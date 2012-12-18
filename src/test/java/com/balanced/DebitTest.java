@@ -11,12 +11,12 @@ import com.balanced.errors.NoResultsFound;
 
 public class DebitTest extends BaseTest {
 
-	@Test
-	public void testRefund() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-		Marketplace mp = Marketplace.mine();
-		Account account = createBuyer(mp);
-		Debit debit = account.debit(123);
-		Refund refund = debit.refund();
-		assertEquals(refund.amount, debit.amount);
-	}
+    @Test
+    public void testRefund() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
+        Marketplace mp = Marketplace.mine();
+        Account account = createBuyer(mp);
+        Debit debit = account.debit(123);
+        Refund refund = debit.refund();
+        assertEquals(refund.amount, debit.amount);
+    }
 }
