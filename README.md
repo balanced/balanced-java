@@ -6,7 +6,7 @@ Online Marketplace Payments
 
 ## Requirements
 
-TODO
+This is still a **BETA** client. 
     
 ## Issues
 
