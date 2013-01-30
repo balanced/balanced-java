@@ -8,7 +8,6 @@ import java.util.Map;
 import com.balanced.core.Client;
 import com.balanced.core.Resource;
 import com.balanced.core.ResourceCollection;
-import com.balanced.core.ResourceQuery;
 import com.balanced.errors.HTTPError;
 
 public class Account extends Resource {
@@ -21,16 +20,22 @@ public class Account extends Resource {
     public String email_address;
     public String roles[];
     public String bank_accounts_uri;
-    public ResourceCollection<BankAccount> bank_accounts;
+    public BankAccount.Collection bank_accounts;
     public String cards_uri;
     public ResourceCollection<Card> cards;
     public String credits_uri;
-    public ResourceCollection<Credit> credits;
+    public Credit.Collection credits;
     public String debits_uri;
-    public ResourceCollection<Debit> debits;
+    public Debit.Collection debits;
     public String holds_uri;
-    public ResourceCollection<Hold> holds;
+    public Hold.Collection holds;
     public Map<String, String> meta;
+    
+    public static class Collection extends ResourceCollection<Account> {
+		public Collection(String uri) {
+			super(Account.class, uri);
+		}
+	};
     
     public static Account get(String uri) throws HTTPError {
         return new Account((new Client()).get(uri));
@@ -42,6 +47,10 @@ public class Account extends Resource {
     
     public Account(Map<String, Object> payload) {
         super(payload);
+    }
+    
+    public Account(String uri) throws HTTPError {
+        super(uri);
     }
 
     public Credit credit(
@@ -142,14 +151,14 @@ public class Account extends Resource {
         email_address = (String) payload.get("email_address");
         roles = (String[])(((ArrayList<String>) payload.get("roles")).toArray(new String[0]));
         bank_accounts_uri = (String) payload.get("bank_accounts_uri");
-        bank_accounts = new ResourceCollection<BankAccount>(BankAccount.class, bank_accounts_uri);
+        bank_accounts = new BankAccount.Collection(bank_accounts_uri);
         cards_uri = (String) payload.get("cards_uri");
         cards = new ResourceCollection<Card>(Card.class, cards_uri);        
         credits_uri = (String) payload.get("credits_uri");
-        credits = new ResourceCollection<Credit>(Credit.class, credits_uri);
+        credits = new Credit.Collection(credits_uri);
         debits_uri = (String) payload.get("debits_uri");
-        debits = new ResourceCollection<Debit>(Debit.class, debits_uri);
+        debits = new Debit.Collection(debits_uri);
         holds_uri = (String) payload.get("holds_uri");
-        holds = new ResourceCollection<Hold>(Hold.class, holds_uri);
+        holds = new Hold.Collection(holds_uri);
     }
 }

@@ -25,6 +25,11 @@ public abstract class Resource {
         this.deserialize(payload);
     }
     
+    public Resource(String uri) throws HTTPError {
+    	Map<String, Object> payload = client.get(uri);
+        this.deserialize(payload);
+    }
+    
     public void save() throws HTTPError {
         Map<String, Object> request = serialize();
         Map<String, Object> response = null;

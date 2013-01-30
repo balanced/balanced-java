@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.balanced.core.Client;
 import com.balanced.core.Resource;
+import com.balanced.core.ResourceCollection;
 import com.balanced.errors.HTTPError;
 
 public class Card extends Resource {
@@ -24,9 +25,11 @@ public class Card extends Resource {
     public Boolean is_valid;
     public String fingerprint;
     
-    public static Card get(String uri) throws HTTPError {
-        return new Card((new Client()).get(uri));
-    }
+    public static class Collection extends ResourceCollection<Card> {
+		public Collection(String uri) {
+			super(Card.class, uri);
+		}
+	};
     
     public Card() {
         super();
@@ -34,6 +37,10 @@ public class Card extends Resource {
     
     public Card(Map<String, Object> payload) {
         super(payload);
+    }
+    
+    public Card(String uri) throws HTTPError {
+        super(uri);
     }
     
     @Override

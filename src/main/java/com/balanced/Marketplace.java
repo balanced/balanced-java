@@ -42,6 +42,14 @@ public class Marketplace extends Resource {
     public static Marketplace mine() throws NoResultsFound, MultipleResultsFound, HTTPError {
         return query().one();
     }
+    
+    public Marketplace() {
+        super();
+    }
+    
+    public Marketplace(String uri) throws HTTPError {
+        super(uri);
+    }
 
     public BankAccount tokenizeBankAccount(
             String name,
@@ -212,19 +220,19 @@ public class Marketplace extends Resource {
         domain_url = (String) payload.get("domain_url");
         in_escrow = ((Double) payload.get("in_escrow")).intValue();
         bank_accounts_uri = (String) payload.get("bank_accounts_uri");
-        bank_accounts = new ResourceCollection<BankAccount>(BankAccount.class, bank_accounts_uri);
+        bank_accounts = new BankAccount.Collection(bank_accounts_uri);
         cards_uri = (String) payload.get("cards_uri");
-        cards = new ResourceCollection<Card>(Card.class, cards_uri);
+        cards = new Card.Collection(cards_uri);
         accounts_uri = (String) payload.get("accounts_uri");
-        accounts = new ResourceCollection<Account>(Account.class, accounts_uri);
+        accounts = new Account.Collection(accounts_uri);
         credits_uri = (String) payload.get("credits_uri");
-        credits = new ResourceCollection<Credit>(Credit.class, credits_uri);
+        credits = new Credit.Collection(credits_uri);
         debits_uri = (String) payload.get("debits_uri");
-        debits = new ResourceCollection<Debit>(Debit.class, debits_uri);
+        debits = new Debit.Collection(debits_uri);
         holds_uri = (String) payload.get("holds_uri");
-        holds = new ResourceCollection<Hold>(Hold.class, holds_uri);
+        holds = new Hold.Collection(holds_uri);
         refunds_uri = (String) payload.get("refunds_uri");
-        refunds = new ResourceCollection<Refund>(Refund.class, refunds_uri);
+        refunds = new Refund.Collection(refunds_uri);
         meta = (Map<String, String>) payload.get("meta");
     }
 }

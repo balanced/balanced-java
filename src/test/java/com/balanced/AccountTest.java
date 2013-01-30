@@ -8,8 +8,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.balanced.errors.CannotCreate;
-import com.balanced.errors.DuplicateAccountEmailAddress;
 import com.balanced.errors.HTTPError;
 import com.balanced.errors.InsufficientFunds;
 import com.balanced.errors.MultipleResultsFound;

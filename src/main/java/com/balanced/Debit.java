@@ -22,7 +22,13 @@ public class Debit extends Resource  {
     public String hold_uri;
     public Hold hold;
     public String refunds_uri;
-    public ResourceCollection<Refund> refunds;
+    public Refund.Collection refunds;
+    
+    public static class Collection extends ResourceCollection<Debit> {
+		public Collection(String uri) {
+			super(Debit.class, uri);
+		}
+	};
     
     public Debit() {
         super();
@@ -56,19 +62,19 @@ public class Debit extends Resource  {
     
     public Account getAccount() throws HTTPError {
         if (account == null)
-            account = Account.get(account_uri);
+            account = new Account(account_uri);
         return account;
     }
     
     public Card getCard() throws HTTPError {
         if (card == null)
-            card = Card.get(card_uri);
+            card = new Card(card_uri);
         return card;
     }
 
     public Hold getHold() throws HTTPError {
         if (hold == null)
-            hold = Hold.get(hold_uri);
+            hold = new Hold(hold_uri);
         return hold;
     }
     
@@ -116,6 +122,6 @@ public class Debit extends Resource  {
             hold_uri = null;
         }
         refunds_uri = (String) payload.get("refunds_uri");
-        refunds = new ResourceCollection<Refund>(Refund.class, refunds_uri);
+        refunds = new Refund.Collection(refunds_uri);
     }
 }

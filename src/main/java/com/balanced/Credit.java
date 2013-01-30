@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.balanced.core.Resource;
+import com.balanced.core.ResourceCollection;
 
 public class Credit extends Resource {
     
@@ -16,6 +17,12 @@ public class Credit extends Resource {
     public String account_uri;
     public Account account;
     public Map<String, String> meta;
+    
+    public static class Collection extends ResourceCollection<Credit> {
+		public Collection(String uri) {
+			super(Credit.class, uri);
+		}
+	};
     
     @Override
     public Map<String, Object> serialize() {

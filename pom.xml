@@ -33,8 +33,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> 
   </properties>
-
-  <!-- Sonatype repo submission stuff -->
   <parent>
     <groupId>org.sonatype.oss</groupId>
     <artifactId>oss-parent</artifactId>
@@ -50,8 +48,13 @@
   	<dependency>
 	    <groupId>org.apache.httpcomponents</groupId>
 	    <artifactId>httpclient-osgi</artifactId>
-	    <version>4.2</version>
+	    <version>4.2.1</version>
 	</dependency>
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>3.1</version>
+    </dependency>
 	<dependency>
 	    <groupId>commons-codec</groupId>
 	    <artifactId>commons-codec</artifactId>
@@ -64,16 +67,7 @@
         <scope>test</scope>
     </dependency>
   </dependencies>
-  
   <build>
-        <resources>
-            <resource>
-                <directory>.</directory>
-                <includes>
-                    <include>VERSION</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -113,6 +107,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.4</version>
                 <executions>
                   <execution>
                     <id>sign-artifacts</id>
@@ -125,5 +120,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

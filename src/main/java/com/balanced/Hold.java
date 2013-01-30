@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.balanced.core.Client;
 import com.balanced.core.Resource;
+import com.balanced.core.ResourceCollection;
 import com.balanced.errors.HTTPError;
 
 public class Hold extends Resource {
@@ -22,6 +23,12 @@ public class Hold extends Resource {
     public Account account;
     public String card_uri;
     public Card card;
+    
+    public static class Collection extends ResourceCollection<Hold> {
+		public Collection(String uri) {
+			super(Hold.class, uri);
+		}
+	};
 
     public static Hold get(String uri) throws HTTPError {
         return new Hold((new Client()).get(uri));
@@ -31,19 +38,23 @@ public class Hold extends Resource {
         super();
     }
     
+    public Hold(String uri) throws HTTPError {
+        super(uri);
+    }
+    
     public Hold(Map<String, Object> payload) {
         super(payload);
     }
     
     public Account getAccount() throws HTTPError {
         if (account == null)
-            account = Account.get(account_uri);
+            account = new Account(account_uri);
         return account;
     }
     
     public Card getCard() throws HTTPError {
         if (card == null)
-            card = Card.get(card_uri);
+            card = new Card(card_uri);
         return card;
     }
     

@@ -28,7 +28,7 @@ public class BaseTest {
         k.save();
         Settings.key = k.secret;
         
-        Marketplace mp = new  Marketplace();
+        Marketplace mp = new Marketplace();
         mp.save();
         return mp;
     }

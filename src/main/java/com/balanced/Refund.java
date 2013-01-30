@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.balanced.core.Resource;
+import com.balanced.core.ResourceCollection;
 
 public class Refund extends Resource {
     
@@ -16,6 +17,12 @@ public class Refund extends Resource {
     public String appears_on_statement_as;
     public String transaction_number;
     public Debit debit;
+    
+    public static class Collection extends ResourceCollection<Refund> {
+		public Collection(String uri) {
+			super(Refund.class, uri);
+		}
+	};
 
     public Refund() {
         super();

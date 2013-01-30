@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.balanced.core.Resource;
+import com.balanced.core.ResourceCollection;
 import com.balanced.core.ResourceQuery;
-import com.balanced.errors.CannotCreate;
 import com.balanced.errors.HTTPError;
 
 public class BankAccount extends Resource {
@@ -19,6 +19,12 @@ public class BankAccount extends Resource {
     public String fingerprint;
     public String bank_name;
     public Map<String, String> meta;
+    
+    public static class Collection extends ResourceCollection<BankAccount> {
+		public Collection(String uri) {
+			super(BankAccount.class, uri);
+		}
+	};
     
     public BankAccount() {
         super();

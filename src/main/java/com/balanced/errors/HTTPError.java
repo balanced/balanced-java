@@ -3,7 +3,6 @@ package com.balanced.errors;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 
-
 public class HTTPError extends Exception {
     
     public int status_code;
