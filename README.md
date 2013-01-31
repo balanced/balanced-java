@@ -25,7 +25,7 @@ Please use appropriately tagged github [issues](https://github.com/balanced/bala
 
 ### Maven
 
-Add the this dependency to your `pom.xml`:
+Add this dependency to your `pom.xml`:
 
     <dependency>
 	    <groupId>com.balancedpayments</groupId>
@@ -47,7 +47,21 @@ See https://www.balancedpayments.com/docs/api#java for tutorials and documentati
 
 ## Publishing
 
-TODO
+[Sonatype OSS repository](https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide).
+
+### Snapshot
+
+    $ mvn clean deploy
+
+### Stage Release
+
+    $ mvn release:clean
+    $ mvn release:prepare
+    $ mvn release:perform
+
+### Release
+
+Done using the [Sonatype Nexus UI](https://oss.sonatype.org/).
 
 ## Contributing
 
