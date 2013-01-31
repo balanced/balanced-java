@@ -4,21 +4,38 @@ Online Marketplace Payments
 
 [![Build Status](https://secure.travis-ci.org/balanced/balanced-java.png)](http://travis-ci.org/balanced/balanced-java) 
 
+This is still a **BETA** client. 
+
 ## Requirements
 
-This is still a **BETA** client. 
-    
+- [gson](http://code.google.com/p/google-gson/) 2.2.2
+- [httpclient](http://hc.apache.org/) 4.2.1
+- [commons-lang3](http://commons.apache.org/lang/) 3.1
+- [commons-codec](http://commons.apache.org/codec/) 1.7
+
+Which you can download to `target/dependency` using: 
+
+    $ mvn dependency:copy-dependencies
+
 ## Issues
 
 Please use appropriately tagged github [issues](https://github.com/balanced/balanced-java/issues) to request features or report bugs.
 
 ## Installation
 
-TODO
+### Maven
+
+Add the this dependency to you `pom.xml`:
+
+    <dependency>
+	    <groupId>com.balancedpayments</groupId>
+	    <artifactId>balancedpayments</artifactId>
+	    <version>0.1</version>
+    </dependency>
 
 ## Quickstart
 
-TODO  
+TODO
 
 ## Usage
 
@@ -30,7 +47,7 @@ See https://www.balancedpayments.com/docs/api#java for tutorials and documentati
 
 ## Publishing
 
-TODO 
+TODO
 
 ## Contributing
 
@@ -41,3 +58,4 @@ TODO
 5. Commit your changes (`git commit -am 'Add some feature'`)
 6. Push to the branch (`git push origin my-new-feature`)
 7. Create new pull request
+
