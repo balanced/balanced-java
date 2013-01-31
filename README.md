@@ -10,7 +10,7 @@ This is still a **BETA** client.
 
 - [gson](http://code.google.com/p/google-gson/) 2.2.2
 - [httpclient](http://hc.apache.org/) 4.2.1
-- [commons-lang3](http://commons.apache.org/lang/) 3.1
+- [commons-lang](http://commons.apache.org/lang/) 3.1
 - [commons-codec](http://commons.apache.org/codec/) 1.7
 
 Which you can download to `target/dependency` using: 
@@ -25,7 +25,7 @@ Please use appropriately tagged github [issues](https://github.com/balanced/bala
 
 ### Maven
 
-Add the this dependency to you `pom.xml`:
+Add the this dependency to your `pom.xml`:
 
     <dependency>
 	    <groupId>com.balancedpayments</groupId>
