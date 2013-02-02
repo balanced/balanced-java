@@ -38,7 +38,7 @@ public class Credit extends Resource {
             account = null;
             account_uri = (String) payload.get("account_uri");
         }
-        else if (payload.containsKey("account")) {
+        else if (payload.containsKey("account") && payload.get("account") != null) {
             account = new Account((Map<String, Object>) payload.get("account"));
             account_uri = account.uri;
         }
