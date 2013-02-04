@@ -25,10 +25,10 @@ public class Debit extends Resource  {
     public Refund.Collection refunds;
     
     public static class Collection extends ResourceCollection<Debit> {
-		public Collection(String uri) {
-			super(Debit.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(Debit.class, uri);
+        }
+    };
     
     public Debit() {
         super();

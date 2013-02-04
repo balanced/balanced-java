@@ -26,10 +26,10 @@ public class Card extends Resource {
     public String fingerprint;
     
     public static class Collection extends ResourceCollection<Card> {
-		public Collection(String uri) {
-			super(Card.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(Card.class, uri);
+        }
+    };
     
     public Card() {
         super();

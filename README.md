@@ -2,9 +2,7 @@
 
 Online Marketplace Payments
 
-[![Build Status](https://secure.travis-ci.org/balanced/balanced-java.png)](http://travis-ci.org/balanced/balanced-java) 
-
-This is still a **BETA** client. 
+[![Build Status](https://secure.travis-ci.org/balanced/balanced-java.png)](http://travis-ci.org/balanced/balanced-java)
 
 ## Requirements
 

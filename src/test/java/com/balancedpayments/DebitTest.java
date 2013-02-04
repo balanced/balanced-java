@@ -25,12 +25,12 @@ public class DebitTest extends BaseTest {
     
     @Test
     public void testDebitFilter() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-    	Marketplace mp = Marketplace.mine();
-    	Account buyer;
-    	Debit[] debits = new Debit[3];
-    	
-    	buyer = createBuyer(mp);
-    	debits[0] = buyer.debit(55);
+        Marketplace mp = Marketplace.mine();
+        Account buyer;
+        Debit[] debits = new Debit[3];
+        
+        buyer = createBuyer(mp);
+        debits[0] = buyer.debit(55);
         debits[1] = buyer.debit(66);
         debits[2] = buyer.debit(77);
 
@@ -38,16 +38,32 @@ public class DebitTest extends BaseTest {
         assertEquals(1, query.total());
         assertEquals(debits[2].id, query.first().id);
         
+        query = buyer.debits.query().filter("amount", 77);
+        assertEquals(1, query.total());
+        assertEquals(debits[2].id, query.first().id);
+        
         query = (
-			buyer
-			.debits
-			.query()
-			.filter("amount", "<", 77)
-			.order_by("created_at", true)
-		);
+            buyer
+            .debits
+            .query()
+            .filter("amount", "<", 77)
+            .order_by("created_at", true)
+        );
         assertEquals(2, query.total());
         ArrayList<Debit> all_debits = query.all();
         assertEquals(debits[0].id, all_debits.get(0).id);
         assertEquals(debits[1].id, all_debits.get(1).id);
+        
+        query = (
+                buyer
+                .debits
+                .query()
+                .filter("amount", ">", 55)
+                .filter("amount", "<", 77)
+                .order_by("amount", false)
+            );
+        assertEquals(1, query.total());
+        all_debits = query.all();
+        assertEquals(debits[1].id, all_debits.get(0).id);
     }
 }

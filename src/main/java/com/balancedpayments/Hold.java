@@ -25,10 +25,10 @@ public class Hold extends Resource {
     public Card card;
     
     public static class Collection extends ResourceCollection<Hold> {
-		public Collection(String uri) {
-			super(Hold.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(Hold.class, uri);
+        }
+    };
 
     public static Hold get(String uri) throws HTTPError {
         return new Hold((new Client()).get(uri));

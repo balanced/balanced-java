@@ -19,10 +19,10 @@ public class Refund extends Resource {
     public Debit debit;
     
     public static class Collection extends ResourceCollection<Refund> {
-		public Collection(String uri) {
-			super(Refund.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(Refund.class, uri);
+        }
+    };
 
     public Refund() {
         super();

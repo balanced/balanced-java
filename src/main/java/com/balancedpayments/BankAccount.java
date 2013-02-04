@@ -21,10 +21,10 @@ public class BankAccount extends Resource {
     public Map<String, String> meta;
     
     public static class Collection extends ResourceCollection<BankAccount> {
-		public Collection(String uri) {
-			super(BankAccount.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(BankAccount.class, uri);
+        }
+    };
     
     public BankAccount() {
         super();

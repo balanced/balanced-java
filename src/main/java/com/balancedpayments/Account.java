@@ -32,10 +32,10 @@ public class Account extends Resource {
     public Map<String, String> meta;
     
     public static class Collection extends ResourceCollection<Account> {
-		public Collection(String uri) {
-			super(Account.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(Account.class, uri);
+        }
+    };
     
     public static Account get(String uri) throws HTTPError {
         return new Account((new Client()).get(uri));

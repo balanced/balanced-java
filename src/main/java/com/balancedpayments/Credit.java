@@ -19,10 +19,10 @@ public class Credit extends Resource {
     public Map<String, String> meta;
     
     public static class Collection extends ResourceCollection<Credit> {
-		public Collection(String uri) {
-			super(Credit.class, uri);
-		}
-	};
+        public Collection(String uri) {
+            super(Credit.class, uri);
+        }
+    };
     
     @Override
     public Map<String, Object> serialize() {
