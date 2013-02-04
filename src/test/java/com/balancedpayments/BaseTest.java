@@ -13,28 +13,28 @@ import com.balancedpayments.errors.NoResultsFound;
 public class BaseTest {
 
     public static String KEY_MARKETPLACE = "984f92c847e111e2a7a0026ba7f8ec28";
-    
+
     protected Marketplace mp;
-    
+
     @Before
     public void setUp() throws NoResultsFound, MultipleResultsFound, HTTPError {
-    	String location = System.getProperty("balanced_location ", Settings.location);
+    	String location = System.getProperty("balanced_location", Settings.location);
     	String key = System.getProperty("balanced_key", KEY_MARKETPLACE);
     	Settings.configure(location, key);
         this.mp = Marketplace.mine();
     }
-    
+
     protected Marketplace createMarketplace() throws HTTPError {
         Settings.key = null;
         APIKey k = new APIKey();
         k.save();
         Settings.key = k.secret;
-        
+
         Marketplace mp = new Marketplace();
         mp.save();
         return mp;
     }
-    
+
     protected Card createCard(Marketplace mp) throws HTTPError {
         return mp.tokenizeCard(
                 "123 Fake Street",
@@ -47,19 +47,19 @@ public class BaseTest {
                 12,
                 2013);
     }
-    
+
     protected BankAccount createBankAccount(Marketplace mp) throws HTTPError {
         return mp.tokenizeBankAccount(
                 "Homer Jay",
                 "112233a",
                 "121042882");
     }
-    
+
     protected Account createBuyer(Marketplace mp) throws HTTPError {
         Card card = createCard(mp);
         return mp.createBuyerAccount(card.uri);
     }
-    
+
     protected Account createMerchant(Marketplace mp) throws HTTPError {
         BankAccount bank_account = createBankAccount(mp);
         Map<String, Object> merchant = new HashMap<String, Object>();
@@ -78,7 +78,7 @@ public class BaseTest {
                 merchant,
                 null);
     }
-    
+
     protected void fundEscrow(Marketplace mp) throws HTTPError {
         createBuyer(mp).debit(2000000);
     }
