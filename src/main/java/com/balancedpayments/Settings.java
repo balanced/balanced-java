@@ -8,6 +8,10 @@ public class Settings {
     
     public static void configure(String location, String key) {
         Settings.location = location;
-        Settings.location = key;
+        Settings.key = key;
+    }
+    
+    public static void configure(String key) {
+        Settings.key = key;
     }
 }

@@ -18,7 +18,9 @@ public class BaseTest {
     
     @Before
     public void setUp() throws NoResultsFound, MultipleResultsFound, HTTPError {
-        Settings.key = KEY_MARKETPLACE;
+    	String location = System.getProperty("balanced_location ", Settings.location);
+    	String key = System.getProperty("balanced_key", KEY_MARKETPLACE);
+    	Settings.configure(location, key);
         this.mp = Marketplace.mine();
     }
     
