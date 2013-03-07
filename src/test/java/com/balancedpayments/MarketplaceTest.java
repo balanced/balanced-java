@@ -3,6 +3,7 @@ package com.balancedpayments;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.balancedpayments.errors.APIError;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
+import com.balancedpayments.errors.NotCreated;
 
 public class MarketplaceTest extends BaseTest {
 
@@ -174,7 +176,7 @@ public class MarketplaceTest extends BaseTest {
         merchant.put("dob", "1842-01-01");
         merchant.put("phone_number", "+16505551234");
         merchant.put("country_code", "USA");
-        Account account = mp.createMerchantAccount(
+        mp.createMerchantAccount(
                 "Homer Jay", 
                 null,
                 ba.uri,
@@ -187,5 +189,32 @@ public class MarketplaceTest extends BaseTest {
         Marketplace mp = createMarketplace();
         mp.createAccount("Me", "me@example.com");
         mp.createAccount("Me", "me@example.com");
+    }
+    
+    @Test
+    public void testCallbackRegistration() throws HTTPError, NotCreated {
+        Marketplace mp = createMarketplace();
+        assertEquals(mp.callbacks.total(), 0);
+        Callback callback = mp.registerCallback("http://www.example.com/cb");
+        assertEquals(mp.callbacks.total(), 1);
+        callback.delete();
+        assertEquals(mp.callbacks.total(), 0);
+    }
+    
+    @Test
+    public void testEvents() throws HTTPError, NotCreated, InterruptedException {
+        Marketplace mp = createMarketplace();
+        int prev = mp.events.total();
+        Account account = createBuyer(mp);
+        account.debit(123);
+        int cur = mp.events.total();
+        int count = 0;
+        while (cur == prev && count < 5) {
+            System.out.println("waiting for events ...");
+            Thread.sleep(2000);
+            count += 1;
+        }
+        assertTrue(cur > prev);
+        mp.events.all();
     }
 }

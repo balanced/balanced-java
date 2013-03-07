@@ -32,7 +32,6 @@ public class BankAccount extends Resource {
     public BankAccount() {
         super();
     }
-
     
     public BankAccount(String uri) throws HTTPError {
         super(uri);

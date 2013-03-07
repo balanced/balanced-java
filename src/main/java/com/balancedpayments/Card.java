@@ -29,6 +29,28 @@ public class Card extends Resource {
         public Collection(String uri) {
             super(Card.class, uri);
         }
+        
+        public Card create(
+                String street_address,
+                String city,
+                String region,
+                String postal_code,
+                String name,
+                String card_number,
+                String security_code,
+                int expiration_month,
+                int expiration_year) throws HTTPError {
+            Map<String, Object> payload = new HashMap<String, Object>();
+            payload.put("street_address", street_address);
+            payload.put("city", city);
+            payload.put("region", region);
+            payload.put("postal_code", postal_code);
+            payload.put("name", name);
+            payload.put("card_number", card_number);
+            payload.put("expiration_month", expiration_month);
+            payload.put("expiration_year", expiration_year);
+            return create(payload);
+        }
     };
     
     public Card() {

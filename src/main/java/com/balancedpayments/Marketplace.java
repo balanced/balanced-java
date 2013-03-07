@@ -18,20 +18,24 @@ public class Marketplace extends Resource {
     public String domain_url;
     public Integer in_escrow;
     public String bank_accounts_uri;
-    public ResourceCollection<BankAccount> bank_accounts;
+    public BankAccount.Collection bank_accounts;
     public String cards_uri;
-    public ResourceCollection<Card> cards;
+    public Card.Collection cards;
     public String accounts_uri;
-    public ResourceCollection<Account> accounts;
+    public Account.Collection accounts;
     public String debits_uri;
-    public ResourceCollection<Debit> debits;
+    public Debit.Collection debits;
     public String credits_uri;
-    public ResourceCollection<Credit> credits;
+    public Credit.Collection credits;
     public String holds_uri;
-    public ResourceCollection<Hold> holds;
+    public Hold.Collection holds;
     public String refunds_uri;
-    public ResourceCollection<Refund> refunds;
+    public Refund.Collection refunds;
     public Map<String, String> meta;
+    public String events_uri;
+    public Event.Collection events;
+    public String callbacks_uri;
+    public Callback.Collection callbacks;
 
     public static ResourceQuery<Marketplace> query() {
         return new ResourceQuery<Marketplace>(
@@ -106,16 +110,16 @@ public class Marketplace extends Resource {
             String security_code,
             int expiration_month,
             int expiration_year) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("street_address", street_address);
-        payload.put("city", city);
-        payload.put("region", region);
-        payload.put("postal_code", postal_code);
-        payload.put("name", name);
-        payload.put("card_number", card_number);
-        payload.put("expiration_month", expiration_month);
-        payload.put("expiration_year", expiration_year);
-        return cards.create(payload);
+        return cards.create(
+                street_address,
+                city,
+                region,
+                postal_code,
+                name,
+                card_number,
+                security_code,
+                expiration_month,
+                expiration_year);
     }
     
     public Account createAccount(
@@ -192,6 +196,10 @@ public class Marketplace extends Resource {
             payload.put("meta", meta);
         return accounts.create(payload);
     }
+    
+    public Callback registerCallback(String url) throws HTTPError {
+        return callbacks.create(url);
+    }
 
     @Override
     public void save() throws HTTPError {
@@ -234,5 +242,9 @@ public class Marketplace extends Resource {
         refunds_uri = (String) payload.get("refunds_uri");
         refunds = new Refund.Collection(refunds_uri);
         meta = (Map<String, String>) payload.get("meta");
+        events_uri = (String) payload.get("events_uri");
+        events = new Event.Collection(events_uri);
+        callbacks_uri = (String) payload.get("callbacks_uri");
+        callbacks = new Callback.Collection(callbacks_uri);
     }
 }
