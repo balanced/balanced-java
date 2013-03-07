@@ -32,6 +32,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.balancedpayments.Settings;
 import com.balancedpayments.errors.APIError;
+import com.balancedpayments.errors.BankAccountVerificationFailure;
 import com.balancedpayments.errors.Declined;
 import com.balancedpayments.errors.DuplicateAccountEmailAddress;
 import com.balancedpayments.errors.HTTPError;
@@ -213,6 +214,8 @@ public class Client {
             throw new Declined(response, body, payload);
         else if (DuplicateAccountEmailAddress.CODES.contains(category_code))
             throw new DuplicateAccountEmailAddress(response, body, payload);
+        else if (BankAccountVerificationFailure.CODES.contains(category_code))
+            throw new BankAccountVerificationFailure(response, body, payload);
         
         throw new APIError(response, body, payload);
     }

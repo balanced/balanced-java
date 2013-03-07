@@ -19,6 +19,9 @@ public class BankAccount extends Resource {
     public String fingerprint;
     public String bank_name;
     public Map<String, String> meta;
+    public String verifications_uri;
+    public BankAccountVerification.Collection verifications;
+    public String verification_uri;
     
     public static class Collection extends ResourceCollection<BankAccount> {
         public Collection(String uri) {
@@ -28,6 +31,11 @@ public class BankAccount extends Resource {
     
     public BankAccount() {
         super();
+    }
+
+    
+    public BankAccount(String uri) throws HTTPError {
+        super(uri);
     }
     
     public BankAccount(Map<String, Object> payload) {
@@ -69,5 +77,19 @@ public class BankAccount extends Resource {
         fingerprint = (String) payload.get("fingerprint");
         bank_name = (String) payload.get("bank_name");
         meta = (Map<String, String>) payload.get("meta");
+        verifications_uri = (String) payload.get("verifications_uri");
+        verifications = new BankAccountVerification.Collection(verifications_uri);
+        verification_uri = (String) payload.get("verification_uri");
+    }
+    
+    public BankAccountVerification verify() throws HTTPError {
+        return verifications.create();
+    }
+    
+    public BankAccountVerification getVerification() throws HTTPError {
+        if (verification_uri == null) {
+            return null;
+        }
+        return new BankAccountVerification(verification_uri);
     }
 }

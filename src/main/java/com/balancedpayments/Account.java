@@ -22,7 +22,7 @@ public class Account extends Resource {
     public String bank_accounts_uri;
     public BankAccount.Collection bank_accounts;
     public String cards_uri;
-    public ResourceCollection<Card> cards;
+    public Card.Collection cards;
     public String credits_uri;
     public Credit.Collection credits;
     public String debits_uri;
@@ -153,7 +153,7 @@ public class Account extends Resource {
         bank_accounts_uri = (String) payload.get("bank_accounts_uri");
         bank_accounts = new BankAccount.Collection(bank_accounts_uri);
         cards_uri = (String) payload.get("cards_uri");
-        cards = new ResourceCollection<Card>(Card.class, cards_uri);        
+        cards = new Card.Collection(cards_uri);        
         credits_uri = (String) payload.get("credits_uri");
         credits = new Credit.Collection(credits_uri);
         debits_uri = (String) payload.get("debits_uri");

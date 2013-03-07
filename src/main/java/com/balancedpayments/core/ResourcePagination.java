@@ -2,6 +2,7 @@ package com.balancedpayments.core;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +74,11 @@ public class ResourcePagination<T> implements Iterable<T> {
         catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    public T create() throws HTTPError {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        return create(payload);
     }
     
     public T create(Map<String, Object> payload) throws HTTPError {
