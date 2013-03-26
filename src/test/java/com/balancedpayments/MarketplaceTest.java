@@ -210,9 +210,10 @@ public class MarketplaceTest extends BaseTest {
         int cur = mp.events.total();
         int count = 0;
         while (cur == prev && count < 5) {
-            System.out.println("waiting for events ...");
-            Thread.sleep(2000);
+            System.out.println(String.format("waiting for events - %i, %i == %i...", count, cur, prev));
+            Thread.sleep(2);
             count += 1;
+            cur = mp.events.total();
         }
         assertTrue(cur > prev);
         mp.events.all();
