@@ -202,18 +202,18 @@ public class MarketplaceTest extends BaseTest {
     }
     
     @Test
-    public void testEvents() throws HTTPError, NotCreated, InterruptedException {
+    public void testEvents() throws HTTPError, NotCreated, InterruptedException, NoResultsFound, MultipleResultsFound {
         Marketplace mp = createMarketplace();
-        int prev = mp.events.total();
+        int prev = Marketplace.mine().events.total();
         Account account = createBuyer(mp);
         account.debit(123);
-        int cur = mp.events.total();
+        int cur = Marketplace.mine().events.total();
         int count = 0;
-        while (cur == prev && count < 5) {
+        while (cur == prev && count < 10) {
             System.out.println(String.format("waiting for events - %i, %i == %i...", count, cur, prev));
             Thread.sleep(2000);  // 2 seconds
             count += 1;
-            cur = mp.events.total();
+            cur = Marketplace.mine().events.total();
         }
         assertTrue(cur > prev);
         mp.events.all();
