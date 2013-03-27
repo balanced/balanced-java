@@ -71,3 +71,6 @@ Done using the [Sonatype Nexus UI](https://oss.sonatype.org/).
 6. Push to the branch (`git push origin my-new-feature`)
 7. Create new pull request
 
+## Contributors
+
+* [You](https://github.com/balanced/balanced-java/issues)!

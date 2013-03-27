@@ -210,7 +210,7 @@ public class MarketplaceTest extends BaseTest {
         int cur = Marketplace.mine().events.total();
         int count = 0;
         while (cur == prev && count < 10) {
-            System.out.println(String.format("waiting for events - %i, %i == %i...", count, cur, prev));
+            System.out.println(String.format("waiting for events - %d, %d == %d...", count, cur, prev));
             Thread.sleep(2000);  // 2 seconds
             count += 1;
             cur = Marketplace.mine().events.total();
