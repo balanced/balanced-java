@@ -135,7 +135,7 @@ public class Account extends Resource {
 
     /*
     This method should be called after and only after a merchant is redirect to
-    Balanced and Balanced consequently redirects the merchant bank to you with a
+    Balanced and Balanced consequently redirects the merchant back to you with a
     merchant_uri parameter on a query string. It is generated when
     the marketplace redirects its user to Balanced as a result of a
     MoreInformationRequired exception that's thrown (http status code 300).
