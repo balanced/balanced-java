@@ -1,6 +1,7 @@
 package com.balancedpayments;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -24,14 +25,14 @@ public class AccountTest extends BaseTest {
         assertEquals(account.roles.length, 0);
         assertFalse(Arrays.asList(account.roles).contains("buyer"));
         assertFalse(Arrays.asList(account.roles).contains("merchant"));
-        
+
         BankAccount ba = createBankAccount(mp);
         account.associateBankAccount(ba.uri);
         assertEquals(account.bank_accounts.total(), 1);
         assertEquals(account.cards.total(), 0);
         assertFalse(Arrays.asList(account.roles).contains("buyer"));
         assertFalse(Arrays.asList(account.roles).contains("merchant"));
-        
+
         Card card = createCard(mp);
         account.associateCard(card.uri);
         assertEquals(account.bank_accounts.total(), 1);
@@ -39,34 +40,43 @@ public class AccountTest extends BaseTest {
         assertTrue(Arrays.asList(account.roles).contains("buyer"));
         assertFalse(Arrays.asList(account.roles).contains("merchant"));
     }
-    
+
     @Test
     public void testCredit() throws HTTPError {
         fundEscrow(mp);
         Account account = createMerchant(mp);
         account.credit(123);
     }
-    
+
     @Test(expected=InsufficientFunds.class)
     public void testCreditInsufficientFunds() throws HTTPError {
         Marketplace mp = createMarketplace();
         Account account = createMerchant(mp);
         account.credit(123);
     }
-    
+
     @Test
     public void testDebit() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = Marketplace.mine();
         Account account = createBuyer(mp);
         account.debit(123);
     }
-    
+
     @Test
     public void testHold() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = Marketplace.mine();
         Account account = createBuyer(mp);
         Hold hold = account.hold(123);
-        assertEquals(hold.account.id, account.id); 
+        assertEquals(hold.account.id, account.id);
+    }
+
+    @Test
+    public void testPromoteToMerchant() throws HTTPError, NoResultsFound, MultipleResultsFound {
+        Marketplace mp = Marketplace.mine();
+        Account account = createBuyer(mp);
+        assertFalse(Arrays.asList(account.roles).contains("merchant"));
+        account.promoteToMerchant(buildMerchantPayload());
+        assertTrue(Arrays.asList(account.roles).contains("merchant"));
     }
 }
 
