@@ -4,7 +4,7 @@
 # java
 *.class
 
-# packages 
+# packages
 *.jar
 *.war
 *.ear
@@ -20,3 +20,8 @@
 
 # maven
 target
+
+
+# idea
+.idea
+*.iml

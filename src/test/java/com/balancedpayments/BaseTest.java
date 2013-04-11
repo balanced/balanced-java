@@ -62,6 +62,16 @@ public class BaseTest {
 
     protected Account createMerchant(Marketplace mp) throws HTTPError {
         BankAccount bank_account = createBankAccount(mp);
+        Map<String, Object> merchant = buildMerchantPayload();
+        return mp.createMerchantAccount(
+                null,
+                null,
+                bank_account.uri,
+                merchant,
+                null);
+    }
+
+    protected Map<String, Object> buildMerchantPayload() {
         Map<String, Object> merchant = new HashMap<String, Object>();
         merchant.put("type", "person");
         merchant.put("name", "William James");
@@ -71,12 +81,7 @@ public class BaseTest {
         merchant.put("dob", "1842-01-01");
         merchant.put("phone_number", "+16505551234");
         merchant.put("country_code", "USA");
-        return mp.createMerchantAccount(
-                null,
-                null,
-                bank_account.uri,
-                merchant,
-                null);
+        return merchant;
     }
 
     protected void fundEscrow(Marketplace mp) throws HTTPError {
