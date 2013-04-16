@@ -134,7 +134,7 @@ public class Account extends Resource {
     }
 
     /*
-    This method should be called after and only after a merchant is redirect to
+    This method should be called after and only after a merchant is redirected to
     Balanced and Balanced consequently redirects the merchant back to you with a
     merchant_uri parameter on a query string. It is generated when
     the marketplace redirects its user to Balanced as a result of a
