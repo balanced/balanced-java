@@ -11,7 +11,7 @@ Online Marketplace Payments
 - [commons-lang](http://commons.apache.org/lang/) 3.1
 - [commons-codec](http://commons.apache.org/codec/) 1.7
 
-Which you can download to `target/dependency` using: 
+Which you can download to `target/dependency` using:
 
     $ mvn dependency:copy-dependencies
 
@@ -28,7 +28,7 @@ Add this dependency to your `pom.xml`:
     <dependency>
 	    <groupId>com.balancedpayments</groupId>
 	    <artifactId>balancedpayments</artifactId>
-	    <version>0.1</version>
+	    <version>0.6</version>
     </dependency>
 
 ## Quickstart
@@ -40,7 +40,7 @@ TODO
 See https://www.balancedpayments.com/docs/api#java for tutorials and documentation.
 
 ## Testing
-    
+
     $ mvn test
 
 ## Publishing
