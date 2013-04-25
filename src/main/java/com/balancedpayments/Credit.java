@@ -49,7 +49,7 @@ public class Credit extends Resource {
         bank_account = new BankAccount((Map<String, Object>) payload.get("bank_account"));
         created_at = deserializeDate((String) payload.get("created_at"));
         amount = ((Double) payload.get("amount")).intValue();
-        description = (String) payload.get("description ");
+        description = (String) payload.get("description");
         status = (String) payload.get("status");
         meta = (Map<String, String>) payload.get("meta");
     }
