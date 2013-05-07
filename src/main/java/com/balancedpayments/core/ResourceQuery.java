@@ -18,13 +18,13 @@ public class ResourceQuery<T> extends ResourcePagination<T> {
         super(cls, uri);
     }
 
-    public T first() throws NoResultsFound, HTTPError {
+    public T first() throws HTTPError {
         Integer limit = getLimit();
         setLimit(1);
         ArrayList<T> items = all();
         setLimit(limit);
         if (items.size() == 0)
-            throw new NoResultsFound();
+            return null;
         return items.get(0);
     }
     

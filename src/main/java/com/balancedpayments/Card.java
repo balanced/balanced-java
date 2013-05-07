@@ -65,6 +65,11 @@ public class Card extends Resource {
         super(uri);
     }
     
+    public void invalidate() throws HTTPError {
+        is_valid = false;
+        save();
+    }
+    
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> payload = new HashMap<String, Object>();
