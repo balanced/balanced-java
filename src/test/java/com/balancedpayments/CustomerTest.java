@@ -25,14 +25,14 @@ public class CustomerTest extends BaseTest {
         Customer customer = new Customer(payload);
         customer.save();
     }
-    
+
     @Test
     public void testCreateBusinessCustomer() throws HTTPError {
         Map<String, Object> payload = businessCustomerPayload();
         Customer customer = new Customer(payload);
         customer.save();
     }
-    
+
     @Test
     public void testCards() throws HTTPError {
         Customer customer = createPersonCustomer();
@@ -46,7 +46,7 @@ public class CustomerTest extends BaseTest {
         active_card = customer.activeCard();
         assertNull(active_card);
     }
-    
+
     @Test
     public void testBankAccounts() throws HTTPError {
         Customer customer = createPersonCustomer();
@@ -57,17 +57,17 @@ public class CustomerTest extends BaseTest {
         active_bank_account = customer.activeBankAccount();
         assertNotNull(active_bank_account);
     }
-    
+
     @Test
     public void testDebitCredit() throws HTTPError {
         Customer buyer = createBusinessCustomer();
         Card card = createCard(mp);
         buyer.addCard(card);
-        
+
         Customer seller = createBusinessCustomer();
         BankAccount bank_account = createBankAccount(mp);
         seller.addBankAccount(bank_account);
-        
+
         Map<String, String> meta = new HashMap<String, String>();
         meta.put("ships", "tomorrow");
         Debit debit = buyer.debit(
@@ -78,7 +78,7 @@ public class CustomerTest extends BaseTest {
             seller.uri,
             meta);
         assertEquals(debit.card.id, card.id);
-        
+
         Credit credit = seller.credit(
             1200,
             "sold something tangy",
@@ -86,6 +86,6 @@ public class CustomerTest extends BaseTest {
             "TANGY",
             debit.uri,
             meta);
-        assertEquals(credit.bank_account.id, card.id);
+        assertEquals(credit.bank_account.id, bank_account.id);
     }
 }
