@@ -20,7 +20,7 @@ public class Customer extends Resource {
     public String credits_uri;
     public Credit.Collection credits;
     public String debits_uri;
-    public Debit.Collection debits;    
+    public Debit.Collection debits;
     public String dob;
     public String ein;
     public String email;
@@ -41,7 +41,7 @@ public class Customer extends Resource {
             super(Customer.class, uri);
         }
     };
-    
+
     public static ResourceQuery<Customer> query() {
         return new ResourceQuery<Customer>(
                 Customer.class,
@@ -63,32 +63,32 @@ public class Customer extends Resource {
     public Customer(String uri) throws HTTPError {
         super(uri);
     }
-    
+
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
             uri = String.format("/v%s/%s", Settings.VERSION, "customers");
         super.save();
     }
-    
+
     public void addBankAccount(String bank_account_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("bank_account_uri", bank_account_uri);
         Map<String, Object> response = client.put(uri, payload);
         deserialize(response);
     }
-    
+
     public void addBankAccount(BankAccount bank_account) throws HTTPError {
         addBankAccount(bank_account.uri);
     }
-    
+
     public BankAccount activeBankAccount() throws HTTPError {
         return (bank_accounts
                 .query()
                 .filter("is_valid", true)
                 .order_by("created_at", false)
                 .first());
-         
+
     }
 
     public void addCard(String card_uri) throws HTTPError {
@@ -97,11 +97,11 @@ public class Customer extends Resource {
         Map<String, Object> response = client.put(uri, payload);
         deserialize(response);
     }
-    
+
     public void addCard(Card card) throws HTTPError {
         addCard(card.uri);
     }
-    
+
     public Card activeCard() throws HTTPError {
         return (cards
                 .query()
@@ -122,7 +122,7 @@ public class Customer extends Resource {
         if (description != null)
             payload.put("description", description);
         if (destination_uri != null)
-            payload.put("destination", destination_uri);
+            payload.put("destination_uri", destination_uri);
         if (appears_on_statement_as != null)
             payload.put("appears_on_statement_as", appears_on_statement_as);
         if (meta != null)
@@ -142,7 +142,7 @@ public class Customer extends Resource {
         if (description != null)
             payload.put("description", description);
         if (source_uri != null)
-            payload.put("source", source_uri);
+            payload.put("source_uri", source_uri);
         if (appears_on_statement_as != null)
             payload.put("appears_on_statement_as", appears_on_statement_as);
         if (meta != null)
@@ -155,7 +155,7 @@ public class Customer extends Resource {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> payload = new HashMap<String, Object>();
-        
+
         payload.put("address", address);
         payload.put("business_name", business_name);
         payload.put("dob", dob);
@@ -167,7 +167,7 @@ public class Customer extends Resource {
         payload.put("phone", phone);
         payload.put("ssn_last4", ssn_last4);
         payload.put("twitter", twitter);
-        
+
         return payload;
     }
 
@@ -175,7 +175,7 @@ public class Customer extends Resource {
     public void deserialize(Map<String, Object> payload) {
         super.deserialize(payload);
         address = (Map<String, String>) payload.get("address");
-        bank_accounts_uri = (String) payload.get("bank_accounts_uri"); 
+        bank_accounts_uri = (String) payload.get("bank_accounts_uri");
         bank_accounts = (bank_accounts_uri != null) ? new BankAccount.Collection(bank_accounts_uri) : null;
         business_name = (String) payload.get("business_name");
         cards_uri = (String) payload.get("cards_uri");

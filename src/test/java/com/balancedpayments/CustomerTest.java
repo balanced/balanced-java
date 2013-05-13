@@ -63,6 +63,7 @@ public class CustomerTest extends BaseTest {
         Customer buyer = createBusinessCustomer();
         Card card = createCard(mp);
         buyer.addCard(card);
+        assertEquals(buyer.activeCard().id, card.id);
 
         Customer seller = createBusinessCustomer();
         BankAccount bank_account = createBankAccount(mp);
@@ -83,6 +84,41 @@ public class CustomerTest extends BaseTest {
             1200,
             "sold something tangy",
             null,
+            "TANGY",
+            debit.uri,
+            meta);
+        assertEquals(credit.bank_account.id, bank_account.id);
+    }
+
+    @Test
+    public void testDebitSourceCreditDestination() throws HTTPError {
+        Customer buyer = createBusinessCustomer();
+        Card card = createCard(mp);
+        buyer.addCard(card);
+        buyer.addCard(createCard(mp));
+        assertFalse(buyer.activeCard().id.equals(card.id));
+
+        Customer seller = createBusinessCustomer();
+        BankAccount bank_account = createBankAccount(mp);
+        seller.addBankAccount(bank_account);
+        seller.addBankAccount(createBankAccount(mp));
+        assertFalse(seller.activeBankAccount().id.equals(bank_account.id));
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("ships", "tomorrow");
+        Debit debit = buyer.debit(
+            1234,
+            "something tangy",
+            card.uri,
+            "TANGY",
+            seller.uri,
+            meta);
+        assertEquals(debit.card.id, card.id);
+
+        Credit credit = seller.credit(
+            1200,
+            "sold something tangy",
+            bank_account.uri,
             "TANGY",
             debit.uri,
             meta);
