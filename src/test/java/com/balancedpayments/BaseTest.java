@@ -87,4 +87,75 @@ public class BaseTest {
     protected void fundEscrow(Marketplace mp) throws HTTPError {
         createBuyer(mp).debit(2000000);
     }
+
+    protected Customer createPersonCustomer() throws HTTPError {
+        Customer customer = new Customer(personCustomerPayload());
+        customer.save();
+        return customer;
+    }
+
+    protected Map<String, Object> personCustomerPayload() {
+        Map<String, Object> payload = new HashMap<String, Object>();
+
+        payload.put("name", "John Lee Hooker");
+        payload.put("twitter", "@balanced");
+        payload.put("phone", "(904) 555-1796");
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("meta can store", "any flat key/value data you like");
+        meta.put("github", "https://github.com/balanced");
+        meta.put("more_additional_data", "54.8");
+        payload.put("meta", meta);
+
+        payload.put("facebook", "https://facebook.com/balanced");
+
+        Map<String, String> address = new HashMap<String, String>();
+        address.put("city", "San Francisco");
+        address.put("state", "CA");
+        address.put("postal_code", "94103");
+        address.put("line1", "965 Mission St");
+        address.put("country_code", "US");
+        payload.put("address", address);
+
+        payload.put("ssn_last4", "3209");
+
+        return payload;
+    }
+
+    protected Customer createBusinessCustomer() throws HTTPError {
+        Customer customer = new Customer(businessCustomerPayload());
+        customer.save();
+        return customer;
+    }
+
+    protected Map<String, Object> businessCustomerPayload() {
+        Map<String, Object> payload = new HashMap<String, Object>();
+
+        payload.put("name", "John Lee Hooker");
+        payload.put("twitter", "@balanced");
+        payload.put("phone", "(904) 555-1796");
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("meta can store", "any flat key/value data you like");
+        meta.put("github", "https://github.com/balanced");
+        meta.put("more_additional_data", "54.8");
+        payload.put("meta", meta);
+
+        payload.put("facebook", "https://facebook.com/balanced");
+
+        Map<String, String> address = new HashMap<String, String>();
+        address.put("city", "San Francisco");
+        address.put("state", "CA");
+        address.put("postal_code", "94103");
+        address.put("line1", "965 Mission St");
+        address.put("country_code", "US");
+        payload.put("address", address);
+
+        payload.put("ssn_last4", "3209");
+
+        payload.put("business_name", "Balanced");
+        payload.put("ein", "123456789");
+
+        return payload;
+    }
 }
