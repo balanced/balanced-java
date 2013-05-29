@@ -93,13 +93,18 @@ public class Debit extends Resource  {
         amount = ((Double) payload.get("amount")).intValue();
         description = (String) payload.get("description");
         transaction_number = (String) payload.get("transaction_number");
+
         if (payload.containsKey("account_uri")) {
             account = null;
             account_uri = (String) payload.get("account_uri");
         }
-        else {
+        else if (payload.containsKey("account") && payload.get("account") != null) {
             account = new Account((Map<String, Object>) payload.get("account"));
             account_uri = account.uri;
+        }
+        else {
+            account = null;
+            account_uri = null;
         }
         if (payload.containsKey("source_uri")) {
             card = null;

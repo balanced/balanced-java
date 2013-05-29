@@ -17,6 +17,7 @@ public class Refund extends Resource {
     public String appears_on_statement_as;
     public String transaction_number;
     public Debit debit;
+    public String account_uri;
     
     public static class Collection extends ResourceCollection<Refund> {
         public Collection(String uri) {
@@ -50,7 +51,18 @@ public class Refund extends Resource {
         amount = ((Double) payload.get("amount")).intValue();
         description = (String) payload.get("description");
         appears_on_statement_as = (String) payload.get("appears_on_statement_as");
-        account = new Account((Map<String, Object>) payload.get("account"));
+        if (payload.containsKey("account_uri")) {
+            account = null;
+            account_uri = (String) payload.get("account_uri");
+        }
+        else if (payload.containsKey("account") && payload.get("account") != null) {
+            account = new Account((Map<String, Object>) payload.get("account"));
+            account_uri = account.uri;
+        }
+        else {
+            account = null;
+            account_uri = null;
+        }
         debit = new Debit((Map<String, Object>) payload.get("debit"));
     }
 }
