@@ -101,9 +101,13 @@ public class Hold extends Resource {
             account = null;
             account_uri = (String) payload.get("account_uri");
         }
-        else {
+        else if (payload.containsKey("account") && payload.get("account") != null) {
             account = new Account((Map<String, Object>) payload.get("account"));
             account_uri = account.uri;
+        }
+        else {
+            account = null;
+            account_uri = null;
         }
         if (payload.get("debit") != null)
             debit = new Debit((Map<String, Object>) payload.get("debit"));
