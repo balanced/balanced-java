@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import com.balancedpayments.Settings;
-import com.balancedpayments.errors.CannotCreate;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
 

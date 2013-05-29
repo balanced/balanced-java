@@ -1,17 +1,15 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
-import com.balancedpayments.errors.DuplicateAccountEmailAddress;
 import com.balancedpayments.errors.APIError;
+import com.balancedpayments.errors.DuplicateAccountEmailAddress;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
@@ -25,41 +23,48 @@ public class MarketplaceTest extends BaseTest {
         APIKey key = new APIKey();
         key.save();
         Settings.key = key.secret;
-        
-        Marketplace mp = new Marketplace();
-        mp.save();    
-    }
-    
-    @Test(expected=APIError.class)
-    public void testDoubleCreate() throws HTTPError {        
+
         Marketplace mp = new Marketplace();
         mp.save();
     }
-    
+
+    @Test(expected=APIError.class)
+    public void testDoubleCreate() throws HTTPError {
+        Marketplace mp = new Marketplace();
+        mp.save();
+    }
+
     @Test
     public void testMine() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Settings.key = null;
         APIKey key = new APIKey();
         key.save();
         Settings.key = key.secret;
-        
+
         Marketplace mp = new Marketplace();
-        mp.save();    
-        
+        mp.save();
+
         Marketplace mine = Marketplace.mine();
         assertEquals(mine.id, mp.id);
     }
-    
+
+    @Test
+    public void testOwner() throws HTTPError, NoResultsFound, MultipleResultsFound {
+        Marketplace mine = Marketplace.mine();
+        assertNotNull(mine.owner_account);
+        assertNotNull(mine.owner_customer);
+    }
+
     @Test(expected=NoResultsFound.class)
     public void testNoMine() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Settings.key = null;
         APIKey key = new APIKey();
         key.save();
         Settings.key = key.secret;
-        
+
         Marketplace.mine();
     }
-    
+
     @Test
     public void testTokenizeBankAccount() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = Marketplace.mine();
@@ -72,7 +77,7 @@ public class MarketplaceTest extends BaseTest {
         assertEquals(ba.routing_number, "121042882");
         assertEquals(ba.type, "checking");
     }
-    
+
     @Test
     public void testCreditBankAccount() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = Marketplace.mine();
@@ -85,7 +90,7 @@ public class MarketplaceTest extends BaseTest {
                 "121042882",
                 "checking");
     }
-    
+
     @Test
     public void testTokenizeCard() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = Marketplace.mine();
@@ -105,14 +110,14 @@ public class MarketplaceTest extends BaseTest {
         assertEquals(card.expiration_year.intValue(), 2013);
         assertEquals(card.expiration_month.intValue(), 12);
     }
-    
+
     @Test
     public void testCreateAccount() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = Marketplace.mine();
         Account account = mp.createAccount("Homer Jay");
         assertEquals(account.roles.length, 0);
     }
-    
+
     @Test
     public void testCreateBuyerAccount() throws HTTPError {
         Card card = mp.tokenizeCard(
@@ -126,14 +131,14 @@ public class MarketplaceTest extends BaseTest {
                 12,
                 2013);
         Account account = mp.createBuyerAccount(
-                "Homer Jay", 
+                "Homer Jay",
                 null,
                 card.uri,
                 null);
         assertTrue(Arrays.asList(account.roles).contains("buyer"));
         assertEquals(account.cards.total(), 1);
     }
-    
+
     @Test
     public void testCreateMerchantAccount() throws HTTPError {
         BankAccount ba = mp.tokenizeBankAccount(
@@ -150,7 +155,7 @@ public class MarketplaceTest extends BaseTest {
         merchant.put("phone_number", "+16505551234");
         merchant.put("country_code", "USA");
         Account account = mp.createMerchantAccount(
-                "Homer Jay", 
+                "Homer Jay",
                 null,
                 ba.uri,
                 merchant,
@@ -158,7 +163,7 @@ public class MarketplaceTest extends BaseTest {
         assertTrue(Arrays.asList(account.roles).contains("merchant"));
         assertEquals(account.bank_accounts.total(), 1);
     }
-    
+
     @Test(expected=HTTPError.class)
     public void testMerchantVerificationFailure() throws HTTPError {
         // NOTE: postal_code == '99999' && region == 'EX' triggers verification failure
@@ -177,20 +182,20 @@ public class MarketplaceTest extends BaseTest {
         merchant.put("phone_number", "+16505551234");
         merchant.put("country_code", "USA");
         mp.createMerchantAccount(
-                "Homer Jay", 
+                "Homer Jay",
                 null,
                 ba.uri,
                 merchant,
                 null);
     }
-    
+
     @Test(expected=DuplicateAccountEmailAddress.class)
     public void testDuplicateEmailAddresses() throws HTTPError {
         Marketplace mp = createMarketplace();
         mp.createAccount("Me", "me@example.com");
         mp.createAccount("Me", "me@example.com");
     }
-    
+
     @Test
     public void testCallbackRegistration() throws HTTPError, NotCreated {
         Marketplace mp = createMarketplace();
@@ -200,7 +205,7 @@ public class MarketplaceTest extends BaseTest {
         callback.delete();
         assertEquals(mp.callbacks.total(), 0);
     }
-    
+
     @Test
     public void testEvents() throws HTTPError, NotCreated, InterruptedException, NoResultsFound, MultipleResultsFound {
         Marketplace mp = createMarketplace();

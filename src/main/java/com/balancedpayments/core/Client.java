@@ -41,27 +41,27 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Client {
-    
+
     private static final String AGENT = "balanced-java";
     private static final int CONNECTION_TIMEOUT = 60 * 1000;
-    
-    private String root;
-    private String key;
-    private HttpClient httpClient; 
-    
+
+    private final String root;
+    private final String key;
+    private final HttpClient httpClient;
+
     public Client(String location, String key) {
         this.key = (key != null) ? key : Settings.key;
         this.root = (location != null) ? location : Settings.location;
-        
+
         PoolingClientConnectionManager connMgr = new PoolingClientConnectionManager();
         this.httpClient = new DefaultHttpClient(connMgr);
-        
+
         this.httpClient.getParams().setParameter("http.protocol.version", HttpVersion.HTTP_1_1);
         this.httpClient.getParams().setParameter("http.socket.timeout", new Integer(CONNECTION_TIMEOUT));
         this.httpClient.getParams().setParameter("http.connection.timeout", new Integer(CONNECTION_TIMEOUT));
         this.httpClient.getParams().setParameter("http.protocol.content-charset", "UTF-8");
     }
-    
+
     public Client() {
         this(null, null);
     }
@@ -72,7 +72,7 @@ public class Client {
         addHeaders(request);
         return op(request);
     }
-    
+
     public Map<String, Object> get(String path) throws HTTPError {
         return get(path, new HashMap<String, String>());
     }
@@ -83,41 +83,41 @@ public class Client {
         addHeaders(request);
         op(request);
     }
-    
+
     public void delete(String path) throws HTTPError {
         delete(path, new HashMap<String, String>());
     }
-    
+
     public Map<String, Object> put(String path, Object payload) throws HTTPError {
         URI uri = buildUri(path);
         HttpPut request = new HttpPut(uri);
         addHeaders(request);
         request.setEntity(new StringEntity(
-                serialize(payload), 
+                serialize(payload),
                 ContentType.APPLICATION_JSON));
         return op(request);
     }
-    
+
     public Map<String, Object> post(String path, Object payload) throws HTTPError {
         URI uri = buildUri(path);
         HttpPost request = new HttpPost(uri);
         addHeaders(request);
         request.setEntity(new StringEntity(
-                serialize(payload), 
+                serialize(payload),
                 ContentType.APPLICATION_JSON));
         return op(request);
     }
-    
+
     private String buildQueryString(Map<String, String> params) {
-        ArrayList<NameValuePair> nvs = new ArrayList<NameValuePair>(params.size()); 
+        ArrayList<NameValuePair> nvs = new ArrayList<NameValuePair>(params.size());
         for (Map.Entry<String, String> entry : params.entrySet()) {
             NameValuePair nv = new BasicNameValuePair(entry.getKey(), entry.getValue());
             nvs.add(nv);
         }
         String queryString = URLEncodedUtils.format(nvs, "UTF-8");
-        return queryString; 
+        return queryString;
     }
-    
+
     private URI buildUri(String path, Map<String, String> params) {
         StringBuilder sb = new StringBuilder();
         sb.append(root);
@@ -133,17 +133,17 @@ public class Client {
             throw new RuntimeException(e);
         }
     }
-    
+
     private URI buildUri(String path) {
         return buildUri(path, null);
     }
-    
+
     private void addHeaders(HttpUriRequest request) {
         String version = getClass().getPackage().getImplementationVersion();
         request.addHeader(new BasicHeader("User-Agent", AGENT + '/' + version));
         request.addHeader(new BasicHeader("Accept", "application/json"));
     }
-    
+
     private Map<String, Object> op(HttpUriRequest request) throws HTTPError {
         if (key != null) {
             byte auth[];
@@ -155,7 +155,7 @@ public class Client {
             String authEncoding = Base64.encodeBase64URLSafeString(auth);
             request.setHeader("Authorization", "Basic " + authEncoding);
         }
-        
+
         HttpResponse response;
         try {
             response = httpClient.execute(request);
@@ -165,7 +165,7 @@ public class Client {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
+
         String body = null;
         Map<String, Object> payload = null;
         HttpEntity entity = response.getEntity();
@@ -190,23 +190,24 @@ public class Client {
 
         return payload;
     }
-    
+
     private String serialize(Object payload) {
         Gson gson = new Gson();
-        return gson.toJson(payload);
+        String json = gson.toJson(payload);
+        return json;
     }
-    
+
     private Map<String, Object> deserialize(String body) {
         Gson gson = new Gson();
         return gson.fromJson(body, new TypeToken<Map<String, Object>>() {}.getType());
     }
-    
+
     private static void error(
             HttpResponse response,
             String body,
             Map<String, Object> payload) throws APIError {
         String category_code = (String) payload.get("category_code");
-        
+
         // http://stackoverflow.com/questions/3434466/creating-a-factory-method-in-java-that-doesnt-rely-on-if-else
         if (InsufficientFunds.CODES.contains(category_code))
             throw new InsufficientFunds(response, body, payload);
@@ -216,7 +217,7 @@ public class Client {
             throw new DuplicateAccountEmailAddress(response, body, payload);
         else if (BankAccountVerificationFailure.CODES.contains(category_code))
             throw new BankAccountVerificationFailure(response, body, payload);
-        
+
         throw new APIError(response, body, payload);
     }
 }

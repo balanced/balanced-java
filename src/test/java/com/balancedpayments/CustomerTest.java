@@ -1,21 +1,16 @@
 package com.balancedpayments;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
 import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.InsufficientFunds;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
 
 public class CustomerTest extends BaseTest {
 

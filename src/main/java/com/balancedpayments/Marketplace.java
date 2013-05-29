@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.Resource;
-import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
 
 public class Marketplace extends Resource {
-    
+
     public String name;
     public String support_email_address;
     public String support_phone_number;
@@ -36,28 +35,30 @@ public class Marketplace extends Resource {
     public Event.Collection events;
     public String callbacks_uri;
     public Callback.Collection callbacks;
+    public Account owner_account;
+    public Customer owner_customer;
 
     public static ResourceQuery<Marketplace> query() {
         return new ResourceQuery<Marketplace>(
                 Marketplace.class,
                 String.format("/v%s/%s", Settings.VERSION, "marketplaces"));
     }
-    
+
     public static Marketplace mine() throws NoResultsFound, MultipleResultsFound, HTTPError {
         return query().one();
     }
-    
+
     public Marketplace() {
         super();
     }
-    
+
     public Marketplace(String uri) throws HTTPError {
         super(uri);
     }
 
     public BankAccount tokenizeBankAccount(
             String name,
-            String account_number, 
+            String account_number,
             String routing_number) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("name", name);
@@ -65,10 +66,10 @@ public class Marketplace extends Resource {
         payload.put("routing_number", routing_number);
         return bank_accounts.create(payload);
     }
-    
+
     public BankAccount tokenizeBankAccount(
             String name,
-            String account_number, 
+            String account_number,
             String routing_number,
             String type) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
@@ -78,7 +79,7 @@ public class Marketplace extends Resource {
         payload.put("type", type);
         return bank_accounts.create(payload);
     }
-    
+
     public Credit creditBankAccount(
             int amount,
             String description,
@@ -99,7 +100,7 @@ public class Marketplace extends Resource {
         payload.put("bank_account", bank_account);
         return credits.create(payload);
     }
-    
+
     public Card tokenizeCard(
             String street_address,
             String city,
@@ -121,7 +122,7 @@ public class Marketplace extends Resource {
                 expiration_month,
                 expiration_year);
     }
-    
+
     public Account createAccount(
             String name,
             String email_address,
@@ -136,11 +137,11 @@ public class Marketplace extends Resource {
     public Account createAccount(String name, String email_address) throws HTTPError {
         return createAccount(name, email_address, null);
     }
-    
+
     public Account createAccount(String name) throws HTTPError {
         return createAccount(name, null, null);
     }
-    
+
     public Account createBuyerAccount(
             String name,
             String email_address,
@@ -162,7 +163,7 @@ public class Marketplace extends Resource {
     }
 
     public Account createMerchantAccount(
-                     String name, 
+                     String name,
                      String email_address,
                      String bank_account_uri,
                      String merchant_uri,
@@ -178,9 +179,9 @@ public class Marketplace extends Resource {
             payload.put("meta", meta);
         return accounts.create(payload);
     }
-    
+
     public Account createMerchantAccount(
-             String name, 
+             String name,
              String email_address,
              String bank_account_uri,
              Map<String, Object> merchant,
@@ -196,7 +197,7 @@ public class Marketplace extends Resource {
             payload.put("meta", meta);
         return accounts.create(payload);
     }
-    
+
     public Callback registerCallback(String url) throws HTTPError {
         return callbacks.create(url);
     }
@@ -246,5 +247,7 @@ public class Marketplace extends Resource {
         events = new Event.Collection(events_uri);
         callbacks_uri = (String) payload.get("callbacks_uri");
         callbacks = new Callback.Collection(callbacks_uri);
+        owner_account = new Account((Map<String, Object>) payload.get("owner_account"));
+        owner_customer = new Customer((Map<String, Object>) payload.get("owner_customer"));
     }
 }
