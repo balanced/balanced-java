@@ -6,29 +6,55 @@ import java.util.Map;
 
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
+import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
 
 public class Card extends Resource {
-    
+
+    @ResourceField()
     public Date created_at;
+
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
+
+    @ResourceField(mutable=true)
     public String street_address;
+
+    @ResourceField(mutable=true)
     public String postal_code;
+
+    @ResourceField(mutable=true)
     public String country_code;
+
+    @ResourceField(mutable=true)
     public String name;
+
+    @ResourceField(mutable=true)
     public Integer expiration_month;
+
+    @ResourceField(mutable=true)
     public Integer expiration_year;
+
+    @ResourceField(field="last_four")
     public String card_number;
+
+    @ResourceField()
     public String last_four;
+
+    @ResourceField()
     public String brand;
+
+    @ResourceField(mutable=true)
     public Boolean is_valid;
+
+    @ResourceField(field="hash")
     public String fingerprint;
-    
+
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
             super(Card.class, uri);
         }
-        
+
         public Card create(
                 String street_address,
                 String city,
@@ -51,54 +77,22 @@ public class Card extends Resource {
             return create(payload);
         }
     };
-    
+
     public Card() {
         super();
     }
-    
+
     public Card(Map<String, Object> payload) {
         super(payload);
     }
-    
+
     public Card(String uri) throws HTTPError {
         super(uri);
     }
-    
+
     public void invalidate() throws HTTPError {
         is_valid = false;
         save();
     }
-    
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("meta", meta);
-        payload.put("card_number", card_number);
-        payload.put("street_address", street_address);
-        payload.put("postal_code", postal_code);
-        payload.put("country_code", country_code);
-        payload.put("name", name);
-        payload.put("expiration_month", expiration_month);
-        payload.put("expiration_year", expiration_year);
-        payload.put("is_valid", is_valid);
-        return payload;
-    }
 
-    @Override
-    public void deserialize(Map<String, Object> payload) {
-        super.deserialize(payload);
-        created_at = deserializeDate((String) payload.get("created_at"));
-        meta = (Map<String, String>) payload.get("meta");
-        street_address = (String) payload.get("street_address");
-        postal_code = (String) payload.get("postal_code");
-        country_code = (String) payload.get("country_code");
-        name = (String) payload.get("name");
-        expiration_month = ((Double) payload.get("expiration_month")).intValue();
-        expiration_year = ((Double) payload.get("expiration_year")).intValue();
-        card_number = (String) payload.get("last_four");
-        last_four = (String) payload.get("last_four");
-        brand = (String) payload.get("brand");
-        is_valid = (Boolean) payload.get("is_valid");
-        fingerprint = (String) payload.get("hash");
-    }
 }

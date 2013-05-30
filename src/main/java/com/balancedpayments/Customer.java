@@ -6,34 +6,64 @@ import java.util.Map;
 import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
+import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 
 public class Customer extends Resource {
 
+    @ResourceField(mutable=true)
     public Map<String, String> address;
-    public String bank_accounts_uri;
+
+    @ResourceField(field="bank_accounts_uri")
     public BankAccount.Collection bank_accounts;
+
+    @ResourceField(mutable=true)
     public String business_name;
-    public String cards_uri;
+
+    @ResourceField(field="cards_uri")
     public Card.Collection cards;
-    public String credits_uri;
+
+    @ResourceField(field="credits_uri")
     public Credit.Collection credits;
-    public String debits_uri;
+
+    @ResourceField(field="debits_uri")
     public Debit.Collection debits;
+
+    @ResourceField(mutable=true)
     public String dob;
+
+    @ResourceField(mutable=true)
     public String ein;
+
+    @ResourceField(mutable=true)
     public String email;
+
+    @ResourceField(mutable=true)
     public String facebook;
-    public String holds_uri;
+
+    @ResourceField(field="holds_uri")
     public Hold.Collection holds;
+
+    @ResourceField()
     public Boolean is_identity_verified;
+
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
+
+    @ResourceField(mutable=true)
     public String name;
+
+    @ResourceField(mutable=true)
     public String phone;
-    public String refunds_uri;
+
+    @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
+
+    @ResourceField(mutable=true)
     public String ssn_last4;
+
+    @ResourceField(mutable=true)
     public String twitter;
 
     public static class Collection extends ResourceCollection<Customer> {
@@ -150,53 +180,5 @@ public class Customer extends Resource {
         if (on_behalf_of_uri != null)
             payload.put("on_behalf_of_uri", on_behalf_of_uri);
         return debits.create(payload);
-    }
-
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> payload = new HashMap<String, Object>();
-
-        payload.put("address", address);
-        payload.put("business_name", business_name);
-        payload.put("dob", dob);
-        payload.put("ein", ein);
-        payload.put("email", email);
-        payload.put("facebook", facebook);
-        payload.put("meta", meta);
-        payload.put("name", name);
-        payload.put("phone", phone);
-        payload.put("ssn_last4", ssn_last4);
-        payload.put("twitter", twitter);
-
-        return payload;
-    }
-
-    @Override
-    public void deserialize(Map<String, Object> payload) {
-        super.deserialize(payload);
-        address = (Map<String, String>) payload.get("address");
-        bank_accounts_uri = (String) payload.get("bank_accounts_uri");
-        bank_accounts = (bank_accounts_uri != null) ? new BankAccount.Collection(bank_accounts_uri) : null;
-        business_name = (String) payload.get("business_name");
-        cards_uri = (String) payload.get("cards_uri");
-        cards = (cards_uri != null) ? new Card.Collection(cards_uri) : null;
-        credits_uri = (String) payload.get("credits_uri");
-        credits = (credits_uri != null) ? new Credit.Collection(credits_uri) : null;
-        debits_uri = (String) payload.get("debits_uri");
-        debits = (debits_uri != null) ? new Debit.Collection(debits_uri) : null;
-        dob = (String) payload.get("dob");
-        ein = (String) payload.get("ein");
-        email = (String) payload.get("email");
-        facebook= (String) payload.get("facebook");
-        holds_uri = (String) payload.get("holds_uri");
-        holds = (holds_uri != null) ? new Hold.Collection(holds_uri) : null;
-        is_identity_verified = (Boolean) payload.get("is_identity_verified");
-        meta = (Map<String, String>) payload.get("meta");
-        name = (String) payload.get("name");
-        phone = (String) payload.get("phone");
-        refunds_uri = (String) payload.get("refunds_uri");
-        refunds = (refunds_uri != null) ? new Refund.Collection(refunds_uri) : null;
-        ssn_last4 = (String) payload.get("ssn_last4");
-        twitter = (String) payload.get("twitter");
     }
 }

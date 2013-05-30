@@ -1,79 +1,71 @@
 package com.balancedpayments;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
+import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
 
 public class Merchant extends Resource {
-    
+
     public static final String PERSON_TYPE = "person";
     public static final String BUSINESS_TYPE = "business";
-    
+
+    @ResourceField()
     public Date created_at;
+
+    @ResourceField(mutable=true)
     public String type;
+
+    @ResourceField(mutable=true)
     public String name;
+
+    @ResourceField(mutable=true)
     public String email_address;
+
+    @ResourceField(mutable=true)
     public String phone_number;
+
+    @ResourceField()
     public String accounts_uri;
+
+    @ResourceField()
     public ResourceCollection<Account> accounts;
+
+    @ResourceField()
     public String api_keys_uri;
+
+    @ResourceField()
     public ResourceCollection<APIKey> api_keys;
+
+    @ResourceField(mutable=true)
     public String street_address;
+
+    @ResourceField(mutable=true)
     public String city;
+
+    @ResourceField(mutable=true)
     public String postal_code;
+
+    @ResourceField(mutable=true)
     public String country_code;
+
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
-    
-    
+
+
     public static ResourceQuery<Merchant> query() {
         return new ResourceQuery<Merchant>(
                 Merchant.class,
                 String.format("/v%s/%s", Settings.VERSION, "merchants"));
     }
-    
+
     public static Merchant me() throws NoResultsFound, MultipleResultsFound, HTTPError {
         return query().one();
-    }
-    
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("type", type);
-        payload.put("name", name);
-        payload.put("email_address", email_address);
-        payload.put("phone_number", phone_number);
-        payload.put("accounts_uri", accounts_uri);
-        payload.put("street_address", street_address);
-        payload.put("city", city);
-        payload.put("postal_code", postal_code);
-        payload.put("country_code", country_code);
-        payload.put("meta", meta);
-        return payload;
-    }
-
-    @Override
-    public void deserialize(Map<String, Object> payload) {
-        super.deserialize(payload);
-        created_at = deserializeDate((String) payload.get("created_at"));
-        meta = (Map<String, String>) payload.get("meta");
-        type = (String) payload.get("type");
-        name = (String) payload.get("name");
-        email_address = (String) payload.get("email_address");
-        phone_number = (String) payload.get("phone_number");
-        street_address = (String) payload.get("street_address");
-        city = (String) payload.get("city");
-        postal_code = (String) payload.get("postal_code");
-        country_code = (String) payload.get("country_code");        
-        accounts_uri = (String) payload.get("accounts_uri");
-        accounts = new ResourceCollection<Account>(Account.class, accounts_uri);
-        api_keys_uri = (String) payload.get("api_keys_uri");
-        api_keys = new ResourceCollection<APIKey>(APIKey.class, api_keys_uri);
     }
 }
