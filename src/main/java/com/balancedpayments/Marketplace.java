@@ -6,7 +6,6 @@ import java.util.Map;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
-import com.balancedpayments.core.ResourceRelation;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
@@ -31,31 +30,31 @@ public class Marketplace extends Resource {
     @ResourceField()
     public Integer in_escrow;
 
-    @ResourceRelation(field="bank_accounts_uri")
+    @ResourceField(field="bank_accounts_uri")
     public BankAccount.Collection bank_accounts;
 
-    @ResourceRelation(field="cards_uri")
+    @ResourceField(field="cards_uri")
     public Card.Collection cards;
 
-    @ResourceRelation(field="accounts_uri")
+    @ResourceField(field="accounts_uri")
     public Account.Collection accounts;
 
-    @ResourceRelation(field="debits_uri")
+    @ResourceField(field="debits_uri")
     public Debit.Collection debits;
 
-    @ResourceRelation(field="credits_uri")
+    @ResourceField(field="credits_uri")
     public Credit.Collection credits;
 
-    @ResourceRelation(field="holds_uri")
+    @ResourceField(field="holds_uri")
     public Hold.Collection holds;
 
-    @ResourceRelation(field="refunds_uri")
+    @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
 
-    @ResourceRelation(field="events_uri")
+    @ResourceField(field="events_uri")
     public Event.Collection events;
 
-    @ResourceRelation(field="callbacks_uri")
+    @ResourceField(field="callbacks_uri")
     public Callback.Collection callbacks;
 
     @ResourceField()

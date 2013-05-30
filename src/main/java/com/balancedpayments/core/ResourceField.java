@@ -11,6 +11,6 @@ public @interface ResourceField {
 
     public boolean required() default true;
 
-    public String relation() default "";
+    public boolean collection() default false;
 
 }

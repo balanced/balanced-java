@@ -7,7 +7,6 @@ import java.util.Map;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
-import com.balancedpayments.core.ResourceRelation;
 import com.balancedpayments.errors.HTTPError;
 
 public class Debit extends Resource  {
@@ -51,7 +50,7 @@ public class Debit extends Resource  {
     @ResourceField(required=false)
     public Hold hold;
 
-    @ResourceRelation(field="refunds_uri")
+    @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
 
     public static class Collection extends ResourceCollection<Debit> {

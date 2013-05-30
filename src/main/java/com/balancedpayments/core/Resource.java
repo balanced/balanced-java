@@ -83,45 +83,39 @@ public abstract class Resource {
     public void deserialize(Map<String, Object> payload) {
         Field[] fields = this.getClass().getFields();
         for(Field f : fields){
+            if (!f.isAnnotationPresent(ResourceField.class)) {
+                continue;
+            }
+
             Object value = null;
 
-            // ResourceField
-            if (f.isAnnotationPresent(ResourceField.class)) {
-                ResourceField rf = f.getAnnotation(ResourceField.class);
-                String key = rf.field().equals("") ? f.getName() : rf.field();
-                if (!rf.required() && !payload.containsKey(key)) {
-                    value = null;
-                }
-                else {
-                    value = payload.get(key);
-                }
+            ResourceField rf = f.getAnnotation(ResourceField.class);
+            String key = rf.field().equals("") ? f.getName() : rf.field();
+            if (!rf.required() && !payload.containsKey(key)) {
+                value = null;
+            }
+            else {
+                value = payload.get(key);
+            }
 
-                if (f.getType() == Date.class) {
-                    value = deserializeDate((String) value);
-                }
-                else if (f.getType() == String[].class) {
-                    value = (((ArrayList<String>) value).toArray(new String[0]));
-                }
-                else if (f.getType() == Integer.class) {
-                    value = ((Double) value).intValue();
-                }
-                else if (Resource.class.isAssignableFrom(f.getType())) {
-                    if (value != null) {
-                        value = deserializeResource((Map<String, Object>)value, f.getType());
-                    }
+            if (f.getType() == Date.class) {
+                value = deserializeDate((String) value);
+            }
+            else if (f.getType() == String[].class) {
+                value = (((ArrayList<String>) value).toArray(new String[0]));
+            }
+            else if (f.getType() == Integer.class) {
+                value = ((Double) value).intValue();
+            }
+            else if (Resource.class.isAssignableFrom(f.getType())) {
+                if (value != null) {
+                    value = deserializeResource((Map<String, Object>)value, f.getType());
                 }
             }
-            // ResourceRelation
-            else if (f.isAnnotationPresent(ResourceRelation.class)) {
-                ResourceRelation rr = f.getAnnotation(ResourceRelation.class);
-                String key = rr.field().equals("") ? f.getName() : rr.field();
-                value = payload.get(key);
+            else if (ResourceCollection.class.isAssignableFrom(f.getType())) {
                 if (value != null) {
                     value = deserializeResourceCollection((String) value, f.getType());
                 }
-            }
-            else {
-                continue;
             }
 
             try {

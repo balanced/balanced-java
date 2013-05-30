@@ -8,7 +8,6 @@ import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
-import com.balancedpayments.core.ResourceRelation;
 import com.balancedpayments.errors.HTTPError;
 
 public class Account extends Resource {
@@ -31,19 +30,19 @@ public class Account extends Resource {
     @ResourceField(mutable=true)
     public Map<String, String> meta;
 
-    @ResourceRelation(field="bank_accounts_uri")
+    @ResourceField(field="bank_accounts_uri")
     public BankAccount.Collection bank_accounts;
 
-    @ResourceRelation(field="cards_uri")
+    @ResourceField(field="cards_uri")
     public Card.Collection cards;
 
-    @ResourceRelation(field="credits_uri")
+    @ResourceField(field="credits_uri")
     public Credit.Collection credits;
 
-    @ResourceRelation(field="debits_uri")
+    @ResourceField(field="debits_uri")
     public Debit.Collection debits;
 
-    @ResourceRelation(field="holds_uri")
+    @ResourceField(field="holds_uri")
     public Hold.Collection holds;
 
     public static class Collection extends ResourceCollection<Account> {

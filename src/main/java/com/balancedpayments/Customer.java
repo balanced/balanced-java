@@ -8,7 +8,6 @@ import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
-import com.balancedpayments.core.ResourceRelation;
 import com.balancedpayments.errors.HTTPError;
 
 public class Customer extends Resource {
@@ -16,19 +15,19 @@ public class Customer extends Resource {
     @ResourceField(mutable=true)
     public Map<String, String> address;
 
-    @ResourceRelation(field="bank_accounts_uri")
+    @ResourceField(field="bank_accounts_uri")
     public BankAccount.Collection bank_accounts;
 
     @ResourceField(mutable=true)
     public String business_name;
 
-    @ResourceRelation(field="cards_uri")
+    @ResourceField(field="cards_uri")
     public Card.Collection cards;
 
-    @ResourceRelation(field="credits_uri")
+    @ResourceField(field="credits_uri")
     public Credit.Collection credits;
 
-    @ResourceRelation(field="debits_uri")
+    @ResourceField(field="debits_uri")
     public Debit.Collection debits;
 
     @ResourceField(mutable=true)
@@ -43,7 +42,7 @@ public class Customer extends Resource {
     @ResourceField(mutable=true)
     public String facebook;
 
-    @ResourceRelation(field="holds_uri")
+    @ResourceField(field="holds_uri")
     public Hold.Collection holds;
 
     @ResourceField()
@@ -58,7 +57,7 @@ public class Customer extends Resource {
     @ResourceField(mutable=true)
     public String phone;
 
-    @ResourceRelation(field="refunds_uri")
+    @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
 
     @ResourceField(mutable=true)

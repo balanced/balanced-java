@@ -7,7 +7,6 @@ import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
-import com.balancedpayments.core.ResourceRelation;
 import com.balancedpayments.errors.HTTPError;
 
 public class BankAccount extends Resource {
@@ -36,7 +35,7 @@ public class BankAccount extends Resource {
     @ResourceField()
     public Map<String, String> meta;
 
-    @ResourceRelation(field="verifications_uri")
+    @ResourceField(field="verifications_uri")
     public BankAccountVerification.Collection verifications;
 
     @ResourceField()
