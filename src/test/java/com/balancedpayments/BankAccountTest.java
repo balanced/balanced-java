@@ -14,7 +14,8 @@ import com.balancedpayments.errors.NoResultsFound;
 public class BankAccountTest  extends BaseTest {
 
     protected BankAccount ba;
-    
+
+    @Override
     @Before
     public void setUp() throws NoResultsFound, MultipleResultsFound, HTTPError {
         super.setUp();
@@ -22,7 +23,7 @@ public class BankAccountTest  extends BaseTest {
         ba = createBankAccount(mp);
         account.associateBankAccount(ba.uri);
     }
-    
+
     @Test
     public void testVerify() throws CannotCreate, HTTPError {
         BankAccountVerification bav = ba.verify();
@@ -32,11 +33,11 @@ public class BankAccountTest  extends BaseTest {
         assertEquals(bav.attempts.intValue(), 1);
         assertEquals(bav.state, "verified");
     }
-    
+
     @Test(expected=BankAccountVerificationFailure.class)
     public void testDoubleVerify() throws CannotCreate, HTTPError {
         ba.verify();
         ba.verify();
     }
-    
+
 }

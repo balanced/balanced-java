@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.Resource;
+import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
@@ -11,31 +12,55 @@ import com.balancedpayments.errors.NoResultsFound;
 
 public class Marketplace extends Resource {
 
+    @ResourceField(mutable=true)
     public String name;
+
+    @ResourceField(mutable=true)
     public String support_email_address;
+
+    @ResourceField(mutable=true)
     public String support_phone_number;
+
+    @ResourceField(mutable=true)
     public String domain_url;
-    public Integer in_escrow;
-    public String bank_accounts_uri;
-    public BankAccount.Collection bank_accounts;
-    public String cards_uri;
-    public Card.Collection cards;
-    public String accounts_uri;
-    public Account.Collection accounts;
-    public String debits_uri;
-    public Debit.Collection debits;
-    public String credits_uri;
-    public Credit.Collection credits;
-    public String holds_uri;
-    public Hold.Collection holds;
-    public String refunds_uri;
-    public Refund.Collection refunds;
+
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
-    public String events_uri;
+
+    @ResourceField()
+    public Integer in_escrow;
+
+    @ResourceField(field="bank_accounts_uri")
+    public BankAccount.Collection bank_accounts;
+
+    @ResourceField(field="cards_uri")
+    public Card.Collection cards;
+
+    @ResourceField(field="accounts_uri")
+    public Account.Collection accounts;
+
+    @ResourceField(field="debits_uri")
+    public Debit.Collection debits;
+
+    @ResourceField(field="credits_uri")
+    public Credit.Collection credits;
+
+    @ResourceField(field="holds_uri")
+    public Hold.Collection holds;
+
+    @ResourceField(field="refunds_uri")
+    public Refund.Collection refunds;
+
+    @ResourceField(field="events_uri")
     public Event.Collection events;
-    public String callbacks_uri;
+
+    @ResourceField(field="callbacks_uri")
     public Callback.Collection callbacks;
+
+    @ResourceField()
     public Account owner_account;
+
+    @ResourceField()
     public Customer owner_customer;
 
     public static ResourceQuery<Marketplace> query() {
@@ -207,47 +232,5 @@ public class Marketplace extends Resource {
         if (id == null && uri == null)
             uri = String.format("/v%s/%s", Settings.VERSION, "marketplaces");
         super.save();
-    }
-
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("name", name);
-        payload.put("support_email_address", support_email_address);
-        payload.put("support_phone_number", support_phone_number);
-        payload.put("domain_url", domain_url);
-        payload.put("meta", meta);
-        return payload;
-    }
-
-    @Override
-    public void deserialize(Map<String, Object> payload) {
-        super.deserialize(payload);
-        name = (String) payload.get("name");
-        support_email_address = (String) payload.get("support_email_address");
-        support_phone_number = (String) payload.get("support_phone_number");
-        domain_url = (String) payload.get("domain_url");
-        in_escrow = ((Double) payload.get("in_escrow")).intValue();
-        bank_accounts_uri = (String) payload.get("bank_accounts_uri");
-        bank_accounts = new BankAccount.Collection(bank_accounts_uri);
-        cards_uri = (String) payload.get("cards_uri");
-        cards = new Card.Collection(cards_uri);
-        accounts_uri = (String) payload.get("accounts_uri");
-        accounts = new Account.Collection(accounts_uri);
-        credits_uri = (String) payload.get("credits_uri");
-        credits = new Credit.Collection(credits_uri);
-        debits_uri = (String) payload.get("debits_uri");
-        debits = new Debit.Collection(debits_uri);
-        holds_uri = (String) payload.get("holds_uri");
-        holds = new Hold.Collection(holds_uri);
-        refunds_uri = (String) payload.get("refunds_uri");
-        refunds = new Refund.Collection(refunds_uri);
-        meta = (Map<String, String>) payload.get("meta");
-        events_uri = (String) payload.get("events_uri");
-        events = new Event.Collection(events_uri);
-        callbacks_uri = (String) payload.get("callbacks_uri");
-        callbacks = new Callback.Collection(callbacks_uri);
-        owner_account = new Account((Map<String, Object>) payload.get("owner_account"));
-        owner_customer = new Customer((Map<String, Object>) payload.get("owner_customer"));
     }
 }

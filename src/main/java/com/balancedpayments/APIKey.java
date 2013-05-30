@@ -1,43 +1,34 @@
 package com.balancedpayments;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
+import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
 
 public class APIKey extends Resource
 {
-    private static final String root = "api_keys";
-    
-    public String secret;
+    private static final String root_uri = String.format("/v%s/%s", Settings.VERSION, "api_keys");
+
+    @ResourceField()
     public Date created_at;
-    
+
+    @ResourceField(mutable=true)
+    public Map<String, String> meta;
+
+    @ResourceField(required=false)
+    public String secret;
+
     public static ResourceCollection<APIKey> query() {
-        return new ResourceCollection<APIKey>(
-                APIKey.class,
-                String.format("/v%s/%s", Settings.VERSION, root));
-    }
-    
-    @Override
-    public void save() throws HTTPError {
-        if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, root);
-        super.save();
-    }
-    
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        return payload;
+        return new ResourceCollection<APIKey>(APIKey.class, root_uri);
     }
 
     @Override
-    public void deserialize(Map<String, Object> payload) {
-        super.deserialize(payload);
-        secret = payload.containsKey("secret") ? (String) payload.get("secret") : null;
-        created_at = deserializeDate((String) payload.get("created_at"));
+    public void save() throws HTTPError {
+        if (id == null && uri == null)
+            uri = APIKey.root_uri;
+        super.save();
     }
 }

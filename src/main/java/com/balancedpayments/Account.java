@@ -1,6 +1,5 @@
 package com.balancedpayments;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +7,7 @@ import java.util.Map;
 import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
+import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
 
 public class Account extends Resource {
@@ -15,21 +15,35 @@ public class Account extends Resource {
     public static final String BUYER_ROLE = "buyer";
     public static final String MERCHANT_ROLE = "merchant";
 
+    @ResourceField()
     public Date created_at;
+
+    @ResourceField(mutable=true)
     public String name;
+
+    @ResourceField(mutable=true)
     public String email_address;
+
+    @ResourceField()
     public String roles[];
-    public String bank_accounts_uri;
-    public BankAccount.Collection bank_accounts;
-    public String cards_uri;
-    public Card.Collection cards;
-    public String credits_uri;
-    public Credit.Collection credits;
-    public String debits_uri;
-    public Debit.Collection debits;
-    public String holds_uri;
-    public Hold.Collection holds;
+
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
+
+    @ResourceField(field="bank_accounts_uri")
+    public BankAccount.Collection bank_accounts;
+
+    @ResourceField(field="cards_uri")
+    public Card.Collection cards;
+
+    @ResourceField(field="credits_uri")
+    public Credit.Collection credits;
+
+    @ResourceField(field="debits_uri")
+    public Debit.Collection debits;
+
+    @ResourceField(field="holds_uri")
+    public Hold.Collection holds;
 
     public static class Collection extends ResourceCollection<Account> {
         public Collection(String uri) {
@@ -155,34 +169,5 @@ public class Account extends Resource {
         payload.put("card_uri", card_uri);
         Map<String, Object> response = client.put(uri, payload);
         deserialize(response);
-    }
-
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("name", name);
-        payload.put("email_address", email_address);
-        payload.put("meta", meta);
-        return payload;
-    }
-
-    @Override
-    public void deserialize(Map<String, Object> payload) {
-        super.deserialize(payload);
-        created_at = deserializeDate((String) payload.get("created_at"));
-        meta = (Map<String, String>) payload.get("meta");
-        name = (String) payload.get("name");
-        email_address = (String) payload.get("email_address");
-        roles = (String[])(((ArrayList<String>) payload.get("roles")).toArray(new String[0]));
-        bank_accounts_uri = (String) payload.get("bank_accounts_uri");
-        bank_accounts = new BankAccount.Collection(bank_accounts_uri);
-        cards_uri = (String) payload.get("cards_uri");
-        cards = new Card.Collection(cards_uri);
-        credits_uri = (String) payload.get("credits_uri");
-        credits = new Credit.Collection(credits_uri);
-        debits_uri = (String) payload.get("debits_uri");
-        debits = new Debit.Collection(debits_uri);
-        holds_uri = (String) payload.get("holds_uri");
-        holds = new Hold.Collection(holds_uri);
     }
 }
