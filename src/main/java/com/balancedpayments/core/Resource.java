@@ -1,33 +1,41 @@
 package com.balancedpayments.core;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
 
 public abstract class Resource {
-    
+
     protected static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     protected Client client = new Client();
-    
+
+    @ResourceField()
     public String uri;
+
+    @ResourceField()
     public String id;
 
     public Resource() {
     }
-    
+
     public Resource(Map<String, Object> payload) {
         this.deserialize(payload);
     }
-    
+
     public Resource(String uri) throws HTTPError {
         Map<String, Object> payload = client.get(uri);
         this.deserialize(payload);
     }
-    
+
     public void save() throws HTTPError {
         Map<String, Object> request = serialize();
         Map<String, Object> response = null;
@@ -40,20 +48,92 @@ public abstract class Resource {
             response = client.put(uri, request);
         deserialize(response);
     }
-    
+
     public void delete() throws NotCreated, HTTPError {
         if (id == null)
             throw new NotCreated(this.getClass());
         client.delete(uri);
     }
-    
-    public abstract Map<String, Object> serialize();
-    
-    public void deserialize(Map<String, Object> payload) {
-        uri = (String) payload.get("uri");
-        id = (String) payload.get("id");
+
+    public Map<String, Object> serialize() {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        Field[] fields = this.getClass().getFields();
+        for(Field f : fields){
+            if (!f.isAnnotationPresent(ResourceField.class)) {
+                continue;
+            }
+            ResourceField rf = f.getAnnotation(ResourceField.class);
+            if (!rf.mutable()) {
+                continue;
+            }
+            String name = rf.field().equals("") ? f.getName() : rf.field();
+            Object value;
+            try {
+                value = f.get(this);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+            payload.put(name, value);
+         }
+        return payload;
     }
-    
+
+    public void deserialize(Map<String, Object> payload) {
+        Field[] fields = this.getClass().getFields();
+        for(Field f : fields){
+            Object value = null;
+
+            // ResourceField
+            if (f.isAnnotationPresent(ResourceField.class)) {
+                ResourceField rf = f.getAnnotation(ResourceField.class);
+                String key = rf.field().equals("") ? f.getName() : rf.field();
+                if (!rf.required() && !payload.containsKey(key)) {
+                    value = null;
+                }
+                else {
+                    value = payload.get(key);
+                }
+
+                if (f.getType() == Date.class) {
+                    value = deserializeDate((String) value);
+                }
+                else if (f.getType() == String[].class) {
+                    value = (((ArrayList<String>) value).toArray(new String[0]));
+                }
+                else if (f.getType() == Integer.class) {
+                    value = ((Double) value).intValue();
+                }
+                else if (Resource.class.isAssignableFrom(f.getType())) {
+                    if (value != null) {
+                        value = deserializeResource((Map<String, Object>)value, f.getType());
+                    }
+                }
+            }
+            // ResourceRelation
+            else if (f.isAnnotationPresent(ResourceRelation.class)) {
+                ResourceRelation rr = f.getAnnotation(ResourceRelation.class);
+                String key = rr.field().equals("") ? f.getName() : rr.field();
+                value = payload.get(key);
+                if (value != null) {
+                    value = deserializeResourceCollection((String) value, f.getType());
+                }
+            }
+            else {
+                continue;
+            }
+
+            try {
+                f.set(this, value);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     protected Date deserializeDate(String raw) {
         // http://stackoverflow.com/a/2132605/1339571
         raw = raw.substring(0, 23) + raw.substring(26, raw.length());
@@ -63,4 +143,58 @@ public abstract class Resource {
             throw new RuntimeException(e);
         }
     }
+
+    protected Object deserializeResourceCollection(String raw, Class clazz) {
+        Object value;
+
+        Constructor<?> ctor;
+        try {
+            ctor = clazz.getConstructor(String.class);
+        } catch (SecurityException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            value = ctor.newInstance(new Object[] { raw });
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+
+        return value;
+    }
+
+    protected Resource deserializeResource(Map<String, Object> raw, Class clazz) {
+        Resource value;
+
+        Constructor<?> ctor;
+        try {
+            ctor = clazz.getConstructor();
+        } catch (SecurityException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            value = (Resource) ctor.newInstance(new Object[] { });
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+        value.deserialize(raw);
+
+        return value;
+    }
 }
+
