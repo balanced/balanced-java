@@ -17,6 +17,9 @@ public class BankAccount extends Resource {
     @ResourceField(mutable=true)
     public String name;
 
+    @ResourceField()
+    public Boolean is_valid;
+
     @ResourceField(mutable=true)
     public String account_number;
 
