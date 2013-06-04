@@ -64,8 +64,8 @@ public class BankAccount extends Resource {
         super(payload);
     }
 
-    public static ResourceQuery<Marketplace> query() {
-        return new ResourceQuery<Marketplace>(Marketplace.class, root_uri);
+    public static ResourceQuery<BankAccount> query() {
+        return new ResourceQuery<BankAccount>(BankAccount.class, root_uri);
     }
 
     @Override
