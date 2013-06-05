@@ -43,6 +43,10 @@ public class BankAccount extends Resource {
 
     @ResourceField(required=false)
     public BankAccountVerification verification;
+    
+    @Deprecated
+    @ResourceField(required=false)
+    public Boolean is_valid;
 
     protected static final String root_uri = "/v" + Settings.VERSION + "/bank_accounts";
 
