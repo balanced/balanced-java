@@ -10,6 +10,9 @@ import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 
 public class BankAccount extends Resource {
+	
+	public final String Checking = "checking";
+    public final String Savings = "savings";
 
     @ResourceField()
     public Date created_at;
