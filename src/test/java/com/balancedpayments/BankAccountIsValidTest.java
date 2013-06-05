@@ -42,7 +42,7 @@ public class BankAccountIsValidTest  extends BaseTest {
     	bankAccount.account_number = "112233a";
     	bankAccount.type = "checking";
     	bankAccount.save();
-    	assertEquals(ba.is_valid, null);
+    	assertEquals(bankAccount.is_valid, null);
     	
     }
 }
