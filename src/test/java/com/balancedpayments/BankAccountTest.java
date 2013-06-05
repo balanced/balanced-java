@@ -10,6 +10,7 @@ import com.balancedpayments.errors.CannotCreate;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
+import com.balancedpayments.errors.NotCreated;
 
 public class BankAccountTest  extends BaseTest {
 
@@ -38,6 +39,27 @@ public class BankAccountTest  extends BaseTest {
     public void testDoubleVerify() throws CannotCreate, HTTPError {
         ba.verify();
         ba.verify();
+    }
+    
+    @Test
+    public void testSoftDeleteOfBankAccountFromAssociatedBankAccount() throws CannotCreate, HTTPError, NotCreated {
+    	ba.save();
+        assertEquals(ba.is_valid, true);
+        ba.delete();
+        ba.save();
+        assertEquals(ba.is_valid, false);
+    }
+    
+    @Test
+    public void testSofDeleteOfBankAccount() throws HTTPError{
+    	BankAccount bankAccount = new BankAccount();
+    	bankAccount.name = "Harry Fakester";
+    	bankAccount.routing_number = "121042882";
+    	bankAccount.account_number = "112233a";
+    	bankAccount.type = "checking";
+    	bankAccount.save();
+    	assertEquals(bankAccount.is_valid, null);
+    	
     }
 
 }
