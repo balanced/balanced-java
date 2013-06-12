@@ -49,7 +49,10 @@ public class Card extends Resource {
 
     @ResourceField(field="hash")
     public String fingerprint;
-
+    
+    @ResourceField(mutable=true, required=false)
+    public String security_code;
+    
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
             super(Card.class, uri);
@@ -74,6 +77,7 @@ public class Card extends Resource {
             payload.put("card_number", card_number);
             payload.put("expiration_month", expiration_month);
             payload.put("expiration_year", expiration_year);
+            payload.put("security_code", security_code);
             return create(payload);
         }
     };
