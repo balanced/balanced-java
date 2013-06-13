@@ -2,7 +2,7 @@
     Credit.Collection credits = new Credit.Collection()
 
 % else:
-        Credit.Collection credits = new Credit.Collection();
+        //Credit.Collection credits = new Credit.Collection();
 
 % endif
 

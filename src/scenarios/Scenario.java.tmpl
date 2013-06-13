@@ -1,0 +1,19 @@
+package {{ scenario }};
+
+import com.balancedpayments.*;
+import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.MultipleResultsFound;
+import com.balancedpayments.errors.NoResultsFound;
+import java.util.HashMap;
+import java.util.Map;
+
+public class {{ scenario }} {
+
+    public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
+        String apiKey = "{{ api_key }}";
+        String location = System.getProperty("balanced_location", Settings.location);
+        String key = System.getProperty("balanced_key", apiKey);
+        Settings.configure(location, key);
+{{ snippet }}
+    }
+}

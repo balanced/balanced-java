@@ -46,6 +46,9 @@ public class Refund extends Resource {
     public Refund() {
         super();
     }
+    public Refund(String uri) {
+        super();
+    }
 
     public Refund(Map<String, Object> payload) {
         super(payload);

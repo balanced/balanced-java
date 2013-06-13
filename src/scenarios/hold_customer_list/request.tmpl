@@ -1,7 +1,2 @@
-Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("card_number", {{ request.card_number }});
-payload.put("expiration_month", {{ request.expiration_month }});
-payload.put("expiration_year", {{ request.expiration_year }});
-payload.put("security_code", {{ request.security_code }});
-Card card = new Card(payload);
-card.save();
+    Customer customer = new Customer("{{ request.customer_uri }}");
+    Hold.Collection holds = customer.holds;

@@ -2,7 +2,7 @@
     Account account = new Account(payload);
 
 % else:
-    HashMap<String, String> payload = new HashMap<String, String>();
+    Map<String, Object> payload = new HashMap<String, Object>();
     payload.put("dob", "");
     payload.put("name", "Johann Bernoulli");
     payload.put("phone_number", "");

@@ -2,13 +2,7 @@
 Card card = new Card();
 
 % else:
-Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("card_number", );
-payload.put("expiration_month", );
-payload.put("expiration_year", );
-payload.put("security_code", );
-Card card = new Card(payload);
-card.save();
+    Debit debit = new Debit("/v1/marketplaces/TEST-MP64bmAzypIUS0SUZ4qkoFqG/debits/WD706iriHZn5MZEyQ86DmHmE");
 
 % endif
 

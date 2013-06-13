@@ -105,7 +105,11 @@ public abstract class Resource {
                 value = (((ArrayList<String>) value).toArray(new String[0]));
             }
             else if (f.getType() == Integer.class) {
-                value = ((Double) value).intValue();
+                try {
+                    value = ((Double) value).intValue();
+                } catch (Exception e) {
+                    value = (Integer) value;
+                }
             }
             else if (Resource.class.isAssignableFrom(f.getType())) {
                 if (value != null) {
@@ -130,6 +134,7 @@ public abstract class Resource {
 
     protected Date deserializeDate(String raw) {
         // http://stackoverflow.com/a/2132605/1339571
+        if (raw == null) return null;
         raw = raw.substring(0, 23) + raw.substring(26, raw.length());
         try {
             return dateTimeFormat.parse(raw);

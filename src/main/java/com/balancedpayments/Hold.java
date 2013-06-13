@@ -27,6 +27,9 @@ public class Hold extends Resource {
     @ResourceField(mutable=true)
     public String description;
 
+    @ResourceField(mutable=true)
+    public String appears_on_statement_as;
+
     @ResourceField()
     public Debit debit;
 

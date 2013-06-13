@@ -8,9 +8,9 @@
 % else:
     Account account = new Account("");
     account.debit( 5000,
-                   Some descriptive text for the debit in the dashboard,
-                   ,
-                   Statement text,
+                   "Some descriptive text for the debit in the dashboard",
+                   "",
+                   "Statement text",
                    null);
 
 % endif

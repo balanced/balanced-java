@@ -36,6 +36,10 @@ public class Credit extends Resource {
     @ResourceField(required=false)
     public Customer customer;
 
+    public Credit(String uri) {
+        super();
+    }
+
     public static class Collection extends ResourceCollection<Credit> {
         public Collection(String uri) {
             super(Credit.class, uri);

@@ -47,8 +47,9 @@ public class RenderScenarios {
         Map<String, Object> result =  loadScenarioCache();
         HashMap requestData;
         requestData = null;
+        String apiKey = null;
         try {
-            //requestData = ((HashMap)((HashMap)((HashMap)result.get(scenario)).get("request")).get("payload"));
+            apiKey = (String) result.get("api_key");
             requestData = ((HashMap)((HashMap)result.get(scenario)).get("request"));
         } catch (Exception e) {
             System.out.println("Scenario not found in scenario.cache");
@@ -56,11 +57,17 @@ public class RenderScenarios {
         data.put("request", requestData);
 
         String scenarioDefinition = render(scenarioPath.concat("/definition.tmpl"), null);
-
         String scenarioRequest = render(scenarioPath.concat("/request.tmpl"), data);
 
         // Output java scenario
-        //writeFile(scenarioPath.concat("/Scenario.java"), scenarioRequest);
+        Map<String, Object> javaData = new HashMap<String, Object>();
+        javaData.put("snippet", scenarioRequest);
+        javaData.put("api_key", apiKey);
+        javaData.put("scenario", scenario);
+        String javaScenario = render(scenarioPath.concat("/../Scenario.java.tmpl"), javaData);
+        String javaFileName = scenarioPath + "/" + scenario + ".java";
+        writeFile(javaFileName, javaScenario);
+        CompileSourceInMemory.runClassFromSource(javaFileName, scenario);
 
         // Output mako template
         Map<String,Object> makoData = new HashMap<String, Object>();

@@ -8,7 +8,7 @@
         ba.routing_number = "";
         ba.type = "checking";
         ba.save();
-        ba.credit(10000);
+        //ba.credit(10000);
 
 % endif
 

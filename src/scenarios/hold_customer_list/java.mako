@@ -1,14 +1,8 @@
 % if mode == 'definition':
-Card card = new Card();
 
 % else:
-Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("card_number", );
-payload.put("expiration_month", );
-payload.put("expiration_year", );
-payload.put("security_code", );
-Card card = new Card(payload);
-card.save();
+    Customer customer = new Customer("/v1/customers/CU6W5pSk2CUXQxhENqyGRvQe");
+    Hold.Collection holds = customer.holds;
 
 % endif
 

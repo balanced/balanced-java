@@ -3,7 +3,7 @@
 
 % else:
     Account account = new Account("");
-    account.debit();
+    account.debit(100);
 
 % endif
 

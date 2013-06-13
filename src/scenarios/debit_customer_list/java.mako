@@ -2,7 +2,6 @@
 todo
 
 % else:
-todo
 
 % endif
 

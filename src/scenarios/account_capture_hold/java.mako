@@ -2,7 +2,7 @@
     Hold.capture(...)
 
 % else:
-    Hold hold = Hold("");
+    Hold hold = new Hold("");
     hold.account_uri = "";
     Account account = hold.getAccount();
     Debit debit = hold.capture();

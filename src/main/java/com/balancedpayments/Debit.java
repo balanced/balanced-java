@@ -63,6 +63,10 @@ public class Debit extends Resource  {
         super();
     }
 
+    public Debit(String uri) {
+        super();
+    }
+
     public Debit(Map<String, Object> payload) {
         super(payload);
     }

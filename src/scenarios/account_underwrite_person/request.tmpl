@@ -1,2 +1,12 @@
     Account account = new Account("{{ request.accounts_uri }}");
-    account
+    Map<String, Object> merchantPayload = new HashMap<String, Object>();
+    Map<String, Object> personPayload = new HashMap<String, Object>();
+
+    merchantPayload.put("name", "{{ request.payload.merchant.name }}");
+    merchantPayload.put("dob", "{{ request.payload.merchant.dob }}");
+    merchantPayload.put("phone_number", "{{ request.payload.merchant.phone_number }}");
+    merchantPayload.put("postal_code", "{{ request.payload.merchant.postal_code }}");
+    merchantPayload.put("street_address", "{{ request.payload.merchant.street_address }}");
+    merchantPayload.put("type", "{{ request.payload.merchant.type }}");
+
+    account.promoteToMerchant(merchantPayload);
