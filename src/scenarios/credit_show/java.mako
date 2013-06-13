@@ -2,7 +2,7 @@
     Credit credit = new Credit(uri)
 
 % else:
-    Credit credit = new Credit("/v1/credits/CR2M7u0Orut0VyFgtba8GAMf");
+    Credit credit = new Credit("/v1/credits/CR6HPyOqdWtPuNdeHJFd7ybY");
 
 % endif
 

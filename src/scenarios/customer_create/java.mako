@@ -1,8 +1,8 @@
 % if mode == 'definition':
-todo
+    Customer customer = new Customer();
 
 % else:
-todo
+    Customer customer = new Customer();
 
 % endif
 

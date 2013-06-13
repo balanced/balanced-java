@@ -2,8 +2,8 @@
     BankAccountVerification.confirm(...)
 
 % else:
-        BankAccount ba = new BankAccount("/v1/bank_accounts/BA2q0W6DqBAtytLyfBAD4p3y");
-        ba.verification_uri = "/v1/bank_accounts/BA2q0W6DqBAtytLyfBAD4p3y/verifications/BZ2qWyR9zEOhUA4a1nVPXO4T";
+        BankAccount ba = new BankAccount("/v1/bank_accounts/BA6joBOllXBzGbYKpa4PCiGQ");
+        ba.verification_uri = "/v1/bank_accounts/BA6joBOllXBzGbYKpa4PCiGQ/verifications/BZ6kgUuE7JInbXvZLxJqMqnR";
         BankAccountVerification verification = ba.getVerification();
         verification.confirm(1, 1);
 

@@ -1,1 +1,7 @@
-todo
+    Customer customer = new Customer("{{ request.customer_uri }}");
+    customer.credit({{ request.payload.amount }},
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);

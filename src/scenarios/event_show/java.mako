@@ -5,7 +5,7 @@ request.tmpl
 Scenario.javaCard card = new Card();
 
 % else:
-    Event event = new Event("/v1/events/EV46e176b8cd8811e28d53026ba7cac9da");
+    Event event = new Event("/v1/events/EVc75db820d3ae11e29834026ba7cac9da");
 
 % endif
 

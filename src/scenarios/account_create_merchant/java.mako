@@ -3,7 +3,7 @@
 
 % else:
     Account account = new Account();
-    account.associateBankAccount("/v1/bank_accounts/BA2G3VwpWEazRJliQSQfDmgU");
+    account.associateBankAccount("/v1/bank_accounts/BA6AOckxt2HBpyXSGwiyCIKy");
 
 % endif
 

@@ -28,7 +28,6 @@ public class ResourcePagination<T> implements Iterable<T> {
             this.index = 0;
         }
         
-        @Override
         public boolean hasNext() {
             try {
                 return (index < page.getSize() || this.page.getNextUri() != null);
@@ -38,7 +37,6 @@ public class ResourcePagination<T> implements Iterable<T> {
             }
         }
 
-        @Override
         public T next() {
             if (!hasNext())
                 throw new NoSuchElementException();
@@ -56,7 +54,6 @@ public class ResourcePagination<T> implements Iterable<T> {
             }
         }
 
-        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
@@ -142,7 +139,6 @@ public class ResourcePagination<T> implements Iterable<T> {
         }
     }
     
-    @Override
     public Iterator<T> iterator() {
         String uri = getURI();
         ResourcePage<T> page = new ResourcePage<T>(cls, uri);
