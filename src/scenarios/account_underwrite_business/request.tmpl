@@ -1,0 +1,6 @@
+    Account account = new Account("{{ request.accounts_uri }}");
+    HashMap merchantPayload = new HashMap<String, Object>();
+    {% for field in request.payload %}
+    merchantPayload["{{ field }}"];
+    {% endfor %}
+    account.promoteToMerchant(merchantPayload);

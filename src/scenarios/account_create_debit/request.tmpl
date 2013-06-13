@@ -1,0 +1,2 @@
+    Account account = new Account("{{ request.account_uri }}");
+    account.debit({{ request.payload.amount }});

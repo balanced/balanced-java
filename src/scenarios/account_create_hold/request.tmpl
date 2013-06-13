@@ -1,0 +1,2 @@
+    Account account = new Account("{{ request.account_uri }}");
+    Hold hold = account.hold({{ request.payload.amount }});
