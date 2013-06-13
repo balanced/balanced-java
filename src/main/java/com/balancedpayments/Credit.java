@@ -36,6 +36,10 @@ public class Credit extends Resource {
     @ResourceField(required=false)
     public Customer customer;
 
+    public Credit() {
+        super();
+    }
+
     public Credit(String uri) {
         super();
     }
