@@ -8,12 +8,7 @@
 
 % else:
     Customer customer = new Customer("/v1/customers/CU6PXyMacKRYKNJPJFKtONK0");
-    customer.credit(100,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null);
+    customer.credit(100);
 
 % endif
 

@@ -5,4 +5,4 @@
     payload.put("postal_code", "{{ request.payload.postal_code }}");
     payload.put("street_address", "{{ request.payload.street_address }}");
     payload.put("type", "{{ request.payload.type }}");
-    Account account = new Account(payload);
+    BankAccount account = new BankAccount(payload);

@@ -9,7 +9,7 @@
     payload.put("postal_code", "");
     payload.put("street_address", "");
     payload.put("type", "checking");
-    Account account = new Account(payload);
+    BankAccount account = new BankAccount(payload);
 
 % endif
 

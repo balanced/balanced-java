@@ -126,27 +126,4 @@ public class BankAccount extends Resource {
     public Credit credit(int amount) throws HTTPError {
         return credit(amount, null, null, null, null);
     }
-
-    public Debit debit(
-            int amount,
-            String description,
-            String source_uri,
-            String appears_on_statement_as,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (source_uri != null)
-            payload.put("source", source_uri);
-        if (appears_on_statement_as != null)
-            payload.put("appears_on_statement_as", appears_on_statement_as);
-        if (meta != null)
-            payload.put("meta", meta);
-        return debits.create(payload);
-    }
-
-    public Debit debit(int amount) throws HTTPError {
-        return debit(amount, null, null, null, null);
-    }
 }

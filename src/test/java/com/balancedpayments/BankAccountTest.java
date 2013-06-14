@@ -62,4 +62,7 @@ public class BankAccountTest  extends BaseTest {
     	
     }
 
+    @Test
+    public void testCredit() {}
+
 }

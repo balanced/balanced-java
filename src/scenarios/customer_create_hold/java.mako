@@ -1,5 +1,6 @@
 % if mode == 'definition':
-todo
+    Customer customer = new Customer("");
+    customer.hold();
 
 % else:
 

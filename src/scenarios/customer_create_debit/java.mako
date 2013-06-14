@@ -8,12 +8,7 @@
 
 % else:
     Customer customer = new Customer("/v1/customers/CU7GuPv9Y2F8ySwJHuHL0YWq");
-    customer.debit( 1000,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null);
+    customer.debit( 1000);
 
 % endif
 

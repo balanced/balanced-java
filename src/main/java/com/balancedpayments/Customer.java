@@ -160,6 +160,10 @@ public class Customer extends Resource {
         return credits.create(payload);
     }
 
+    public Credit credit(int amount) throws HTTPError {
+        return credit(amount, null, null, null, null, null);
+    }
+
     public Debit debit(
             int amount,
             String description,
@@ -180,5 +184,33 @@ public class Customer extends Resource {
         if (on_behalf_of_uri != null)
             payload.put("on_behalf_of_uri", on_behalf_of_uri);
         return debits.create(payload);
+    }
+
+    public Debit debit(int amount) throws HTTPError {
+        return debit(amount, null, null, null, null, null);
+    }
+
+    public Debit debit(int amount, String source_uri) throws HTTPError {
+        return debit(amount, null, source_uri, null, null, null);
+    }
+
+    public Hold hold(
+            int amount,
+            String description,
+            String source_uri,
+            Map<String, String> meta) throws HTTPError {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", amount);
+        if (description != null)
+            payload.put("description", description);
+        if (source_uri != null)
+            payload.put("source", source_uri);
+        if (meta != null)
+            payload.put("meta", meta);
+        return holds.create(payload);
+    }
+
+    public Hold hold(int amount) throws HTTPError {
+        return hold(amount, null, null, null);
     }
 }

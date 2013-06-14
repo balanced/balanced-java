@@ -2,7 +2,8 @@
     Credit.Collection credits = new Credit.Collection()
 
 % else:
-        //Credit.Collection credits = new Credit.Collection();
+        Marketplace mp = Marketplace.mine();
+        Credit.Collection credits = mp.credits;
 
 % endif
 
