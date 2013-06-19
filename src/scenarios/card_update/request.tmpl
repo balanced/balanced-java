@@ -1,3 +1,8 @@
 Card card = new Card("{{ request.uri }}");
 Map<String, String> meta = new HashMap<String, String>();
-meta.put("facebook.user_id", "{{ request.payload.meta.' }}");
+meta.put("facebook.user_id", "0192837465");
+meta.put("my-own-customer-id", "12345");
+meta.put("twitter.id", "1234987650");
+card.meta = meta;
+card.save();
+

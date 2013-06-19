@@ -1,2 +1,3 @@
+// requires updated scenarios.cache
 Customer customer = new Customer("{{ request.customer_uri }}");
-customer.debit({{ request.payload.amount }}, "{{ request.payload.hold_uri }}");
+customer.debit(100, "{{ request.payload.hold_uri }}");

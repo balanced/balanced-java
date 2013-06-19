@@ -2,7 +2,7 @@
 BankAccount.verify()
 
 % else:
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA3X9madzYu5zQybfb43pOer/verifications");
+BankAccount ba = new BankAccount("/v1/bank_accounts/BA1mOWnGISRn9236e6tOuDLq/verifications");
 ba.verify();
 
 % endif

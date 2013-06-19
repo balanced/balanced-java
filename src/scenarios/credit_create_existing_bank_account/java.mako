@@ -2,7 +2,7 @@
 BankAccount.credit(amount);
 
 % else:
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA3S82mRZS12C8AkQ8flcYXB");
+BankAccount ba = new BankAccount("/v1/bank_accounts/BA1iViFZ5fKWIixl3fpq07Je");
 ba.credit(10000);
 
 % endif

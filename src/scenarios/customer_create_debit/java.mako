@@ -8,7 +8,7 @@ Map<String, String> meta)
 
 % else:
 Customer customer = new Customer("");
-customer.debit( );
+customer.debit(100);
 
 % endif
 

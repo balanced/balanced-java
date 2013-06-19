@@ -5,7 +5,7 @@ BankAccount.credit(amount)
 BankAccount ba = new BankAccount();
 ba.account_number = "9900000005";
 ba.name = "Johann Bernoulli";
-ba.routing_number = "";
+ba.routing_number = "121000358";
 ba.type = "checking";
 ba.save();
 ba.credit(10000);

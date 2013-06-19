@@ -2,8 +2,8 @@
 Account.associateCard(...)
 
 % else:
-Account account = new Account("/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/accounts/AC4eJoKeEVrjhbE8gnTOBF9M");
-account.associateCard("/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/cards/CC4g5wDWVKvcmEL0doWoIhWw");
+Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC1DOd9xMVGdZSGUeyrducwU");
+account.associateCard("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/cards/CC1FuQR6sXB07wmrWwwFF2Wj");
 
 % endif
 

@@ -3,10 +3,10 @@ Hold.capture(Map<String, Object> payload);
 
 % else:
 Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("hold_uri", "/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/holds/HL10OYZ6boBE6q4MtcMFjrce");
+payload.put("hold_uri", "/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds/HL3IKFgbk6IzYg4IhOjzzjTp");
 payload.put("amount", 1000);
 Hold hold = new Hold(payload);
-hold.account_uri = "/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/accounts/AC5ToiF5k1RCPNOfiPXAvNPk";
+hold.account_uri = "/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC3z3msdgTHiowL349h94P22";
 Account account = hold.getAccount();
 Debit debit = hold.capture(1000);
 

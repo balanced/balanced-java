@@ -2,7 +2,7 @@
 Credit.Collection credits = new Credit.Collection(uri);
 
 % else:
-Credit.Collection credits = new Credit.Collection("/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/accounts/AC4eJoKeEVrjhbE8gnTOBF9M/credits");
+Credit.Collection credits = new Credit.Collection("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC1DOd9xMVGdZSGUeyrducwU/credits");
 
 % endif
 

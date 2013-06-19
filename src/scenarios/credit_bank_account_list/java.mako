@@ -2,7 +2,7 @@
 Account.credits
 
 % else:
-Account account = new Account("/v1/bank_accounts/BA3S82mRZS12C8AkQ8flcYXB");
+Account account = new Account("/v1/bank_accounts/BA1iViFZ5fKWIixl3fpq07Je");
 Credit.Collection credits = account.credits;
 
 % endif

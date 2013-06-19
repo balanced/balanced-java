@@ -1,4 +1,5 @@
 
+import com.balancedpayments.BankAccount;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.asfun.jangod.template.TemplateEngine;
@@ -96,8 +97,6 @@ public class RenderScenarios {
             System.out.println(scenario);
             renderScenario(scenario, scenarioPath);
         }
-
-
     }
 
 }

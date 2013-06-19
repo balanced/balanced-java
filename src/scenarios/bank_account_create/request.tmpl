@@ -1,8 +1,7 @@
 Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("dob", "{{ request.payload.dob }}");
+payload.put("account_number", "{{ request.payload.account_number }}");
 payload.put("name", "{{ request.payload.name }}");
-payload.put("phone_number", "{{ request.payload.phone_number }}");
-payload.put("postal_code", "{{ request.payload.postal_code }}");
-payload.put("street_address", "{{ request.payload.street_address }}");
+payload.put("routing_number", "{{ request.payload.routing_number }}");
 payload.put("type", "{{ request.payload.type }}");
+
 BankAccount account = new BankAccount(payload);
