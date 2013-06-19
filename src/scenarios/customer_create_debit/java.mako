@@ -7,8 +7,8 @@ String on_behalf_of_uri,
 Map<String, String> meta)
 
 % else:
-Customer customer = new Customer("/v1/customers/CU7GuPv9Y2F8ySwJHuHL0YWq");
-customer.debit( 1000);
+Customer customer = new Customer("");
+customer.debit( );
 
 % endif
 

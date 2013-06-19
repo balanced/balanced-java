@@ -2,8 +2,8 @@
 Customer.addBankAccount(...)
 
 % else:
-Customer customer = new Customer("/v1/customers/CU7KsM3n0uv9cqwm94E1enVB");
-customer.addBankAccount("/v1/bank_accounts/BA7LMoiDtVIogA3dSCkb93xQ");
+Customer customer = new Customer("/v1/customers/CU5nHiKeivGKNoHg1wdKlsym");
+customer.addBankAccount("/v1/bank_accounts/BA5oBHE1yVrizbWw5adTwEB9");
 
 % endif
 

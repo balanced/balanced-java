@@ -2,7 +2,7 @@
 Customer.credits
 
 % else:
-Customer customer = new Customer("/v1/customers/CU6PXyMacKRYKNJPJFKtONK0");
+Customer customer = new Customer("");
 Credit.Collection credits = customer.credits;
 
 % endif

@@ -1,7 +1,7 @@
 % if mode == 'definition':
 
 % else:
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA7LMoiDtVIogA3dSCkb93xQ");
+BankAccount ba = new BankAccount("/v1/bank_accounts/BA5oBHE1yVrizbWw5adTwEB9");
 ba.is_valid = false;
 ba.save();
 

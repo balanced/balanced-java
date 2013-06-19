@@ -2,7 +2,7 @@
 Refund refund = new Refund(uri);
 
 % else:
-Refund refund = new Refund("/v1/customers/CU6W5pSk2CUXQxhENqyGRvQe/refunds/RF7rcQFmIUkcoIHnpZcnQk5W");
+Refund refund = new Refund("/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/refunds/RF56HnnTj66FSFMrJ0QgJaTm");
 
 % endif
 

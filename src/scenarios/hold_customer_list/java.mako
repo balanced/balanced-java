@@ -1,7 +1,7 @@
 % if mode == 'definition':
 
 % else:
-Customer customer = new Customer("/v1/customers/CU6W5pSk2CUXQxhENqyGRvQe");
+Customer customer = new Customer("");
 Hold.Collection holds = customer.holds;
 
 % endif

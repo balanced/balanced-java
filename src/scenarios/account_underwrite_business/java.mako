@@ -2,7 +2,7 @@
 Account.promoteToMerchant(...)
 
 % else:
-Account account = new Account("/v1/marketplaces/TEST-MP64bmAzypIUS0SUZ4qkoFqG/accounts");
+Account account = new Account("/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/accounts");
 Map<String, Object> merchantPayload = new HashMap<String, Object>();
 Map<String, Object> personPayload = new HashMap<String, Object>();
 

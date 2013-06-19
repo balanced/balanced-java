@@ -1,4 +1,7 @@
-Hold hold = new Hold("{{ request.payload.hold_uri }}");
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("hold_uri", "{{ request.payload.hold_uri }}");
+payload.put("amount", {{ request.payload.amount }});
+Hold hold = new Hold(payload);
 hold.account_uri = "{{ request.account_uri }}";
 Account account = hold.getAccount();
 Debit debit = hold.capture({{ request.payload.amount }});

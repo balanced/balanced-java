@@ -2,7 +2,7 @@
 Customer.refunds
 
 % else:
-Customer customer = new Customer("/v1/customers/CU6W5pSk2CUXQxhENqyGRvQe");
+Customer customer = new Customer("");
 Refund.Collection refunds = customer.refunds;
 
 % endif

@@ -2,7 +2,7 @@
 Refund.save()
 
 % else:
-Refund refund = new Refund("/v1/customers/CU6W5pSk2CUXQxhENqyGRvQe/refunds/RF7rcQFmIUkcoIHnpZcnQk5W");
+Refund refund = new Refund("/v1/marketplaces/TEST-MP3MuCwscFiUbhv2Z2lB49cQ/refunds/RF56HnnTj66FSFMrJ0QgJaTm");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("refund.reason", "user not happy with product");
