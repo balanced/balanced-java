@@ -45,6 +45,9 @@ public class Account extends Resource {
     @ResourceField(field="holds_uri")
     public Hold.Collection holds;
 
+    @ResourceField(field="refunds_uri")
+    public Refund.Collection refunds;
+
     public static class Collection extends ResourceCollection<Account> {
         public Collection(String uri) {
             super(Account.class, uri);
