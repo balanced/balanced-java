@@ -1,9 +1,9 @@
 % if mode == 'definition':
-    Customer.credits
+Customer.credits
 
 % else:
-    Customer customer = new Customer("/v1/customers/CU6PXyMacKRYKNJPJFKtONK0");
-    Credit.Collection credits = customer.credits;
+Customer customer = new Customer("/v1/customers/CU6PXyMacKRYKNJPJFKtONK0");
+Credit.Collection credits = customer.credits;
 
 % endif
 

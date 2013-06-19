@@ -1,4 +1,4 @@
-    Hold hold = new Hold("{{ request.payload.hold_uri }}");
-    hold.account_uri = "{{ request.account_uri }}";
-    Account account = hold.getAccount();
-    Debit debit = hold.capture({{ request.payload.amount }});
+Hold hold = new Hold("{{ request.payload.hold_uri }}");
+hold.account_uri = "{{ request.account_uri }}";
+Account account = hold.getAccount();
+Debit debit = hold.capture({{ request.payload.amount }});

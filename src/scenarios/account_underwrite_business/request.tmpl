@@ -1,18 +1,18 @@
-    Account account = new Account("{{ request.accounts_uri }}");
-    Map<String, Object> merchantPayload = new HashMap<String, Object>();
-    Map<String, Object> personPayload = new HashMap<String, Object>();
+Account account = new Account("{{ request.accounts_uri }}");
+Map<String, Object> merchantPayload = new HashMap<String, Object>();
+Map<String, Object> personPayload = new HashMap<String, Object>();
 
-    personPayload.put("dob", "{{ request.payload.merchant.person.dob }}");
-    personPayload.put("name", "{{ request.payload.merchant.person.name }}");
-    personPayload.put("phone_number", "{{ request.payload.merchant.person.phone_number }}");
-    personPayload.put("postal_code", "{{ request.payload.merchant.person.postal_code }}");
-    personPayload.put("street_address", "{{ request.payload.merchant.person.street_address }}");
-    merchantPayload.put("name", "{{ request.payload.merchant.name }}");
-    merchantPayload.put("person", personPayload);
-    merchantPayload.put("phone_number", "{{ request.payload.merchant.phone_number }}");
-    merchantPayload.put("postal_code", "{{ request.payload.merchant.postal_code }}");
-    merchantPayload.put("street_address", "{{ request.payload.merchant.street_address }}");
-    merchantPayload.put("tax_id", "{{ request.payload.merchant.tax_id }}");
-    merchantPayload.put("type", "{{ request.payload.merchant.type }}");
+personPayload.put("dob", "{{ request.payload.merchant.person.dob }}");
+personPayload.put("name", "{{ request.payload.merchant.person.name }}");
+personPayload.put("phone_number", "{{ request.payload.merchant.person.phone_number }}");
+personPayload.put("postal_code", "{{ request.payload.merchant.person.postal_code }}");
+personPayload.put("street_address", "{{ request.payload.merchant.person.street_address }}");
+merchantPayload.put("name", "{{ request.payload.merchant.name }}");
+merchantPayload.put("person", personPayload);
+merchantPayload.put("phone_number", "{{ request.payload.merchant.phone_number }}");
+merchantPayload.put("postal_code", "{{ request.payload.merchant.postal_code }}");
+merchantPayload.put("street_address", "{{ request.payload.merchant.street_address }}");
+merchantPayload.put("tax_id", "{{ request.payload.merchant.tax_id }}");
+merchantPayload.put("type", "{{ request.payload.merchant.type }}");
 
-    account.promoteToMerchant(merchantPayload);
+account.promoteToMerchant(merchantPayload);

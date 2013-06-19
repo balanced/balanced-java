@@ -1,9 +1,9 @@
 % if mode == 'definition':
-    Account.hold(...)
+Account.hold(...)
 
 % else:
-    Account account = new Account("");
-    Hold hold = account.hold(100);
+Account account = new Account("");
+Hold hold = account.hold(100);
 
 % endif
 

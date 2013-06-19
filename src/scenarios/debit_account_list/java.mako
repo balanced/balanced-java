@@ -1,9 +1,9 @@
 % if mode == 'definition':
-    Debit.Collection
+Debit.Collection
 
 % else:
-    Account account = new Account("");
-    Debit.Collection debits = account.debits;
+Account account = new Account("");
+Debit.Collection debits = account.debits;
 
 % endif
 

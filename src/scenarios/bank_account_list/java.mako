@@ -1,8 +1,8 @@
 % if mode == 'definition':
-    BankAccount.Collection
+BankAccount.Collection
 
 % else:
-    BankAccount.Collection bankAccounts = new BankAccount.Collection("/v1/bank_accounts");
+BankAccount.Collection bankAccounts = new BankAccount.Collection("/v1/bank_accounts");
 
 % endif
 

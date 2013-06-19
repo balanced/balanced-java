@@ -1,7 +1,7 @@
-        BankAccount ba = new BankAccount();
-        ba.account_number = "{{ request.bank_account.account_number }}";
-        ba.name = "{{ request.bank_account.name }}";
-        ba.routing_number = "{{ request.bank_acount.routing_number }}";
-        ba.type = "{{ request.bank_account.type }}";
-        ba.save();
-        ba.credit({{ request.amount }});
+BankAccount ba = new BankAccount();
+ba.account_number = "{{ request.bank_account.account_number }}";
+ba.name = "{{ request.bank_account.name }}";
+ba.routing_number = "{{ request.bank_acount.routing_number }}";
+ba.type = "{{ request.bank_account.type }}";
+ba.save();
+ba.credit({{ request.amount }});

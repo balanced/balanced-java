@@ -1,2 +1,2 @@
-    Customer customer = new Customer("{{ request.customer_uri }}");
-    customer.debit({{ request.payload.amount }}, "{{ request.payload.hold_uri }}");
+Customer customer = new Customer("{{ request.customer_uri }}");
+customer.debit({{ request.payload.amount }}, "{{ request.payload.hold_uri }}");

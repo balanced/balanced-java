@@ -1,8 +1,8 @@
 % if mode == 'definition':
-    Hold.Collection
+Hold.Collection
 
 % else:
-    Hold.Collection holds = new Hold.Collection("");
+Hold.Collection holds = new Hold.Collection("");
 
 % endif
 

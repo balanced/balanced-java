@@ -1,9 +1,9 @@
 % if mode == 'definition':
-    Customer.debits
+Customer.debits
 
 % else:
-    Customer customer = new Customer("");
-    Debit.Collection debits  = customer.debits;
+Customer customer = new Customer("");
+Debit.Collection debits  = customer.debits;
 
 % endif
 
