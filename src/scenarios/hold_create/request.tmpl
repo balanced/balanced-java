@@ -1,11 +1,8 @@
-String apiKey = "{{ api_key }}";
-String location = System.getProperty("balanced_location", Settings.location);
-String key = System.getProperty("balanced_key", apiKey);
-Settings.configure(location, key);
+Settings.configure("{{ api_key }}");
 
 Account account = new Account("{{ request.account_uri }}");
-account.hold( {{ request.payload.amount }},
-"{{ request.payload.description }}",
-"{{ request.customer_uri }}",
-null);
+account.hold({{ request.payload.amount }},
+             "{{ request.payload.description }}",
+             "{{ request.customer_uri }}",
+             null);
 account.save();

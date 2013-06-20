@@ -1,7 +1,4 @@
-String apiKey = "{{ api_key }}";
-String location = System.getProperty("balanced_location", Settings.location);
-String key = System.getProperty("balanced_key", apiKey);
-Settings.configure(location, key);
+Settings.configure("{{ api_key }}");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("account_number", "{{ request.payload.account_number }}");

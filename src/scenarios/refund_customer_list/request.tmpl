@@ -1,7 +1,4 @@
-String apiKey = "{{ api_key }}";
-String location = System.getProperty("balanced_location", Settings.location);
-String key = System.getProperty("balanced_key", apiKey);
-Settings.configure(location, key);
+Settings.configure("{{ api_key }}");
 
 Customer customer = new Customer("{{ request.customer_uri }}");
 Refund.Collection refunds = customer.refunds;
