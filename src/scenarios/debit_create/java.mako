@@ -1,9 +1,9 @@
 % if mode == 'definition':
 Account.debit(int amount,
-String description,
-String source_uri,
-String appears_on_statement_as,
-Map<String, String> meta);
+              String description,
+              String source_uri,
+              String appears_on_statement_as,
+              Map<String, String> meta);
 
 % else:
 Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
