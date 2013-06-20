@@ -1,3 +1,8 @@
+String apiKey = "{{ api_key }}";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 Hold hold = new Hold("{{ request.hold_uri }}");
 hold.appears_on_statement_as = "{{ request.payload.appears_on_statement_as }}";
 hold.description = "{{ request.payload.description }}";

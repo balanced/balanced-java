@@ -1,3 +1,8 @@
+String apiKey = "{{ api_key }}";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 BankAccount ba = new BankAccount("{{ request.bank_account_uri }}");
 ba.verification_uri = "{{ request.uri }}";
 BankAccountVerification verification = ba.getVerification();

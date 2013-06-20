@@ -7,6 +7,11 @@ String debit_uri,
 Map<String, String> meta);
 
 % else:
+String apiKey = "";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 Customer customer = new Customer("");
 customer.credit(100);
 

@@ -1,3 +1,8 @@
+String apiKey = "{{ api_key }}";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 // requires updated scenarios.cache
 Customer customer = new Customer("{{ request.customer_uri }}");
 customer.debit(100, "{{ request.payload.hold_uri }}");

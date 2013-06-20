@@ -1,6 +1,11 @@
+String apiKey = "{{ api_key }}";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 Account account = new Account("{{ request.account_uri }}");
-account.debit( {{ request.payload.amount }},
-"{{ request.payload.description }}",
-"{{ request.account_uri }}",
-"{{ request.payload.appears_on_statement_as }}",
-null);
+account.debit({{ request.payload.amount }},
+              "{{ request.payload.description }}",
+              "{{ request.account_uri }}",
+              "{{ request.payload.appears_on_statement_as }}",
+              null);

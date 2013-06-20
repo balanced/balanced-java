@@ -2,6 +2,11 @@
 Hold.capture();
 
 % else:
+String apiKey = "";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 Hold hold = new Hold("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds/HL2iXfavB2OOOYDoegA9gdXq");
 hold.appears_on_statement_as = "ShowsUpOnStmt";
 hold.description = "Some descriptive text for the debit in the dashboard";

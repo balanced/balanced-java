@@ -1,3 +1,8 @@
+String apiKey = "{{ api_key }}";
+String location = System.getProperty("balanced_location", Settings.location);
+String key = System.getProperty("balanced_key", apiKey);
+Settings.configure(location, key);
+
 Card card = new Card("{{ request.uri }}");
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("facebook.user_id", "0192837465");
