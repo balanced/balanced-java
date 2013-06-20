@@ -56,6 +56,7 @@ public class RenderScenarios {
             System.out.println("Scenario not found in scenario.cache");
         }
         data.put("request", requestData);
+        data.put("api_key", apiKey);
 
         String scenarioDefinition = render(scenarioPath.concat("/definition.tmpl"), null);
         String scenarioRequest = render(scenarioPath.concat("/request.tmpl"), data);
@@ -74,6 +75,7 @@ public class RenderScenarios {
         Map<String,Object> makoData = new HashMap<String, Object>();
         makoData.put("definition", scenarioDefinition);
         makoData.put("request", scenarioRequest);
+        makoData.put("api_key", apiKey);
         String renderedMakoFile = render(scenarioPath.concat("/../java.mako.tmpl"), makoData);
         writeFile(scenarioPath.concat("/java.mako"), renderedMakoFile);
     }
