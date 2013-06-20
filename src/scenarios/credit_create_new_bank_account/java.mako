@@ -1,5 +1,5 @@
 % if mode == 'definition':
-BankAccount.credit(amount)
+BankAccount.credit(amount);
 
 % else:
 BankAccount ba = new BankAccount();

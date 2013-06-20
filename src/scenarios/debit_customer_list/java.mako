@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.debits
+Customer.debits;
 
 % else:
 Customer customer = new Customer("");

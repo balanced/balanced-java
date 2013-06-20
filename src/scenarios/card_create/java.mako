@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Card card = new Card();
+Card card = new Card(Map<String, Object> payload);
 
 % else:
 Map<String, Object> payload = new HashMap<String, Object>();

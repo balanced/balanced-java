@@ -3,7 +3,7 @@ Account.debit(int amount,
 String description,
 String source_uri,
 String appears_on_statement_as,
-Map<String, String> meta)
+Map<String, String> meta);
 
 % else:
 Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC1DOd9xMVGdZSGUeyrducwU");

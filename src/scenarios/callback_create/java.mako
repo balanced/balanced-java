@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Callback
+Callback(String uri);
 
 % else:
 Callback callback = new Callback();

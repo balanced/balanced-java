@@ -4,7 +4,12 @@ Callback.delete();
 % else:
 Callback callback = new Callback();
 callback.save();
-callback.delete();
+try {
+    callback.delete();
+}
+catch (NotCreated e) {
+    // the callback didn't exist in the first place
+}
 
 % endif
 

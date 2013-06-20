@@ -1,4 +1,5 @@
 % if mode == 'definition':
+Customer.debit(int amount, String holdUri);
 
 % else:
 // requires updated scenarios.cache

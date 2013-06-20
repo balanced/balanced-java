@@ -1,1 +1,11 @@
 BankAccount ba = new BankAccount("{{ request.uri }}");
+ba.account_number = "{{ request.payload.account_number }}";
+ba.routing_number = "{{ request.payload.routing_number }}";
+ba.name = "{{ request.payload.name }}";
+ba.type = "{{ request.payload.type }}";
+try {
+    ba.save();
+}
+catch (HTTPError e) {
+    // handle invalid routing numbers
+}

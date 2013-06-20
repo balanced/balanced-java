@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.credits
+Customer.credits;
 
 % else:
 // this scenario is not present in scenarios.cache

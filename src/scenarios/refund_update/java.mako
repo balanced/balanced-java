@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Refund.save()
+Refund.save();
 
 % else:
 Refund refund = new Refund("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/refunds/RF2Tl2Zvpxlib5YgfpfcHGHl");

@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Account.associateBankAccount(...)
+Account.associateBankAccount(String uri);
 
 % else:
 Account account = new Account();

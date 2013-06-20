@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Account account = new Account(payload);
+BankAccount bankAccount = new BankAccount(Map<String, Object> payload);
 
 % else:
 Map<String, Object> payload = new HashMap<String, Object>();
@@ -8,7 +8,7 @@ payload.put("name", "Johann Bernoulli");
 payload.put("routing_number", "121000358");
 payload.put("type", "checking");
 
-BankAccount account = new BankAccount(payload);
+BankAccount bankAccount = new BankAccount(payload);
 
 % endif
 

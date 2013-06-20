@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Credit.Collection credits = new Credit.Collection()
+Marketplace.credits;
 
 % else:
 Marketplace mp = Marketplace.mine();

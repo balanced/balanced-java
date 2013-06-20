@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Account.credit(amount)
+Account.credit(int amount);
 
 % else:
 Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC1DOd9xMVGdZSGUeyrducwU");

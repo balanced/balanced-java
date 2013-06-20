@@ -1,4 +1,5 @@
 % if mode == 'definition':
+Customer.holds;
 
 % else:
 Customer customer = new Customer("");

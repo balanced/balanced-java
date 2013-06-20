@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.addBankAccount(...)
+Customer.addBankAccount(String uri);
 
 % else:
 Customer customer = new Customer("/v1/customers/CU3adsU393ZhadbawaoGDwSG");

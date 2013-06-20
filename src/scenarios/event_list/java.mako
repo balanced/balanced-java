@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Card card = new Card();
+Event.Collection(String uri);
 
 % else:
 Event.Collection events = new Event.Collection("/v1/events");

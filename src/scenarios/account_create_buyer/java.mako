@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Account.associateCard(card_uri);
+Account.associateCard(String uri);
 
 % else:
 Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts");

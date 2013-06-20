@@ -1,8 +1,9 @@
 % if mode == 'definition':
-Customer customer = new Customer("");
-customer.hold();
+Customer.hold(int amount);
 
 % else:
+Customer customer = new Customer("");
+customer.hold();
 
 % endif
 

@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.addCard(...)
+Customer.addCard(String uri);
 
 % else:
 Customer customer = new Customer("/v1/customers/CU35EBvb9i2DsNqkuy96EGTI");

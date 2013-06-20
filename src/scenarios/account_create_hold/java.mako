@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Account.hold(...)
+Account.hold(int amount);
 
 % else:
 Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC3z3msdgTHiowL349h94P22");

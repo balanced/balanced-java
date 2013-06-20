@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.refunds
+Customer.refunds;
 
 % else:
 Customer customer = new Customer("");

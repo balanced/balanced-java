@@ -1,5 +1,5 @@
 % if mode == 'definition':
-BankAccount.getVerification()
+BankAccount.getVerification();
 
 % else:
 BankAccount ba = new BankAccount("/v1/bank_accounts/BA1oRQpLj6VsbSYZydExip2W");
