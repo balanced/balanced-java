@@ -7,6 +7,8 @@ import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 
+import com.balancedpayments.errors.HTTPError;
+
 public class Credit extends Resource {
 
     @ResourceField()
@@ -40,8 +42,8 @@ public class Credit extends Resource {
         super();
     }
 
-    public Credit(String uri) {
-        super();
+    public Credit(String uri) throws HTTPError {
+        super(uri);
     }
 
     public static class Collection extends ResourceCollection<Credit> {
