@@ -208,6 +208,8 @@ public class MarketplaceTest extends BaseTest {
 
     @Test
     public void testEvents() throws HTTPError, NotCreated, InterruptedException, NoResultsFound, MultipleResultsFound {
+        String balancedEnv = System.getenv("BALANCED_ENV");
+        org.junit.Assume.assumeTrue((balancedEnv != "staging"));
         Marketplace mp = createMarketplace();
         int prev = Marketplace.mine().events.total();
         Account account = createBuyer(mp);
