@@ -21,7 +21,6 @@ public class CardTest  extends BaseTest {
         Card card = createCard(mp);
         buyer.addCard(card);
         buyer.addCard(createCard(mp));
-        card.delete();
-        //Some assertion here...
+        card.unstore();
     }
 }

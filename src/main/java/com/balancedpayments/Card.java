@@ -8,6 +8,7 @@ import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.NotCreated;
 
 public class Card extends Resource {
 
@@ -49,10 +50,10 @@ public class Card extends Resource {
 
     @ResourceField(field="hash")
     public String fingerprint;
-    
+
     @ResourceField(mutable=true, required=false)
     public String security_code;
-    
+
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
             super(Card.class, uri);
@@ -97,6 +98,10 @@ public class Card extends Resource {
     public void invalidate() throws HTTPError {
         is_valid = false;
         save();
+    }
+
+    public void unstore() throws HTTPError, NotCreated {
+        super.delete();
     }
 
 }

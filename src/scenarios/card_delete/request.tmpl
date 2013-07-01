@@ -1,9 +1,9 @@
 Settings.configure("{{ api_key }}");
 
-BankAccount bankAccount = new Card("{{ request.uri }}");
+Card card = new Card("{{ request.uri }}");
 try {
-    Card.delete();
+    card.unstore();
 }
 catch (NotCreated e) {
-    // the bank account didn't exist in the first place
+    // the card didn't exist in the first place
 }
