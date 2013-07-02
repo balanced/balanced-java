@@ -43,25 +43,25 @@ public class Credit extends Resource {
     public Reversal.Collection reversals;
 
     public Credit() {
-        super();
+	super();
     }
 
     public Credit(String uri) throws HTTPError {
-        super(uri);
+	super(uri);
     }
 
     public Reversal reverse(
-            Integer amount,
-            String description,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        if (amount != null)
-            payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (meta != null)
-            payload.put("meta", meta);
-        return reversals.create(payload);
+			    Integer amount,
+			    String description,
+			    Map<String, String> meta) throws HTTPError {
+	Map<String, Object> payload = new HashMap<String, Object>();
+	if (amount != null)
+	    payload.put("amount", amount);
+	if (description != null)
+	    payload.put("description", description);
+	if (meta != null)
+	    payload.put("meta", meta);
+	return reversals.create(payload);
     }
 
     public Reversal reverse(int amount) throws HTTPError {
@@ -73,8 +73,8 @@ public class Credit extends Resource {
     }
 
     public static class Collection extends ResourceCollection<Credit> {
-        public Collection(String uri) {
-            super(Credit.class, uri);
-        }
+	public Collection(String uri) {
+	    super(Credit.class, uri);
+	}
     }
 }

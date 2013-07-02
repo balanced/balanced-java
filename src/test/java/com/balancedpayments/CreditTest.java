@@ -17,8 +17,8 @@ public class CreditTest extends BaseTest {
     @Test
     public void testReversal() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
 	Marketplace mp = Marketplace.mine();
-        Account account = createBuyer(mp);
-        Debit debit = account.debit(123);
+	Account account = createBuyer(mp);
+	Debit debit = account.debit(123);
 	Account account2 = createMerchant(mp);
 	Credit credit = account2.credit(123);
 	Reversal reversal = credit.reverse();
