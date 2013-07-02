@@ -216,7 +216,7 @@ public class MarketplaceTest extends BaseTest {
         account.debit(123);
         int cur = Marketplace.mine().events.total();
         int count = 0;
-        while (cur == prev && count < 20) {
+        while (cur == prev && count < 60) {
             System.out.println(String.format("waiting for events - %d, %d == %d...", count, cur, prev));
             Thread.sleep(2000);  // 2 seconds
             count += 1;
