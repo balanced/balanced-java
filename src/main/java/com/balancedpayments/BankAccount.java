@@ -13,8 +13,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class BankAccount extends Resource {
 
-    public final String Checking = "checking";
-    public final String Savings = "savings";
+    public final static String Checking = "checking";
+    public final static String Savings = "savings";
 
     @ResourceField()
     public Date created_at;

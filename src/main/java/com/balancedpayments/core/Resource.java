@@ -55,6 +55,10 @@ public abstract class Resource {
         client.delete(uri);
     }
 
+    public void refresh() throws HTTPError {
+        deserialize(client.get(uri));
+    }
+
     public Map<String, Object> serialize() {
         Map<String, Object> payload = new HashMap<String, Object>();
         Field[] fields = this.getClass().getFields();
@@ -108,7 +112,7 @@ public abstract class Resource {
                 try {
                     value = ((Double) value).intValue();
                 } catch (Exception e) {
-                    value = (Integer) value;
+                    value = value;
                 }
             }
             else if (Resource.class.isAssignableFrom(f.getType())) {
