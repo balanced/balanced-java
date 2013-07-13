@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -58,6 +59,10 @@ public class Debit extends Resource  {
             super(Debit.class, uri);
         }
     };
+
+    public static Debit get(String uri) throws HTTPError {
+        return new Debit((new Client()).get(uri));
+    }
 
     public Debit() {
         super();

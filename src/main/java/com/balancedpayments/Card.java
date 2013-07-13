@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -49,10 +50,10 @@ public class Card extends Resource {
 
     @ResourceField(field="hash")
     public String fingerprint;
-    
+
     @ResourceField(mutable=true, required=false)
     public String security_code;
-    
+
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
             super(Card.class, uri);
@@ -81,6 +82,10 @@ public class Card extends Resource {
             return create(payload);
         }
     };
+
+    public static Card get(String uri) throws HTTPError {
+        return new Card((new Client()).get(uri));
+    }
 
     public Card() {
         super();

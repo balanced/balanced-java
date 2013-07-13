@@ -3,6 +3,7 @@ package com.balancedpayments;
 import java.util.Date;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -44,6 +45,10 @@ public class Reversal extends Resource {
             super(Reversal.class, uri);
         }
     };
+
+    public static Reversal get(String uri) throws HTTPError {
+        return new Reversal((new Client()).get(uri));
+    }
 
     public Reversal() {
         super();

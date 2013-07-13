@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -11,7 +12,7 @@ import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 
 public class BankAccount extends Resource {
-	
+
     public final String Checking = "checking";
     public final String Savings = "savings";
 
@@ -56,7 +57,7 @@ public class BankAccount extends Resource {
 
     @ResourceField(field="holds_uri")
     public Hold.Collection holds;
-    
+
     @Deprecated
     @ResourceField(required=false)
     public Boolean is_valid;
@@ -68,6 +69,10 @@ public class BankAccount extends Resource {
             super(BankAccount.class, uri);
         }
     };
+
+    public static BankAccount get(String uri) throws HTTPError {
+        return new BankAccount((new Client()).get(uri));
+    }
 
     public BankAccount() {
         super();

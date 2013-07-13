@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -42,12 +43,20 @@ public class Credit extends Resource {
     @ResourceField(field="reversals_uri")
     public Reversal.Collection reversals;
 
+    public static Credit get(String uri) throws HTTPError {
+        return new Credit((new Client()).get(uri));
+    }
+
     public Credit() {
         super();
     }
 
     public Credit(String uri) throws HTTPError {
         super(uri);
+    }
+
+    public Credit(Map<String, Object> payload) {
+        super(payload);
     }
 
     public Reversal reverse(

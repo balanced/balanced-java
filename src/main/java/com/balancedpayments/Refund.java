@@ -3,6 +3,7 @@ package com.balancedpayments;
 import java.util.Date;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -38,12 +39,15 @@ public class Refund extends Resource {
     @ResourceField()
     public Debit debit;
 
-
     public static class Collection extends ResourceCollection<Refund> {
         public Collection(String uri) {
             super(Refund.class, uri);
         }
     };
+
+    public static Refund get(String uri) throws HTTPError {
+        return new Refund((new Client()).get(uri));
+    }
 
     public Refund() {
         super();
