@@ -158,15 +158,18 @@ public class Account extends Resource {
         deserialize(response);
     }
 
-    /*
-    This method should be called after and only after a merchant is redirected to
-    Balanced and Balanced consequently redirects the merchant back to you with a
-    merchant_uri parameter on a query string. It is generated when
-    the marketplace redirects its user to Balanced as a result of a
-    MoreInformationRequired exception that's thrown (http status code 300).
-
-    You should use the promoteToMerchant(Map<String, Object> merchant_map) method
-    when attempting to communicate as a first attempt with Balanced.
+    /**
+     * This method should be called after and only after a merchant is redirected to
+     * Balanced and Balanced consequently redirects the merchant back to you with a
+     * merchant_uri parameter on a query string. It is generated when
+     * the marketplace redirects its user to Balanced as a result of a
+     * MoreInformationRequired exception that's thrown (http status code 300).
+     * <p>
+     * You should use the promoteToMerchant(Map<String, Object> merchant_map) method
+     * when attempting to communicate as a first attempt with Balanced.
+     *
+     * @param merchant_uri The URI of the merchant
+     * @see promoteToMerchant
      */
     public void promoteToMerchant(String merchant_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
