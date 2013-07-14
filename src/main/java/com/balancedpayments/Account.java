@@ -151,6 +151,27 @@ public class Account extends Resource {
         deserialize(response);
     }
 
+    /**
+     * This method is used to promote an account to a merchant account, which will
+     * set the is_identity_verified field to True.  The merchant map will depend
+     * on whether the account is for an individual or a business; see the following:
+     * <ul>
+     *     <li><a href=https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst#promote-a-buyer-account-to-a-merchant>Person Merchant</a></li>
+     *     <li><a href=https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst#create-a-business-merchant>Business Merchant</a></li>
+     * </ul>
+     *
+     * <p>
+     * Should this method return an HTTP 300 response, you must request additional information
+     * from the merchant; see <a href=https://www.balancedpayments.com/help#q146>What is KYC?</a>
+     * <p>
+     * Once you receive the merchant URI from the Balanced API, use the
+     * promoteToMerchant(String merchant_uri) method to underwrite the account as
+     * a merchant account.
+     *
+     * @param merchant_map A map with the merchant's information, which can be
+     *                     for a person or a business.
+     * @see promoteToMerchant
+     */
     public void promoteToMerchant(Map<String, Object> merchant_map) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("merchant", merchant_map);
@@ -168,7 +189,7 @@ public class Account extends Resource {
      * You should use the promoteToMerchant(Map<String, Object> merchant_map) method
      * when attempting to communicate as a first attempt with Balanced.
      *
-     * @param merchant_uri The URI of the merchant
+     * @param merchant_uri The URI of the merchant returned by the Balanced API following identity verification
      * @see promoteToMerchant
      */
     public void promoteToMerchant(String merchant_uri) throws HTTPError {
