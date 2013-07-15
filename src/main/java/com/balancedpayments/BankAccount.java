@@ -68,28 +68,60 @@ public class BankAccount extends Resource {
         public Collection(String uri) {
             super(BankAccount.class, uri);
         }
-    };
+    }
 
+    /**
+     * Returns a bank account object, given a URI for a bank account.
+     *
+     * @param uri The URI of a bank account you wish to instantiate
+     * @return a bank account object
+     * @throws HTTPError
+     */
     public static BankAccount get(String uri) throws HTTPError {
         return new BankAccount((new Client()).get(uri));
     }
 
+    /**
+     * Constructor
+     */
     public BankAccount() {
         super();
     }
 
+    /**
+     * Constructor
+     *
+     * @param uri The URI of a bank account you wish to instantiate
+     * @throws HTTPError
+     */
     public BankAccount(String uri) throws HTTPError {
         super(uri);
     }
 
+    /**
+     * Creates a new bank account using the contents of the payload.
+     * @param payload See <a href="https://github.com/balanced/balanced-api/blob/master/resources/bank_accounts.rst#create-a-bank-account" target="_blank">Bank Account API Reference</a>
+     *                for the required fields
+     */
     public BankAccount(Map<String, Object> payload) {
         super(payload);
     }
 
+    /**
+     * Class method for querying for bank accounts based on the values
+     * of their attributes.
+     *
+     * @return a Resource Query
+     */
     public static ResourceQuery<BankAccount> query() {
         return new ResourceQuery<BankAccount>(BankAccount.class, root_uri);
     }
 
+    /**
+     * Persists changes to a local object instance by making an API call
+     *
+     * @throws HTTPError
+     */
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null) {
@@ -98,16 +130,41 @@ public class BankAccount extends Resource {
         super.save();
     }
 
+    /**
+     * Attempts to verify a bank account
+     *
+     * @return a BankAccountVerification object
+     * @throws HTTPError
+     */
     public BankAccountVerification verify() throws HTTPError {
         return verifications.create();
     }
 
+    /**
+     * Returns an associated BankAccountVerification object for the bank
+     * account.
+     *
+     * @return a BankAccountVerification object
+     * @throws HTTPError
+     */
     public BankAccountVerification getVerification() throws HTTPError {
         if (verification_uri == null) {
             return null;
         }
         return new BankAccountVerification(verification_uri);
     }
+
+    /**
+     * Credits a bank account
+     *
+     * @param amount the amount to be credited
+     * @param description a description of the transaction
+     * @param destination_uri the destination of the credit
+     * @param appears_on_statement_as the text that appears on the bank statement
+     * @param meta metadata field for information about the transaction
+     * @return
+     * @throws HTTPError
+     */
 
     public Credit credit(
             int amount,
@@ -128,6 +185,13 @@ public class BankAccount extends Resource {
         return credits.create(payload);
     }
 
+    /**
+     * Credits a bank account
+     *
+     * @param amount the amount to be credited
+     * @return a Credit object
+     * @throws HTTPError
+     */
     public Credit credit(int amount) throws HTTPError {
         return credit(amount, null, null, null, null);
     }

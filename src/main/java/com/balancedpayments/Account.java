@@ -77,7 +77,7 @@ public class Account extends Resource {
      * Constructor that will create an account with the information given in
      * the payload
      *
-     * @param payload See https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst
+     * @param payload See <a href="https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst" target="_blank">Accounts API Reference</a>
      *                for the fields that you may include in the payload
      */
     public Account(Map<String, Object> payload) {
@@ -266,13 +266,13 @@ public class Account extends Resource {
      * set the is_identity_verified field to True.  The merchant map will depend
      * on whether the account is for an individual or a business; see the following:
      * <ul>
-     *     <li><a href=https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst#promote-a-buyer-account-to-a-merchant>Person Merchant</a></li>
-     *     <li><a href=https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst#create-a-business-merchant>Business Merchant</a></li>
+     *     <li><a href="https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst#promote-a-buyer-account-to-a-merchant" target="_blank">Person Merchant</a></li>
+     *     <li><a href="https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst#create-a-business-merchant" target="_blank">Business Merchant</a></li>
      * </ul>
      *
      * <p>
      * Should this method return an HTTP 300 response, you must request additional information
-     * from the merchant; see <a href=https://www.balancedpayments.com/help#q146>What is KYC?</a>
+     * from the merchant; see <a href="https://www.balancedpayments.com/help#q146" target="_blank">What is KYC?</a>
      * <p>
      * Once you receive the merchant URI from the Balanced API, use the
      * promoteToMerchant(String merchant_uri) method to underwrite the account as
