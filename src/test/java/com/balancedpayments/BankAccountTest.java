@@ -40,16 +40,16 @@ public class BankAccountTest  extends BaseTest {
         ba.verify();
         ba.verify();
     }
-    
+
     @Test
     public void testSoftDeleteOfBankAccountFromAssociatedBankAccount() throws CannotCreate, HTTPError, NotCreated {
     	ba.save();
         assertEquals(ba.is_valid, true);
         ba.delete();
-        ba.save();
+        ba.refresh();
         assertEquals(ba.is_valid, false);
     }
-    
+
     @Test
     public void testSofDeleteOfBankAccount() throws HTTPError{
     	BankAccount bankAccount = new BankAccount();
@@ -59,7 +59,7 @@ public class BankAccountTest  extends BaseTest {
     	bankAccount.type = "checking";
     	bankAccount.save();
     	assertEquals(bankAccount.is_valid, null);
-    	
+
     }
 
     @Test

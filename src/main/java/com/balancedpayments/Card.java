@@ -1,22 +1,17 @@
 package com.balancedpayments;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.Client;
-import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
 
-public class Card extends Resource {
+public class Card extends FundingInstrument {
 
-    @ResourceField()
-    public Date created_at;
-
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
+    @ResourceField(field="hash")
+    public String fingerprint;
 
     @ResourceField(mutable=true)
     public String street_address;
@@ -45,14 +40,14 @@ public class Card extends Resource {
     @ResourceField()
     public String brand;
 
-    @ResourceField(mutable=true)
-    public Boolean is_valid;
-
-    @ResourceField(field="hash")
-    public String fingerprint;
-
     @ResourceField(mutable=true, required=false)
     public String security_code;
+
+    @ResourceField(required=false)
+    public String customer_uri;
+
+    @ResourceField(field="customer_uri", required=false)
+    public Customer customer;
 
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
@@ -108,11 +103,6 @@ public class Card extends Resource {
 
     public Card(String uri) throws HTTPError {
         super(uri);
-    }
-
-    public void invalidate() throws HTTPError {
-        is_valid = false;
-        save();
     }
 
 }

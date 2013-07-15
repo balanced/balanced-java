@@ -31,13 +31,16 @@ public class Debit extends Resource  {
     public String card_uri;
 
     @ResourceField(required=false)
-    public Card card;
-
-    @ResourceField(required=false)
     public String account_uri;
 
     @ResourceField(required=false)
     public Account account;
+
+    @ResourceField(required=false)
+    public String source_uri;
+
+    @ResourceField(required=false)
+    public FundingInstrument source;
 
     @ResourceField(required=false)
     public String customer_uri;
@@ -104,10 +107,16 @@ public class Debit extends Resource  {
         return account;
     }
 
-    public Card getCard() throws HTTPError {
-        if (card == null)
-            card = new Card(card_uri);
-        return card;
+    public Customer getCustomer() throws HTTPError {
+        if (customer == null)
+            customer = customer_uri == null ? null : new Customer(customer_uri);
+        return customer;
+    }
+
+    public FundingInstrument getSource() throws HTTPError {
+        if (source == null)
+            source = source_uri == null ? null : new FundingInstrument(source_uri);
+        return source;
     }
 
     public Hold getHold() throws HTTPError {

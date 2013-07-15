@@ -1,23 +1,21 @@
 package com.balancedpayments;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.Client;
-import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 
-public class BankAccount extends Resource {
+public class BankAccount extends FundingInstrument {
 
     public final static String Checking = "checking";
     public final static String Savings = "savings";
 
     @ResourceField()
-    public Date created_at;
+    public String fingerprint;
 
     @ResourceField(mutable=true)
     public String name;
@@ -30,9 +28,6 @@ public class BankAccount extends Resource {
 
     @ResourceField(mutable=true)
     public String type;
-
-    @ResourceField()
-    public String fingerprint;
 
     @ResourceField()
     public String bank_name;
@@ -57,10 +52,6 @@ public class BankAccount extends Resource {
 
     @ResourceField(field="holds_uri")
     public Hold.Collection holds;
-
-    @Deprecated
-    @ResourceField(required=false)
-    public Boolean is_valid;
 
     protected static final String root_uri = "/v" + Settings.VERSION + "/bank_accounts";
 
