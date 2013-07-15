@@ -52,24 +52,60 @@ public class Account extends Resource {
         public Collection(String uri) {
             super(Account.class, uri);
         }
-    };
+    }
 
+    /**
+     * Returns an instance of an account
+     *
+     * @param uri The URI of the account you wish to instantiate
+     * @return the account you wish to instantiate
+     * @see Account
+     */
     public static Account get(String uri) throws HTTPError {
         return new Account((new Client()).get(uri));
     }
 
+    /**
+     * Constructor for Account
+     *
+     */
     public Account() {
         super();
     }
 
+    /**
+     * Constructor that will create an account with the information given in
+     * the payload
+     *
+     * @param payload See https://github.com/balanced/balanced-api/blob/master/resources/accounts.rst
+     *                for the fields that you may include in the payload
+     */
     public Account(Map<String, Object> payload) {
         super(payload);
     }
 
+
+    /**
+     * Instantiate an Account given an Account URI
+     *
+     * @param uri The URI for an existing account
+     */
     public Account(String uri) throws HTTPError {
         super(uri);
     }
 
+
+    /**
+     * Credits a bank account for a given amount
+     *
+     * @param amount The amount to credit a bank account
+     * @param description A description of the transaction
+     * @param destination_uri The bank account URI the funds will be credited to
+     * @param appears_on_statement_as What shows up on the bank statement
+     * @param meta For persisting optional metadata about the transaction
+     * @see Credit
+     * @return a credit object
+     */
     public Credit credit(
             int amount,
             String description,
@@ -89,14 +125,43 @@ public class Account extends Resource {
         return credits.create(payload);
     }
 
+
+    /**
+     * Credits a bank account for a given amount. Note that you may pass
+     * additional parameters.
+     *
+     * @param amount The amount to credit a bank account
+     * @see Credit
+     * @return a credit object
+     */
     public Credit credit(int amount) throws HTTPError {
         return credit(amount, null, null, null, null);
     }
 
+    /**
+     * Credits a bank account for a given amount
+     *
+     * @param amount The amount to credit a bank account
+     * @param description A description of the transaction
+     * @see Credit
+     * @return a credit object
+     */
     public Credit credit(int amount, String description) throws HTTPError {
         return credit(amount, description, null, null, null);
     }
 
+    /**
+     * Debits an account for a given amount; note that you may pass
+     * additional parameters using debit(int amount, String appears_on_statement_as)
+     *
+     * @param amount Amount you wish to charge
+     * @param description A description of the transaction
+     * @param source_uri The URI of the funding source for the transaction
+     * @param appears_on_statement_as What you would like to show up on a bank/card statement
+     * @param meta  For persisting optional metadata about the transaction
+     * @return a Debit object
+     * @see Debit
+     */
     public Debit debit(
             int amount,
             String description,
@@ -116,14 +181,42 @@ public class Account extends Resource {
         return debits.create(payload);
     }
 
+    /**
+     * Debits an account for a given amount; note that you may pass additional
+     * parameters to this method.
+     *
+     * @param amount Amount you wish to charge
+     * @return a Debit object
+     * @see Debit
+     */
     public Debit debit(int amount) throws HTTPError {
         return debit(amount, null, null, null, null);
     }
 
+    /**
+     * Debits an account for a given amount; note that you may pass additional
+     * parameters to this method.
+     *
+     * @param amount Amount you wish to charge
+     * @param appears_on_statement_as What will show on the credit card statement
+     * @return a Debit object
+     * @see Debit
+     */
     public Debit debit(int amount, String appears_on_statement_as) throws HTTPError {
         return debit(amount, null, null, appears_on_statement_as, null);
     }
 
+    /**
+     * Use this method to authorize a card for a given amount, which can later
+     * be captured by calling Hold.capture
+     *
+     * @param amount The amount you wish to authorize
+     * @param description A description of the hold, used for display purposes
+     * @param source_uri The URI of the funding instrument, usually a credit/debit card
+     * @param meta A map that can hold anything you want; basically a way to offload your data needs onto Balanced.
+     * @return a Hold object
+     * @see Hold
+     */
     public Hold hold(
             int amount,
             String description,
@@ -140,10 +233,27 @@ public class Account extends Resource {
         return holds.create(payload);
     }
 
+    /**
+     * Use this method to authorize a card for a given amount, which can later
+     * be captured by calling Hold.capture.  Note that you may call this method
+     * with additional parameters.  This method will default to authorizing the
+     * last card associated with an account.
+     *
+     * @return a Hold object
+     * @param amount The amount you wish to authorize
+     * @see Hold
+     */
     public Hold hold(int amount) throws HTTPError {
         return hold(amount, null, null, null);
     }
 
+
+    /**
+     * Use this method to associate a bank account to an account.
+     *
+     * @param bank_account_uri The URI of the bank account to be associated
+     *                         with the account
+     */
     public void associateBankAccount(String bank_account_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("bank_account_uri", bank_account_uri);
@@ -170,7 +280,6 @@ public class Account extends Resource {
      *
      * @param merchant_map A map with the merchant's information, which can be
      *                     for a person or a business.
-     * @see promoteToMerchant
      */
     public void promoteToMerchant(Map<String, Object> merchant_map) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
@@ -190,7 +299,6 @@ public class Account extends Resource {
      * when attempting to communicate as a first attempt with Balanced.
      *
      * @param merchant_uri The URI of the merchant returned by the Balanced API following identity verification
-     * @see promoteToMerchant
      */
     public void promoteToMerchant(String merchant_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
@@ -199,6 +307,11 @@ public class Account extends Resource {
         deserialize(response);
     }
 
+    /**
+     * Use this method to associate a credit/debit card to an account.
+     *
+     * @param card_uri The URI of the card you wish to associate with the account
+     */
     public void associateCard(String card_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("card_uri", card_uri);
