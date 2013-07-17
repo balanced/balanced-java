@@ -93,6 +93,10 @@ public class Account extends Resource {
         return credit(amount, null, null, null, null);
     }
 
+    public Credit credit(int amount, String description) throws HTTPError {
+        return credit(amount, description, null, null, null);
+    }
+
     public Debit debit(
             int amount,
             String description,
@@ -114,6 +118,10 @@ public class Account extends Resource {
 
     public Debit debit(int amount) throws HTTPError {
         return debit(amount, null, null, null, null);
+    }
+
+    public Debit debit(int amount, String appears_on_statement_as) throws HTTPError {
+        return debit(amount, null, null, appears_on_statement_as, null);
     }
 
     public Hold hold(

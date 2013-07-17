@@ -10,7 +10,7 @@ import com.balancedpayments.core.ResourceField;
 
 import com.balancedpayments.errors.HTTPError;
 
-public class Refund extends Resource {
+public class Reversal extends Resource {
 
     @ResourceField()
     public Date created_at;
@@ -37,26 +37,27 @@ public class Refund extends Resource {
     public String transaction_number;
 
     @ResourceField()
-    public Debit debit;
+    public Credit credit;
 
-    public static class Collection extends ResourceCollection<Refund> {
+
+    public static class Collection extends ResourceCollection<Reversal> {
         public Collection(String uri) {
-            super(Refund.class, uri);
+            super(Reversal.class, uri);
         }
     };
 
-    public static Refund get(String uri) throws HTTPError {
-        return new Refund((new Client()).get(uri));
+    public static Reversal get(String uri) throws HTTPError {
+        return new Reversal((new Client()).get(uri));
     }
 
-    public Refund() {
+    public Reversal() {
         super();
     }
-    public Refund(String uri) throws HTTPError {
+    public Reversal(String uri) throws HTTPError {
         super(uri);
     }
 
-    public Refund(Map<String, Object> payload) {
+    public Reversal(Map<String, Object> payload) {
         super(payload);
     }
 }

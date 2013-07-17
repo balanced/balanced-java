@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -14,8 +15,8 @@ import com.balancedpayments.errors.NotCreated;
 
 public class BankAccount extends Resource {
 
-    public final String Checking = "checking";
-    public final String Savings = "savings";
+    public final static String Checking = "checking";
+    public final static String Savings = "savings";
 
     @ResourceField()
     public Date created_at;
@@ -69,7 +70,11 @@ public class BankAccount extends Resource {
         public Collection(String uri) {
             super(BankAccount.class, uri);
         }
-    };
+    }
+
+    public static BankAccount get(String uri) throws HTTPError {
+        return new BankAccount((new Client()).get(uri));
+    }
 
     public BankAccount() {
         super();

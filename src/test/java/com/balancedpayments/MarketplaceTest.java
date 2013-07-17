@@ -208,13 +208,15 @@ public class MarketplaceTest extends BaseTest {
 
     @Test
     public void testEvents() throws HTTPError, NotCreated, InterruptedException, NoResultsFound, MultipleResultsFound {
+        String balancedEnv = System.getenv("BALANCED_ENV");
+        org.junit.Assume.assumeTrue((balancedEnv != "staging"));
         Marketplace mp = createMarketplace();
         int prev = Marketplace.mine().events.total();
         Account account = createBuyer(mp);
         account.debit(123);
         int cur = Marketplace.mine().events.total();
         int count = 0;
-        while (cur == prev && count < 20) {
+        while (cur == prev && count < 60) {
             System.out.println(String.format("waiting for events - %d, %d == %d...", count, cur, prev));
             Thread.sleep(2000);  // 2 seconds
             count += 1;

@@ -56,6 +56,9 @@ public class Merchant extends Resource {
     public String country_code;
 
     @ResourceField(mutable=true)
+    public String dob;
+
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
 
 
@@ -67,5 +70,12 @@ public class Merchant extends Resource {
 
     public static Merchant me() throws NoResultsFound, MultipleResultsFound, HTTPError {
         return query().one();
+    }
+
+    @Override
+    public void save() throws HTTPError {
+        if (id == null && uri == null)
+            uri = String.format("/v%s/%s", Settings.VERSION, ",merchants");
+        super.save();
     }
 }

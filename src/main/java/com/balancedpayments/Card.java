@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -81,7 +82,22 @@ public class Card extends Resource {
             payload.put("security_code", security_code);
             return create(payload);
         }
+
+        public Card create(
+                String card_number,
+                int expiration_month,
+                int expiration_year) throws HTTPError {
+            Map<String, Object> payload = new HashMap<String, Object>();
+            payload.put("card_number", card_number);
+            payload.put("expiration_month", expiration_month);
+            payload.put("expiration_year", expiration_year);
+            return create(payload);
+        }
     };
+
+    public static Card get(String uri) throws HTTPError {
+        return new Card((new Client()).get(uri));
+    }
 
     public Card() {
         super();

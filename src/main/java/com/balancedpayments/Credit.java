@@ -1,11 +1,15 @@
 package com.balancedpayments;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
+
+import com.balancedpayments.errors.HTTPError;
 
 public class Credit extends Resource {
 
@@ -36,17 +40,50 @@ public class Credit extends Resource {
     @ResourceField(required=false)
     public Customer customer;
 
+    @ResourceField(field="reversals_uri")
+    public Reversal.Collection reversals;
+
+    public static Credit get(String uri) throws HTTPError {
+        return new Credit((new Client()).get(uri));
+    }
+
     public Credit() {
         super();
     }
 
-    public Credit(String uri) {
-        super();
+    public Credit(String uri) throws HTTPError {
+        super(uri);
+    }
+
+    public Credit(Map<String, Object> payload) {
+        super(payload);
+    }
+
+    public Reversal reverse(
+                            Integer amount,
+                            String description,
+                            Map<String, String> meta) throws HTTPError {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        if (amount != null)
+            payload.put("amount", amount);
+        if (description != null)
+            payload.put("description", description);
+        if (meta != null)
+            payload.put("meta", meta);
+        return reversals.create(payload);
+    }
+
+    public Reversal reverse(int amount) throws HTTPError {
+        return reverse(amount, null, null);
+    }
+
+    public Reversal reverse() throws HTTPError {
+        return reverse(null, null, null);
     }
 
     public static class Collection extends ResourceCollection<Credit> {
         public Collection(String uri) {
             super(Credit.class, uri);
         }
-    };
+    }
 }

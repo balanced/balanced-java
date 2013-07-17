@@ -148,6 +148,16 @@ public class Marketplace extends Resource {
                 expiration_year);
     }
 
+    public Card tokenizeCard(
+            String card_number,
+            int expiration_month,
+            int expiration_year) throws HTTPError {
+        return cards.create(
+                card_number,
+                expiration_month,
+                expiration_year);
+    }
+
     public Account createAccount(
             String name,
             String email_address,
