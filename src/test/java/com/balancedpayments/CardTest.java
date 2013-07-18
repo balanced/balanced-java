@@ -24,7 +24,7 @@ public class CardTest  extends BaseTest {
     public ExpectedException apiError = ExpectedException.none();
 
     @Test
-    public void testVerify() throws CannotCreate, HTTPError, NotCreated {
+    public void testCardDelete() throws CannotCreate, HTTPError, NotCreated {
         Customer buyer = createBusinessCustomer();
         Card card = createCard(mp);
         buyer.addCard(card);
