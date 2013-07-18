@@ -1,6 +1,7 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import com.balancedpayments.errors.BankAccountVerificationFailure;
 import com.balancedpayments.errors.CannotCreate;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.APIError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
 import com.balancedpayments.errors.NotCreated;
@@ -45,7 +47,14 @@ public class BankAccountTest  extends BaseTest {
     public void testSoftDeleteOfBankAccountFromAssociatedBankAccount() throws CannotCreate, HTTPError, NotCreated {
     	ba.save();
         assertEquals(ba.is_valid, true);
+        ba.credit(100);
         ba.unstore();
+        try {
+            ba.credit(100);
+            fail();
+        } catch (APIError e) {
+            System.out.print("Cannot credit deleted bank account; pass");
+        }
     }
 
     @Test
