@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.balancedpayments.errors.BankAccountVerificationFailure;
@@ -13,10 +14,14 @@ import com.balancedpayments.errors.APIError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
 import com.balancedpayments.errors.NotCreated;
+import org.junit.rules.ExpectedException;
 
 public class BankAccountTest  extends BaseTest {
 
     protected BankAccount ba;
+
+    @Rule
+    public ExpectedException apiError = ExpectedException.none();
 
     @Override
     @Before
@@ -49,12 +54,8 @@ public class BankAccountTest  extends BaseTest {
         assertEquals(ba.is_valid, true);
         ba.credit(100);
         ba.unstore();
-        try {
-            ba.credit(100);
-            fail();
-        } catch (APIError e) {
-            System.out.print("Cannot credit deleted bank account; pass");
-        }
+        apiError.expect(APIError.class);
+        ba.credit(100);
     }
 
     @Test

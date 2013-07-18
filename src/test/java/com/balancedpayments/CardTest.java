@@ -6,16 +6,22 @@ import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Rule;
+
 
 import com.balancedpayments.errors.CannotCreate;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
 import com.balancedpayments.errors.APIError;
+import org.junit.rules.ExpectedException;
 
 
 public class CardTest  extends BaseTest {
 
     protected Card card;
+
+    @Rule
+    public ExpectedException apiError = ExpectedException.none();
 
     @Test
     public void testVerify() throws CannotCreate, HTTPError, NotCreated {
@@ -25,11 +31,7 @@ public class CardTest  extends BaseTest {
         buyer.addCard(createCard(mp));
         buyer.debit(100, "", card.uri, "", null, null);
         card.unstore();
-        try {
-            buyer.debit(100, "", card.uri, "", null, null);
-            fail();
-        } catch (APIError e) {
-            System.out.print("Cannot debit deleted card; pass");
-        }
+        apiError.expect(APIError.class);
+        buyer.debit(100, "", card.uri, "", null, null);
     }
 }
