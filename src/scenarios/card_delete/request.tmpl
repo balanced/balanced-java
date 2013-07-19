@@ -1,0 +1,9 @@
+Settings.configure("{{ api_key }}");
+
+Card card = new Card("{{ request.uri }}");
+try {
+    card.unstore();
+}
+catch (NotCreated e) {
+    // the card didn't exist in the first place
+}

@@ -7,6 +7,7 @@ import com.balancedpayments.core.Client;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.NotCreated;
 
 public class Card extends FundingInstrument {
 
@@ -105,4 +106,13 @@ public class Card extends FundingInstrument {
         super(uri);
     }
 
+
+    public void invalidate() throws HTTPError {
+        is_valid = false;
+        save();
+    }
+
+    public void unstore() throws HTTPError, NotCreated {
+        super.delete();
+    }
 }

@@ -8,6 +8,8 @@ import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.NotCreated;
+
 
 public class BankAccount extends FundingInstrument {
 
@@ -59,7 +61,7 @@ public class BankAccount extends FundingInstrument {
         public Collection(String uri) {
             super(BankAccount.class, uri);
         }
-    };
+    }
 
     public static BankAccount get(String uri) throws HTTPError {
         return new BankAccount((new Client()).get(uri));
@@ -121,5 +123,9 @@ public class BankAccount extends FundingInstrument {
 
     public Credit credit(int amount) throws HTTPError {
         return credit(amount, null, null, null, null);
+    }
+
+    public void unstore() throws HTTPError, NotCreated {
+        super.delete();
     }
 }

@@ -1,20 +1,28 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.balancedpayments.errors.BankAccountVerificationFailure;
 import com.balancedpayments.errors.CannotCreate;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.APIError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
 import com.balancedpayments.errors.NotCreated;
+import org.junit.rules.ExpectedException;
 
 public class BankAccountTest  extends BaseTest {
 
     protected BankAccount ba;
+    protected BankAccount ba2;
+
+    @Rule
+    public ExpectedException apiError = ExpectedException.none();
 
     @Override
     @Before
@@ -22,6 +30,8 @@ public class BankAccountTest  extends BaseTest {
         super.setUp();
         Account account = mp.createAccount("Homer Jay");
         ba = createBankAccount(mp);
+        ba2 =createBankAccount(mp);
+        account.associateBankAccount(ba2.uri);
         account.associateBankAccount(ba.uri);
     }
 
@@ -42,12 +52,13 @@ public class BankAccountTest  extends BaseTest {
     }
 
     @Test
-    public void testSoftDeleteOfBankAccountFromAssociatedBankAccount() throws CannotCreate, HTTPError, NotCreated {
+    public void testUnstoreOfBankAccountFromAssociatedBankAccount() throws CannotCreate, HTTPError, NotCreated {
     	ba.save();
         assertEquals(ba.is_valid, true);
-        ba.delete();
-        ba.refresh();
-        assertEquals(ba.is_valid, false);
+        ba.credit(100);
+        ba.unstore();
+        apiError.expect(APIError.class);
+        ba.credit(100);
     }
 
     @Test

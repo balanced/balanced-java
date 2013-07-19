@@ -2,7 +2,7 @@ Settings.configure("{{ api_key }}");
 
 BankAccount bankAccount = new BankAccount("{{ request.uri }}");
 try {
-    bankAccount.delete();
+    bankAccount.unstore();
 }
 catch (NotCreated e) {
     // the bank account didn't exist in the first place
