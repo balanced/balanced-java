@@ -73,8 +73,7 @@ public class CustomerTest extends BaseTest {
             "TANGY",
             seller.uri,
             meta);
-        // FIXME: ?
-        //assertEquals(debit.card.id, card.id);
+        assertEquals(debit.source.id, card.id);
 
         Credit credit = seller.credit(
             1200,
