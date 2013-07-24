@@ -4,15 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
+import com.balancedpayments.errors.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
 
 
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.NotCreated;
-import com.balancedpayments.errors.APIError;
 import org.junit.rules.ExpectedException;
 
 
@@ -33,5 +30,23 @@ public class CardTest  extends BaseTest {
         card.unstore();
         apiError.expect(APIError.class);
         buyer.debit(100, "", card.uri, "", null, null);
+    }
+
+    @Test
+    public void testCardCustomerDebit() throws HTTPError, CardNotAssociated {
+        Customer buyer = createBusinessCustomer();
+        Card card = createCard(mp);
+        buyer.addCard(card);
+        card.refresh();
+        card.debit(1000);
+    }
+
+    @Test
+    public void testCardAccountDebit() throws HTTPError, CardNotAssociated {
+        Account buyer = createBuyer(mp);
+        Card card = createCard(mp);
+        buyer.associateCard(card.uri);
+        card.refresh();
+        card.debit(1000);
     }
 }
