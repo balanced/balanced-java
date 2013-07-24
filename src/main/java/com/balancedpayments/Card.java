@@ -8,6 +8,7 @@ import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
+import com.balancedpayments.errors.CardUnassociated;
 
 public class Card extends FundingInstrument {
 
@@ -44,11 +45,11 @@ public class Card extends FundingInstrument {
     @ResourceField(mutable=true, required=false)
     public String security_code;
 
-    @ResourceField(required=false)
-    public String customer_uri;
-
-    @ResourceField(field="customer_uri", required=false)
+    @ResourceField(field="customer", required=false)
     public Customer customer;
+
+    @ResourceField(field="account", required=false)
+    public Customer account;
 
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
@@ -88,7 +89,19 @@ public class Card extends FundingInstrument {
             payload.put("expiration_year", expiration_year);
             return create(payload);
         }
-    };
+    }
+
+    public Debit debit(int amount) throws HTTPError, CardUnassociated {
+        Debit debit = null;
+        if (this.customer != null) {
+            debit = this.customer.debit(amount);
+        } else if (this.account != null) {
+            debit = this.account.debit(amount);
+        } else {
+            throw new CardUnassociated();
+        }
+        return debit;
+    }
 
     public static Card get(String uri) throws HTTPError {
         return new Card((new Client()).get(uri));

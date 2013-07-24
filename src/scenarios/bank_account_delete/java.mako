@@ -1,5 +1,5 @@
 % if mode == 'definition':
-BankAccount.delete();
+BankAccount.unstore();
 
 % else:
 Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
