@@ -2,9 +2,9 @@
 Account.debit(int amount);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC3z3msdgTHiowL349h94P22");
+Account account = new Account("/v1/marketplaces/TEST-MP5Rwi1N0GqQZ9nAyf11c2v0/accounts/AC7uvsGvRVwgII1TwvbgKakU");
 account.debit(100);
 
 % endif

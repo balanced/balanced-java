@@ -2,9 +2,9 @@
 Card card = new Card(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-Card card = new Card("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/cards/CC1urjr8nECMDtdzPr1ByVZu");
+Card card = new Card("/v1/marketplaces/TEST-MP5Rwi1N0GqQZ9nAyf11c2v0/cards/CC6m2aWsnilcUxa1hzF3l0Sk");
 
 % endif
 

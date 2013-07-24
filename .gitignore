@@ -25,3 +25,6 @@ target
 # idea
 .idea
 *.iml
+
+# generated scenarios
+src/scenarios/*/*.java
