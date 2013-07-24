@@ -2,7 +2,7 @@
 Customer.debit(int amount, String holdUri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
 // requires updated scenarios.cache
 Customer customer = new Customer("");

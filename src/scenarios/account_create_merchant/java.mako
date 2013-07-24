@@ -2,10 +2,10 @@
 Account.associateBankAccount(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
 Account account = new Account();
-account.associateBankAccount("/v1/bank_accounts/BA1KawqyAPjlJABtlpNxhatp");
+account.associateBankAccount("/v1/bank_accounts/BA3AHHLYWaYkw9pJM6Bs37WG");
 
 % endif
 

@@ -2,9 +2,9 @@
 Event event = new Event(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
-Event event = new Event("/v1/events/EV27be46ecd92e11e296f4026ba7cac9da");
+Event event = new Event("/v1/events/EV6fa3f52ef3e111e286c1026ba7f8ec28");
 
 % endif
 

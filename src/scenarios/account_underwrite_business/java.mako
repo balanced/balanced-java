@@ -2,9 +2,9 @@
 Account.promoteToMerchant(Map<String, Object> payload);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
-Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts");
+Account account = new Account("/v1/marketplaces/TEST-MP3oDYBxCRm2CVSWGt1RRctG/accounts");
 Map<String, Object> merchantPayload = new HashMap<String, Object>();
 Map<String, Object> personPayload = new HashMap<String, Object>();
 

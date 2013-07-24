@@ -2,7 +2,7 @@
 Customer.debits;
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
 Customer customer = new Customer("");
 Debit.Collection debits  = customer.debits;

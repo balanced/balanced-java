@@ -2,9 +2,9 @@
 Debit.save();
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
-Debit debit = new Debit("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/debits/WD226COgRPON3b8joB90ti2I");
+Debit debit = new Debit("/v1/marketplaces/TEST-MP3oDYBxCRm2CVSWGt1RRctG/debits/WD4kiFCRCuX81uHcFaIqBFAr");
 debit.description = "New description for debit";
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("anykey", "valuegoeshere");

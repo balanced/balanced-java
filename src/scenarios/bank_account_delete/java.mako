@@ -2,9 +2,9 @@
 BankAccount.unstore();
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("6f755804f3e111e295f6026ba7cd33d0");
 
-BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA1dnlguWRMK1SXfh7Jp9WVY");
+BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA3KPriol4oA5MwrDmSR7it0");
 try {
     bankAccount.unstore();
 }
