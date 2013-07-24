@@ -52,6 +52,12 @@ public class Debit extends Resource  {
     public String hold_uri;
 
     @ResourceField(required=false)
+    public String appears_on_statement_as;
+
+    @ResourceField(required=false)
+    public String status;
+
+    @ResourceField(required=false)
     public Hold hold;
 
     @ResourceField(field="refunds_uri")
@@ -61,7 +67,21 @@ public class Debit extends Resource  {
         public Collection(String uri) {
             super(Debit.class, uri);
         }
-    };
+
+        public Debit create(int amount,
+                            String appears_on_statement_as,
+                            String description,
+                            String source_uri,
+                            Map<String, String> meta) throws HTTPError{
+            Map<String, Object> payload = new HashMap<String, Object>();
+            payload.put("amount", amount);
+            payload.put("appears_on_statement_as", appears_on_statement_as);
+            payload.put("description", description);
+            payload.put("source_uri", source_uri);
+            payload.put("meta", meta);
+            return create(payload);
+        }
+    }
 
     public static Debit get(String uri) throws HTTPError {
         return new Debit((new Client()).get(uri));

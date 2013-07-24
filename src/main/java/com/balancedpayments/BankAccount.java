@@ -125,6 +125,18 @@ public class BankAccount extends FundingInstrument {
         return credit(amount, null, null, null, null);
     }
 
+    public Debit debit(int amount,
+                       String appears_on_statement_as,
+                       String description,
+                       Map<String, String> meta) throws HTTPError {
+
+        return debits.create(amount, appears_on_statement_as, description, this.uri, meta);
+    }
+
+    public Debit debit(int amount) throws HTTPError {
+        return debit(amount, null, null, null);
+    }
+
     public void unstore() throws HTTPError, NotCreated {
         super.delete();
     }
