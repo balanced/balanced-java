@@ -46,10 +46,19 @@ public class Hold extends Resource {
     public Account account;
 
     @ResourceField(required=false)
+    public String customer_uri;
+
+    @ResourceField(required=false)
+    public Customer customer;
+
+    @ResourceField(required=false)
     public String card_uri;
 
     @ResourceField(required=false)
     public Card card;
+
+    @ResourceField(required=false)
+    public FundingInstrument source;
 
     public static class Collection extends ResourceCollection<Hold> {
         public Collection(String uri) {
@@ -100,7 +109,15 @@ public class Hold extends Resource {
         if (description != null) {
             payload.put("description", description);
         }
-        debit = account.debits.create(payload);
+        Debit.Collection debits;
+        if (customer != null) {
+            debits = customer.debits;
+        } else if (account != null) {
+            debits = account.debits;
+        } else {
+            throw new IllegalStateException("Can't capture without either a Customer or Account having been established");
+        }
+        debit = debits.create(payload);
         return debit;
     }
 
@@ -113,7 +130,15 @@ public class Hold extends Resource {
         if (description != null) {
             payload.put("description", description);
         }
-        debit = account.debits.create(payload);
+        Debit.Collection debits;
+        if (customer != null) {
+            debits = customer.debits;
+        } else if (account != null) {
+            debits = account.debits;
+        } else {
+            throw new IllegalStateException("Can't capture without either a Customer or Account having been established");
+        }
+        debit = debits.create(payload);
         return debit;
     }
 }
