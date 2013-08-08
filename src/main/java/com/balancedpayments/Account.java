@@ -108,7 +108,7 @@ public class Account extends Resource {
         if (description != null)
             payload.put("description", description);
         if (source_uri != null)
-            payload.put("source", source_uri);
+            payload.put("source_uri", source_uri);
         if (appears_on_statement_as != null)
             payload.put("appears_on_statement_as", appears_on_statement_as);
         if (meta != null)
@@ -134,7 +134,7 @@ public class Account extends Resource {
         if (description != null)
             payload.put("description", description);
         if (source_uri != null)
-            payload.put("source", source_uri);
+            payload.put("source_uri", source_uri);
         if (meta != null)
             payload.put("meta", meta);
         return holds.create(payload);

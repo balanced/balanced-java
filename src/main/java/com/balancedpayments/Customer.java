@@ -204,7 +204,7 @@ public class Customer extends Resource {
         if (description != null)
             payload.put("description", description);
         if (source_uri != null)
-            payload.put("source", source_uri);
+            payload.put("source_uri", source_uri);
         if (meta != null)
             payload.put("meta", meta);
         return holds.create(payload);
