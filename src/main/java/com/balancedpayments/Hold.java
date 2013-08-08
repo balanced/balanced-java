@@ -94,6 +94,12 @@ public class Hold extends Resource {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("hold_uri", uri);
         payload.put("amount", amount);
+        if (appears_on_statement_as != null) {
+            payload.put("appears_on_statement_as", appears_on_statement_as);
+        }
+        if (description != null) {
+            payload.put("description", description);
+        }
         debit = account.debits.create(payload);
         return debit;
     }
@@ -101,6 +107,12 @@ public class Hold extends Resource {
     public Debit capture() throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("hold_uri", uri);
+        if (appears_on_statement_as != null) {
+            payload.put("appears_on_statement_as", appears_on_statement_as);
+        }
+        if (description != null) {
+            payload.put("description", description);
+        }
         debit = account.debits.create(payload);
         return debit;
     }
