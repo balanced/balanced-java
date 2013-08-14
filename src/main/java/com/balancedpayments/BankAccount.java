@@ -68,7 +68,13 @@ public class BankAccount extends Resource {
     @Override
     public void deserialize(Map<String, Object> payload) {
         super.deserialize(payload);
-        created_at = deserializeDate((String) payload.get("created_at"));
+        String created_at_payload = (String) payload.get("created_at");
+        if (created_at_payload != null) {
+            created_at = deserializeDate(created_at_payload);
+        }
+        else {
+            created_at = null;
+        }
         name = (String) payload.get("name");
         account_number = (String) payload.get("account_number");
         routing_number = (String) payload.get("routing_number");
@@ -76,8 +82,15 @@ public class BankAccount extends Resource {
         fingerprint = (String) payload.get("fingerprint");
         bank_name = (String) payload.get("bank_name");
         meta = (Map<String, String>) payload.get("meta");
-        verifications_uri = (String) payload.get("verifications_uri");
-        verifications = new BankAccountVerification.Collection(verifications_uri);
+        String verifications_uri_payload = (String) payload.get("verifications_uri");
+        if (verifications_uri_payload != null) {
+            verifications_uri = verifications_uri_payload;
+            verifications = new BankAccountVerification.Collection(verifications_uri);
+        }
+        else {
+            verifications_uri = null;
+            verifications = null;
+        }
         verification_uri = (String) payload.get("verification_uri");
     }
     
