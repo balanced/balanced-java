@@ -41,7 +41,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Client {
-
+    private static final String VERSION = "0.10";
     private static final String AGENT = "balanced-java";
     private static final int CONNECTION_TIMEOUT = 60 * 1000;
     
