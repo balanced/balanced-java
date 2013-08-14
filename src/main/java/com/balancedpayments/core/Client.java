@@ -41,7 +41,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Client {
-    
+
     private static final String AGENT = "balanced-java";
     private static final int CONNECTION_TIMEOUT = 60 * 1000;
     
@@ -139,8 +139,7 @@ public class Client {
     }
     
     private void addHeaders(HttpUriRequest request) {
-        String version = getClass().getPackage().getImplementationVersion();
-        request.addHeader(new BasicHeader("User-Agent", AGENT + '/' + version));
+        request.addHeader(new BasicHeader("User-Agent", AGENT + '/' + VERSION));
         request.addHeader(new BasicHeader("Accept", "application/json"));
     }
     
