@@ -1,6 +1,7 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 
@@ -65,5 +66,27 @@ public class DebitTest extends BaseTest {
         assertEquals(1, query.total());
         all_debits = query.all();
         assertEquals(debits[1].id, all_debits.get(0).id);
+    }
+
+    @Test
+    public void testRetrieveDebit() throws HTTPError, NoResultsFound, MultipleResultsFound {
+        Marketplace mp = Marketplace.mine();
+        Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
+        String description = "Goods and services";
+        Card card = mp.tokenizeCard(
+                "123 Fake Street",
+                "Jollywood",
+                null,
+                "90210",
+                "William Henry Cavendish III",
+                "4112344112344113",
+                "123",
+                12,
+                2013);
+        account.associateCard(card.uri);
+        Debit newDebit = account.debit(10000, description, card.uri, null, null);
+        Debit debit = new Debit(newDebit.uri);
+        assertNotNull("Debit should not be null", debit);
+        assertEquals("Debit description should be \"" + description + "\"", description, debit.description);
     }
 }
