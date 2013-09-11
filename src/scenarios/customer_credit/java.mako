@@ -9,7 +9,7 @@ Map<String, String> meta);
 % else:
 Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
 
-Customer customer = new Customer("");
+Customer customer = new Customer("/v1/customers/CU3adsU393ZhadbawaoGDwSG");
 customer.credit(100);
 
 % endif
