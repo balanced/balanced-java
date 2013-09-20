@@ -120,4 +120,33 @@ public class CustomerTest extends BaseTest {
             meta);
         assertEquals(credit.bank_account.id, bank_account.id);
     }
+
+    @Test
+    public void debitWithMultipleActiveCards() throws HTTPError {
+        Customer customer = createPersonCustomer();
+        Card card1 = createCard(mp);
+        customer.addCard(card1);
+        Card card2 = createCard(mp);
+        customer.addCard(card2);
+        assertEquals(card2.id, customer.activeCard().id);
+        Debit debit = customer.debit(24995, card1.uri);
+        assertEquals(card1.id, debit.source.id);
+    }
+
+    @Test
+    public void holdWithMultipleActiveCards() throws HTTPError {
+        Customer customer = createPersonCustomer();
+        Card card1 = createCard(mp);
+        customer.addCard(card1);
+        Card card2 = createCard(mp);
+        customer.addCard(card2);
+        assertEquals(card2.id, customer.activeCard().id);
+        Hold hold = customer.hold(39995, "My Description", card1.uri, null);
+        // TODO: assertEquals(card1.id, hold.source.id);
+        // There is no hold.source yet, but there probably should be!
+        // So for now we can just take it all the way through capture and
+        // then ensure that the Debit has the correct card associated:
+        Debit debit = hold.capture();
+        assertEquals(card1.id, debit.source.id);
+    }
 }

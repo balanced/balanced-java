@@ -1,6 +1,8 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -49,5 +51,23 @@ public class HoldTest extends BaseTest {
         Hold hold = buyer.hold(123);
         Debit debit = hold.capture();
         assertEquals(debit.amount, hold.amount);
+    }
+    
+    @Test
+    public void captureWithAppearsOnStatementAs() throws HTTPError {
+        String appearsOnStatementAs = "Statement text";
+        Hold hold = buyer.hold(123);
+        hold.appears_on_statement_as = appearsOnStatementAs;
+        Debit debit = hold.capture();
+        assertEquals(appearsOnStatementAs, debit.appears_on_statement_as);
+    }
+    
+    @Test
+    public void captureWithDescription() throws HTTPError {
+        String description = "This is my description";
+        Hold hold = buyer.hold(123);
+        hold.description = description;
+        Debit debit = hold.capture();
+        assertEquals(description, debit.description);
     }
 }

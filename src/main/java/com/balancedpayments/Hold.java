@@ -46,10 +46,19 @@ public class Hold extends Resource {
     public Account account;
 
     @ResourceField(required=false)
+    public String customer_uri;
+
+    @ResourceField(required=false)
+    public Customer customer;
+
+    @ResourceField(required=false)
     public String card_uri;
 
     @ResourceField(required=false)
     public Card card;
+
+    @ResourceField(required=false)
+    public FundingInstrument source;
 
     public static class Collection extends ResourceCollection<Hold> {
         public Collection(String uri) {
@@ -94,14 +103,42 @@ public class Hold extends Resource {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("hold_uri", uri);
         payload.put("amount", amount);
-        debit = account.debits.create(payload);
+        if (appears_on_statement_as != null) {
+            payload.put("appears_on_statement_as", appears_on_statement_as);
+        }
+        if (description != null) {
+            payload.put("description", description);
+        }
+        Debit.Collection debits;
+        if (customer != null) {
+            debits = customer.debits;
+        } else if (account != null) {
+            debits = account.debits;
+        } else {
+            throw new IllegalStateException("Can't capture without either a Customer or Account having been established");
+        }
+        debit = debits.create(payload);
         return debit;
     }
 
     public Debit capture() throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("hold_uri", uri);
-        debit = account.debits.create(payload);
+        if (appears_on_statement_as != null) {
+            payload.put("appears_on_statement_as", appears_on_statement_as);
+        }
+        if (description != null) {
+            payload.put("description", description);
+        }
+        Debit.Collection debits;
+        if (customer != null) {
+            debits = customer.debits;
+        } else if (account != null) {
+            debits = account.debits;
+        } else {
+            throw new IllegalStateException("Can't capture without either a Customer or Account having been established");
+        }
+        debit = debits.create(payload);
         return debit;
     }
 }

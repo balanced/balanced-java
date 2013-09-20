@@ -22,6 +22,9 @@ public class Debit extends Resource  {
     public Integer amount;
 
     @ResourceField(mutable=true)
+    public String appears_on_statement_as;
+
+    @ResourceField(mutable=true)
     public String description;
 
     @ResourceField(mutable=true)
