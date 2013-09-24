@@ -66,10 +66,6 @@ public class Debit extends Resource  {
         }
     };
 
-    public static Debit get(String uri) throws HTTPError {
-        return new Debit((new Client()).get(uri));
-    }
-
     public Debit() {
         super();
     }
