@@ -39,6 +39,9 @@ public class Marketplace extends Resource {
     @ResourceField(field="accounts_uri")
     public Account.Collection accounts;
 
+    @ResourceField(field="customers_uri")
+    public Customer.Collection customers;
+
     @ResourceField(field="debits_uri")
     public Debit.Collection debits;
 
