@@ -1,16 +1,14 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.errors.NotCreated;
 import org.junit.Test;
 
 import com.balancedpayments.errors.HTTPError;
+
+import static org.junit.Assert.*;
 
 public class CustomerTest extends BaseTest {
 
@@ -128,5 +126,24 @@ public class CustomerTest extends BaseTest {
 
         Credit credit = seller.credit(creditPayload);
         //assertEquals(credit.bank_account.id, bank_account.id);
+    }
+
+    @Test
+    public void testUnstore() throws HTTPError, NotCreated {
+        Customer buyer = createBusinessCustomer();
+        buyer.unstore();
+    }
+
+    @Test(expected=com.balancedpayments.errors.APIError.class)
+    public void testUnstoreCustomerNotExist() throws HTTPError, NotCreated {
+        Customer buyer = new Customer("/v1/customers/12j5hl21lu35gui");
+        buyer.unstore();
+    }
+
+    @Test
+    public void testCustomerList() throws HTTPError {
+        Customer.Collection customers = mp.customers;
+        assertTrue(customers.getClass().equals(Customer.Collection.class));
+        assertTrue(customers.total() > 0);
     }
 }
