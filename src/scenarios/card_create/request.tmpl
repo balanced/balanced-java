@@ -5,5 +5,6 @@ payload.put("card_number", "{{ request.payload.card_number }}");
 payload.put("expiration_month", {{ request.payload.expiration_month }});
 payload.put("expiration_year", {{ request.payload.expiration_year }});
 payload.put("security_code", "{{ request.payload.security_code }}");
+
 Card card = new Card(payload);
 card.save();

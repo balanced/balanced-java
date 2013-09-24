@@ -2,9 +2,9 @@
 
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-Hold hold = new Hold("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds/HL2NUpy8jaBA1rvSpIR4gQtM");
+Hold hold = new Hold("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/holds/HL5yeuNhpim4hq0nci5Zty2e");
 hold.is_void = true;
 hold.save();
 

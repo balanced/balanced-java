@@ -2,9 +2,9 @@
 Account.debits;
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC1DOd9xMVGdZSGUeyrducwU");
+Account account = new Account("");
 Debit.Collection debits = account.debits;
 
 % endif

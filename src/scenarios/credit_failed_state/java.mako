@@ -2,15 +2,15 @@
 BankAccount.credit(int amount);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
 BankAccount ba = new BankAccount();
-ba.account_number = "9900000005";
-ba.name = "Johann Bernoulli";
-ba.routing_number = "121000358";
-ba.type = "checking";
+ba.account_number = "";
+ba.name = "";
+ba.routing_number = "";
+ba.type = "";
 ba.save();
-ba.credit(10000);
+ba.credit();
 
 % endif
 

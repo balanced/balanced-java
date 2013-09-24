@@ -5,14 +5,17 @@ Account.hold(int amount,
              Map<String, String> meta)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts/AC1DOd9xMVGdZSGUeyrducwU");
-account.hold(5000,
-             "Some descriptive text for the debit in the dashboard",
-             "",
-             null);
-account.save();
+Customer customer = new Customer("/v1/customers/CU5V9hgMlkw8NMm7N2HZNzTk");
+customer.addCard("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/cards/CC5WFWuNSzBpYgfNqDb8RVLE");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 5000);
+payload.put("source_uri", "/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/cards/CC5WFWuNSzBpYgfNqDb8RVLE");
+
+Hold hold = new Hold(payload);
+hold.save();
 
 % endif
 

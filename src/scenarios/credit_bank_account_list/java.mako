@@ -2,9 +2,9 @@
 Account.credits;
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-Account account = new Account("/v1/bank_accounts/BA1iViFZ5fKWIixl3fpq07Je");
+Account account = new Account("/v1/bank_accounts/BA43YHYoNLyuUUJ0VjZpKBpd");
 Credit.Collection credits = account.credits;
 
 % endif

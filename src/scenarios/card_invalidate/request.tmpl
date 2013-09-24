@@ -1,5 +1,4 @@
 Settings.configure("{{ api_key }}");
 
 Card card = new Card("{{ request.uri }}");
-card.is_valid = false;
-card.save();
+card.invalidate();

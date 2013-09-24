@@ -2,9 +2,9 @@
 Card.Collection cards = new Card.Collection(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-Card.Collection cards = new Card.Collection("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/cards");
+Card.Collection cards = new Card.Collection("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/cards");
 
 % endif
 

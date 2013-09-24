@@ -2,14 +2,17 @@
 BankAccount.credit(amount);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-BankAccount ba = new BankAccount();
-ba.account_number = "9900000001";
-ba.name = "Johann Bernoulli";
-ba.routing_number = "121000358";
-ba.type = "checking";
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("name", "Johann Bernoulli");
+payload.put("routing_number", "121000358");
+payload.put("account_number", "9900000001");
+payload.put("type", "checking");
+
+BankAccount ba = new BankAccount(payload);
 ba.save();
+
 ba.credit(10000);
 
 % endif

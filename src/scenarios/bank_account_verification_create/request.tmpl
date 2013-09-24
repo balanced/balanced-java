@@ -1,4 +1,4 @@
 Settings.configure("{{ api_key }}");
 
-BankAccount ba = new BankAccount("{{ request.uri }}");
-ba.verify();
+BankAccount bankAccount = new BankAccount("{{ request.bank_account_uri }}");
+bankAccount.verify();

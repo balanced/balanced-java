@@ -2,8 +2,10 @@ Settings.configure("{{ api_key }}");
 
 Debit debit = new Debit("{{ request.uri }}");
 debit.description = "{{ request.payload.description }}";
+
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("anykey", "{{ request.payload.meta.anykey }}");
 meta.put("facebook.id", "1234567890");
+
 debit.meta = meta;
 debit.save();

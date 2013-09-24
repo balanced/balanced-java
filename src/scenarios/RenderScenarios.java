@@ -53,7 +53,7 @@ public class RenderScenarios {
             apiKey = (String) result.get("api_key");
             requestData = ((HashMap)((HashMap)result.get(scenario)).get("request"));
         } catch (Exception e) {
-            System.out.println("Scenario not found in scenario.cache");
+            System.out.println(scenario + " not found in scenario.cache");
         }
         data.put("request", requestData);
         data.put("api_key", apiKey);
@@ -96,7 +96,6 @@ public class RenderScenarios {
     public static void main(String[] args) throws IOException, JsonMappingException {
         for (String scenarioPath : getScenarioPaths()) {
             String scenario = new File(scenarioPath).getName();
-            System.out.println(scenario);
             renderScenario(scenario, scenarioPath);
         }
     }

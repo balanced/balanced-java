@@ -1,9 +1,12 @@
 Settings.configure("{{ api_key }}");
 
-BankAccount ba = new BankAccount();
-ba.account_number = "{{ request.bank_account.account_number }}";
-ba.name = "{{ request.bank_account.name }}";
-ba.routing_number = "{{ request.bank_account.routing_number }}";
-ba.type = "{{ request.bank_account.type }}";
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("name", "{{ request.payload.bank_account.name }}");
+payload.put("routing_number", "{{ request.payload.bank_account.routing_number }}");
+payload.put("account_number", "{{ request.payload.bank_account.account_number }}");
+payload.put("type", "{{ request.payload.bank_account.type }}");
+
+BankAccount ba = new BankAccount(payload);
 ba.save();
-ba.credit({{ request.amount }});
+
+ba.credit({{ request.payload.amount }});

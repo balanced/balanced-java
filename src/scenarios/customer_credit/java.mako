@@ -7,10 +7,14 @@ String debit_uri,
 Map<String, String> meta);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-Customer customer = new Customer("/v1/customers/CU3adsU393ZhadbawaoGDwSG");
-customer.credit(100);
+Customer customer = new Customer("/v1/customers/CU3QbHVO44v9opCiSdarCV14");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 100);
+
+customer.credit(payload);
 
 % endif
 

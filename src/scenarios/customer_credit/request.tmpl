@@ -1,4 +1,8 @@
 Settings.configure("{{ api_key }}");
 
 Customer customer = new Customer("{{ request.customer_uri }}");
-customer.credit(100);
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 100);
+
+customer.credit(payload);

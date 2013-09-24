@@ -2,11 +2,9 @@
 BankAccountVerification.save();
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
 
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA1r9dSqsfWLIAN3APL4yEh2");
-ba.verification_uri = "/v1/bank_accounts/BA1r9dSqsfWLIAN3APL4yEh2/verifications/BZ1rOZcf3vZlsH6ne5tRqiL6";
-BankAccountVerification verification = ba.getVerification();
+BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA3YXRiVoKoMJMhq3Bfwxyu2/verifications/BZ40XvdMDOfXN0T7fIlFF4U8");
 verification.confirm(1, 1);
 verification.save();
 
