@@ -48,8 +48,14 @@ public class Hold extends Resource {
     @ResourceField(required=false)
     public String card_uri;
 
+    @ResourceField(mutable=true, required=false)
+    public String source_uri;
+
     @ResourceField(required=false)
     public Card card;
+
+    @ResourceField(required=false)
+    public FundingInstrument source;
 
     public static class Collection extends ResourceCollection<Hold> {
         public Collection(String uri) {
@@ -73,6 +79,13 @@ public class Hold extends Resource {
         super(payload);
     }
 
+    @Override
+    public void save() throws HTTPError {
+        if (id == null && uri == null)
+            uri = String.format("/v%s/%s", Settings.VERSION, "holds");
+        super.save();
+    }
+
     public Account getAccount() throws HTTPError {
         if (account == null)
             account = new Account(account_uri);
@@ -90,10 +103,8 @@ public class Hold extends Resource {
         save();
     }
 
-    public Debit capture(int amount) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
+    public Debit capture(Map<String, Object> payload) throws HTTPError {
         payload.put("hold_uri", uri);
-        payload.put("amount", amount);
         debit = account.debits.create(payload);
         return debit;
     }

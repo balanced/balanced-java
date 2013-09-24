@@ -9,6 +9,7 @@ import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.NotCreated;
 
 public class Customer extends Resource {
 
@@ -140,77 +141,15 @@ public class Customer extends Resource {
                 .first());
     }
 
-    public Credit credit(
-            int amount,
-            String description,
-            String destination_uri,
-            String appears_on_statement_as,
-            String debit_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (destination_uri != null)
-            payload.put("destination_uri", destination_uri);
-        if (appears_on_statement_as != null)
-            payload.put("appears_on_statement_as", appears_on_statement_as);
-        if (meta != null)
-            payload.put("meta", meta);
+    public Credit credit(Map<String, Object> payload) throws HTTPError {
         return credits.create(payload);
     }
 
-    public Credit credit(int amount) throws HTTPError {
-        return credit(amount, null, null, null, null, null);
-    }
-
-    public Debit debit(
-            int amount,
-            String description,
-            String source_uri,
-            String appears_on_statement_as,
-            String on_behalf_of_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (source_uri != null)
-            payload.put("source_uri", source_uri);
-        if (appears_on_statement_as != null)
-            payload.put("appears_on_statement_as", appears_on_statement_as);
-        if (meta != null)
-            payload.put("meta", meta);
-        if (on_behalf_of_uri != null)
-            payload.put("on_behalf_of_uri", on_behalf_of_uri);
+    public Debit debit(Map<String, Object> payload) throws HTTPError {
         return debits.create(payload);
     }
 
-    public Debit debit(int amount) throws HTTPError {
-        return debit(amount, null, null, null, null, null);
-    }
-
-    public Debit debit(int amount, String source_uri) throws HTTPError {
-        return debit(amount, null, source_uri, null, null, null);
-    }
-
-    public Hold hold(
-            int amount,
-            String description,
-            String source_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (source_uri != null)
-            payload.put("source", source_uri);
-        if (meta != null)
-            payload.put("meta", meta);
-        return holds.create(payload);
-    }
-
-    public Hold hold(int amount) throws HTTPError {
-        return hold(amount, null, null, null);
+    public void unstore() throws NotCreated, HTTPError {
+        this.delete();
     }
 }

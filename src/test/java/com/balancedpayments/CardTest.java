@@ -15,6 +15,9 @@ import com.balancedpayments.errors.NotCreated;
 import com.balancedpayments.errors.APIError;
 import org.junit.rules.ExpectedException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class CardTest  extends BaseTest {
 
@@ -29,9 +32,14 @@ public class CardTest  extends BaseTest {
         Card card = createCard(mp);
         buyer.addCard(card);
         buyer.addCard(createCard(mp));
-        buyer.debit(100, "", card.uri, "", null, null);
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 100);
+        payload.put("source_uri", card.uri);
+
+        buyer.debit(payload);
         card.unstore();
         apiError.expect(APIError.class);
-        buyer.debit(100, "", card.uri, "", null, null);
+        buyer.debit(payload);
     }
 }

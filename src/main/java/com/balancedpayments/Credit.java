@@ -19,7 +19,7 @@ public class Credit extends Resource {
     @ResourceField(mutable=true)
     public Map<String, String> meta;
 
-    @ResourceField()
+    @ResourceField(mutable=true)
     public Integer amount;
 
     @ResourceField()
@@ -28,8 +28,11 @@ public class Credit extends Resource {
     @ResourceField()
     public String status;
 
-    @ResourceField()
+    @ResourceField(required=false)
     public BankAccount bank_account;
+
+    @ResourceField(mutable=true, required=false)
+    public String destination_uri;
 
     @ResourceField()
     public String account_uri;
@@ -59,26 +62,19 @@ public class Credit extends Resource {
         super(payload);
     }
 
-    public Reversal reverse(
-                            Integer amount,
-                            String description,
-                            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        if (amount != null)
-            payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (meta != null)
-            payload.put("meta", meta);
+    @Override
+    public void save() throws HTTPError {
+        if (id == null && uri == null)
+            uri = String.format("/v%s/%s", Settings.VERSION, "credits");
+        super.save();
+    }
+
+    public Reversal reverse(Map<String, Object> payload) throws HTTPError {
         return reversals.create(payload);
     }
 
-    public Reversal reverse(int amount) throws HTTPError {
-        return reverse(amount, null, null);
-    }
-
     public Reversal reverse() throws HTTPError {
-        return reverse(null, null, null);
+        return reverse(null);
     }
 
     public static class Collection extends ResourceCollection<Credit> {

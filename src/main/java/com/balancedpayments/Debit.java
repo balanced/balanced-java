@@ -49,6 +49,9 @@ public class Debit extends Resource  {
     public Customer customer;
 
     @ResourceField(required=false)
+    public String appears_on_statement_as;
+
+    @ResourceField(required=false)
     public String hold_uri;
 
     @ResourceField(required=false)
@@ -79,26 +82,12 @@ public class Debit extends Resource  {
         super(payload);
     }
 
-    public Refund refund(
-            Integer amount,
-            String description,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        if (amount != null)
-            payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (meta != null)
-            payload.put("meta", meta);
+    public Refund refund(Map<String, Object> payload) throws HTTPError {
         return refunds.create(payload);
     }
 
-    public Refund refund(int amount) throws HTTPError {
-        return refund(amount, null, null);
-    }
-
     public Refund refund() throws HTTPError {
-        return refund(null, null, null);
+        return refund(null);
     }
 
     public Account getAccount() throws HTTPError {
