@@ -48,7 +48,7 @@ public class AccountTest extends BaseTest {
     }
 
     @Test(expected=InsufficientFunds.class)
-    public void testCreditInsufficientFunds() throws HTTPError {
+    public void testCreditInsufficientFunds() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = createMarketplace();
         Account account = createMerchant(mp);
         account.credit(123);

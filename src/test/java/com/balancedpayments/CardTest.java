@@ -1,9 +1,5 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
@@ -18,6 +14,9 @@ import org.junit.rules.ExpectedException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 
 public class CardTest  extends BaseTest {
 
@@ -25,6 +24,21 @@ public class CardTest  extends BaseTest {
 
     @Rule
     public ExpectedException apiError = ExpectedException.none();
+
+    @Test
+    public void testCardCreate() throws HTTPError {
+        Card newCard = createCard(mp);
+
+        card = new Card(newCard.uri);
+        assertNotNull(card.uri);
+        assertEquals("Visa", card.brand);
+        assertEquals("visa", card.card_type);
+        assertEquals("4113", card.last_four);
+        assertTrue(card.is_valid);
+        assertTrue(card.is_verified);
+        assertEquals("failed", card.postal_code_check);
+        assertEquals("passed", card.security_code_check);
+    }
 
     @Test
     public void testCardDelete() throws CannotCreate, HTTPError, NotCreated {

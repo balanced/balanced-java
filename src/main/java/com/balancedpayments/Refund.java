@@ -3,7 +3,6 @@ package com.balancedpayments;
 import java.util.Date;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -46,7 +45,7 @@ public class Refund extends Resource {
     };
 
     public static Refund get(String uri) throws HTTPError {
-        return new Refund((new Client()).get(uri));
+        return new Refund((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Refund() {

@@ -65,7 +65,7 @@ public class Merchant extends Resource {
     public static ResourceQuery<Merchant> query() {
         return new ResourceQuery<Merchant>(
                 Merchant.class,
-                String.format("/v%s/%s", Settings.VERSION, "merchants"));
+                String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "merchants"));
     }
 
     public static Merchant me() throws NoResultsFound, MultipleResultsFound, HTTPError {
@@ -75,7 +75,7 @@ public class Merchant extends Resource {
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, ",merchants");
+            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), ",merchants");
         super.save();
     }
 }

@@ -3,7 +3,6 @@ package com.balancedpayments;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
@@ -13,8 +12,8 @@ import com.balancedpayments.errors.NotCreated;
 
 public class BankAccount extends FundingInstrument {
 
-    public final static String Checking = "checking";
-    public final static String Savings = "savings";
+    public final static String CHECKING = "checking";
+    public final static String SAVINGS = "savings";
 
     @ResourceField()
     public String fingerprint;
@@ -55,7 +54,7 @@ public class BankAccount extends FundingInstrument {
     @ResourceField(field="holds_uri")
     public Hold.Collection holds;
 
-    protected static final String root_uri = "/v" + Settings.VERSION + "/bank_accounts";
+    protected static final String root_uri = "/v" + Balanced.getInstance().getAPIVersion() + "/bank_accounts";
 
     public static class Collection extends ResourceCollection<BankAccount> {
         public Collection(String uri) {
@@ -64,7 +63,7 @@ public class BankAccount extends FundingInstrument {
     }
 
     public static BankAccount get(String uri) throws HTTPError {
-        return new BankAccount((new Client()).get(uri));
+        return new BankAccount((Balanced.getInstance().getClient()).get(uri));
     }
 
     public BankAccount() {
@@ -102,30 +101,7 @@ public class BankAccount extends FundingInstrument {
         return new BankAccountVerification(verification_uri);
     }
 
-    public Credit credit(
-            int amount,
-            String description,
-            String destination_uri,
-            String appears_on_statement_as,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (destination_uri != null)
-            payload.put("destination", destination_uri);
-        if (appears_on_statement_as != null)
-            payload.put("appears_on_statement_as", appears_on_statement_as);
-        if (meta != null)
-            payload.put("meta", meta);
+    public Credit credit(Map<String, Object> payload) throws HTTPError {
         return credits.create(payload);
-    }
-
-    public Credit credit(int amount) throws HTTPError {
-        return credit(amount, null, null, null, null);
-    }
-
-    public void unstore() throws HTTPError, NotCreated {
-        super.delete();
     }
 }

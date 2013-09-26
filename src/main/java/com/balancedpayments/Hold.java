@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -64,7 +63,7 @@ public class Hold extends Resource {
     };
 
     public static Hold get(String uri) throws HTTPError {
-        return new Hold((new Client()).get(uri));
+        return new Hold((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Hold() {
@@ -82,7 +81,7 @@ public class Hold extends Resource {
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, "holds");
+            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "holds");
         super.save();
     }
 

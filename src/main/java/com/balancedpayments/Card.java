@@ -3,7 +3,6 @@ package com.balancedpayments;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
@@ -39,10 +38,25 @@ public class Card extends FundingInstrument {
     public String last_four;
 
     @ResourceField()
+    public String card_type;
+
+    @ResourceField()
     public String brand;
+
+    @ResourceField()
+    public Boolean is_valid;
+
+    @ResourceField()
+    public Boolean is_verified;
+
+    @ResourceField()
+    public String postal_code_check;
 
     @ResourceField(mutable=true, required=false)
     public String security_code;
+
+    @ResourceField()
+    public String security_code_check;
 
     @ResourceField(required=false)
     public String customer_uri;
@@ -55,43 +69,13 @@ public class Card extends FundingInstrument {
             super(Card.class, uri);
         }
 
-        public Card create(
-                String street_address,
-                String city,
-                String region,
-                String postal_code,
-                String name,
-                String card_number,
-                String security_code,
-                int expiration_month,
-                int expiration_year) throws HTTPError {
-            Map<String, Object> payload = new HashMap<String, Object>();
-            payload.put("street_address", street_address);
-            payload.put("city", city);
-            payload.put("region", region);
-            payload.put("postal_code", postal_code);
-            payload.put("name", name);
-            payload.put("card_number", card_number);
-            payload.put("expiration_month", expiration_month);
-            payload.put("expiration_year", expiration_year);
-            payload.put("security_code", security_code);
-            return create(payload);
-        }
-
-        public Card create(
-                String card_number,
-                int expiration_month,
-                int expiration_year) throws HTTPError {
-            Map<String, Object> payload = new HashMap<String, Object>();
-            payload.put("card_number", card_number);
-            payload.put("expiration_month", expiration_month);
-            payload.put("expiration_year", expiration_year);
-            return create(payload);
+        public Card create(Map<String, Object> payload) throws HTTPError {
+            return super.create(payload);
         }
     };
 
     public static Card get(String uri) throws HTTPError {
-        return new Card((new Client()).get(uri));
+        return new Card((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Card() {
@@ -104,15 +88,5 @@ public class Card extends FundingInstrument {
 
     public Card(String uri) throws HTTPError {
         super(uri);
-    }
-
-
-    public void invalidate() throws HTTPError {
-        is_valid = false;
-        save();
-    }
-
-    public void unstore() throws HTTPError, NotCreated {
-        super.delete();
     }
 }

@@ -22,7 +22,6 @@ public class DebitTest extends BaseTest {
 
     @Test
     public void testRefund() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account account = createBuyer(mp);
         Debit debit = account.debit(123);
         Refund refund = debit.refund();
@@ -30,8 +29,16 @@ public class DebitTest extends BaseTest {
     }
 
     @Test
+    public void testRefundGet() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
+        Account account = createBuyer(mp);
+        Debit debit = account.debit(123);
+        Refund newRefund = debit.refund();
+        Refund refund = new Refund(newRefund.uri);
+        assertEquals(newRefund.uri, refund.uri);
+    }
+
+    @Test
     public void testDebitFilter() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account buyer;
         Debit[] debits = new Debit[3];
 
@@ -75,19 +82,9 @@ public class DebitTest extends BaseTest {
 
     @Test
     public void testRetrieveDebit() throws HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
         String description = "Goods and services";
-        Card card = mp.tokenizeCard(
-                "123 Fake Street",
-                "Jollywood",
-                null,
-                "90210",
-                "William Henry Cavendish III",
-                "4112344112344113",
-                "123",
-                12,
-                2013);
+        Card card = createCard(mp);
         account.associateCard(card.uri);
         Debit newDebit = account.debit(10000, description, card.uri, null, null);
         Debit debit = new Debit(newDebit.uri);
@@ -98,16 +95,7 @@ public class DebitTest extends BaseTest {
     @Test
     public void testCustomerDebitAttributes() throws HTTPError {
         Customer customer = createBusinessCustomer();
-        Card card = mp.tokenizeCard(
-                "123 Fake Street",
-                "Jollywood",
-                null,
-                "90210",
-                "William Henry Cavendish III",
-                "4112344112344113",
-                "123",
-                12,
-                2013);
+        Card card = createCard(mp);
         customer.addCard(card.uri);
 
         Map<String, Object> payload = new HashMap<String, Object>();
@@ -125,25 +113,15 @@ public class DebitTest extends BaseTest {
 
     @Test
     public void testAccountDebitAttributes() throws HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
         String description = "Goods and services";
-        Card card = mp.tokenizeCard(
-                "123 Fake Street",
-                "Jollywood",
-                null,
-                "90210",
-                "William Henry Cavendish III",
-                "4112344112344113",
-                "123",
-                12,
-                2013);
+        Card card = createCard(mp);
         account.associateCard(card.uri);
         Debit newDebit = account.debit(10000, description, card.uri, null, null);
         Debit debit = new Debit(newDebit.uri);
 
         assertNotNull("Account should not be null", debit.getAccount());
         assertNotNull("Customer should not be null", debit.getCustomer());
-        assertNull("Hold should be null", debit.getHold());
+        assertNotNull("Hold should not be null", debit.getHold());
     }
 }

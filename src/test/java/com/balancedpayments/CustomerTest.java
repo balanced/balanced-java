@@ -35,7 +35,10 @@ public class CustomerTest extends BaseTest {
         customer.addCard(card);
         active_card = customer.activeCard();
         assertNotNull(active_card);
-        active_card.invalidate();
+        try {
+            active_card.unstore();
+        }
+        catch (Exception e) {}
         active_card = customer.activeCard();
         assertNull(active_card);
     }

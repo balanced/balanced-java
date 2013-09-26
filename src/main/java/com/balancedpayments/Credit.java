@@ -1,10 +1,8 @@
 package com.balancedpayments;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -22,14 +20,17 @@ public class Credit extends Resource {
     @ResourceField(mutable=true)
     public Integer amount;
 
+    @ResourceField(mutable=true)
+    public String appears_on_statement_as;
+
     @ResourceField()
     public String description;
 
     @ResourceField()
     public String status;
 
-    @ResourceField(required=false)
-    public BankAccount bank_account;
+    @ResourceField(mutable=true, required=false)
+    public Map<String, String> bank_account;
 
     @ResourceField(mutable=true, required=false)
     public String destination_uri;
@@ -47,7 +48,7 @@ public class Credit extends Resource {
     public Reversal.Collection reversals;
 
     public static Credit get(String uri) throws HTTPError {
-        return new Credit((new Client()).get(uri));
+        return new Credit((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Credit() {
@@ -65,7 +66,7 @@ public class Credit extends Resource {
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, "credits");
+            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "credits");
         super.save();
     }
 

@@ -1,6 +1,7 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.balancedpayments.errors.*;
@@ -32,10 +33,18 @@ public class HoldTest extends BaseTest {
         Hold hold = new Hold(payload);
         hold.save();
         assertTrue(hold.amount == 2000);
+        assertNotNull(hold.getAccount());
+        assertNotNull(hold.getCard());
+    }
+
+    @Test(expected = APIError.class)
+    public void testSaveBlank() throws HTTPError {
+        Hold hold = new Hold();
+        hold.save();
     }
 
     @Test
-    public void testCapture() throws CannotCreate, HTTPError, NotCreated {
+    public void testCapturePartial() throws CannotCreate, HTTPError, NotCreated {
         Customer customer = createBusinessCustomer();
         Card card = createCard(mp);
         customer.addCard(card);
@@ -55,6 +64,25 @@ public class HoldTest extends BaseTest {
         Debit debit = hold.capture(payload);
         assertTrue(debit.amount == 1925);
         assertTrue(debit.appears_on_statement_as.equals("BagelHub TastyBagels"));
+    }
+
+    @Test
+    public void testCapture() throws CannotCreate, HTTPError, NotCreated {
+        Customer customer = createBusinessCustomer();
+        Card card = createCard(mp);
+        customer.addCard(card);
+
+        // create a hold
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 2000);
+        payload.put("source_uri", card.uri);
+        Hold hold = new Hold(payload);
+        hold.save();
+
+        // capture the hold
+        hold = new Hold(hold.uri);
+        Debit debit = hold.capture();
+        assertTrue(debit.amount == 2000);
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.balancedpayments;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -76,11 +75,11 @@ public class Customer extends Resource {
     public static ResourceQuery<Customer> query() {
         return new ResourceQuery<Customer>(
                 Customer.class,
-                String.format("/v%s/%s", Settings.VERSION, "customers"));
+                String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "customers"));
     }
 
     public static Customer get(String uri) throws HTTPError {
-        return new Customer((new Client()).get(uri));
+        return new Customer((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Customer() {
@@ -98,14 +97,14 @@ public class Customer extends Resource {
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, "customers");
+            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "customers");
         super.save();
     }
 
     public void addBankAccount(String bank_account_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("bank_account_uri", bank_account_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
@@ -125,7 +124,7 @@ public class Customer extends Resource {
     public void addCard(String card_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("card_uri", card_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
