@@ -195,8 +195,8 @@
                         </excludes>
                     </instrumentation>
                     <check>
-                        <branchRate>30</branchRate>
-                        <lineRate>30</lineRate>
+                        <branchRate>0</branchRate>
+                        <lineRate>0</lineRate>
                         <haltOnFailure>true</haltOnFailure>
                         <totalBranchRate>30</totalBranchRate>
                         <totalLineRate>30</totalLineRate>
