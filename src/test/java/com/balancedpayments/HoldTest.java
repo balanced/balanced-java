@@ -23,13 +23,13 @@ public class HoldTest extends BaseTest {
     @Test
     public void testCreate() throws CannotCreate, HTTPError, NotCreated {
         Customer customer = createBusinessCustomer();
-        Card card = createCard(mp);
-        customer.addCard(card);
+        Card newCard = createCard(mp);
+        customer.addCard(newCard);
 
         // create a hold
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("amount", 2000);
-        payload.put("source_uri", card.uri);
+        payload.put("source_uri", newCard.uri);
         Hold hold = new Hold(payload);
         hold.save();
         assertTrue(hold.amount == 2000);

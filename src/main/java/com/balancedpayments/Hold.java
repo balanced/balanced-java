@@ -92,9 +92,16 @@ public class Hold extends Resource {
     }
 
     public Card getCard() throws HTTPError {
-        if (card == null)
-            card = new Card(card_uri);
-        return card;
+        if (card == null) {
+            if (card_uri != null) {
+                return card = new Card(card_uri);
+            }
+            else if (source.uri != null) {
+                return card = new Card(source.uri);
+            }
+        }
+
+        return null;
     }
 
     public void void_() throws HTTPError {
