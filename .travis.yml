@@ -4,3 +4,5 @@ jdk:
   - openjdk7
   - openjdk6
   - oraclejdk7
+
+script: "mvn install -DskipTests=true -B && mvn cobertura:cobertura && mvn cobertura:check"

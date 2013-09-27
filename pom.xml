@@ -175,6 +175,13 @@
                     <useFile>false</useFile>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -200,8 +207,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>clean</goal>
-                            <goal>check</goal>
+                            <goal>cobertura</goal>
                         </goals>
                     </execution>
                 </executions>
