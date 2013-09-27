@@ -76,6 +76,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.2.3</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>net.asfun.jangod</groupId>
             <artifactId>jangod</artifactId>
@@ -83,6 +84,7 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/jangod.jar</systemPath>
         </dependency>
+        -->
     </dependencies>
     <profiles>
         <profile>
