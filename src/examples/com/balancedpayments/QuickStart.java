@@ -16,7 +16,7 @@ public class QuickStart {
         System.out.printf("Our secret is %s\n", key.secret);
 
         System.out.printf("Configure with our secret\n");
-        Settings.configure(key.secret);
+        Balanced.configure(key.secret);
 
         System.out.printf("Create marketplace\n");
         Marketplace mp = new Marketplace();

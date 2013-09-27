@@ -8,7 +8,7 @@ import java.util.Map;
 public class bank_account_invalid_routing_number {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
 
 BankAccount ba = new BankAccount("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/bank_accounts");
 ba.account_number = "9900000001";
@@ -24,3 +24,4 @@ catch (HTTPError e) {
 
 }
 }
+

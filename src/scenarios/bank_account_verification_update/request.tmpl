@@ -1,4 +1,4 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
 BankAccountVerification verification = new BankAccountVerification("{{ request.uri }}");
 verification.confirm({{ request.payload.amount_1 }}, {{ request.payload.amount_2 }});

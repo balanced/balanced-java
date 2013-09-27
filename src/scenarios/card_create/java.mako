@@ -2,7 +2,7 @@
 Card card = new Card(Map<String, Object> payload);
 
 % else:
-Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("card_number", "5105105105105100");

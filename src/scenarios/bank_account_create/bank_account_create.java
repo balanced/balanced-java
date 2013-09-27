@@ -8,7 +8,7 @@ import java.util.Map;
 public class bank_account_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("account_number", "9900000001");
@@ -20,3 +20,4 @@ BankAccount bankAccount = new BankAccount(payload);
 
 }
 }
+

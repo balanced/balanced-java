@@ -8,7 +8,7 @@ import java.util.Map;
 public class account_underwrite_person {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Settings.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
 
 Account account = new Account("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/accounts");
 Map<String, Object> merchantPayload = new HashMap<String, Object>();
@@ -25,3 +25,4 @@ account.promoteToMerchant(merchantPayload);
 
 }
 }
+
