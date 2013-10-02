@@ -1,14 +1,14 @@
 package com.balancedpayments;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.balancedpayments.core.Client;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class BankAccount extends FundingInstrument {
@@ -34,7 +34,7 @@ public class BankAccount extends FundingInstrument {
     @ResourceField()
     public String bank_name;
 
-    @ResourceField()
+    @ResourceField(mutable = true)
     public Map<String, String> meta;
 
     @ResourceField(field="verifications_uri")
