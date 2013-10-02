@@ -48,7 +48,7 @@ public class Debit extends Resource  {
     @ResourceField(required=false)
     public Customer customer;
 
-    @ResourceField(required=false)
+    @ResourceField(required=false, mutable=true)
     public String appears_on_statement_as;
 
     @ResourceField(required=false)

@@ -33,7 +33,7 @@ public class BankAccount extends FundingInstrument {
     @ResourceField()
     public String bank_name;
 
-    @ResourceField()
+    @ResourceField(mutable=true)
     public Map<String, String> meta;
 
     @ResourceField(field="verifications_uri")

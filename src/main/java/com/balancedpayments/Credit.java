@@ -20,7 +20,7 @@ public class Credit extends Resource {
     @ResourceField(mutable=true)
     public Integer amount;
 
-    @ResourceField(mutable=true)
+    @ResourceField(mutable=true, required=false)
     public String appears_on_statement_as;
 
     @ResourceField()
