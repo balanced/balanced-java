@@ -2,7 +2,7 @@
 BankAccount bankAccount = new BankAccount(Map<String, Object> payload);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("account_number", "9900000001");

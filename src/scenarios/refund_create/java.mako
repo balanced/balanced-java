@@ -2,9 +2,9 @@
 Debit.refund();
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-Debit debit = new Debit("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/debits/WD2S3Z2JJWKzMvFZccxqZ0C4");
+Debit debit = new Debit("/v1/marketplaces/TEST-MP5Rwi1N0GqQZ9nAyf11c2v0/debits/WD7elkB2x5Kj09uFxSd5rmB2");
 debit.refund();
 
 % endif

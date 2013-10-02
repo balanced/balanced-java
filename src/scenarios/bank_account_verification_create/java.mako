@@ -2,9 +2,9 @@
 BankAccount.verify();
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA1mOWnGISRn9236e6tOuDLq/verifications");
+BankAccount ba = new BankAccount("/v1/bank_accounts/BA6aAfGRXuglH6NYXi9jrdVR/verifications");
 ba.verify();
 
 % endif

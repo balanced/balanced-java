@@ -1,9 +1,9 @@
 % if mode == 'definition':
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-BankAccount ba = new BankAccount("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/bank_accounts");
+BankAccount ba = new BankAccount("/v1/marketplaces/TEST-MP5Rwi1N0GqQZ9nAyf11c2v0/bank_accounts");
 ba.account_number = "9900000001";
 ba.routing_number = "111111118";
 ba.name = "Johann Bernoulli";

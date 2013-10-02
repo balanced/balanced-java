@@ -2,10 +2,10 @@
 Customer.addBankAccount(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-Customer customer = new Customer("/v1/customers/CU3adsU393ZhadbawaoGDwSG");
-customer.addBankAccount("/v1/bank_accounts/BA3cqPyNcF9b8JU3BRoLjZn8");
+Customer customer = new Customer("/v1/customers/CU6FNeVr7htjlCc4gU5VVhkH");
+customer.addBankAccount("/v1/bank_accounts/BA6GQEG2QIQxlvqZmDFCWhKU");
 
 % endif
 

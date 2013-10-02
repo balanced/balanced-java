@@ -2,7 +2,7 @@
 Marketplace.credits;
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
 Marketplace mp = Marketplace.mine();
 Credit.Collection credits = mp.credits;

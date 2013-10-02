@@ -7,7 +7,7 @@ String debit_uri,
 Map<String, String> meta);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
 Customer customer = new Customer("/v1/customers/CU3adsU393ZhadbawaoGDwSG");
 customer.credit(100);

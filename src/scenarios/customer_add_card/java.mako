@@ -2,10 +2,10 @@
 Customer.addCard(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-Customer customer = new Customer("/v1/customers/CU35EBvb9i2DsNqkuy96EGTI");
-customer.addCard("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/cards/CC375O8m73xEg1AV1oL1AIe2");
+Customer customer = new Customer("/v1/customers/CU6C6w0wYGGwMftYKS6tyCYM");
+customer.addCard("/v1/marketplaces/TEST-MP5Rwi1N0GqQZ9nAyf11c2v0/cards/CC6Dsnkgg9hSvw6wkrn6ylui");
 
 % endif
 

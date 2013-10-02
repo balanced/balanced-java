@@ -2,9 +2,9 @@
 Refund refund = new Refund(String uri);
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Settings.configure("c07a8282f49111e2a035026ba7d31e6f");
 
-Refund refund = new Refund("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/refunds/RF2Tl2Zvpxlib5YgfpfcHGHl");
+Refund refund = new Refund("/v1/marketplaces/TEST-MP5Rwi1N0GqQZ9nAyf11c2v0/refunds/RF7hsO01rx8siK1kV6nVWP39");
 
 % endif
 
