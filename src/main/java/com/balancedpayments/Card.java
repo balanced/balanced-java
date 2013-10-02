@@ -6,8 +6,7 @@ import java.util.Map;
 import com.balancedpayments.core.Client;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.NotCreated;
+import com.balancedpayments.errors.*;
 
 public class Card extends FundingInstrument {
 
@@ -44,11 +43,11 @@ public class Card extends FundingInstrument {
     @ResourceField(mutable=true, required=false)
     public String security_code;
 
-    @ResourceField(required=false)
-    public String customer_uri;
-
-    @ResourceField(field="customer_uri", required=false)
+    @ResourceField(field="customer", required=false)
     public Customer customer;
+
+    @ResourceField(field="account", required=false)
+    public Account account;
 
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
@@ -105,6 +104,28 @@ public class Card extends FundingInstrument {
     public Card(String uri) throws HTTPError {
         super(uri);
     }
+
+    public Debit debit(
+            int amount,
+            String description,
+            String appears_on_statement_as,
+            String on_behalf_of_uri,
+            Map<String, String> meta) throws HTTPError, CardNotAssociated {
+        if (this.customer != null) {
+            return this.customer.debit(amount, description, this.uri, appears_on_statement_as, on_behalf_of_uri, meta);
+        }
+        else if (this.account != null) {
+            return this.account.debit(amount, description, this.uri, appears_on_statement_as, meta);
+        }
+        else {
+            throw new CardNotAssociated();
+        }
+    }
+
+    public Debit debit(int amount) throws HTTPError, CardNotAssociated {
+        return debit(amount, null, null, null, null);
+    }
+
 
 
     public void invalidate() throws HTTPError {

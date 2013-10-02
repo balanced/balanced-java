@@ -1,0 +1,9 @@
+Settings.configure("{{ api_key }}");
+
+Card card = new Card("{{ request.uri }}");
+mp = Marketplace.mine();
+Customer buyer = createBusinessCustomer();
+Card card = createCard(mp);
+buyer.addCard(card);
+card.refresh();
+card.debit(1000);

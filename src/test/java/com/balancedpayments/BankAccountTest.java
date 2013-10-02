@@ -74,6 +74,16 @@ public class BankAccountTest  extends BaseTest {
     }
 
     @Test
-    public void testCredit() {}
+    public void testCredit() throws HTTPError {
+        ba.credit(100000);
+    }
+
+    @Test
+    public void testDebit() throws HTTPError {
+        BankAccountVerification bav = ba.verify();
+        bav.confirm(1, 1);
+        ba.refresh();
+        ba.debit(100000);
+    }
 
 }
