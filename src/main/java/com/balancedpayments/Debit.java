@@ -54,6 +54,12 @@ public class Debit extends Resource  {
     @ResourceField(required=false)
     public Hold hold;
 
+    @ResourceField(required=false)
+    public String appears_on_statement_as;
+
+    @ResourceField(required=false)
+    public String status;
+
     @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
 
@@ -61,7 +67,7 @@ public class Debit extends Resource  {
         public Collection(String uri) {
             super(Debit.class, uri);
         }
-    };
+    }
 
     public static Debit get(String uri) throws HTTPError {
         return new Debit((new Client()).get(uri));
