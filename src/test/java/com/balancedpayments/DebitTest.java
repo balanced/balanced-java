@@ -1,10 +1,7 @@
 package com.balancedpayments;
 
 import com.balancedpayments.core.ResourceQuery;
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
+import com.balancedpayments.errors.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,6 +32,47 @@ public class DebitTest extends BaseTest {
         Refund newRefund = debit.refund();
         Refund refund = new Refund(newRefund.uri);
         assertEquals(newRefund.uri, refund.uri);
+    }
+
+    @Test
+    public void testDebitBankAccountVerified() throws HTTPError {
+        Customer customer = new Customer();
+        customer.save();
+
+        BankAccount ba = createBankAccount(mp);
+        customer.addBankAccount(ba);
+
+        BankAccountVerification bankAccountVerification = ba.verify();
+        bankAccountVerification.confirm(1, 1);
+        bankAccountVerification.reload();
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 100000);
+
+        Debit debit = ba.debit(payload);
+
+        assertTrue(debit.status.equals("succeeded"));
+        assertEquals(100000, (int)debit.amount);
+    }
+
+    @Test
+    public void testDebitBankAccountUnverified() throws HTTPError {
+        Customer customer = new Customer();
+        customer.save();
+
+        BankAccount ba = createBankAccount(mp);
+        customer.addBankAccount(ba);
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 100000);
+
+        try {
+            Debit debit = ba.debit(payload);
+            fail("Debiting an unverified bank account should fail");
+        }
+        catch (APIError e) {
+            assertEquals("funding-source-not-debitable", e.category_code);
+        }
     }
 
     @Test

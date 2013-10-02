@@ -104,4 +104,8 @@ public class BankAccount extends FundingInstrument {
     public Credit credit(Map<String, Object> payload) throws HTTPError {
         return credits.create(payload);
     }
+
+    public Debit debit(Map<String, Object> payload) throws HTTPError {
+        return debits.create(payload);
+    }
 }

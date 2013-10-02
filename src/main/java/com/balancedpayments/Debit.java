@@ -52,6 +52,9 @@ public class Debit extends Resource  {
     public String appears_on_statement_as;
 
     @ResourceField(required=false)
+    public String status;
+
+    @ResourceField(required=false)
     public String hold_uri;
 
     @ResourceField(required=false)
