@@ -147,8 +147,4 @@ public class Customer extends Resource {
     public Debit debit(Map<String, Object> payload) throws HTTPError {
         return debits.create(payload);
     }
-
-    public void unstore() throws NotCreated, HTTPError {
-        this.delete();
-    }
 }

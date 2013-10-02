@@ -56,6 +56,10 @@ public abstract class Resource {
         deserialize(response);
     }
 
+    public void unstore() throws NotCreated, HTTPError {
+        delete();
+    }
+
     public void delete() throws NotCreated, HTTPError {
         if (id == null)
             throw new NotCreated(this.getClass());
