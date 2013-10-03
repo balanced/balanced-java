@@ -1,5 +1,0 @@
-Settings.configure("{{ api_key }}");
-
-// requires updated scenarios.cache
-Customer customer = new Customer("{{ request.customer_uri }}");
-customer.debit(100, "{{ request.payload.hold_uri }}");

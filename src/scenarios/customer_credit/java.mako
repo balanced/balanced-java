@@ -1,16 +1,15 @@
 % if mode == 'definition':
-Customer.credit(int amount,
-String description,
-String destination_uri,
-String appears_on_statement_as,
-String debit_uri,
-Map<String, String> meta);
+Customer.credit(Map<String, Object> payload)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("/v1/customers/CU3adsU393ZhadbawaoGDwSG");
-customer.credit(100);
+Customer customer = new Customer("/v1/customers/CU3pCSyHecPahJL4FKDMThoG");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 100);
+
+customer.credit(payload);
 
 % endif
 

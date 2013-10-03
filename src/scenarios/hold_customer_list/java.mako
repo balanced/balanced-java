@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Customer.holds;
+Customer.holds
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("");
+Customer customer = new Customer("/v1/customers/CU4YcokzpBw7L1Fluc0gPVAA");
 Hold.Collection holds = customer.holds;
 
 % endif

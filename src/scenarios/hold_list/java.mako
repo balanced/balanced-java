@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Hold.Collection(String uri);
+Hold.Collection(String uri)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Hold.Collection holds = new Hold.Collection("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds");
+Hold.Collection holds = new Hold.Collection("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/holds");
 
 % endif
 

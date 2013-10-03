@@ -66,6 +66,25 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>cobertura-maven-plugin</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>net.asfun.jangod</groupId>
+            <artifactId>jangod</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jangod.jar</systemPath>
+        </dependency>
+        -->
     </dependencies>
     <profiles>
         <profile>
@@ -156,7 +175,52 @@
                     <useFile>false</useFile>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>${project.basedir}/src/scenarios/**</exclude>
+                        </excludes>
+                    </instrumentation>
+                    <check>
+                        <branchRate>0</branchRate>
+                        <lineRate>0</lineRate>
+                        <haltOnFailure>true</haltOnFailure>
+                        <totalBranchRate>30</totalBranchRate>
+                        <totalLineRate>30</totalLineRate>
+                        <packageLineRate>30</packageLineRate>
+                        <packageBranchRate>30</packageBranchRate>
+                    </check>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

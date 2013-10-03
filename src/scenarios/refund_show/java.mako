@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Refund refund = new Refund(String uri);
+Refund(String uri)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Refund refund = new Refund("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/refunds/RF2Tl2Zvpxlib5YgfpfcHGHl");
+Refund refund = new Refund("/v1/customers/CU5eN73VZL9xr3qR4VIgtTZI/refunds/RF5tlXeMsrSsrDfJdLEDrDsP");
 
 % endif
 

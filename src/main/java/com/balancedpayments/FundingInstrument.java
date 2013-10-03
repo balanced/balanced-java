@@ -3,13 +3,13 @@ package com.balancedpayments;
 import java.util.Date;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.NotCreated;
 
-public class FundingInstrument  extends Resource {
+public class FundingInstrument extends Resource {
 
     @ResourceField()
     public Date created_at;
@@ -37,7 +37,7 @@ public class FundingInstrument  extends Resource {
     };
 
     public static FundingInstrument get(String uri) throws HTTPError {
-        return new FundingInstrument((new Client()).get(uri));
+        return new FundingInstrument((Balanced.getInstance().getClient()).get(uri));
     }
 
     public FundingInstrument() {
@@ -52,9 +52,12 @@ public class FundingInstrument  extends Resource {
         super(uri);
     }
 
-    public void invalidate() throws HTTPError {
-        is_valid = false;
-        save();
+    public void invalidate() throws HTTPError, NotCreated {
+        unstore();
+    }
+
+    public void unstore() throws HTTPError, NotCreated {
+        super.delete();
     }
 
     public Customer getCustomer() throws HTTPError {

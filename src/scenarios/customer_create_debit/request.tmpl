@@ -1,4 +1,9 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
 Customer customer = new Customer("{{ request.customer_uri }}");
-customer.debit(100);
+customer.save();
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+
+customer.debit(payload);

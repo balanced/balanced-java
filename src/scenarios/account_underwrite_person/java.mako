@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Account.promoteToMerchant(Map<String, Object> payload);
+Account.promoteToMerchant(Map<String, Object> payload)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Account account = new Account("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/accounts");
+Account account = new Account("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/accounts");
 Map<String, Object> merchantPayload = new HashMap<String, Object>();
 Map<String, Object> personPayload = new HashMap<String, Object>();
 

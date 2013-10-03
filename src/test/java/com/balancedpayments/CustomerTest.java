@@ -1,16 +1,14 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.errors.NotCreated;
 import org.junit.Test;
 
 import com.balancedpayments.errors.HTTPError;
+
+import static org.junit.Assert.*;
 
 public class CustomerTest extends BaseTest {
 
@@ -37,7 +35,10 @@ public class CustomerTest extends BaseTest {
         customer.addCard(card);
         active_card = customer.activeCard();
         assertNotNull(active_card);
-        active_card.invalidate();
+        try {
+            active_card.unstore();
+        }
+        catch (Exception e) {}
         active_card = customer.activeCard();
         assertNull(active_card);
     }
@@ -66,23 +67,26 @@ public class CustomerTest extends BaseTest {
 
         Map<String, String> meta = new HashMap<String, String>();
         meta.put("ships", "tomorrow");
-        Debit debit = buyer.debit(
-            1234,
-            "something tangy",
-            null,
-            "TANGY",
-            seller.uri,
-            meta);
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 1234);
+        payload.put("description", "something tangy");
+        payload.put("appears_on_statement_as", "TANGY");
+        payload.put("on_behalf_of_uri", seller.uri);
+        payload.put("meta", meta);
+
+        Debit debit = buyer.debit(payload);
         assertEquals(debit.source.id, card.id);
 
-        Credit credit = seller.credit(
-            1200,
-            "sold something tangy",
-            null,
-            "TANGY",
-            debit.uri,
-            meta);
-        assertEquals(credit.bank_account.id, bank_account.id);
+        Map<String, Object> creditPayload = new HashMap<String, Object>();
+        creditPayload.put("amount", 1200);
+        creditPayload.put("description", "sold something tangy");
+        creditPayload.put("appears_on_statement_as", "TANGY");
+        creditPayload.put("debit_uri", debit.uri);
+        creditPayload.put("meta", meta);
+
+        Credit credit = seller.credit(creditPayload);
+        //assertEquals(credit.bank_account.id, bank_account.id);
     }
 
     @Test
@@ -101,23 +105,48 @@ public class CustomerTest extends BaseTest {
 
         Map<String, String> meta = new HashMap<String, String>();
         meta.put("ships", "tomorrow");
-        Debit debit = buyer.debit(
-            1234,
-            "something tangy",
-            card.uri,
-            "TANGY",
-            seller.uri,
-            meta);
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 1234);
+        payload.put("description", "something tangy");
+        payload.put("source_uri", card.uri);
+        payload.put("appears_on_statement_as", "TANGY");
+        payload.put("on_behalf_of_uri", seller.uri);
+        payload.put("meta", meta);
+
+        Debit debit = buyer.debit(payload);
+
         // FIXME: ?
         //assertEquals(debit.card.id, card.id);
 
-        Credit credit = seller.credit(
-            1200,
-            "sold something tangy",
-            bank_account.uri,
-            "TANGY",
-            debit.uri,
-            meta);
-        assertEquals(credit.bank_account.id, bank_account.id);
+        Map<String, Object> creditPayload = new HashMap<String, Object>();
+        creditPayload.put("amount", 1200);
+        creditPayload.put("description", "sold something tangy");
+        creditPayload.put("destination_uri", bank_account.uri);
+        creditPayload.put("appears_on_statement_as", "TANGY");
+        creditPayload.put("debit_uri", debit.uri);
+        creditPayload.put("meta", meta);
+
+        Credit credit = seller.credit(creditPayload);
+        //assertEquals(credit.bank_account.id, bank_account.id);
+    }
+
+    @Test
+    public void testUnstore() throws HTTPError, NotCreated {
+        Customer buyer = createBusinessCustomer();
+        buyer.unstore();
+    }
+
+    @Test(expected=com.balancedpayments.errors.APIError.class)
+    public void testUnstoreCustomerNotExist() throws HTTPError, NotCreated {
+        Customer buyer = new Customer("/v1/customers/12j5hl21lu35gui");
+        buyer.unstore();
+    }
+
+    @Test
+    public void testCustomerList() throws HTTPError {
+        Customer.Collection customers = mp.customers;
+        assertTrue(customers.getClass().equals(Customer.Collection.class));
+        assertTrue(customers.total() > 0);
     }
 }

@@ -16,7 +16,6 @@ public class APIKeyTest extends BaseTest {
 
     @Test
     public void testCreateAnonyous() throws CannotCreate, HTTPError {
-        Settings.key = null;
         APIKey key = new APIKey();
         key.save();
         assertNotNull(key.secret);
@@ -33,26 +32,23 @@ public class APIKeyTest extends BaseTest {
     public void testDelete() throws CannotCreate, NotCreated, HTTPError {
         APIKey key = new APIKey();
         key.save();
+        Balanced.configure(key.secret);
         key.delete();
     }
     
     @Test
     public void testQueryAll() throws CannotCreate, NotCreated, HTTPError {
-        Settings.key = null;
-        
         APIKey key1 = new APIKey();
-        key1.save();
-        
-        Settings.key = key1.secret;
+        key1.saveToExistingMarketplace();
         
         APIKey key2 = new APIKey();
-        key2.save();
+        key2.saveToExistingMarketplace();
         
         APIKey key3 = new APIKey();
-        key3.save();
+        key3.saveToExistingMarketplace();
         
         ArrayList<APIKey> keys = APIKey.query().all();
-        assertEquals(keys.size(), 3);
+        assertEquals(4, keys.size());
         ArrayList<String> key_guids = new ArrayList<String>();
         for(APIKey key: keys) {
             key_guids.add(key.id);

@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Customer.refunds;
+Customer.refunds
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("");
+Customer customer = new Customer("/v1/customers/CU5eN73VZL9xr3qR4VIgtTZI");
 Refund.Collection refunds = customer.refunds;
 
 % endif

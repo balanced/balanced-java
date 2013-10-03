@@ -1,9 +1,10 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("card_number", "{{ request.payload.card_number }}");
 payload.put("expiration_month", {{ request.payload.expiration_month }});
 payload.put("expiration_year", {{ request.payload.expiration_year }});
 payload.put("security_code", "{{ request.payload.security_code }}");
+
 Card card = new Card(payload);
 card.save();

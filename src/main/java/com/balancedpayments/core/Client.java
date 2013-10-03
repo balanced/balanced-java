@@ -30,7 +30,6 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.balancedpayments.Settings;
 import com.balancedpayments.errors.APIError;
 import com.balancedpayments.errors.BankAccountVerificationFailure;
 import com.balancedpayments.errors.Declined;
@@ -51,8 +50,8 @@ public class Client {
     private final HttpClient httpClient;
 
     public Client(String location, String key) {
-        this.key = (key != null) ? key : Settings.key;
-        this.root = (location != null) ? location : Settings.location;
+        this.key = key;
+        this.root = location;
 
         PoolingClientConnectionManager connMgr = new PoolingClientConnectionManager();
         this.httpClient = new DefaultHttpClient(connMgr);
@@ -61,10 +60,6 @@ public class Client {
         this.httpClient.getParams().setParameter("http.socket.timeout", new Integer(CONNECTION_TIMEOUT));
         this.httpClient.getParams().setParameter("http.connection.timeout", new Integer(CONNECTION_TIMEOUT));
         this.httpClient.getParams().setParameter("http.protocol.content-charset", "UTF-8");
-    }
-
-    public Client() {
-        this(null, null);
     }
 
     public Map<String, Object> get(String path, Map<String, String> params) throws HTTPError {
@@ -152,7 +147,7 @@ public class Client {
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
-            String authEncoding = Base64.encodeBase64URLSafeString(auth);
+            String authEncoding = Base64.encodeBase64String(auth);// .encodeBase64URLSafeString(auth);
             request.setHeader("Authorization", "Basic " + authEncoding);
         }
 
@@ -207,7 +202,6 @@ public class Client {
             String body,
             Map<String, Object> payload) throws APIError {
         String category_code = (String) payload.get("category_code");
-
         // http://stackoverflow.com/questions/3434466/creating-a-factory-method-in-java-that-doesnt-rely-on-if-else
         if (InsufficientFunds.CODES.contains(category_code))
             throw new InsufficientFunds(response, body, payload);

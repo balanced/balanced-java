@@ -1,8 +1,8 @@
 % if mode == 'definition':
-Marketplace.credits;
+Marketplace.credits
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 Marketplace mp = Marketplace.mine();
 Credit.Collection credits = mp.credits;

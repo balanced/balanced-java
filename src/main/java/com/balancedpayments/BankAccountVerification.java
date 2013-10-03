@@ -33,15 +33,11 @@ public class BankAccountVerification extends Resource {
         super(uri);
     }
 
-    public BankAccountVerification(Map<String, Object> payload) {
-        super(payload);
-    }
-
     public void confirm(int amount_1, int amount_2) throws HTTPError {
         Map<String, Object> request = new HashMap<String, Object>();
         request.put("amount_1", amount_1);
         request.put("amount_2", amount_2);
-        Map<String, Object> response = client.put(uri, request);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, request);
         deserialize(response);
     }
 }

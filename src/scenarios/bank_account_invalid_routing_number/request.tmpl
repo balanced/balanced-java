@@ -1,4 +1,4 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
 BankAccount ba = new BankAccount("{{ request.uri }}");
 ba.account_number = "{{ request.payload.account_number }}";

@@ -1,12 +1,12 @@
 % if mode == 'definition':
-Customer.credits;
+Customer.credits
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 // this scenario is not present in scenarios.cache
 // so the customer_uri will be rendered as an empty string
-Customer customer = new Customer("");
+Customer customer = new Customer("/v1/customers/CU3pCSyHecPahJL4FKDMThoG");
 Credit.Collection credits = customer.credits;
 
 % endif

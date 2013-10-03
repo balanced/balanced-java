@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Credit credit = new Credit(String uri);
+Credit(String uri)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Credit credit = new Credit("/v1/credits/CR1S0Lm10SbeviGMt1Xxosq3");
+Credit credit = new Credit("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/credits/CR3XMwizdVVRk0REoMM5LeU6");
 
 % endif
 

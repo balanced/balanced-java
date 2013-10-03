@@ -10,7 +10,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class APIKey extends Resource
 {
-    private static final String root_uri = String.format("/v%s/%s", Settings.VERSION, "api_keys");
+    private static final String root_uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "api_keys");
 
     @ResourceField()
     public Date created_at;
@@ -25,10 +25,17 @@ public class APIKey extends Resource
         return new ResourceCollection<APIKey>(APIKey.class, root_uri);
     }
 
+    public void saveToExistingMarketplace() throws HTTPError {
+        if (id == null && uri == null)
+            uri = APIKey.root_uri;
+        super.save();
+    }
+
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
             uri = APIKey.root_uri;
+        Balanced.configure(null);
         super.save();
     }
 }

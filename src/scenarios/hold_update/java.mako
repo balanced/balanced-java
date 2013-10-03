@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Hold.save();
+Hold.save()
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Hold hold = new Hold("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds/HL2c934i8dnd0nydSAXhhbdI");
+Hold hold = new Hold("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/holds/HL52kZFtZTaaxBfENP6l6y48");
 hold.description = "update this description";
 hold.save();
 

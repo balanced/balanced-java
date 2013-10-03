@@ -12,23 +12,27 @@ import com.balancedpayments.errors.NoResultsFound;
 
 public class BaseTest {
 
-    public static String KEY_MARKETPLACE = "984f92c847e111e2a7a0026ba7f8ec28";
+    public static String KEY_MARKETPLACE = "ak-test-162blqRxbgzRNOsRhWloVQ3hHJBNosJQJ";
 
     protected Marketplace mp;
 
     @Before
     public void setUp() throws NoResultsFound, MultipleResultsFound, HTTPError {
-    	String location = System.getProperty("balanced_location", Settings.location);
-    	String key = System.getProperty("balanced_key", KEY_MARKETPLACE);
-    	Settings.configure(location, key);
-        this.mp = Marketplace.mine();
+    	/*String key = System.getProperty("balanced_key", KEY_MARKETPLACE);
+    	Balanced.getInstance().configure(key);
+        this.mp = Marketplace.mine();*/
+        APIKey key = new APIKey();
+        key.save();
+        Balanced.configure(key.secret);
+        Marketplace marketplace = new Marketplace();
+        marketplace.save();
+        this.mp = marketplace;
     }
 
-    protected Marketplace createMarketplace() throws HTTPError {
-        Settings.key = null;
-        APIKey k = new APIKey();
-        k.save();
-        Settings.key = k.secret;
+    protected Marketplace createMarketplace() throws HTTPError, NoResultsFound, MultipleResultsFound {
+        APIKey key = new APIKey();
+        key.save();
+        Balanced.configure(key.secret);
 
         Marketplace mp = new Marketplace();
         mp.save();
@@ -36,16 +40,17 @@ public class BaseTest {
     }
 
     protected Card createCard(Marketplace mp) throws HTTPError {
-        return mp.tokenizeCard(
-                "123 Fake Street",
-                "Jollywood",
-                null,
-                "90210",
-                "Homer Jay",
-                "4112344112344113",
-                "123",
-                12,
-                2013);
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("street_address", "123 Fake Street");
+        payload.put("city", "Jollywood");
+        payload.put("postal_code", "90210");
+        payload.put("name", "Homer Jay");
+        payload.put("card_number", "4112344112344113");
+        payload.put("security_code", "123");
+        payload.put("expiration_month", 12);
+        payload.put("expiration_year", 2016);
+
+        return mp.tokenizeCard(payload);
     }
 
     protected BankAccount createBankAccount(Marketplace mp) throws HTTPError {
@@ -81,6 +86,7 @@ public class BaseTest {
         merchant.put("dob", "1842-01-01");
         merchant.put("phone_number", "+16505551234");
         merchant.put("country_code", "USA");
+
         return merchant;
     }
 

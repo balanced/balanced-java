@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.balancedpayments.Balanced;
 import com.balancedpayments.errors.HTTPError;
 
 public class ResourcePage<T> {
     
-    private Client client = new Client();
+    private Client client = Balanced.getInstance().getClient();
     
     public String uri;
     

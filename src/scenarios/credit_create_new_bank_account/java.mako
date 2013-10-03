@@ -1,16 +1,21 @@
 % if mode == 'definition':
-BankAccount.credit(amount);
+BankAccount.credit(Map<String, Object> payload)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccount ba = new BankAccount();
-ba.account_number = "9900000001";
-ba.name = "Johann Bernoulli";
-ba.routing_number = "121000358";
-ba.type = "checking";
-ba.save();
-ba.credit(10000);
+Map<String, Object> bankAccountPayload = new HashMap<String, Object>();
+bankAccountPayload.put("name", "Johann Bernoulli");
+bankAccountPayload.put("routing_number", "121000358");
+bankAccountPayload.put("account_number", "9900000001");
+bankAccountPayload.put("type", "checking");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 10000);
+payload.put("bank_account", bankAccountPayload);
+
+Credit credit = new Credit(payload);
+credit.save();
 
 % endif
 

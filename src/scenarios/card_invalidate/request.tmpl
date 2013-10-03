@@ -1,5 +1,10 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
 Card card = new Card("{{ request.uri }}");
-card.is_valid = false;
-card.save();
+
+try {
+    card.unstore();
+}
+catch (NotCreated e) {
+    // card never existed
+}

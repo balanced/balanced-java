@@ -1,2 +1,2 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 

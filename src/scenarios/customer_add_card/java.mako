@@ -1,11 +1,11 @@
 % if mode == 'definition':
-Customer.addCard(String uri);
+Customer.addCard(String uri)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("/v1/customers/CU35EBvb9i2DsNqkuy96EGTI");
-customer.addCard("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/cards/CC375O8m73xEg1AV1oL1AIe2");
+Customer customer = new Customer("/v1/customers/CU5K29KHV21jnwgxVe2rW5nF");
+customer.addCard("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/cards/CC5LSyXneU8VvRVdq9MSVbh6");
 
 % endif
 
