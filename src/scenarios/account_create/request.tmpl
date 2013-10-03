@@ -1,3 +1,4 @@
 Balanced.configure("{{ api_key }}");
 
-Account account = new Account("{{ request.uri }}");
+Account account = new Account();
+account.save();

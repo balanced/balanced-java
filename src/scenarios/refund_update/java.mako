@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Refund.save();
+Refund.save()
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Refund refund = new Refund("/v1/customers/CU5uG18syxNwvFGdbknjZmoo/refunds/RF5DdvCEcpQXCNd6F96mfxC6");
+Refund refund = new Refund("/v1/customers/CU5eN73VZL9xr3qR4VIgtTZI/refunds/RF5tlXeMsrSsrDfJdLEDrDsP");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("refund.reason", "user not happy with product");

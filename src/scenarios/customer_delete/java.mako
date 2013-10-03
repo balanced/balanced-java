@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Customer.unstore();
+Customer.unstore()
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer();
+Customer customer = new Customer("/v1/customers/CU4pU7o8tYkqaGTvf1UQXAFG");
 
 try {
     customer.unstore();

@@ -1,8 +1,8 @@
 % if mode == 'definition':
-BankAccount.credit(amount);
+BankAccount.credit(Map<String, Object> payload)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 Map<String, Object> bankAccountPayload = new HashMap<String, Object>();
 bankAccountPayload.put("name", "Johann Bernoulli");

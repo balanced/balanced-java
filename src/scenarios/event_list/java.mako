@@ -1,8 +1,8 @@
 % if mode == 'definition':
-Event.Collection(String uri);
+Event.Collection(String uri)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 Event.Collection events = new Event.Collection("/v1/events");
 

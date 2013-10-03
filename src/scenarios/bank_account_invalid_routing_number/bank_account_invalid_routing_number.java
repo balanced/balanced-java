@@ -8,9 +8,9 @@ import java.util.Map;
 public class bank_account_invalid_routing_number {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccount ba = new BankAccount("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/bank_accounts");
+BankAccount ba = new BankAccount("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/bank_accounts");
 ba.account_number = "9900000001";
 ba.routing_number = "111111118";
 ba.name = "Johann Bernoulli";

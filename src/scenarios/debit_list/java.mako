@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Debit.Collection(String uri);
+Debit.Collection(String uri)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Debit.Collection debits = new Debit.Collection("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/debits");
+Debit.Collection debits = new Debit.Collection("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/debits");
 
 % endif
 

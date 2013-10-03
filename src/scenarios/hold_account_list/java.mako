@@ -2,7 +2,7 @@
 Hold.Collection(String uri);
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 Hold.Collection holds = new Hold.Collection("");
 

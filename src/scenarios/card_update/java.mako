@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Card.save();
+Card.save()
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Card card = new Card("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/cards/CC4bOqdUBsBenWu7klU6Qfzq");
+Card card = new Card("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/cards/CC3Nm7MZZgDfqOKGyZ5cu9eM");
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("facebook.user_id", "0192837465");
 meta.put("my-own-customer-id", "12345");

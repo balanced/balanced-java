@@ -1,10 +1,10 @@
 % if mode == 'definition':
-BankAccount.getVerification();
+BankAccountVerification(String uri)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA3UJktegv9onsV0b4FJ50Eo/verifications/BZ3WAOvJeY9A45e3iYz1EAxG");
+BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA3xjOoH07QriERLYAU4MWRE/verifications/BZ3zL5PzZeGn22qM4Um8rZF6");
 
 % endif
 

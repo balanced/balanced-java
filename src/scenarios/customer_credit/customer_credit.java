@@ -8,9 +8,9 @@ import java.util.Map;
 public class customer_credit {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("/v1/customers/CU3QbHVO44v9opCiSdarCV14");
+Customer customer = new Customer("/v1/customers/CU3pCSyHecPahJL4FKDMThoG");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 100);

@@ -1,6 +1,6 @@
 Balanced.configure("{{ api_key }}");
 
-Customer customer = new Customer();
+Customer customer = new Customer("{{ request.uri }}");
 
 try {
     customer.unstore();

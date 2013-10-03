@@ -8,9 +8,9 @@ import java.util.Map;
 public class hold_customer_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("/v1/customers/CU5eFG4rR0x1wP4czF8MxO2I");
+Customer customer = new Customer("/v1/customers/CU4YcokzpBw7L1Fluc0gPVAA");
 Hold.Collection holds = customer.holds;
 
 }

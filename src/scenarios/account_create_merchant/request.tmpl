@@ -1,4 +1,4 @@
 Balanced.configure("{{ api_key }}");
 
-Account account = new Account();
+Account account = new Account("{{ request.uri }}");
 account.associateBankAccount("{{ request.payload.bank_account_uri }}");

@@ -1,8 +1,8 @@
 % if mode == 'definition':
-Card card = new Card(Map<String, Object> payload);
+Card(Map<String, Object> payload)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("card_number", "5105105105105100");

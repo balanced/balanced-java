@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Hold(String uri);
+Hold(String uri)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Hold hold = new Hold("/v1/marketplaces/TEST-MP3t1UYs4ixXWfZ79kXhEUcy/holds/HL5iaMpKeWTH4nMWYyItmOZy");
+Hold hold = new Hold("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/holds/HL52kZFtZTaaxBfENP6l6y48");
 
 % endif
 

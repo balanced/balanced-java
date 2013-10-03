@@ -1,4 +1,8 @@
 Balanced.configure("{{ api_key }}");
 
-Customer customer = new Customer();
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("name", "{{ request.name }}");
+payload.put("email", "{{ request.email }}");
+
+Customer customer = new Customer(payload);
 customer.save();

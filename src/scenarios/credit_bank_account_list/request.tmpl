@@ -1,4 +1,4 @@
 Balanced.configure("{{ api_key }}");
 
-Account account = new Account("{{ request.uri }}");
-Credit.Collection credits = account.credits;
+BankAccount bankAccount = new BankAccount("{{ request.uri }}");
+Credit.Collection credits = bankAccount.credits;

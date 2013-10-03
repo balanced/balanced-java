@@ -8,9 +8,14 @@ import java.util.Map;
 public class customer_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer();
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("name", "William Henry Cavendish III");
+payload.put("email", "william@example.com");
+
+Customer customer = new Customer(payload);
+customer.save();
 
 }
 }

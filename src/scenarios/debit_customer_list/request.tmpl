@@ -1,4 +1,4 @@
 Balanced.configure("{{ api_key }}");
 
-Customer customer = new Customer("{{ request.customer_uri }}");
+Customer customer = new Customer("{{ request.uri }}");
 Debit.Collection debits = customer.debits;

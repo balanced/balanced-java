@@ -1,10 +1,10 @@
 % if mode == 'definition':
-BankAccountVerification.save();
+BankAccountVerification.save()
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA3YXRiVoKoMJMhq3Bfwxyu2/verifications/BZ40XvdMDOfXN0T7fIlFF4U8");
+BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA3Cc1WHeLCM0GhP6havpp7N/verifications/BZ3ErxujTs0WxUs2EiMMtre7");
 verification.confirm(1, 1);
 verification.save();
 

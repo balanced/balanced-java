@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Event event = new Event(String uri);
+Event(String uri)
 
 % else:
-Balanced.configure("71d76c1223ad11e38848026ba7c1aba6");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Event event = new Event("/v1/events/EV71f83eba23ad11e3bbfb026ba7cac9da");
+Event event = new Event("/v1/events/EV61f7122c2bc111e398d4026ba7f8ec28");
 
 % endif
 
