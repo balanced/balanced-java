@@ -1,11 +1,17 @@
 % if mode == 'definition':
+Card.unstore()
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Card card = new Card("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/cards/CC1urjr8nECMDtdzPr1ByVZu");
-card.is_valid = false;
-card.save();
+Card card = new Card("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/cards/CC3Nm7MZZgDfqOKGyZ5cu9eM");
+
+try {
+    card.unstore();
+}
+catch (NotCreated e) {
+    // card never existed
+}
 
 % endif
 

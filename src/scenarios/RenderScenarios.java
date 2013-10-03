@@ -1,5 +1,4 @@
 
-import com.balancedpayments.BankAccount;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.asfun.jangod.template.TemplateEngine;
@@ -38,8 +37,7 @@ public class RenderScenarios {
     }
 
     public static String readFile(String pathToFile) throws FileNotFoundException {
-        String content = new Scanner(new File(pathToFile)).useDelimiter("\\Z").next();
-        return content;
+        return new Scanner(new File(pathToFile)).useDelimiter("\\Z").next();
     }
 
     public static void renderScenario(String scenario, String scenarioPath) throws IOException {
@@ -53,7 +51,7 @@ public class RenderScenarios {
             apiKey = (String) result.get("api_key");
             requestData = ((HashMap)((HashMap)result.get(scenario)).get("request"));
         } catch (Exception e) {
-            System.out.println("Scenario not found in scenario.cache");
+            System.out.println(scenario + " not found in scenario.cache");
         }
         data.put("request", requestData);
         data.put("api_key", apiKey);
@@ -69,7 +67,7 @@ public class RenderScenarios {
         String javaScenario = render(scenarioPath.concat("/../Scenario.java.tmpl"), javaData);
         String javaFileName = scenarioPath + "/" + scenario + ".java";
         writeFile(javaFileName, javaScenario);
-        CompileSourceInMemory.runClassFromSource(javaFileName, scenario);
+        //CompileSourceInMemory.runClassFromSource(javaFileName, scenario);
 
         // Output mako template
         Map<String,Object> makoData = new HashMap<String, Object>();
@@ -96,7 +94,6 @@ public class RenderScenarios {
     public static void main(String[] args) throws IOException, JsonMappingException {
         for (String scenarioPath : getScenarioPaths()) {
             String scenario = new File(scenarioPath).getName();
-            System.out.println(scenario);
             renderScenario(scenario, scenarioPath);
         }
     }

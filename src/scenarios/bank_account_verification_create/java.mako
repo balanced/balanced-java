@@ -1,11 +1,11 @@
 % if mode == 'definition':
-BankAccount.verify();
+BankAccount.verify()
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA1mOWnGISRn9236e6tOuDLq/verifications");
-ba.verify();
+BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA3rp18mQvddllvYmWCaAoEv");
+bankAccount.verify();
 
 % endif
 

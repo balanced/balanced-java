@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Refund.Collection = new Refund.Collection(String uri);
+Refund.Collection(String uri)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Refund.Collection refunds = new Refund.Collection("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/refunds");
+Refund.Collection refunds = new Refund.Collection("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/refunds");
 
 % endif
 

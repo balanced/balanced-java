@@ -1,23 +1,24 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.ArrayList;
-
+import com.balancedpayments.core.ResourceQuery;
+import com.balancedpayments.errors.*;
 import org.junit.Test;
 
-import com.balancedpayments.core.ResourceQuery;
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 
 public class DebitTest extends BaseTest {
 
     @Test
+    public void testDebitRetrieve() {
+
+    }
+
+    @Test
     public void testRefund() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account account = createBuyer(mp);
         Debit debit = account.debit(123);
         Refund refund = debit.refund();
@@ -25,8 +26,57 @@ public class DebitTest extends BaseTest {
     }
 
     @Test
+    public void testRefundGet() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
+        Account account = createBuyer(mp);
+        Debit debit = account.debit(123);
+        Refund newRefund = debit.refund();
+        Refund refund = new Refund(newRefund.uri);
+        assertEquals(newRefund.uri, refund.uri);
+    }
+
+    @Test
+    public void testDebitBankAccountVerified() throws HTTPError {
+        Customer customer = new Customer();
+        customer.save();
+
+        BankAccount ba = createBankAccount(mp);
+        customer.addBankAccount(ba);
+
+        BankAccountVerification bankAccountVerification = ba.verify();
+        bankAccountVerification.confirm(1, 1);
+        bankAccountVerification.reload();
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 100000);
+
+        Debit debit = ba.debit(payload);
+
+        assertTrue(debit.status.equals("succeeded"));
+        assertEquals(100000, (int)debit.amount);
+    }
+
+    @Test
+    public void testDebitBankAccountUnverified() throws HTTPError {
+        Customer customer = new Customer();
+        customer.save();
+
+        BankAccount ba = createBankAccount(mp);
+        customer.addBankAccount(ba);
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 100000);
+
+        try {
+            Debit debit = ba.debit(payload);
+            fail("Debiting an unverified bank account should fail");
+        }
+        catch (APIError e) {
+            assertEquals("funding-source-not-debitable", e.category_code);
+        }
+    }
+
+    @Test
     public void testDebitFilter() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account buyer;
         Debit[] debits = new Debit[3];
 
@@ -70,23 +120,46 @@ public class DebitTest extends BaseTest {
 
     @Test
     public void testRetrieveDebit() throws HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
         String description = "Goods and services";
-        Card card = mp.tokenizeCard(
-                "123 Fake Street",
-                "Jollywood",
-                null,
-                "90210",
-                "William Henry Cavendish III",
-                "4112344112344113",
-                "123",
-                12,
-                2013);
+        Card card = createCard(mp);
         account.associateCard(card.uri);
         Debit newDebit = account.debit(10000, description, card.uri, null, null);
         Debit debit = new Debit(newDebit.uri);
         assertNotNull("Debit should not be null", debit);
         assertEquals("Debit description should be \"" + description + "\"", description, debit.description);
+    }
+
+    @Test
+    public void testCustomerDebitAttributes() throws HTTPError {
+        Customer customer = createBusinessCustomer();
+        Card card = createCard(mp);
+        customer.addCard(card.uri);
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 10000);
+        payload.put("description", "Goods and services");
+        payload.put("source_uri", card.uri);
+
+        Debit newDebit = customer.debit(payload);
+        Debit debit = new Debit(newDebit.uri);
+
+        assertNotNull(debit.getCustomer());
+        assertNotNull(debit.getAccount());
+        assertNotNull("Hold should be null", debit.getHold());
+    }
+
+    @Test
+    public void testAccountDebitAttributes() throws HTTPError, NoResultsFound, MultipleResultsFound {
+        Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
+        String description = "Goods and services";
+        Card card = createCard(mp);
+        account.associateCard(card.uri);
+        Debit newDebit = account.debit(10000, description, card.uri, null, null);
+        Debit debit = new Debit(newDebit.uri);
+
+        assertNotNull("Account should not be null", debit.getAccount());
+        assertNotNull("Customer should not be null", debit.getCustomer());
+        assertNotNull("Hold should not be null", debit.getHold());
     }
 }

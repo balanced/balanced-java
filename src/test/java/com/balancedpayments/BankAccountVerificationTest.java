@@ -1,21 +1,19 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import com.balancedpayments.errors.*;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-
-import com.balancedpayments.errors.BankAccountVerificationFailure;
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
+import org.junit.rules.ExpectedException;
 
 public class BankAccountVerificationTest extends BaseTest {
     
     protected BankAccount ba;
     protected BankAccountVerification bav;
-    
+
     @Before
     public void setUp() throws NoResultsFound, MultipleResultsFound, HTTPError {
         super.setUp();
@@ -23,6 +21,19 @@ public class BankAccountVerificationTest extends BaseTest {
         ba = createBankAccount(mp);
         account.associateBankAccount(ba.uri);
         bav = ba.verify();
+    }
+
+    @Test
+    public void testVerifyBankAccountNoCustomer() throws HTTPError {
+        BankAccount ba = createBankAccount(mp);
+
+        try {
+            BankAccountVerification bankAccountVerification = ba.verify();
+            fail("Bank Account verification should fail when not associated to a Customer");
+        }
+        catch (APIError e) {
+            assertEquals("bank-account-no-account", e.category_code);
+        }
     }
 
     @Test(expected=BankAccountVerificationFailure.class)

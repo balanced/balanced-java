@@ -48,7 +48,7 @@ public class AccountTest extends BaseTest {
     }
 
     @Test(expected=InsufficientFunds.class)
-    public void testCreditInsufficientFunds() throws HTTPError {
+    public void testCreditInsufficientFunds() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Marketplace mp = createMarketplace();
         Account account = createMerchant(mp);
         account.credit(123);
@@ -63,10 +63,13 @@ public class AccountTest extends BaseTest {
 
     @Test
     public void testHold() throws HTTPError, NoResultsFound, MultipleResultsFound {
-        Marketplace mp = Marketplace.mine();
         Account account = createBuyer(mp);
-        Hold hold = account.hold(123);
-        assertEquals(hold.account.id, account.id);
+        Card card = createCard(mp);
+        account.associateCard(card.uri);
+        Hold newHold = account.hold(123, null, card.uri, null);
+        Hold hold = new Hold(newHold.uri);
+        assertEquals(account.id, hold.account.id);
+        assertTrue(hold.source.uri.contains(card.id));
     }
 
     @Test

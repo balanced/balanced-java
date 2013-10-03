@@ -16,6 +16,9 @@ import com.balancedpayments.errors.NoResultsFound;
 import com.balancedpayments.errors.NotCreated;
 import org.junit.rules.ExpectedException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BankAccountTest  extends BaseTest {
 
     protected BankAccount ba;
@@ -30,7 +33,7 @@ public class BankAccountTest  extends BaseTest {
         super.setUp();
         Account account = mp.createAccount("Homer Jay");
         ba = createBankAccount(mp);
-        ba2 =createBankAccount(mp);
+        ba2 = createBankAccount(mp);
         account.associateBankAccount(ba2.uri);
         account.associateBankAccount(ba.uri);
     }
@@ -38,7 +41,7 @@ public class BankAccountTest  extends BaseTest {
     @Test
     public void testVerify() throws CannotCreate, HTTPError {
         BankAccountVerification bav = ba.verify();
-        ba = new BankAccount(ba.uri);
+        ba.reload();
         assertEquals(ba.getVerification().id, bav.id);
         bav.confirm(1, 1);
         assertEquals(bav.attempts.intValue(), 1);
@@ -53,12 +56,20 @@ public class BankAccountTest  extends BaseTest {
 
     @Test
     public void testUnstoreOfBankAccountFromAssociatedBankAccount() throws CannotCreate, HTTPError, NotCreated {
-    	ba.save();
         assertEquals(ba.is_valid, true);
-        ba.credit(100);
+        Customer customer = createPersonCustomer();
+        customer.addCard(createCard(mp).uri);
+
+        Map<String, Object> debitPayload = new HashMap<String, Object>();
+        debitPayload.put("amount", 100);
+        customer.debit(debitPayload);
+
+        Map<String, Object> creditPayload = new HashMap<String, Object>();
+        creditPayload.put("amount", 100);
+        ba.credit(creditPayload);
         ba.unstore();
         apiError.expect(APIError.class);
-        ba.credit(100);
+        ba.credit(creditPayload);
     }
 
     @Test
@@ -70,10 +81,5 @@ public class BankAccountTest  extends BaseTest {
     	bankAccount.type = "checking";
     	bankAccount.save();
     	assertEquals(bankAccount.is_valid, null);
-
     }
-
-    @Test
-    public void testCredit() {}
-
 }

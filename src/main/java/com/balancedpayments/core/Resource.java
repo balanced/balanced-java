@@ -10,13 +10,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.Balanced;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
 
 public abstract class Resource {
 
-    protected static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    protected Client client = new Client();
+    protected static final ThreadLocal<SimpleDateFormat> dateTimeFormat
+            = new ThreadLocal<SimpleDateFormat>(){
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        }
+    };
 
     @ResourceField()
     public String uri;
@@ -32,7 +38,7 @@ public abstract class Resource {
     }
 
     public Resource(String uri) throws HTTPError {
-        Map<String, Object> payload = client.get(uri);
+        Map<String, Object> payload = Balanced.getInstance().getClient().get(uri);
         this.deserialize(payload);
     }
 
@@ -42,21 +48,31 @@ public abstract class Resource {
         if (id == null) {
             if (uri == null)
                 throw new RuntimeException(this.getClass().getName());
-            response = client.post(uri, request);
+            response = Balanced.getInstance().getClient().post(uri, request);
         }
-        else
-            response = client.put(uri, request);
+        else {
+            response = Balanced.getInstance().getClient().put(uri, request);
+        }
         deserialize(response);
+    }
+
+    public void unstore() throws NotCreated, HTTPError {
+        delete();
     }
 
     public void delete() throws NotCreated, HTTPError {
         if (id == null)
             throw new NotCreated(this.getClass());
-        client.delete(uri);
+        Balanced.getInstance().getClient().delete(uri);
     }
 
+    public void reload() throws HTTPError {
+        deserialize(Balanced.getInstance().getClient().get(uri));
+    }
+
+    @Deprecated
     public void refresh() throws HTTPError {
-        deserialize(client.get(uri));
+        reload();
     }
 
     public Map<String, Object> serialize() {
@@ -141,7 +157,7 @@ public abstract class Resource {
         if (raw == null) return null;
         raw = raw.substring(0, 23) + raw.substring(26, raw.length());
         try {
-            return dateTimeFormat.parse(raw);
+            return dateTimeFormat.get().parse(raw);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

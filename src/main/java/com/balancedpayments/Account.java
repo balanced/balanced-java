@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
@@ -55,7 +54,7 @@ public class Account extends Resource {
     };
 
     public static Account get(String uri) throws HTTPError {
-        return new Account((new Client()).get(uri));
+        return new Account((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Account() {
@@ -108,7 +107,7 @@ public class Account extends Resource {
         if (description != null)
             payload.put("description", description);
         if (source_uri != null)
-            payload.put("source", source_uri);
+            payload.put("source_uri", source_uri);
         if (appears_on_statement_as != null)
             payload.put("appears_on_statement_as", appears_on_statement_as);
         if (meta != null)
@@ -134,7 +133,7 @@ public class Account extends Resource {
         if (description != null)
             payload.put("description", description);
         if (source_uri != null)
-            payload.put("source", source_uri);
+            payload.put("source_uri", source_uri);
         if (meta != null)
             payload.put("meta", meta);
         return holds.create(payload);
@@ -147,14 +146,14 @@ public class Account extends Resource {
     public void associateBankAccount(String bank_account_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("bank_account_uri", bank_account_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
     public void promoteToMerchant(Map<String, Object> merchant_map) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("merchant", merchant_map);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
@@ -171,14 +170,14 @@ public class Account extends Resource {
     public void promoteToMerchant(String merchant_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("merchant_uri", merchant_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
     public void associateCard(String card_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("card_uri", card_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 }

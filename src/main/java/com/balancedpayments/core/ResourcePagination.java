@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import com.balancedpayments.Balanced;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -59,7 +60,7 @@ public class ResourcePagination<T> implements Iterable<T> {
         }
     }
     
-    protected Client client = new Client();
+    protected Client client = Balanced.getInstance().getClient();
     protected Class<T> cls;
     protected URIBuilder uri_builder; 
 

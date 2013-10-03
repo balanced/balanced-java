@@ -1,11 +1,11 @@
 % if mode == 'definition':
-Customer.debits;
+Customer.debits
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Customer customer = new Customer("");
-Debit.Collection debits  = customer.debits;
+Customer customer = new Customer("/v1/customers/CU4sDLDP25PDb3P3BgFM6s4e");
+Debit.Collection debits = customer.debits;
 
 % endif
 

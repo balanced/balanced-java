@@ -1,11 +1,11 @@
 % if mode == 'definition':
-Account.credits;
+BankAccount.credits
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Account account = new Account("/v1/bank_accounts/BA1iViFZ5fKWIixl3fpq07Je");
-Credit.Collection credits = account.credits;
+BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA3GU9eoZ5YrnVZWPtmfZrNt");
+Credit.Collection credits = bankAccount.credits;
 
 % endif
 

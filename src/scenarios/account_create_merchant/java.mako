@@ -1,11 +1,11 @@
 % if mode == 'definition':
-Account.associateBankAccount(String uri);
+Account.associateBankAccount(String uri)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Account account = new Account();
-account.associateBankAccount("/v1/bank_accounts/BA1KawqyAPjlJABtlpNxhatp");
+Account account = new Account("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/accounts/CU39U7FCqdW1fuo2tIKt0J0H");
+account.associateBankAccount("/v1/bank_accounts/BA3gq3bPXJDkg1xgUnTBfK50");
 
 % endif
 

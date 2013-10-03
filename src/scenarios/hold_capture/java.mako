@@ -1,15 +1,17 @@
 % if mode == 'definition':
-Hold.capture();
+Hold.capture()
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-Hold hold = new Hold("/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds/HL2iXfavB2OOOYDoegA9gdXq");
-hold.appears_on_statement_as = "ShowsUpOnStmt";
-hold.description = "Some descriptive text for the debit in the dashboard";
-hold.uri = "/v1/marketplaces/TEST-MP1cY43VkrOlypoTc5lxfstI/holds/HL2iXfavB2OOOYDoegA9gdXq";
-hold.save();
-hold.capture();
+Hold hold = new Hold("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/holds/HL5OdsQSWpt521V2AVyf2gzc");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 1000);
+payload.put("description", "Some descriptive text for the debit in the dashboard");
+payload.put("appears_on_statement_as", "ShowsUpOnStmt");
+
+hold.capture(payload);
 
 % endif
 

@@ -1,4 +1,10 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
-Customer customer = new Customer();
-customer.unstore();
+Customer customer = new Customer("{{ request.uri }}");
+
+try {
+    customer.unstore();
+}
+catch (NotCreated e) {
+    // the customer didn't exist in the first place
+}

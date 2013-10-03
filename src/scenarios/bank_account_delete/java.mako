@@ -1,10 +1,10 @@
 % if mode == 'definition':
-BankAccount.delete();
+BankAccount.unstore()
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA1dnlguWRMK1SXfh7Jp9WVY");
+BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA3Cc1WHeLCM0GhP6havpp7N");
 try {
     bankAccount.unstore();
 }

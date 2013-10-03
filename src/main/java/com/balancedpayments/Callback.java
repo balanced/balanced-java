@@ -33,8 +33,4 @@ public class Callback extends Resource {
     public Callback(String uri) throws HTTPError {
         super(uri);
     }
-
-    public Callback(Map<String, Object> payload) {
-        super(payload);
-    }
 }

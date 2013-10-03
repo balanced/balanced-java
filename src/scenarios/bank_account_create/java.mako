@@ -1,8 +1,8 @@
 % if mode == 'definition':
-BankAccount bankAccount = new BankAccount(Map<String, Object> payload);
+BankAccount(Map<String, Object> payload)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("account_number", "9900000001");

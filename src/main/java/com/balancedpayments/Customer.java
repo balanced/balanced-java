@@ -3,12 +3,12 @@ package com.balancedpayments;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.NotCreated;
 
 public class Customer extends Resource {
 
@@ -75,11 +75,11 @@ public class Customer extends Resource {
     public static ResourceQuery<Customer> query() {
         return new ResourceQuery<Customer>(
                 Customer.class,
-                String.format("/v%s/%s", Settings.VERSION, "customers"));
+                String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "customers"));
     }
 
     public static Customer get(String uri) throws HTTPError {
-        return new Customer((new Client()).get(uri));
+        return new Customer((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Customer() {
@@ -97,14 +97,14 @@ public class Customer extends Resource {
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, "customers");
+            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "customers");
         super.save();
     }
 
     public void addBankAccount(String bank_account_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("bank_account_uri", bank_account_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
@@ -124,7 +124,7 @@ public class Customer extends Resource {
     public void addCard(String card_uri) throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("card_uri", card_uri);
-        Map<String, Object> response = client.put(uri, payload);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, payload);
         deserialize(response);
     }
 
@@ -140,77 +140,11 @@ public class Customer extends Resource {
                 .first());
     }
 
-    public Credit credit(
-            int amount,
-            String description,
-            String destination_uri,
-            String appears_on_statement_as,
-            String debit_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (destination_uri != null)
-            payload.put("destination_uri", destination_uri);
-        if (appears_on_statement_as != null)
-            payload.put("appears_on_statement_as", appears_on_statement_as);
-        if (meta != null)
-            payload.put("meta", meta);
+    public Credit credit(Map<String, Object> payload) throws HTTPError {
         return credits.create(payload);
     }
 
-    public Credit credit(int amount) throws HTTPError {
-        return credit(amount, null, null, null, null, null);
-    }
-
-    public Debit debit(
-            int amount,
-            String description,
-            String source_uri,
-            String appears_on_statement_as,
-            String on_behalf_of_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (source_uri != null)
-            payload.put("source_uri", source_uri);
-        if (appears_on_statement_as != null)
-            payload.put("appears_on_statement_as", appears_on_statement_as);
-        if (meta != null)
-            payload.put("meta", meta);
-        if (on_behalf_of_uri != null)
-            payload.put("on_behalf_of_uri", on_behalf_of_uri);
+    public Debit debit(Map<String, Object> payload) throws HTTPError {
         return debits.create(payload);
-    }
-
-    public Debit debit(int amount) throws HTTPError {
-        return debit(amount, null, null, null, null, null);
-    }
-
-    public Debit debit(int amount, String source_uri) throws HTTPError {
-        return debit(amount, null, source_uri, null, null, null);
-    }
-
-    public Hold hold(
-            int amount,
-            String description,
-            String source_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        if (source_uri != null)
-            payload.put("source", source_uri);
-        if (meta != null)
-            payload.put("meta", meta);
-        return holds.create(payload);
-    }
-
-    public Hold hold(int amount) throws HTTPError {
-        return hold(amount, null, null, null);
     }
 }

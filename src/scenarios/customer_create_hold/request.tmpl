@@ -1,4 +1,0 @@
-Settings.configure("{{ api_key }}");
-
-Customer customer = new Customer("{{ request.customer_uri }}");
-customer.hold({{ request.payload.amount }});

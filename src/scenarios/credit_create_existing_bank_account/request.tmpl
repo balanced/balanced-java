@@ -1,4 +1,8 @@
-Settings.configure("{{ api_key }}");
+Balanced.configure("{{ api_key }}");
 
 BankAccount ba = new BankAccount("{{ request.uri }}");
-ba.credit({{ request.payload.amount }});
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 1000);
+
+ba.credit(payload);

@@ -1,11 +1,15 @@
 % if mode == 'definition':
-BankAccount.credit(int amount);
+BankAccount.credit(Map<String, Object> payload)
 
 % else:
-Settings.configure("2776ea40d92e11e29fe1026ba7cac9da");
+Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
 
-BankAccount ba = new BankAccount("/v1/bank_accounts/BA1iViFZ5fKWIixl3fpq07Je");
-ba.credit(10000);
+BankAccount ba = new BankAccount("/v1/bank_accounts/BA3GU9eoZ5YrnVZWPtmfZrNt");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 1000);
+
+ba.credit(payload);
 
 % endif
 

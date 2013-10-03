@@ -39,6 +39,9 @@ public class Marketplace extends Resource {
     @ResourceField(field="accounts_uri")
     public Account.Collection accounts;
 
+    @ResourceField(field="customers_uri")
+    public Customer.Collection customers;
+
     @ResourceField(field="debits_uri")
     public Debit.Collection debits;
 
@@ -66,7 +69,7 @@ public class Marketplace extends Resource {
     public static ResourceQuery<Marketplace> query() {
         return new ResourceQuery<Marketplace>(
                 Marketplace.class,
-                String.format("/v%s/%s", Settings.VERSION, "marketplaces"));
+                String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "marketplaces"));
     }
 
     public static Marketplace mine() throws NoResultsFound, MultipleResultsFound, HTTPError {
@@ -126,36 +129,8 @@ public class Marketplace extends Resource {
         return credits.create(payload);
     }
 
-    public Card tokenizeCard(
-            String street_address,
-            String city,
-            String region,
-            String postal_code,
-            String name,
-            String card_number,
-            String security_code,
-            int expiration_month,
-            int expiration_year) throws HTTPError {
-        return cards.create(
-                street_address,
-                city,
-                region,
-                postal_code,
-                name,
-                card_number,
-                security_code,
-                expiration_month,
-                expiration_year);
-    }
-
-    public Card tokenizeCard(
-            String card_number,
-            int expiration_month,
-            int expiration_year) throws HTTPError {
-        return cards.create(
-                card_number,
-                expiration_month,
-                expiration_year);
+    public Card tokenizeCard(Map<String, Object>payload) throws HTTPError {
+        return cards.create(payload);
     }
 
     public Account createAccount(
@@ -240,7 +215,7 @@ public class Marketplace extends Resource {
     @Override
     public void save() throws HTTPError {
         if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Settings.VERSION, "marketplaces");
+            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "marketplaces");
         super.save();
     }
 }
