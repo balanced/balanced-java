@@ -1,21 +1,26 @@
-package customer_credit;
+package credit_failed_state;
 
 import com.balancedpayments.*;
 import com.balancedpayments.errors.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class customer_credit {
+public class credit_failed_state {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
 Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-Customer customer = new Customer("/v1/customers/CU6bg92aGrSXuWUF6usdhBbw");
+BankAccount ba = new BankAccount();
+ba.account_number = "9900000005";
+ba.name = "Johann Bernoulli";
+ba.routing_number = "121000358";
+ba.type = "checking";
+ba.save();
 
 Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("amount", 100);
+payload.put("amount", 10000);
 
-customer.credit(payload);
+ba.credit(payload);
 
 }
 }

@@ -8,9 +8,9 @@ import java.util.Map;
 public class hold_capture {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-Hold hold = new Hold("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/holds/HL5OdsQSWpt521V2AVyf2gzc");
+Hold hold = new Hold("/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/holds/HL1a9V1z4YLJd0vTGWOvXxs2");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 1000);

@@ -1,9 +1,13 @@
 Balanced.configure("{{ api_key }}");
 
 BankAccount ba = new BankAccount();
-ba.account_number = "{{ request.bank_account.account_number }}";
-ba.name = "{{ request.bank_account.name }}";
-ba.routing_number = "{{ request.bank_account.routing_number }}";
-ba.type = "{{ request.bank_account.type }}";
+ba.account_number = "{{ request.payload.bank_account.account_number }}";
+ba.name = "{{ request.payload.bank_account.name }}";
+ba.routing_number = "{{ request.payload.bank_account.routing_number }}";
+ba.type = "{{ request.payload.bank_account.type }}";
 ba.save();
-ba.credit({{ request.amount }});
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+
+ba.credit(payload);
