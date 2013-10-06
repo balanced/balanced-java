@@ -2,9 +2,9 @@
 Refund.save()
 
 % else:
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-Refund refund = new Refund("/v1/customers/CU5eN73VZL9xr3qR4VIgtTZI/refunds/RF5tlXeMsrSsrDfJdLEDrDsP");
+Refund refund = new Refund("/v1/customers/CUuDKfPHvZhTmaNbEsg1BOO/refunds/RFHBiohkzkfO6RPYOrjc9US");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("refund.reason", "user not happy with product");

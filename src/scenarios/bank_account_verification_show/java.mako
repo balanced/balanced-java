@@ -2,9 +2,9 @@
 BankAccountVerification(String uri)
 
 % else:
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA3xjOoH07QriERLYAU4MWRE/verifications/BZ3zL5PzZeGn22qM4Um8rZF6");
+BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA6jdVg9pWO5ePNdL8ucclXi/verifications/BZ6lvRngcv6BuAu5m5XZAx8A");
 
 % endif
 

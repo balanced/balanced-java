@@ -1,11 +1,11 @@
 % if mode == 'definition':
-Callback.delete();
+Callback.delete()
 
 % else:
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-Callback callback = new Callback();
-callback.save();
+Callback callback = new Callback("/v1/callbacks/CB6DYHGJOCaSxYwDz34j5TGa");
+
 try {
     callback.delete();
 }

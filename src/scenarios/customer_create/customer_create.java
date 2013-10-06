@@ -8,7 +8,7 @@ import java.util.Map;
 public class customer_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("name", "William Henry Cavendish III");
