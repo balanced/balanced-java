@@ -8,15 +8,19 @@ import java.util.Map;
 public class credit_failed_state {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
 BankAccount ba = new BankAccount();
-ba.account_number = "";
-ba.name = "";
-ba.routing_number = "";
-ba.type = "";
+ba.account_number = "9900000005";
+ba.name = "Johann Bernoulli";
+ba.routing_number = "121000358";
+ba.type = "checking";
 ba.save();
-ba.credit();
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 10000);
+
+ba.credit(payload);
 
 }
 }

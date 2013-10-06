@@ -2,9 +2,9 @@
 Customer.refunds
 
 % else:
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-Customer customer = new Customer("/v1/customers/CU5eN73VZL9xr3qR4VIgtTZI");
+Customer customer = new Customer("/v1/customers/CUuDKfPHvZhTmaNbEsg1BOO");
 Refund.Collection refunds = customer.refunds;
 
 % endif

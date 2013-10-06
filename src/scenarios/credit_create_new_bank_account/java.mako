@@ -2,7 +2,7 @@
 BankAccount.credit(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
 Map<String, Object> bankAccountPayload = new HashMap<String, Object>();
 bankAccountPayload.put("name", "Johann Bernoulli");

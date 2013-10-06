@@ -2,9 +2,9 @@
 Credit(String uri)
 
 % else:
-Balanced.configure("ak-test-2ppXve1BnInnsIKZytspDrsuhjtAT9dD8");
+Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
-Credit credit = new Credit("/v1/marketplaces/TEST-MP2YQknCUwTrp3NiNxuqDEpi/credits/CR3XMwizdVVRk0REoMM5LeU6");
+Credit credit = new Credit("/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/credits/CR6Y384863fzeb73YbW5NHVe");
 
 % endif
 
