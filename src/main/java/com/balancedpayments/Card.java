@@ -69,7 +69,19 @@ public class Card extends FundingInstrument {
             super(Card.class, uri);
         }
 
+        @Override
         public Card create(Map<String, Object> payload) throws HTTPError {
+            return super.create(payload);
+        }
+
+        public Card create(
+                String card_number,
+                int expiration_month,
+                int expiration_year) throws HTTPError {
+            Map<String, Object> payload = new HashMap<String, Object>();
+            payload.put("card_number", card_number);
+            payload.put("expiration_month", expiration_month);
+            payload.put("expiration_year", expiration_year);
             return super.create(payload);
         }
     };

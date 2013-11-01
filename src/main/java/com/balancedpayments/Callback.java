@@ -31,8 +31,8 @@ public class Callback extends Resource {
             return callback;
         }
 
-        public Callback create(String url) {
-            return create(url);
+        public Callback create(String url) throws HTTPError {
+            return create(url, null);
         }
     };
 

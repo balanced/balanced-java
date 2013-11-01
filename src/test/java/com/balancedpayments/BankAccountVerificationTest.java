@@ -10,10 +10,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class BankAccountVerificationTest extends BaseTest {
-    
+
     protected BankAccount ba;
     protected BankAccountVerification bav;
 
+    @Override
     @Before
     public void setUp() throws NoResultsFound, MultipleResultsFound, HTTPError {
         super.setUp();
@@ -28,7 +29,7 @@ public class BankAccountVerificationTest extends BaseTest {
         BankAccount ba = createBankAccount(mp);
 
         try {
-            BankAccountVerification bankAccountVerification = ba.verify();
+            ba.verify();
             fail("Bank Account verification should fail when not associated to a Customer");
         }
         catch (APIError e) {
@@ -40,13 +41,13 @@ public class BankAccountVerificationTest extends BaseTest {
     public void testFailedConfirm() throws CannotCreate, HTTPError {
         bav.confirm(12, 13);
     }
-    
+
     @Test(expected=BankAccountVerificationFailure.class)
     public void testDoubleConfirm() throws CannotCreate, HTTPError {
         bav.confirm(1, 1);
         bav.confirm(1, 1);
     }
-    
+
     @Test
     public void testExhaustedConfirm() throws CannotCreate, HTTPError {
         while (bav.remaining_attempts != 1) {
@@ -55,7 +56,7 @@ public class BankAccountVerificationTest extends BaseTest {
             }
             catch (BankAccountVerificationFailure e){
                 bav = new BankAccountVerification(bav.uri);
-                assertEquals(bav.state, "pending");
+                assertEquals(bav.state, "deposit_succeeded");
             }
         }
         try {

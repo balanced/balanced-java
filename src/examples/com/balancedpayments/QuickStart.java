@@ -33,7 +33,7 @@ public class QuickStart {
         System.out.printf("My marketplace's name is now: %s\n", mp.name);
 
         System.out.printf("Cool, let's create (aka tokenize) a card!\n");
-        Card card = mp.tokenizeCard("5105105105105100", 12, 2015);
+        Card card = mp.cards.create("5105105105105100", 12, 2015);
         System.out.printf("Our card is %s.\n", card.uri);
 
         System.out.printf("Now create our **buyer** account associated with that card\n");
@@ -47,13 +47,13 @@ public class QuickStart {
         Debit debit = hold.capture();
         System.out.printf("Which gives us this debit %s\n", debit.uri);
 
-        mp.refresh();
+        mp.reload();
         System.out.printf("Sweet, now we have this much in escrow %s\n", mp.in_escrow);
 
         System.out.printf("But lets refund the full amount\n");
         Refund refund = debit.refund();
 
-        mp.refresh();
+        mp.reload();
         System.out.printf("So now we have this much in escrow %s\n", mp.in_escrow);
 
         System.out.printf("That was the buyer, now lets add a **merchant** account\n");
@@ -71,7 +71,7 @@ public class QuickStart {
                 "Jack Q Merchant",
                 "123123123",
                 "123123123",
-                BankAccount.Checking);
+                BankAccount.CHECKING);
 
         Account merchant = mp.createMerchantAccount(
                 "Jack Q Merchant",

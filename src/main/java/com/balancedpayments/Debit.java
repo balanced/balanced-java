@@ -69,6 +69,10 @@ public class Debit extends Resource  {
         }
     };
 
+    public static Debit get(String uri) throws HTTPError {
+        return new Debit((Balanced.getInstance().getClient()).get(uri));
+    }
+
     public Debit() {
         super();
     }
