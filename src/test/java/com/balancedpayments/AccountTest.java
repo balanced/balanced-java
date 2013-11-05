@@ -1,9 +1,5 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -12,6 +8,8 @@ import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.InsufficientFunds;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
+
+import static org.junit.Assert.*;
 
 public class AccountTest extends BaseTest {
 
@@ -79,6 +77,12 @@ public class AccountTest extends BaseTest {
         assertFalse(Arrays.asList(account.roles).contains("merchant"));
         account.promoteToMerchant(buildMerchantPayload());
         assertTrue(Arrays.asList(account.roles).contains("merchant"));
+    }
+
+    @Test
+    public void testCustomerNotNull() throws HTTPError {
+        Account account = createBuyer(mp);
+        assertNotNull(account.customer);
     }
 }
 

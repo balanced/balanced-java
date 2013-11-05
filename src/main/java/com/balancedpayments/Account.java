@@ -47,6 +47,10 @@ public class Account extends Resource {
     @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
 
+    @ResourceField(field="customer_uri", required=false)
+    public Customer customer;
+
+
     public static class Collection extends ResourceCollection<Account> {
         public Collection(String uri) {
             super(Account.class, uri);
