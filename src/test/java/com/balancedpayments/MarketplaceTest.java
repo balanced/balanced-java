@@ -76,11 +76,11 @@ public class MarketplaceTest extends BaseTest {
     public void testTokenizeCard() throws HTTPError, NoResultsFound, MultipleResultsFound {
         Card card = createCard(mp);
 
-        assertEquals(card.name, "Homer Jay");
-        assertEquals(card.card_number, "4113");
-        assertEquals(card.last_four, "4113");
-        assertEquals(card.expiration_year.intValue(), 2016);
-        assertEquals(card.expiration_month.intValue(), 12);
+        assertEquals("Homer Jay", card.name);
+        assertNull(card.card_number);
+        assertEquals("4113", card.last_four);
+        assertEquals(2016, card.expiration_year.intValue());
+        assertEquals(12, card.expiration_month.intValue());
     }
 
     @Test
