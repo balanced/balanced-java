@@ -78,9 +78,6 @@ public class Card extends FundingInstrument {
     @ResourceField(required=false)
     public String customer_uri;
 
-    @ResourceField(field="customer_uri", required=false)
-    public Customer customer;
-
 
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
@@ -112,12 +109,8 @@ public class Card extends FundingInstrument {
         super();
     }
 
-    public Card(Map<String, Object> payload) {
-        super(payload);
-    }
-
-    public Card(String uri) throws HTTPError {
-        super(uri);
+    public Card (Object obj) throws HTTPError{
+        super(obj);
     }
 
     @Override

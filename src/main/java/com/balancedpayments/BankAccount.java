@@ -70,12 +70,8 @@ public class BankAccount extends FundingInstrument {
         super();
     }
 
-    public BankAccount(String uri) throws HTTPError {
-        super(uri);
-    }
-
-    public BankAccount(Map<String, Object> payload) {
-        super(payload);
+    public BankAccount(Object obj) throws HTTPError {
+        super(obj);
     }
 
     public static ResourceQuery<BankAccount> query() {

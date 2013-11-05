@@ -61,13 +61,10 @@ public class Account extends Resource {
         super();
     }
 
-    public Account(Map<String, Object> payload) {
-        super(payload);
+    public Account(Object obj) throws HTTPError {
+        super(obj);
     }
 
-    public Account(String uri) throws HTTPError {
-        super(uri);
-    }
 
     public Credit credit(
             int amount,

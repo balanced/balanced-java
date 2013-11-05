@@ -77,12 +77,8 @@ public class Debit extends Resource  {
         super();
     }
 
-    public Debit(String uri) throws HTTPError {
-        super(uri);
-    }
-
-    public Debit(Map<String, Object> payload) {
-        super(payload);
+    public Debit(Object obj) throws HTTPError {
+        super(obj);
     }
 
     public Refund refund(Map<String, Object> payload) throws HTTPError {

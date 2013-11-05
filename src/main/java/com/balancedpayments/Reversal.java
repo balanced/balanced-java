@@ -43,7 +43,7 @@ public class Reversal extends Resource {
         public Collection(String uri) {
             super(Reversal.class, uri);
         }
-    };
+    }
 
     public static Reversal get(String uri) throws HTTPError {
         return new Reversal((Balanced.getInstance().getClient()).get(uri));
@@ -52,11 +52,8 @@ public class Reversal extends Resource {
     public Reversal() {
         super();
     }
-    public Reversal(String uri) throws HTTPError {
-        super(uri);
-    }
 
-    public Reversal(Map<String, Object> payload) {
-        super(payload);
+    public Reversal(Object obj) throws HTTPError {
+        super(obj);
     }
 }

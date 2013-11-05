@@ -70,12 +70,8 @@ public class Hold extends Resource {
         super();
     }
 
-    public Hold(String uri) throws HTTPError {
-        super(uri);
-    }
-
-    public Hold(Map<String, Object> payload) {
-        super(payload);
+    public Hold(Object obj) throws HTTPError {
+        super(obj);
     }
 
     @Override
