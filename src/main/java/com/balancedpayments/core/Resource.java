@@ -33,13 +33,14 @@ public abstract class Resource {
     public Resource() {
     }
 
-    public Resource(Map<String, Object> payload) {
-        this.deserialize(payload);
-    }
-
-    public Resource(String uri) throws HTTPError {
-        Map<String, Object> payload = Balanced.getInstance().getClient().get(uri);
-        this.deserialize(payload);
+    public Resource(Object obj) throws HTTPError {
+        if (obj instanceof String) {
+            Map<String, Object> payload = Balanced.getInstance().getClient().get((String)obj);
+            this.deserialize(payload);
+        }
+        else if(obj instanceof Map) {
+            this.deserialize((Map) obj);
+        }
     }
 
     public void save() throws HTTPError {
@@ -100,7 +101,7 @@ public abstract class Resource {
         return payload;
     }
 
-    public void deserialize(Map<String, Object> payload) {
+    public void deserialize(Map<String, Object> payload) throws HTTPError{
         Field[] fields = this.getClass().getFields();
         for(Field f : fields){
             if (!f.isAnnotationPresent(ResourceField.class)) {
@@ -133,6 +134,9 @@ public abstract class Resource {
             }
             else if (Resource.class.isAssignableFrom(f.getType())) {
                 if (value != null) {
+                    if (value instanceof String) {
+                        value = Balanced.getInstance().getClient().get((String)value);
+                    }
                     value = deserializeResource((Map<String, Object>)value, f.getType());
                 }
             }
@@ -189,7 +193,7 @@ public abstract class Resource {
         return value;
     }
 
-    protected Resource deserializeResource(Map<String, Object> raw, Class clazz) {
+    protected Resource deserializeResource(Map<String, Object> raw, Class clazz) throws HTTPError {
         Resource value;
 
         Constructor<?> ctor;
