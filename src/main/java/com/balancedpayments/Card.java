@@ -109,8 +109,12 @@ public class Card extends FundingInstrument {
         super();
     }
 
-    public Card (Object obj) throws HTTPError{
-        super(obj);
+    public Card(Map<String, Object> payload) throws HTTPError {
+        super(payload);
+    }
+
+    public Card(String uri) throws HTTPError {
+        super(uri);
     }
 
     @Override

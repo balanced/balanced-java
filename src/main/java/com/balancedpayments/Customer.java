@@ -86,8 +86,12 @@ public class Customer extends Resource {
         super();
     }
 
-    public Customer(Object obj) throws HTTPError {
-        super(obj);
+    public Customer(String uri) throws HTTPError {
+        super(uri);
+    }
+
+    public Customer(Map<String, Object> payload) throws HTTPError {
+        super(payload);
     }
 
     @Override

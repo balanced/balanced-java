@@ -33,14 +33,13 @@ public abstract class Resource {
     public Resource() {
     }
 
-    public Resource(Object obj) throws HTTPError {
-        if (obj instanceof String) {
-            Map<String, Object> payload = Balanced.getInstance().getClient().get((String)obj);
-            this.deserialize(payload);
-        }
-        else if(obj instanceof Map) {
-            this.deserialize((Map) obj);
-        }
+    public Resource(Map<String, Object> payload) throws HTTPError {
+        this.deserialize(payload);
+    }
+
+    public Resource(String uri) throws HTTPError {
+        Map<String, Object> payload = Balanced.getInstance().getClient().get(uri);
+        this.deserialize(payload);
     }
 
     public void save() throws HTTPError {

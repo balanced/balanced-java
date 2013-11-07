@@ -44,8 +44,12 @@ public class FundingInstrument extends Resource {
         super();
     }
 
-    public FundingInstrument(Object obj) throws HTTPError{
-        super(obj);
+    public FundingInstrument(Map<String, Object> payload) throws HTTPError {
+        super(payload);
+    }
+
+    public FundingInstrument(String uri) throws HTTPError {
+        super(uri);
     }
 
     public void invalidate() throws HTTPError, NotCreated {

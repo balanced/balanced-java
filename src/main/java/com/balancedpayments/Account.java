@@ -55,7 +55,7 @@ public class Account extends Resource {
         public Collection(String uri) {
             super(Account.class, uri);
         }
-    };
+    }
 
     public static Account get(String uri) throws HTTPError {
         return new Account((Balanced.getInstance().getClient()).get(uri));
@@ -65,8 +65,12 @@ public class Account extends Resource {
         super();
     }
 
-    public Account(Object obj) throws HTTPError {
-        super(obj);
+    public Account(Map<String, Object> payload) throws HTTPError {
+        super(payload);
+    }
+
+    public Account(String uri) throws HTTPError {
+        super(uri);
     }
 
 

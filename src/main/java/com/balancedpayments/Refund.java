@@ -51,8 +51,11 @@ public class Refund extends Resource {
     public Refund() {
         super();
     }
+    public Refund(String uri) throws HTTPError {
+        super(uri);
+    }
 
-    public Refund(Object obj) throws HTTPError {
-        super(obj);
+    public Refund(Map<String, Object> payload) throws HTTPError {
+        super(payload);
     }
 }

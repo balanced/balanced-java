@@ -52,8 +52,11 @@ public class Reversal extends Resource {
     public Reversal() {
         super();
     }
+    public Reversal(String uri) throws HTTPError {
+        super(uri);
+    }
 
-    public Reversal(Object obj) throws HTTPError {
-        super(obj);
+    public Reversal(Map<String, Object> payload) throws HTTPError {
+        super(payload);
     }
 }

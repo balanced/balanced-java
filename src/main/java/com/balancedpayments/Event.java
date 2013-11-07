@@ -29,8 +29,12 @@ public class Event extends Resource {
         super();
     }
 
-    public Event(Object obj) throws HTTPError {
-        super(obj);
+    public Event(String uri) throws HTTPError {
+        super(uri);
+    }
+
+    public Event(Map<String, Object> payload) throws HTTPError {
+        super(payload);
     }
 
     @Override

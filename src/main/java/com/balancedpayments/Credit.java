@@ -55,8 +55,12 @@ public class Credit extends Resource {
         super();
     }
 
-    public Credit(Object obj) throws HTTPError {
-        super(obj);
+    public Credit(String uri) throws HTTPError {
+        super(uri);
+    }
+
+    public Credit(Map<String, Object> payload) throws HTTPError {
+        super(payload);
     }
 
     @Override
