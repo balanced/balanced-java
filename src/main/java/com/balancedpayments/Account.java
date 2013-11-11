@@ -47,11 +47,15 @@ public class Account extends Resource {
     @ResourceField(field="refunds_uri")
     public Refund.Collection refunds;
 
+    @ResourceField(field="customer_uri", required=false)
+    public Customer customer;
+
+
     public static class Collection extends ResourceCollection<Account> {
         public Collection(String uri) {
             super(Account.class, uri);
         }
-    };
+    }
 
     public static Account get(String uri) throws HTTPError {
         return new Account((Balanced.getInstance().getClient()).get(uri));
@@ -61,13 +65,14 @@ public class Account extends Resource {
         super();
     }
 
-    public Account(Map<String, Object> payload) {
+    public Account(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 
     public Account(String uri) throws HTTPError {
         super(uri);
     }
+
 
     public Credit credit(
             int amount,

@@ -74,7 +74,7 @@ public class Hold extends Resource {
         super(uri);
     }
 
-    public Hold(Map<String, Object> payload) {
+    public Hold(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 

@@ -86,12 +86,12 @@ public class Customer extends Resource {
         super();
     }
 
-    public Customer(Map<String, Object> payload) {
-        super(payload);
-    }
-
     public Customer(String uri) throws HTTPError {
         super(uri);
+    }
+
+    public Customer(Map<String, Object> payload) throws HTTPError {
+        super(payload);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Customer extends Resource {
         return (bank_accounts
                 .query()
                 .filter("is_valid", true)
-                .order_by("created_at", false)
+                .order_by("created_at", ResourceQuery.SortOrder.DESCENDING)
                 .first());
 
     }
@@ -136,7 +136,7 @@ public class Customer extends Resource {
         return (cards
                 .query()
                 .filter("is_valid", true)
-                .order_by("created_at", false)
+                .order_by("created_at", ResourceQuery.SortOrder.DESCENDING)
                 .first());
     }
 

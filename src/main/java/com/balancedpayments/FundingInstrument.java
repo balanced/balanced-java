@@ -44,7 +44,7 @@ public class FundingInstrument extends Resource {
         super();
     }
 
-    public FundingInstrument(Map<String, Object> payload) {
+    public FundingInstrument(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 

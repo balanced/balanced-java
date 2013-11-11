@@ -98,7 +98,7 @@ public class DebitTest extends BaseTest {
             .debits
             .query()
             .filter("amount", "<", 77)
-            .order_by("created_at", true)
+            .order_by("created_at", ResourceQuery.SortOrder.ASCENDING)
         );
         assertEquals(2, query.total());
         ArrayList<Debit> all_debits = query.all();
@@ -111,7 +111,7 @@ public class DebitTest extends BaseTest {
                 .query()
                 .filter("amount", ">", 55)
                 .filter("amount", "<", 77)
-                .order_by("amount", false)
+                .order_by("amount", ResourceQuery.SortOrder.DESCENDING)
             );
         assertEquals(1, query.total());
         all_debits = query.all();

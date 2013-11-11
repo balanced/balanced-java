@@ -33,7 +33,7 @@ public class Event extends Resource {
         super(uri);
     }
 
-    public Event(Map<String, Object> payload) {
+    public Event(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 

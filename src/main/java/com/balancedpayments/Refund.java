@@ -55,7 +55,7 @@ public class Refund extends Resource {
         super(uri);
     }
 
-    public Refund(Map<String, Object> payload) {
+    public Refund(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 }

@@ -59,7 +59,7 @@ public class Credit extends Resource {
         super(uri);
     }
 
-    public Credit(Map<String, Object> payload) {
+    public Credit(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 

@@ -74,7 +74,7 @@ public class BankAccount extends FundingInstrument {
         super(uri);
     }
 
-    public BankAccount(Map<String, Object> payload) {
+    public BankAccount(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 

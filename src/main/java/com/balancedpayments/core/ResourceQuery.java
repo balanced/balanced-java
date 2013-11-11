@@ -12,6 +12,11 @@ import com.balancedpayments.errors.NoResultsFound;
 
 public class ResourceQuery<T> extends ResourcePagination<T> {
 
+    public interface SortOrder {
+        String ASCENDING = "asc";
+        String DESCENDING = "desc";
+    }
+
     protected static final ThreadLocal<SimpleDateFormat> dateTimeFormat
             = new ThreadLocal<SimpleDateFormat>(){
         @Override
@@ -123,8 +128,8 @@ public class ResourceQuery<T> extends ResourcePagination<T> {
         return this;
     }
 
-    public ResourceQuery<T> order_by(String field, boolean ascending) {
-        String value = String.format("%s,%s", field, ascending ? "asc" : "desc");
+    public ResourceQuery<T> order_by(String field, String order) {
+        String value = String.format("%s,%s", field, order);
         uri_builder.addParameter("sort", value);
         return this;
     }

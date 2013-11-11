@@ -6,33 +6,53 @@ import java.util.Map;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.MultipleResultsFound;
+import com.balancedpayments.errors.NoResultsFound;
 import com.balancedpayments.errors.NotCreated;
 
 public class Card extends FundingInstrument {
 
-    @ResourceField(field="hash")
-    public String fingerprint;
+    @ResourceField(mutable=true)
+    public String card_number;
 
     @ResourceField(mutable=true)
-    public String street_address;
+    public Integer expiration_year;
 
     @ResourceField(mutable=true)
-    public String postal_code;
+    public Integer expiration_month;
 
-    @ResourceField(mutable=true)
-    public String country_code;
+    @ResourceField(mutable=true, required=false)
+    public String security_code;
 
     @ResourceField(mutable=true)
     public String name;
 
     @ResourceField(mutable=true)
-    public Integer expiration_month;
+    public String phone_number;
 
     @ResourceField(mutable=true)
-    public Integer expiration_year;
+    public String city;
 
-    @ResourceField(field="last_four")
-    public String card_number;
+    @ResourceField(mutable=true)
+    public String region;
+
+    @ResourceField(mutable=true)
+    public String state;
+
+    @ResourceField(mutable=true)
+    public String postal_code;
+
+    @ResourceField(mutable=true)
+    public String street_address;
+
+    @ResourceField(mutable=true)
+    public String country_code;
+
+    @ResourceField(mutable=true)
+    public Map<String, Object> meta;
+
+    @ResourceField(field="hash")
+    public String fingerprint;
 
     @ResourceField()
     public String last_four;
@@ -52,17 +72,12 @@ public class Card extends FundingInstrument {
     @ResourceField()
     public String postal_code_check;
 
-    @ResourceField(mutable=true, required=false)
-    public String security_code;
-
     @ResourceField()
     public String security_code_check;
 
     @ResourceField(required=false)
     public String customer_uri;
 
-    @ResourceField(field="customer_uri", required=false)
-    public Customer customer;
 
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
@@ -84,7 +99,7 @@ public class Card extends FundingInstrument {
             payload.put("expiration_year", expiration_year);
             return super.create(payload);
         }
-    };
+    }
 
     public static Card get(String uri) throws HTTPError {
         return new Card((Balanced.getInstance().getClient()).get(uri));
@@ -94,11 +109,27 @@ public class Card extends FundingInstrument {
         super();
     }
 
-    public Card(Map<String, Object> payload) {
+    public Card(Map<String, Object> payload) throws HTTPError {
         super(payload);
     }
 
     public Card(String uri) throws HTTPError {
         super(uri);
+    }
+
+    @Override
+    public void save() throws HTTPError {
+        // Needs marketplace endpoint here.
+        // Ignore MultipleResultsFound and NoResultsFound exceptions
+        try {
+            if (id == null && uri == null)
+                uri = String.format("/v%s/marketplaces/%s/%s",
+                        Balanced.getInstance().getAPIVersion(),
+                        Marketplace.mine().id,
+                        "cards");
+            super.save();
+        }
+        catch (NoResultsFound e) {}
+        catch (MultipleResultsFound e) {}
     }
 }
