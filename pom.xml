@@ -94,6 +94,9 @@
     <profiles>
         <profile>
             <id>release-sign-artifacts</id>
+            <properties>
+                <gpg.keyname>40CBBC2B</gpg.keyname>
+            </properties>
             <activation>
                 <property>
                     <name>performRelease</name>
