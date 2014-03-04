@@ -11,7 +11,7 @@ import com.balancedpayments.errors.NotCreated;
 public class QuickStart {
 
     public static void main(String [] args) throws HTTPError, NoResultsFound, MultipleResultsFound, NotCreated {
-        APIKey key = new APIKey();
+        ApiKey key = new ApiKey();
         key.save();
         System.out.printf("Our secret is %s\n", key.secret);
 
@@ -40,11 +40,11 @@ public class QuickStart {
         Account buyer = mp.createBuyerAccount("buyer", "buyer@example.org", card.uri, null);
         System.out.printf("Our **buyer** account is %s.\n", buyer.uri);
 
-        System.out.printf("Lets hold some moneyfrom the buyer, say $15\n");
-        Hold hold = buyer.hold(1500);
+        System.out.printf("Lets cardHold some moneyfrom the buyer, say $15\n");
+        CardHold cardHold = buyer.hold(1500);
 
         System.out.printf("And now capture that money\n");
-        Debit debit = hold.capture();
+        Debit debit = cardHold.capture();
         System.out.printf("Which gives us this debit %s\n", debit.uri);
 
         mp.reload();

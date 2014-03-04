@@ -10,6 +10,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Event extends Resource {
 
+    // attributes
+
     @ResourceField()
     public Date occurred_at;
 
@@ -17,7 +19,14 @@ public class Event extends Resource {
     public String type;
 
     @ResourceField()
+    public Map<String, Object> callback_statuses;
+
+    @ResourceField()
     public Map<String, Object> entity;
+
+    @ResourceField(field="events.callbacks")
+    public Callback.Collection callbacks;
+
 
     public static class Collection extends ResourceCollection<Event> {
         public Collection(String uri) {

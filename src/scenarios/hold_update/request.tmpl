@@ -1,5 +1,5 @@
 Balanced.configure("{{ api_key }}");
 
-Hold hold = new Hold("{{ request.uri }}");
-hold.description = "{{ request.payload.description }}";
-hold.save();
+Hold cardHold = new Hold("{{ request.uri }}");
+cardHold.description = "{{ request.payload.description }}";
+cardHold.save();

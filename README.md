@@ -65,11 +65,11 @@ System.out.printf("Now create our **buyer** account associated with that card\n"
 Account buyer = mp.createBuyerAccount("buyer", "buyer@example.org", card.uri, null);
 System.out.printf("Our **buyer** account is %s.\n", buyer.uri);
 
-System.out.printf("Lets hold some moneyfrom the buyer, say $15\n");
-Hold hold = buyer.hold(1500);
+System.out.printf("Lets cardHold some moneyfrom the buyer, say $15\n");
+Hold cardHold = buyer.cardHold(1500);
 
 System.out.printf("And now capture that money\n");
-Debit debit = hold.capture();
+Debit debit = cardHold.capture();
 System.out.printf("Which gives us this debit %s\n", debit.uri);
 
 mp.refresh();

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.balancedpayments.Balanced;
 import com.balancedpayments.errors.HTTPError;
@@ -25,20 +27,35 @@ public abstract class Resource {
     };
 
     @ResourceField()
-    public String uri;
+    public Date created_at;
+
+    @ResourceField()
+    public String href;
+
+    public Map<String, String> hyperlinks;
 
     @ResourceField()
     public String id;
+
+    @ResourceField(mutable=true)
+    public Map<String, Object> links;
+
+    @ResourceField(mutable=true)
+    public Map<String, String> meta;
+
+    @ResourceField()
+    public Date updated_at;
+
 
     public Resource() {
     }
 
     public Resource(Map<String, Object> payload) throws HTTPError {
-        this.deserialize(payload);
+        this.constructFromResponse(payload);
     }
 
-    public Resource(String uri) throws HTTPError {
-        Map<String, Object> payload = Balanced.getInstance().getClient().get(uri);
+    public Resource(String href) throws HTTPError {
+        Map<String, Object> payload = Balanced.getInstance().getClient().get(href);
         this.deserialize(payload);
     }
 
@@ -46,12 +63,12 @@ public abstract class Resource {
         Map<String, Object> request = serialize();
         Map<String, Object> response = null;
         if (id == null) {
-            if (uri == null)
+            if (href == null)
                 throw new RuntimeException(this.getClass().getName());
-            response = Balanced.getInstance().getClient().post(uri, request);
+            response = Balanced.getInstance().getClient().post(href, request);
         }
         else {
-            response = Balanced.getInstance().getClient().put(uri, request);
+            response = Balanced.getInstance().getClient().put(href, request);
         }
         deserialize(response);
     }
@@ -63,11 +80,11 @@ public abstract class Resource {
     public void delete() throws NotCreated, HTTPError {
         if (id == null)
             throw new NotCreated(this.getClass());
-        Balanced.getInstance().getClient().delete(uri);
+        Balanced.getInstance().getClient().delete(href);
     }
 
     public void reload() throws HTTPError {
-        deserialize(Balanced.getInstance().getClient().get(uri));
+        deserialize(Balanced.getInstance().getClient().get(href));
     }
 
     @Deprecated
@@ -100,9 +117,9 @@ public abstract class Resource {
         return payload;
     }
 
-    public void deserialize(Map<String, Object> payload) throws HTTPError{
+    public void constructFromResponse(Map<String, Object>payload) throws HTTPError{
         Field[] fields = this.getClass().getFields();
-        for(Field f : fields){
+        for (Field f : fields) {
             if (!f.isAnnotationPresent(ResourceField.class)) {
                 continue;
             }
@@ -111,7 +128,15 @@ public abstract class Resource {
 
             ResourceField rf = f.getAnnotation(ResourceField.class);
             String key = rf.field().equals("") ? f.getName() : rf.field();
-            if (!rf.required() && !payload.containsKey(key)) {
+
+            if (f.getName() == "source") {
+                String foo = "bar";
+            }
+
+            if (key.contains(".")) {
+                value = this.hyperlinks != null ? this.hyperlinks.get(key) : null;
+            }
+            else if (!rf.required() && !payload.containsKey(key)) {
                 value = null;
             }
             else {
@@ -152,6 +177,64 @@ public abstract class Resource {
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    public void hydrate(Map<String, String> links, Map<String, String> meta, Map<String, Object> entity) {
+        for (Map.Entry<String, String> link : links.entrySet()) {
+            String key = link.getKey();
+            String value = link.getValue();
+            String expandedValue = null;
+            if (value != null) {
+                Pattern logEntry = Pattern.compile("\\{(.*?)\\}");
+                Matcher matcher = logEntry.matcher(value);
+                if (matcher.find()) {
+                    String token = matcher.group(1);
+                    String[]linkKey = token.split("\\.");
+                    String linkVal = (String)entity.get(linkKey[1]);
+
+                    // hack for "self" in events.callbacks link
+                    if (linkKey[1].equals("self")) {
+                        linkKey[1] = "id";
+                    }
+
+                    if (linkVal != null) {
+                        expandedValue = value.replaceAll("\\{" + token + "\\}", linkVal);
+                    }
+                    else {
+                        linkVal = ((Map<String, String>)entity.get("links")).get(linkKey[1]);
+                        if (linkVal != null) {
+                            expandedValue = value.replaceAll("\\{" + token + "\\}", linkVal);
+                        }
+                    }
+                }
+                else {
+                    expandedValue = value;
+                }
+            }
+
+            link.setValue(expandedValue);
+        }
+        this.hyperlinks = links;
+    }
+
+    public void deserialize(Map<String, Object> payload) throws HTTPError{
+        Map<String, String> links = (Map<String, String>)payload.remove("links");
+        Map<String, String> meta = (Map<String, String>)payload.remove("meta");
+
+        if (payload.size() > 1) {
+            throw new RuntimeException("Not supported yet");
+        }
+
+        //ArrayList entities = (ArrayList)payload.get(Utils.classNameToResourceKey(this.getClass().getSimpleName()));
+        //ArrayList entities = (ArrayList)payload.entrySet().iterator().next();
+        //Map<String, Object> entity = (Map<String,Object>)entities.get(0);
+        //Map<String, Object> entity = (Map<String, Object>) payload.entrySet().iterator().next().getValue();
+
+        for (Object key : payload.keySet()) {
+            Map<String, Object> entity = (Map<String, Object>)((ArrayList)payload.get(key)).get(0);
+            hydrate(links, meta, entity);
+            constructFromResponse(entity);
         }
     }
 

@@ -11,41 +11,51 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Credit extends Resource {
 
-    @ResourceField()
-    public Date created_at;
+    private static final String resource_href = "/bank_accounts";
 
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
+    // fields
 
     @ResourceField(mutable=true)
     public Integer amount;
 
-    @ResourceField(mutable=true, required=false)
+    @ResourceField(mutable=true)
     public String appears_on_statement_as;
 
-    @ResourceField()
+    @ResourceField(mutable=true)
     public String description;
+
+    @ResourceField(field="credits.order")
+    public Order order;
+
+    // attributes
+
+    @ResourceField()
+    public String currency;
+
+    @ResourceField()
+    public String failure_reason;
+
+    @ResourceField()
+    public String failure_reason_code;
 
     @ResourceField()
     public String status;
 
-    @ResourceField(mutable=true, required=false)
-    public Map<String, String> bank_account;
-
-    @ResourceField(mutable=true, required=false)
-    public String destination_uri;
-
     @ResourceField()
-    public String account_uri;
+    public String transaction_number;
 
-    @ResourceField(required=false)
-    public Account account;
-
-    @ResourceField(required=false)
+    @ResourceField(field="credits.customer")
     public Customer customer;
 
-    @ResourceField(field="reversals_uri")
+    @ResourceField(field="credits.destination")
+    public FundingInstrument destination;
+
+    @ResourceField(field="credits.events")
+    public Event.Collection events;
+
+    @ResourceField(field="credits.reversals")
     public Reversal.Collection reversals;
+
 
     public static Credit get(String uri) throws HTTPError {
         return new Credit((Balanced.getInstance().getClient()).get(uri));
@@ -65,8 +75,8 @@ public class Credit extends Resource {
 
     @Override
     public void save() throws HTTPError {
-        if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "credits");
+        if (id == null && href == null)
+            href = resource_href;
         super.save();
     }
 

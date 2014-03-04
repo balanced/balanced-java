@@ -7,5 +7,5 @@ Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", {{ request.payload.amount }});
 payload.put("source_uri", "{{ request.payload.source_uri }}");
 
-Hold hold = new Hold(payload);
-hold.save();
+Hold cardHold = new Hold(payload);
+cardHold.save();

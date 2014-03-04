@@ -11,11 +11,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Reversal extends Resource {
 
-    @ResourceField()
-    public Date created_at;
-
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
+    // fields
 
     @ResourceField(mutable=true)
     public Integer amount;
@@ -23,20 +19,31 @@ public class Reversal extends Resource {
     @ResourceField(mutable=true)
     public String description;
 
-    @ResourceField(required=false)
-    public String account_uri;
+    // attributes
 
-    @ResourceField(required=false)
-    public Account account;
+    @ResourceField()
+    public String currency;
 
-    @ResourceField(mutable=true)
-    public String appears_on_statement_as;
+    @ResourceField()
+    public String failure_reason;
+
+    @ResourceField()
+    public String failure_reason_code;
+
+    @ResourceField()
+    public String status;
 
     @ResourceField()
     public String transaction_number;
 
-    @ResourceField()
+    @ResourceField(field="reversals.credit")
     public Credit credit;
+
+    @ResourceField(field="reversals.events")
+    public Event.Collection events;
+
+    //@ResourceField(field="reversals.order")
+    //public Order order;
 
 
     public static class Collection extends ResourceCollection<Reversal> {

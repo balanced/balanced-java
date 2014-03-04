@@ -11,34 +11,11 @@ import com.balancedpayments.errors.NotCreated;
 
 public class FundingInstrument extends Resource {
 
-    @ResourceField()
-    public Date created_at;
-
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
-
-    @ResourceField(mutable=true)
-    public String street_address;
-
-    @Deprecated
-    @ResourceField(mutable=true, required=false)
-    public Boolean is_valid;
-
-    @ResourceField(required=false)
-    public String customer_uri;
-
-    @ResourceField(required=false)
-    public Customer customer;
-
     public static class Collection extends ResourceCollection<FundingInstrument> {
         public Collection(String uri) {
             super(FundingInstrument.class, uri);
         }
     };
-
-    public static FundingInstrument get(String uri) throws HTTPError {
-        return new FundingInstrument((Balanced.getInstance().getClient()).get(uri));
-    }
 
     public FundingInstrument() {
         super();
@@ -52,17 +29,17 @@ public class FundingInstrument extends Resource {
         super(uri);
     }
 
-    public void invalidate() throws HTTPError, NotCreated {
-        unstore();
-    }
-
     public void unstore() throws HTTPError, NotCreated {
         super.delete();
     }
 
-    public Customer getCustomer() throws HTTPError {
-        if (customer == null)
-            customer = customer_uri == null ? null : new Customer(customer_uri);
-        return customer;
+    public void associateToCustomer(Customer customer) throws HTTPError {
+        this.links.put("customer", customer.href);
+        this.save();
+    }
+
+    public Debit debit(Map<String, Object> payload) throws HTTPError {
+        // override in subclasses
+        return null;
     }
 }

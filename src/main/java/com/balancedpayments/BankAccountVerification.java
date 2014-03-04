@@ -1,5 +1,6 @@
 package com.balancedpayments;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +15,13 @@ public class BankAccountVerification extends Resource {
     public Integer attempts;
 
     @ResourceField()
-    public Integer remaining_attempts;
+    public Integer attempts_remaining;
 
     @ResourceField()
-    public String state;
+    public String deposit_status;
+
+    @ResourceField()
+    public String verification_status;
 
     public static class Collection extends ResourceCollection<BankAccountVerification> {
         public Collection(String uri) {
@@ -37,7 +41,7 @@ public class BankAccountVerification extends Resource {
         Map<String, Object> request = new HashMap<String, Object>();
         request.put("amount_1", amount_1);
         request.put("amount_2", amount_2);
-        Map<String, Object> response = Balanced.getInstance().getClient().put(uri, request);
+        Map<String, Object> response = Balanced.getInstance().getClient().put(href, request);
         deserialize(response);
     }
 }

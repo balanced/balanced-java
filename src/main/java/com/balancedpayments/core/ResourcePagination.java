@@ -19,12 +19,12 @@ public class ResourcePagination<T> implements Iterable<T> {
     
     public class ResourceIterator implements Iterator<T> {
         
-        public String uri;
+        public String href;
         public ResourcePage<T> page;
         public Integer index;
         
-        public ResourceIterator(String uri, ResourcePage<T> page) {
-            this.uri = uri; 
+        public ResourceIterator(String href, ResourcePage<T> page) {
+            this.href = href;
             this.page = page;
             this.index = 0;
         }
@@ -64,10 +64,10 @@ public class ResourcePagination<T> implements Iterable<T> {
     protected Class<T> cls;
     protected URIBuilder uri_builder; 
 
-    public ResourcePagination(Class<T> cls, String uri) {
+    public ResourcePagination(Class<T> cls, String href) {
         this.cls = cls; 
         try {
-            this.uri_builder = new URIBuilder(uri);
+            this.uri_builder = new URIBuilder(href);
         }
         catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -97,8 +97,8 @@ public class ResourcePagination<T> implements Iterable<T> {
     public int total() throws HTTPError {
         Integer limit = getLimit();
         setLimit(1);
-        String uri = getURI();
-        ResourcePage<T> page = new ResourcePage<T>(cls, uri);
+        String href = getURI();
+        ResourcePage<T> page = new ResourcePage<T>(cls, href);
         setLimit(limit);
         return page.getTotal();
     }
@@ -141,16 +141,16 @@ public class ResourcePagination<T> implements Iterable<T> {
     }
     
     public Iterator<T> iterator() {
-        String uri = getURI();
-        ResourcePage<T> page = new ResourcePage<T>(cls, uri);
-        return new ResourceIterator(uri, page);
+        String href = getURI();
+        ResourcePage<T> page = new ResourcePage<T>(cls, href);
+        return new ResourceIterator(href, page);
     }
     
     public ArrayList<T> all() throws HTTPError {
-        String uri = getURI();
-        ResourcePage<T> page = new ResourcePage<T>(cls, uri);
+        String href = getURI();
+        ResourcePage<T> page = new ResourcePage<T>(cls, href);
         ArrayList<T> items = new ArrayList<T>(page.getTotal());
-        Iterator<T> iterator = new ResourceIterator(uri, page);
+        Iterator<T> iterator = new ResourceIterator(href, page);
         while (iterator.hasNext()) {
             T obj = iterator.next();
             items.add(obj);

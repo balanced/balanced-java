@@ -12,25 +12,17 @@ import com.balancedpayments.errors.CannotCreate;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
 
-public class APIKeyTest extends BaseTest {
-
-    @Test
-    public void testCreateAnonyous() throws CannotCreate, HTTPError {
-        APIKey key = new APIKey();
-        key.save();
-        assertNotNull(key.secret);
-    }
-    
+public class ApiKeyTest {
     @Test
     public void testCreate() throws CannotCreate, HTTPError {
-        APIKey key = new APIKey();
+        ApiKey key = new ApiKey();
         key.save();
         assertNotNull(key.secret);
     }
     
     @Test
     public void testDelete() throws CannotCreate, NotCreated, HTTPError {
-        APIKey key = new APIKey();
+        ApiKey key = new ApiKey();
         key.save();
         Balanced.configure(key.secret);
         key.delete();
@@ -38,20 +30,26 @@ public class APIKeyTest extends BaseTest {
     
     @Test
     public void testQueryAll() throws CannotCreate, NotCreated, HTTPError {
-        APIKey key1 = new APIKey();
+        ApiKey key = new ApiKey();
+        key.save();
+        Balanced.configure(key.secret);
+        Marketplace marketplace = new Marketplace();
+        marketplace.save();
+
+        ApiKey key1 = new ApiKey();
         key1.saveToExistingMarketplace();
         
-        APIKey key2 = new APIKey();
+        ApiKey key2 = new ApiKey();
         key2.saveToExistingMarketplace();
         
-        APIKey key3 = new APIKey();
+        ApiKey key3 = new ApiKey();
         key3.saveToExistingMarketplace();
         
-        ArrayList<APIKey> keys = APIKey.query().all();
+        ArrayList<ApiKey> keys = ApiKey.query().all();
         assertEquals(4, keys.size());
         ArrayList<String> key_guids = new ArrayList<String>();
-        for(APIKey key: keys) {
-            key_guids.add(key.id);
+        for (ApiKey k: keys) {
+            key_guids.add(k.id);
         }
         assertTrue(key_guids.contains(key1.id));
         assertTrue(key_guids.contains(key2.id));

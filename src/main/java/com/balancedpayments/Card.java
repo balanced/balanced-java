@@ -1,82 +1,69 @@
 package com.balancedpayments;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
+import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
-import com.balancedpayments.errors.NotCreated;
 
 public class Card extends FundingInstrument {
 
-    @ResourceField(mutable=true)
-    public String card_number;
+    private static final String resource_href = "/cards";
 
+    // fields
     @ResourceField(mutable=true)
-    public Integer expiration_year;
-
-    @ResourceField(mutable=true)
-    public Integer expiration_month;
+    public Map<String, String> address;
 
     @ResourceField(mutable=true, required=false)
-    public String security_code;
+    public String cvv;
+
+    @ResourceField(mutable=true, required=true)
+    public Integer expiration_month;
+
+    @ResourceField(mutable=true, required=true)
+    public Integer expiration_year;
 
     @ResourceField(mutable=true)
     public String name;
 
-    @ResourceField(mutable=true)
-    public String phone_number;
+    @ResourceField(mutable=true, required=true)
+    public String number;
 
-    @ResourceField(mutable=true)
-    public String city;
-
-    @ResourceField(mutable=true)
-    public String region;
-
-    @ResourceField(mutable=true)
-    public String state;
-
-    @ResourceField(mutable=true)
-    public String postal_code;
-
-    @ResourceField(mutable=true)
-    public String street_address;
-
-    @ResourceField(mutable=true)
-    public String country_code;
-
-    @ResourceField(mutable=true)
-    public Map<String, Object> meta;
-
-    @ResourceField(field="hash")
-    public String fingerprint;
+    // attributes
 
     @ResourceField()
-    public String last_four;
+    public String avs_postal_match;
 
     @ResourceField()
-    public String card_type;
+    public String avs_result;
+
+    @ResourceField()
+    public String avs_street_match;
 
     @ResourceField()
     public String brand;
 
     @ResourceField()
-    public Boolean is_valid;
+    public String cvv_match;
+
+    @ResourceField()
+    public String cvv_result;
+
+    @ResourceField()
+    public String fingerprint;
 
     @ResourceField()
     public Boolean is_verified;
 
-    @ResourceField()
-    public String postal_code_check;
+    @ResourceField(field="cards.card_holds")
+    public CardHold.Collection card_holds;
 
-    @ResourceField()
-    public String security_code_check;
+    @ResourceField(field="cards.customer")
+    public Customer customer;
 
-    @ResourceField(required=false)
-    public String customer_uri;
+    @ResourceField(field="cards.debits")
+    public Debit.Collection debits;
 
 
     public static class Collection extends ResourceCollection<Card> {
@@ -88,21 +75,6 @@ public class Card extends FundingInstrument {
         public Card create(Map<String, Object> payload) throws HTTPError {
             return super.create(payload);
         }
-
-        public Card create(
-                String card_number,
-                int expiration_month,
-                int expiration_year) throws HTTPError {
-            Map<String, Object> payload = new HashMap<String, Object>();
-            payload.put("card_number", card_number);
-            payload.put("expiration_month", expiration_month);
-            payload.put("expiration_year", expiration_year);
-            return super.create(payload);
-        }
-    }
-
-    public static Card get(String uri) throws HTTPError {
-        return new Card((Balanced.getInstance().getClient()).get(uri));
     }
 
     public Card() {
@@ -117,19 +89,23 @@ public class Card extends FundingInstrument {
         super(uri);
     }
 
+    public static ResourceQuery<Card> query() {
+        return new ResourceQuery<Card>(Card.class, resource_href);
+    }
+
     @Override
     public void save() throws HTTPError {
-        // Needs marketplace endpoint here.
-        // Ignore MultipleResultsFound and NoResultsFound exceptions
-        try {
-            if (id == null && uri == null)
-                uri = String.format("/v%s/marketplaces/%s/%s",
-                        Balanced.getInstance().getAPIVersion(),
-                        Marketplace.mine().id,
-                        "cards");
-            super.save();
-        }
-        catch (NoResultsFound e) {}
-        catch (MultipleResultsFound e) {}
+        if (id == null && href == null)
+            href = resource_href;
+        super.save();
+    }
+
+    public CardHold hold(Map<String, Object> payload) throws HTTPError {
+        return card_holds.create(payload);
+    }
+
+    @Override
+    public Debit debit(Map<String, Object> payload) throws HTTPError {
+        return debits.create(payload);
     }
 }

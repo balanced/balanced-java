@@ -11,11 +11,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Refund extends Resource {
 
-    @ResourceField()
-    public Date created_at;
-
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
+    // fields
 
     @ResourceField(mutable=true)
     public Integer amount;
@@ -23,30 +19,35 @@ public class Refund extends Resource {
     @ResourceField(mutable=true)
     public String description;
 
-    @ResourceField(required=false)
-    public String account_uri;
+    // attributes
 
-    @ResourceField(required=false)
-    public Account account;
+    @ResourceField()
+    public String currency;
 
-    @ResourceField(mutable=true)
-    public String appears_on_statement_as;
+    @ResourceField()
+    public String status;
 
     @ResourceField()
     public String transaction_number;
 
-    @ResourceField()
+    @ResourceField(field="refunds.debit")
     public Debit debit;
+
+    //@ResourceField(field="refunds.dispute")
+    //public Dispute dispute;
+
+    @ResourceField(field="refunds.events")
+    public Event.Collection events;
+
+    //@ResourceField(field="refunds.order")
+    //public Order order;
+
 
     public static class Collection extends ResourceCollection<Refund> {
         public Collection(String uri) {
             super(Refund.class, uri);
         }
     };
-
-    public static Refund get(String uri) throws HTTPError {
-        return new Refund((Balanced.getInstance().getClient()).get(uri));
-    }
 
     public Refund() {
         super();

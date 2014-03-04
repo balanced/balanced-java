@@ -12,66 +12,58 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Debit extends Resource  {
 
-    @ResourceField()
-    public Date created_at;
-
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
+    // fields
 
     @ResourceField(mutable=true)
     public Integer amount;
 
     @ResourceField(mutable=true)
-    public String description;
-
-    @ResourceField(mutable=true)
-    public String transaction_number;
-
-    @ResourceField(required=false)
-    public String card_uri;
-
-    @ResourceField(required=false)
-    public String account_uri;
-
-    @ResourceField(required=false)
-    public Account account;
-
-    @ResourceField(required=false)
-    public String source_uri;
-
-    @ResourceField(required=false)
-    public FundingInstrument source;
-
-    @ResourceField(required=false)
-    public String customer_uri;
-
-    @ResourceField(required=false)
-    public Customer customer;
-
-    @ResourceField(required=false, mutable=true)
     public String appears_on_statement_as;
 
+    @ResourceField(mutable=true)
+    public String description;
+
+    @ResourceField(mutable=true, field="debits.order")
+    public Order order;
+
+    // attributes
+
     @ResourceField(required=false)
+    public String currency;
+
+    @ResourceField()
+    public String failure_reason;
+
+    @ResourceField()
+    public String failure_reason_code;
+
+    @ResourceField()
     public String status;
 
-    @ResourceField(required=false)
-    public String hold_uri;
+    @ResourceField()
+    public String transaction_number;
 
-    @ResourceField(required=false)
-    public Hold hold;
+    @ResourceField(field="debits.customer")
+    public Customer customer;
 
-    @ResourceField(field="refunds_uri")
+    //@ResourceField(field="debits.dispute")
+    //public Dispute dispute;
+
+    @ResourceField(field="debits.events")
+    public Event.Collection events;
+
+    @ResourceField(field="debits.refunds")
     public Refund.Collection refunds;
+
+    @ResourceField(field="debits.source")
+    public FundingInstrument source;
+
 
     public static class Collection extends ResourceCollection<Debit> {
         public Collection(String uri) {
             super(Debit.class, uri);
         }
     };
-
-    public static Debit get(String uri) throws HTTPError {
-        return new Debit((Balanced.getInstance().getClient()).get(uri));
-    }
 
     public Debit() {
         super();
@@ -91,29 +83,5 @@ public class Debit extends Resource  {
 
     public Refund refund() throws HTTPError {
         return refund(null);
-    }
-
-    public Account getAccount() throws HTTPError {
-        if (account == null)
-            account = new Account(account_uri);
-        return account;
-    }
-
-    public Customer getCustomer() throws HTTPError {
-        if (customer == null)
-            customer = customer_uri == null ? null : new Customer(customer_uri);
-        return customer;
-    }
-
-    public FundingInstrument getSource() throws HTTPError {
-        if (source == null)
-            source = source_uri == null ? null : new FundingInstrument(source_uri);
-        return source;
-    }
-
-    public Hold getHold() throws HTTPError {
-        if (hold == null)
-            hold = new Hold(hold_uri);
-        return hold;
     }
 }

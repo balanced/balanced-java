@@ -1,5 +1,5 @@
 Balanced.configure("{{ api_key }}");
 
-Hold hold = new Hold("{{ request.uri }}");
-hold.is_void = true;
-hold.save();
+Hold cardHold = new Hold("{{ request.uri }}");
+cardHold.is_void = true;
+cardHold.save();

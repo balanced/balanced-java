@@ -1,7 +1,7 @@
 package hold_create;
 
-import com.balancedpayments.*;
-import com.balancedpayments.errors.*;
+import com.balancedpayments.CardHold;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +17,8 @@ Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);
 payload.put("source_uri", "/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/cards/CC15RAm6JJIEIae6bicvlWRw");
 
-Hold hold = new Hold(payload);
-hold.save();
+CardHold cardHold = new CardHold(payload);
+cardHold.save();
 
 }
 }

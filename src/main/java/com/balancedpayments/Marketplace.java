@@ -1,6 +1,6 @@
 package com.balancedpayments;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.balancedpayments.core.Resource;
@@ -12,6 +12,13 @@ import com.balancedpayments.errors.NoResultsFound;
 
 public class Marketplace extends Resource {
 
+    private static final String resource_href = "/marketplaces";
+
+    // fields
+
+    @ResourceField(mutable=true)
+    public String domain_url;
+
     @ResourceField(mutable=true)
     public String name;
 
@@ -21,201 +28,73 @@ public class Marketplace extends Resource {
     @ResourceField(mutable=true)
     public String support_phone_number;
 
-    @ResourceField(mutable=true)
-    public String domain_url;
-
-    @ResourceField(mutable=true)
-    public Map<String, String> meta;
+    // attributes
 
     @ResourceField()
     public Integer in_escrow;
 
-    @ResourceField(field="bank_accounts_uri")
+    @ResourceField(field="marketplaces.bank_accounts")
     public BankAccount.Collection bank_accounts;
 
-    @ResourceField(field="cards_uri")
-    public Card.Collection cards;
-
-    @ResourceField(field="accounts_uri")
-    public Account.Collection accounts;
-
-    @ResourceField(field="customers_uri")
-    public Customer.Collection customers;
-
-    @ResourceField(field="debits_uri")
-    public Debit.Collection debits;
-
-    @ResourceField(field="credits_uri")
-    public Credit.Collection credits;
-
-    @ResourceField(field="holds_uri")
-    public Hold.Collection holds;
-
-    @ResourceField(field="refunds_uri")
-    public Refund.Collection refunds;
-
-    @ResourceField(field="events_uri")
-    public Event.Collection events;
-
-    @ResourceField(field="callbacks_uri")
+    @ResourceField(field="marketplaces.callbacks")
     public Callback.Collection callbacks;
 
-    @ResourceField()
-    public Account owner_account;
+    @ResourceField(field="marketplaces.cards")
+    public Card.Collection cards;
+
+    @ResourceField(field="marketplaces.customers")
+    public Customer.Collection customers;
+
+    @ResourceField(field="marketplaces.credits")
+    public Credit.Collection credits;
+
+    @ResourceField(field="marketplaces.card_holds")
+    public CardHold.Collection card_holds;
+
+    @ResourceField(field="marketplaces.debits")
+    public Debit.Collection debits;
+
+    @ResourceField(field="marketplaces.events")
+    public Event.Collection events;
+
+    @ResourceField(field="marketplaces.refunds")
+    public Refund.Collection refunds;
+
+    @ResourceField(field="marketplaces.reversals")
+    public Reversal.Collection reversals;
+
+    @ResourceField(field="marketplaces.owner_customer")
+    public Customer owner_customer;
 
     @ResourceField()
-    public Customer owner_customer;
+    public Boolean production;
+
+    @ResourceField()
+    public Integer unsettled_fees;
+
 
     public static ResourceQuery<Marketplace> query() {
         return new ResourceQuery<Marketplace>(
-                Marketplace.class,
-                String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "marketplaces"));
+                Marketplace.class, resource_href);
     }
 
     public static Marketplace mine() throws NoResultsFound, MultipleResultsFound, HTTPError {
-        return query().one();
+        ArrayList<Marketplace> mps = Marketplace.query().all();
+        return mps.get(0);
     }
 
     public Marketplace() {
         super();
     }
 
-    public Marketplace(String uri) throws HTTPError {
-        super(uri);
-    }
-
-    public BankAccount tokenizeBankAccount(
-            String name,
-            String account_number,
-            String routing_number) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("name", name);
-        payload.put("account_number", account_number);
-        payload.put("routing_number", routing_number);
-        return bank_accounts.create(payload);
-    }
-
-    public BankAccount tokenizeBankAccount(
-            String name,
-            String account_number,
-            String routing_number,
-            String type) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("name", name);
-        payload.put("account_number", account_number );
-        payload.put("routing_number", routing_number);
-        payload.put("type", type);
-        return bank_accounts.create(payload);
-    }
-
-    public Credit creditBankAccount(
-            int amount,
-            String description,
-            String account_number,
-            String name,
-            String routing_number,
-            String type) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", amount);
-        if (description != null)
-            payload.put("description", description);
-        Map<String, Object> bank_account = new HashMap<String, Object>();
-        bank_account.put("account_number", account_number);
-        bank_account.put("name", name);
-        bank_account.put("routing_number", routing_number);
-        if (type != null)
-            bank_account.put("type", type);
-        payload.put("bank_account", bank_account);
-        return credits.create(payload);
-    }
-
-    public Card tokenizeCard(Map<String, Object>payload) throws HTTPError {
-        return cards.create(payload);
-    }
-
-    public Account createAccount(
-            String name,
-            String email_address,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("email_address", email_address);
-        if (meta != null)
-            payload.put("meta", meta);
-        return accounts.create(payload);
-    }
-
-    public Account createAccount(String name, String email_address) throws HTTPError {
-        return createAccount(name, email_address, null);
-    }
-
-    public Account createAccount(String name) throws HTTPError {
-        return createAccount(name, null, null);
-    }
-
-    public Account createBuyerAccount(
-            String name,
-            String email_address,
-            String card_uri,
-            Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("card_uri", card_uri);
-        if (name != null)
-            payload.put("name", name);
-        if (email_address != null)
-            payload.put("email_address", email_address);
-        if (meta != null)
-            payload.put("meta", meta);
-        return accounts.create(payload);
-    }
-
-    public Account createBuyerAccount(String card_uri) throws HTTPError {
-        return createBuyerAccount(null, null, card_uri, null);
-    }
-
-    public Account createMerchantAccount(
-                     String name,
-                     String email_address,
-                     String bank_account_uri,
-                     String merchant_uri,
-                     Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("merchant_uri", merchant_uri);
-        payload.put("bank_account_uri", bank_account_uri);
-        if (name != null)
-            payload.put("name", name);
-        if (email_address != null)
-            payload.put("email_address", email_address);
-        if (meta != null)
-            payload.put("meta", meta);
-        return accounts.create(payload);
-    }
-
-    public Account createMerchantAccount(
-             String name,
-             String email_address,
-             String bank_account_uri,
-             Map<String, Object> merchant,
-             Map<String, String> meta) throws HTTPError {
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("merchant", merchant);
-        payload.put("bank_account_uri", bank_account_uri);
-        if (name != null)
-            payload.put("name", name);
-        if (email_address != null)
-            payload.put("email_address", email_address);
-        if (meta != null)
-            payload.put("meta", meta);
-        return accounts.create(payload);
-    }
-
-    public Callback registerCallback(String url) throws HTTPError {
-        return callbacks.create(url);
+    public Marketplace(String href) throws HTTPError {
+        super(href);
     }
 
     @Override
     public void save() throws HTTPError {
-        if (id == null && uri == null)
-            uri = String.format("/v%s/%s", Balanced.getInstance().getAPIVersion(), "marketplaces");
+        if (id == null && href == null)
+            href = resource_href;
         super.save();
     }
 }

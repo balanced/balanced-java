@@ -13,25 +13,111 @@ import static org.junit.Assert.*;
 public class DebitTest extends BaseTest {
 
     @Test
-    public void testDebitRetrieve() {
+    public void testDebitCreate() throws HTTPError {
+        Customer customer = createPersonCustomer();
+        Card card = createCard();
+        card.associateToCustomer(customer);
 
+        HashMap<String, Object> meta = new HashMap<String, Object>();
+        meta.put("invoice_id", "12141");
+
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 10000);
+        payload.put("description", "A simple debit");
+        payload.put("meta", meta);
+
+        Debit debit = card.debit(payload);
+        assertNotNull(debit.href);
+        assertEquals(10000, debit.amount.intValue());
+        assertEquals("A simple debit", debit.description);
+    }
+
+    @Test
+    public void testDebitCreateNoCustomer() throws HTTPError {
+        Card card = createCard();
+
+        HashMap<String, Object> meta = new HashMap<String, Object>();
+        meta.put("invoice_id", "12141");
+
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 10000);
+        payload.put("description", "A simple debit");
+        payload.put("meta", meta);
+
+        Debit debit = card.debit(payload);
+        assertNotNull(debit.href);
+        assertEquals(10000, debit.amount.intValue());
+        assertEquals("A simple debit", debit.description);
+    }
+
+    @Test
+    public void testDebitRetrieve() throws HTTPError {
+        Card card = createCard();
+
+        HashMap<String, Object> meta = new HashMap<String, Object>();
+        meta.put("invoice_id", "12141");
+
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 10000);
+        payload.put("description", "A simple debit");
+        payload.put("meta", meta);
+
+        Debit debit = card.debit(payload);
+        assertNotNull(debit.href);
+        assertEquals(10000, debit.amount.intValue());
+        assertEquals("A simple debit", debit.description);
+
+        Debit theDebit = new Debit(debit.href);
+        assertNotNull(theDebit);
+        assertNotNull(theDebit.href);
+        assertEquals(debit.href, theDebit.href);
     }
 
     @Test
     public void testRefund() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Account account = createBuyer(mp);
-        Debit debit = account.debit(123);
+        Card card = createCard();
+
+        HashMap<String, Object> meta = new HashMap<String, Object>();
+        meta.put("invoice_id", "12141");
+
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 10000);
+        payload.put("description", "A simple debit");
+        payload.put("meta", meta);
+
+        Debit debit = card.debit(payload);
+        assertNotNull(debit.href);
+        assertEquals(10000, debit.amount.intValue());
+        assertEquals("A simple debit", debit.description);
+
         Refund refund = debit.refund();
-        assertEquals(refund.amount, debit.amount);
+
+        assertEquals(debit.amount, refund.amount);
     }
 
     @Test
-    public void testRefundGet() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Account account = createBuyer(mp);
-        Debit debit = account.debit(123);
-        Refund newRefund = debit.refund();
-        Refund refund = new Refund(newRefund.uri);
-        assertEquals(newRefund.uri, refund.uri);
+    public void testRefundsCollection() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
+
+        Card card = createCard();
+
+        HashMap<String, Object> meta = new HashMap<String, Object>();
+        meta.put("invoice_id", "12141");
+
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 10000);
+        payload.put("description", "A simple debit");
+        payload.put("meta", meta);
+
+        Debit debit = card.debit(payload);
+        assertNotNull(debit.href);
+        assertEquals(10000, debit.amount.intValue());
+        assertEquals("A simple debit", debit.description);
+
+        Refund refund = debit.refund();
+
+        debit.reload();
+        Refund.Collection refunds = debit.refunds;
+        assertTrue(refunds.total() == 1);
     }
 
     @Test
@@ -39,8 +125,7 @@ public class DebitTest extends BaseTest {
         Customer customer = new Customer();
         customer.save();
 
-        BankAccount ba = createBankAccount(mp);
-        customer.addBankAccount(ba);
+        BankAccount ba = createBankAccount();
 
         BankAccountVerification bankAccountVerification = ba.verify();
         bankAccountVerification.confirm(1, 1);
@@ -56,110 +141,67 @@ public class DebitTest extends BaseTest {
     }
 
     @Test
-    public void testDebitBankAccountUnverified() throws HTTPError {
+    public void testDebitBankAccountUnverifiedNoCustomer() throws HTTPError {
         Customer customer = new Customer();
         customer.save();
 
-        BankAccount ba = createBankAccount(mp);
-        customer.addBankAccount(ba);
+        BankAccount ba = createBankAccount();
+        BankAccountVerification verification = ba.verify();
+        verification.confirm(1, 1);
 
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("amount", 100000);
 
-        try {
-            Debit debit = ba.debit(payload);
-            fail("Debiting an unverified bank account should fail");
-        }
-        catch (APIError e) {
-            assertEquals("funding-source-not-debitable", e.category_code);
-        }
+        Debit debit = ba.debit(payload);
     }
 
     @Test
     public void testDebitFilter() throws CannotCreate, HTTPError, NoResultsFound, MultipleResultsFound {
-        Account buyer;
         Debit[] debits = new Debit[3];
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 100000);
+        Map<String, Object> payload2 = new HashMap<String, Object>();
+        payload2.put("amount", 777);
+        Map<String, Object> payload3 = new HashMap<String, Object>();
+        payload3.put("amount", 555);
 
-        buyer = createBuyer(mp);
-        debits[0] = buyer.debit(55);
-        debits[1] = buyer.debit(66);
-        debits[2] = buyer.debit(77);
+        Card card = createCard();
+        debits[0] = card.debit(payload);
+        debits[1] = card.debit(payload2);
+        debits[2] = card.debit(payload3);
 
-        ResourceQuery<Debit> query = buyer.debits.query().filter("amount", "=", 77);
+        ResourceQuery<Debit> query = card.debits.query().filter("amount", "=", 777);
         assertEquals(1, query.total());
-        assertEquals(debits[2].id, query.first().id);
+        assertEquals(debits[1].id, query.first().id);
 
-        query = buyer.debits.query().filter("amount", 77);
+        query = card.debits.query().filter("amount", 777);
         assertEquals(1, query.total());
-        assertEquals(debits[2].id, query.first().id);
+        assertEquals(debits[1].id, query.first().id);
 
         query = (
-            buyer
+            card
             .debits
             .query()
-            .filter("amount", "<", 77)
+            .filter("amount", "<", 800)
             .order_by("created_at", ResourceQuery.SortOrder.ASCENDING)
         );
         assertEquals(2, query.total());
+
         ArrayList<Debit> all_debits = query.all();
-        assertEquals(debits[0].id, all_debits.get(0).id);
-        assertEquals(debits[1].id, all_debits.get(1).id);
+        assertEquals(debits[1].id, all_debits.get(0).id);
+        assertEquals(debits[2].id, all_debits.get(1).id);
 
         query = (
-                buyer
+                card
                 .debits
                 .query()
-                .filter("amount", ">", 55)
-                .filter("amount", "<", 77)
+                .filter("amount", ">", 600)
+                .filter("amount", "<", 800)
                 .order_by("amount", ResourceQuery.SortOrder.DESCENDING)
             );
         assertEquals(1, query.total());
+
         all_debits = query.all();
         assertEquals(debits[1].id, all_debits.get(0).id);
-    }
-
-    @Test
-    public void testRetrieveDebit() throws HTTPError, NoResultsFound, MultipleResultsFound {
-        Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
-        String description = "Goods and services";
-        Card card = createCard(mp);
-        account.associateCard(card.uri);
-        Debit newDebit = account.debit(10000, description, card.uri, null, null);
-        Debit debit = new Debit(newDebit.uri);
-        assertNotNull("Debit should not be null", debit);
-        assertEquals("Debit description should be \"" + description + "\"", description, debit.description);
-    }
-
-    @Test
-    public void testCustomerDebitAttributes() throws HTTPError {
-        Customer customer = createBusinessCustomer();
-        Card card = createCard(mp);
-        customer.addCard(card.uri);
-
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("amount", 10000);
-        payload.put("description", "Goods and services");
-        payload.put("source_uri", card.uri);
-
-        Debit newDebit = customer.debit(payload);
-        Debit debit = new Debit(newDebit.uri);
-
-        assertNotNull(debit.getCustomer());
-        assertNotNull(debit.getAccount());
-        assertNotNull("Hold should be null", debit.getHold());
-    }
-
-    @Test
-    public void testAccountDebitAttributes() throws HTTPError, NoResultsFound, MultipleResultsFound {
-        Account account = mp.createBuyerAccount("William Henry Cavendish III", null, null, null);
-        String description = "Goods and services";
-        Card card = createCard(mp);
-        account.associateCard(card.uri);
-        Debit newDebit = account.debit(10000, description, card.uri, null, null);
-        Debit debit = new Debit(newDebit.uri);
-
-        assertNotNull("Account should not be null", debit.getAccount());
-        assertNotNull("Customer should not be null", debit.getCustomer());
-        assertNotNull("Hold should not be null", debit.getHold());
     }
 }

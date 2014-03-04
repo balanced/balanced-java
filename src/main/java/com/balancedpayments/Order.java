@@ -1,0 +1,83 @@
+package com.balancedpayments;
+
+import java.util.Date;
+import java.util.Map;
+
+import com.balancedpayments.core.Resource;
+import com.balancedpayments.core.ResourceCollection;
+import com.balancedpayments.core.ResourceField;
+
+import com.balancedpayments.errors.HTTPError;
+
+public class Order extends Resource {
+
+    // fields
+
+    @ResourceField(mutable=true)
+    public String description;
+
+    @ResourceField(mutable=true)
+    public Map<String, String> delivery_address;
+
+    // attributes
+
+    @ResourceField()
+    public Integer amount;
+
+    @ResourceField()
+    public Integer amount_escrowed;
+
+    @ResourceField()
+    public String currency;
+
+    @ResourceField(field="orders.buyers")
+    public Customer.Collection buyers;
+
+    @ResourceField(field="orders.credits")
+    public Credit.Collection credits;
+
+    @ResourceField(field="orders.debits")
+    public Debit.Collection debits;
+
+    @ResourceField(field="orders.merchant")
+    public Customer merchant;
+
+    @ResourceField(field="orders.refunds")
+    public Refund.Collection refunds;
+
+    @ResourceField(field="orders.reversals")
+    public Reversal.Collection reversals;
+
+
+    public static class Collection extends ResourceCollection<Order> {
+        public Collection(String uri) {
+            super(Order.class, uri);
+        }
+
+        @Override
+        public Order create(Map<String, Object> payload) throws HTTPError {
+            return super.create(payload);
+        }
+    };
+
+    public Order() {
+        super();
+    }
+    public Order(String uri) throws HTTPError {
+        super(uri);
+    }
+
+    public Order(Map<String, Object> payload) throws HTTPError {
+        super(payload);
+    }
+
+    public Debit debitFrom(FundingInstrument fi, Map<String, Object> options) throws HTTPError {
+        options.put("order", this.href);
+        return fi.debit(options);
+    }
+
+    public Credit creditTo(BankAccount ba, Map<String, Object> options) throws HTTPError {
+        options.put("order", this.href);
+        return ba.credit(options);
+    }
+}

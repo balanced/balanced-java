@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.balancedpayments.Balanced;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -40,9 +41,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Client {
-
-    private static final String VERSION = "0.10";
-    private static final String AGENT = "balanced-java";
     private static final int CONNECTION_TIMEOUT = 60 * 1000;
 
     private final String root;
@@ -135,8 +133,10 @@ public class Client {
     }
 
     private void addHeaders(HttpUriRequest request) {
-        request.addHeader(new BasicHeader("User-Agent", AGENT + '/' + VERSION));
-        request.addHeader(new BasicHeader("Accept", "application/json"));
+        request.addHeader(new BasicHeader("User-Agent", Balanced.getInstance().getAgent() + '/' + Balanced.getInstance().getVersion()));
+        //request.addHeader(new BasicHeader("Accept", "application/json"));
+        request.addHeader(new BasicHeader("Content-Type", "application/json;revision=" + Balanced.getInstance().getApiRevision()));
+        request.addHeader(new BasicHeader("Accept", "application/vnd.api+json;revision=" + Balanced.getInstance().getApiRevision()));
     }
 
     private Map<String, Object> op(HttpUriRequest request) throws HTTPError {
@@ -195,6 +195,7 @@ public class Client {
     private Map<String, Object> deserialize(String body) {
         Gson gson = new Gson();
         return gson.fromJson(body, new TypeToken<Map<String, Object>>() {}.getType());
+
     }
 
     private static void error(

@@ -107,28 +107,34 @@ public class ResourcePage<T> {
     
     private void load() throws HTTPError {
         Map<String, Object> page = client.get(uri);
-        
-        uri = (String) page.get("uri");
-        total= ((Double) page.get("total")).intValue();
-        first_uri = (String) page.get("first_uri");
-        previous_uri = (String) page.get("previous_uri");
-        next_uri = (String) page.get("next_uri");
-        last_uri = (String) page.get("last_uri");
+        Map<String, Object> meta = (Map<String, Object>) page.get("meta");
+        uri = (String) meta.get("href");
+        total = ((Double) meta.get("total")).intValue();
+        first_uri = (String) meta.get("first");
+        previous_uri = (String) meta.get("previous");
+        next_uri = (String) meta.get("next");
+        last_uri = (String) meta.get("last");
 
-        List<Map<String, Object>> objs = (List<Map<String, Object>>) page.get("items");
-        items = new ArrayList<T>(objs.size());
-        try {
-            for (Map<String, Object> obj: objs) {
-                T t = cls.newInstance();
-                ((Resource) t).deserialize(obj);
-                items.add(t);
+        Map<String, String> hyperlinks = (Map<String, String>) page.remove("links");
+        Map<String, String> resourceMeta = (Map<String, String>) page.remove("meta");
+
+        List<Map<String, Object>> objs = (List<Map<String, Object>>) page.get(Utils.classNameToResourceKey(cls.getSimpleName()));
+        if (objs != null) {
+            items = new ArrayList<T>(objs.size());
+            try {
+                for (Map<String, Object> obj: objs) {
+                    T t = cls.newInstance();
+                    ((Resource) t).hydrate(hyperlinks, resourceMeta, obj);
+                    ((Resource) t).constructFromResponse(obj);
+                    items.add(t);
+                }
             }
-        }
-        catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        }
-        catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            }
+            catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
