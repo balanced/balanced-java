@@ -11,7 +11,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Credit extends Resource {
 
-    private static final String resource_href = "/bank_accounts";
+    private static final String resource_href = "/credits";
 
     // fields
 
