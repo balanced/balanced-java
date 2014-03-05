@@ -2,16 +2,11 @@ package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
 
+import com.balancedpayments.errors.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.APIError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
-import com.balancedpayments.errors.NotCreated;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
@@ -33,7 +28,7 @@ public class BankAccountTest  extends BaseTest {
     }
 
     @Test
-    public void testVerify() throws CannotCreate, HTTPError {
+    public void testVerify() throws HTTPError {
         BankAccountVerification bav = ba.verify();
         ba.reload();
 
@@ -45,8 +40,8 @@ public class BankAccountTest  extends BaseTest {
         assertEquals(bav.verification_status, "succeeded");
     }
 
-    @Test(expected=APIError.class)
-    public void testDoubleVerify() throws CannotCreate, HTTPError {
+    @Test(expected=BankAccountVerificationFailure.class)
+    public void testDoubleVerify() throws HTTPError {
         ba.verify();
         ba.verify();
     }

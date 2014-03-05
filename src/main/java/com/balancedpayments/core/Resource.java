@@ -226,11 +226,6 @@ public abstract class Resource {
             throw new RuntimeException("Not supported yet");
         }
 
-        //ArrayList entities = (ArrayList)payload.get(Utils.classNameToResourceKey(this.getClass().getSimpleName()));
-        //ArrayList entities = (ArrayList)payload.entrySet().iterator().next();
-        //Map<String, Object> entity = (Map<String,Object>)entities.get(0);
-        //Map<String, Object> entity = (Map<String, Object>) payload.entrySet().iterator().next().getValue();
-
         for (Object key : payload.keySet()) {
             Map<String, Object> entity = (Map<String, Object>)((ArrayList)payload.get(key)).get(0);
             hydrate(links, meta, entity);

@@ -202,17 +202,19 @@ public class Client {
             HttpResponse response,
             String body,
             Map<String, Object> payload) throws APIError {
-        String category_code = (String) payload.get("category_code");
+        Map<String, Object> entity = (Map<String, Object>)((ArrayList)payload.get("errors")).get(0);
+        String category_code = (String) entity.get("category_code");
+
         // http://stackoverflow.com/questions/3434466/creating-a-factory-method-in-java-that-doesnt-rely-on-if-else
         if (InsufficientFunds.CODES.contains(category_code))
-            throw new InsufficientFunds(response, body, payload);
+            throw new InsufficientFunds(response, body, entity);
         else if (Declined.CODES.contains(category_code))
-            throw new Declined(response, body, payload);
+            throw new Declined(response, body, entity);
         else if (DuplicateAccountEmailAddress.CODES.contains(category_code))
-            throw new DuplicateAccountEmailAddress(response, body, payload);
+            throw new DuplicateAccountEmailAddress(response, body, entity);
         else if (BankAccountVerificationFailure.CODES.contains(category_code))
-            throw new BankAccountVerificationFailure(response, body, payload);
+            throw new BankAccountVerificationFailure(response, body, entity);
 
-        throw new APIError(response, body, payload);
+        throw new APIError(response, body, entity);
     }
 }

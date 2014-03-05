@@ -171,7 +171,7 @@ public class OrderTest extends BaseTest {
             credit = ba.credit(creditPayload);
         }
         catch (APIError e) {
-            assertEquals(409, ((APIError)e).status_code);
+            assertEquals(409, ((APIError)e).status_code.intValue());
         }
 
         order.reload();
