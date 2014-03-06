@@ -10,7 +10,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Callback extends Resource {
 
-    private static final String resource_href = "/callbacks";
+    public static final String resource_href = "/callbacks";
 
     @ResourceField(mutable=true)
     public String url;

@@ -11,6 +11,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Reversal extends Resource {
 
+    public static final String resource_href = "/reversals";
+
     // fields
 
     @ResourceField(mutable=true)

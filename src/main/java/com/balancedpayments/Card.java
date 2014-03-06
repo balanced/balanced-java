@@ -9,7 +9,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Card extends FundingInstrument {
 
-    private static final String resource_href = "/cards";
+    public static final String resource_href = "/cards";
 
     // fields
     @ResourceField(mutable=true)

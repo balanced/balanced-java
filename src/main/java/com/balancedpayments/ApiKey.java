@@ -10,10 +10,17 @@ import com.balancedpayments.errors.HTTPError;
 
 public class ApiKey extends Resource
 {
-    private static final String resource_href = "/api_keys";
+    public static final String resource_href = "/api_keys";
 
     @ResourceField(required=false)
     public String secret;
+
+
+    public static class Collection extends ResourceCollection<ApiKey> {
+        public Collection(String uri) {
+            super(ApiKey.class, uri);
+        }
+    }
 
     public static ResourceCollection<ApiKey> query() {
         return new ResourceCollection<ApiKey>(ApiKey.class, resource_href);
@@ -23,6 +30,14 @@ public class ApiKey extends Resource
         if (id == null && href == null)
             href = ApiKey.resource_href;
         super.save();
+    }
+
+    public ApiKey() throws HTTPError {
+        super();
+    }
+
+    public ApiKey(String uri) throws HTTPError {
+        super(uri);
     }
 
     @Override

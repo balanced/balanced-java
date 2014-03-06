@@ -11,6 +11,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Refund extends Resource {
 
+    public static final String resource_href = "/refunds";
+
     // fields
 
     @ResourceField(mutable=true)

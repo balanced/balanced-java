@@ -12,6 +12,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Debit extends Resource  {
 
+    public static final String resource_href = "/debits";
+
     // fields
 
     @ResourceField(mutable=true)
@@ -75,6 +77,13 @@ public class Debit extends Resource  {
 
     public Debit(Map<String, Object> payload) throws HTTPError {
         super(payload);
+    }
+
+    @Override
+    public void save() throws HTTPError {
+        if (id == null && href == null)
+            href = resource_href;
+        super.save();
     }
 
     public Refund refund(Map<String, Object> payload) throws HTTPError {

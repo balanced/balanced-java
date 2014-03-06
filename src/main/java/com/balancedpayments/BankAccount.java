@@ -14,7 +14,7 @@ import com.google.gson.internal.StringMap;
 
 public class BankAccount extends FundingInstrument {
 
-    private static final String resource_href = "/bank_accounts";
+    public static final String resource_href = "/bank_accounts";
     public final static String ACCOUNT_TYPE_CHECKING = "checking";
     public final static String ACCOUNT_TYPE_SAVINGS = "savings";
 

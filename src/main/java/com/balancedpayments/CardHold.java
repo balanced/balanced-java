@@ -10,7 +10,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class CardHold extends Resource {
 
-    private static final String resource_href = "/card_holds";
+    public static final String resource_href = "/card_holds";
 
     // fields
 

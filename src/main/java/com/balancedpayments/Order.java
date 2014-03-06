@@ -11,6 +11,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Order extends Resource {
 
+    public static final String resource_href = "/orders";
+
     // fields
 
     @ResourceField(mutable=true)

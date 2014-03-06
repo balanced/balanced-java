@@ -10,7 +10,7 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Customer extends Resource {
 
-    private static final String resource_href = "/customers";
+    public static final String resource_href = "/customers";
 
     // fields
 

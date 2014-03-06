@@ -10,6 +10,8 @@ import com.balancedpayments.errors.HTTPError;
 
 public class Event extends Resource {
 
+    public static final String resource_href = "/events";
+
     // attributes
 
     @ResourceField()
