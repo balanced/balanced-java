@@ -27,6 +27,9 @@ public class Customer extends Resource {
     public Integer dob_year;
 
     @ResourceField(mutable=true)
+    public String email;
+
+    @ResourceField(mutable=true)
     public String ein;
 
     @ResourceField(mutable=true)
