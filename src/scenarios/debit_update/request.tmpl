@@ -8,4 +8,8 @@ meta.put("anykey", "{{ request.payload.meta.anykey }}");
 meta.put("facebook.id", "1234567890");
 
 debit.meta = meta;
-debit.save();
+
+try {
+    debit.save();
+}
+catch (HTTPError e) {}

@@ -1,16 +1,15 @@
 % if mode == 'definition':
-BankAccount.unstore()
+BankAccount().unstore()
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA6nZLdijPKzQ8RhJNnN1OD6");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BA3LBmizwthrjehivn2ffzHU");
 try {
     bankAccount.unstore();
 }
-catch (NotCreated e) {
-    // the bank account didn't exist in the first place
-}
+catch (APIError e) {}
+catch (NotCreated e) {}
 
 % endif
 

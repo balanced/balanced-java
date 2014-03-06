@@ -8,10 +8,14 @@ import java.util.Map;
 public class refund_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Debit debit = new Debit("/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/debits/WDE7lu1wLfsf2JhWHYM6U2W");
-debit.refund();
+Debit debit = new Debit("/debits/WD57kmfV9Cgc0MiZkHOmFU1z");
+
+try {
+    debit.refund();
+}
+catch (HTTPError e) {}
 
 }
 }

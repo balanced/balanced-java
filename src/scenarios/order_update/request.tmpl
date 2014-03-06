@@ -1,0 +1,16 @@
+Balanced.configure("{{ api_key }}");
+
+Order order = new Order("{{ request.uri }}");
+
+Map<String, String> meta = new HashMap<String, String>();
+meta.put("product.id", "1234567890");
+meta.put("anykey", "valuegoeshere");
+
+order.meta = meta;
+order.description = "{{ request.payload.description }}";
+
+try {
+    order.save();
+}
+catch (HTTPError e) {}
+

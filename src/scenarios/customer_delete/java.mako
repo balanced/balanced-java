@@ -1,17 +1,16 @@
 % if mode == 'definition':
-Customer.unstore()
+Customer().unstore()
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Customer customer = new Customer("/v1/customers/CU7tcMPhFkoiaOjRkmmdBhXO");
+Customer customer = new Customer("/customers/CU4EeI9UPzRcOo2C3j1qFjQj");
 
 try {
     customer.unstore();
 }
-catch (NotCreated e) {
-    // the customer didn't exist in the first place
-}
+catch (HTTPError e) {}
+catch (NotCreated e) {}
 
 % endif
 

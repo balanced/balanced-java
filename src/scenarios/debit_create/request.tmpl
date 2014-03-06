@@ -1,8 +1,0 @@
-Balanced.configure("{{ api_key }}");
-
-Account account = new Account("{{ request.account_uri }}");
-account.debit({{ request.payload.amount }},
-              "{{ request.payload.description }}",
-              "{{ request.account_uri }}",
-              "{{ request.payload.appears_on_statement_as }}",
-              null);

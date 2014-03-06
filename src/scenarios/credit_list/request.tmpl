@@ -1,4 +1,3 @@
 Balanced.configure("{{ api_key }}");
 
-Marketplace mp = Marketplace.mine();
-Credit.Collection credits = mp.credits;
+Credit.Collection credits = new Credit.Collection(Credit.resource_href);

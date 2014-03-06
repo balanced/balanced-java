@@ -8,9 +8,9 @@ import java.util.Map;
 public class debit_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Debit.Collection debits = new Debit.Collection("/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/debits");
+Debit.Collection debits = new Debit.Collection(Debit.resource_href);
 
 }
 }

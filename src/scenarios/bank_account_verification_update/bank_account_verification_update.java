@@ -8,11 +8,10 @@ import java.util.Map;
 public class bank_account_verification_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-BankAccountVerification verification = new BankAccountVerification("/v1/bank_accounts/BA6nZLdijPKzQ8RhJNnN1OD6/verifications/BZ6s3ghAmwY5BhnJIrCKSkUo");
+BankAccountVerification verification = new BankAccountVerification("/verifications/BZ3NheXIi1UxUiNtkaSo1ZI5");
 verification.confirm(1, 1);
-verification.save();
 
 }
 }

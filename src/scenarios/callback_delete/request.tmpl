@@ -5,6 +5,5 @@ Callback callback = new Callback("{{ request.uri }}");
 try {
     callback.delete();
 }
-catch (NotCreated e) {
-    // the callback didn't exist in the first place
-}
+catch (APIError e) {}
+catch (NotCreated e) {}

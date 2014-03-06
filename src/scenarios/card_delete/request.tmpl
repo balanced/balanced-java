@@ -4,6 +4,5 @@ Card card = new Card("{{ request.uri }}");
 try {
     card.unstore();
 }
-catch (NotCreated e) {
-    // the card didn't exist in the first place
-}
+catch (HTTPError e) {}
+catch (NotCreated e) {}

@@ -1,0 +1,10 @@
+Balanced.configure("{{ api_key }}");
+
+CardHold cardHold = new CardHold("{{ request.card_hold_href }}");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", 1000);
+payload.put("description", "{{ request.payload.description }}");
+payload.put("appears_on_statement_as", "{{ request.payload.appears_on_statement_as }}");
+
+cardHold.capture(payload);

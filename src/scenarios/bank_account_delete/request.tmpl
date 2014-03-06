@@ -4,6 +4,5 @@ BankAccount bankAccount = new BankAccount("{{ request.uri }}");
 try {
     bankAccount.unstore();
 }
-catch (NotCreated e) {
-    // the bank account didn't exist in the first place
-}
+catch (APIError e) {}
+catch (NotCreated e) {}

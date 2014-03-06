@@ -1,0 +1,8 @@
+Balanced.configure("{{ api_key }}");
+
+CardHold cardHold = new CardHold("{{ request.uri }}");
+try {
+    cardHold.unstore();
+}
+catch (HTTPError e) {}
+catch (NotCreated notCreated) {}

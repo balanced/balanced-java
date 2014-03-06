@@ -1,0 +1,17 @@
+Balanced.configure("{{ api_key }}");
+
+Reversal reversal = new Reversal("{{ request.uri }}");
+
+Map<String, String> meta = new HashMap<String, String>();
+meta.put("reversal.reason", "user not happy with product");
+meta.put("user.notes", "very polite on the phone");
+meta.put("user.satisfaction", "6");
+
+reversal.meta = meta;
+reversal.description = "{{ request.payload.description }}";
+
+try {
+    reversal.save();
+}
+catch (HTTPError e) {}
+

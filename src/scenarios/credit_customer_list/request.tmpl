@@ -1,6 +1,0 @@
-Balanced.configure("{{ api_key }}");
-
-// this scenario is not present in scenarios.cache
-// so the customer_uri will be rendered as an empty string
-Customer customer = new Customer("{{ request.customer_uri }}");
-Credit.Collection credits = customer.credits;

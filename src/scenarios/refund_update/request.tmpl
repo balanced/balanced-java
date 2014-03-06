@@ -8,5 +8,9 @@ meta.put("user.notes", "very polite on the phone");
 meta.put("user.refund.count", "3");
 refund.meta = meta;
 refund.description = "{{ request.payload.description }}";
-refund.save();
+
+try {
+    refund.save();
+}
+catch (HTTPError e) {}
 

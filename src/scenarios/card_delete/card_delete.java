@@ -8,15 +8,14 @@ import java.util.Map;
 public class card_delete {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Card card = new Card("/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/cards/CC6NiW8huZV4AxYTDJsjOd7k");
+Card card = new Card("/cards/CC4cbNzUmFqGrc1GmFpXp6fe");
 try {
     card.unstore();
 }
-catch (NotCreated e) {
-    // the card didn't exist in the first place
-}
+catch (HTTPError e) {}
+catch (NotCreated e) {}
 
 }
 }

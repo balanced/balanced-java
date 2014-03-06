@@ -5,6 +5,5 @@ Customer customer = new Customer("{{ request.uri }}");
 try {
     customer.unstore();
 }
-catch (NotCreated e) {
-    // the customer didn't exist in the first place
-}
+catch (HTTPError e) {}
+catch (NotCreated e) {}

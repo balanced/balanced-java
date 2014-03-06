@@ -8,10 +8,14 @@ import java.util.Map;
 public class callback_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
 Callback callback = new Callback("http://www.example.com/callback");
-callback.save();
+
+try {
+    callback.save();
+}
+catch(HTTPError e) {}
 
 }
 }

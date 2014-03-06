@@ -2,9 +2,9 @@
 BankAccount.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-BankAccount.Collection bankAccounts = new BankAccount.Collection("/v1/bank_accounts");
+BankAccount.Collection bankAccounts = new BankAccount.Collection("/bank_accounts");
 
 % endif
 

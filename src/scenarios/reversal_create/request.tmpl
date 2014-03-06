@@ -1,0 +1,8 @@
+Balanced.configure("{{ api_key }}");
+
+Credit credit = new Credit("{{ request.credit_href }}");
+
+try {
+    credit.reverse();
+}
+catch (HTTPError e) {}

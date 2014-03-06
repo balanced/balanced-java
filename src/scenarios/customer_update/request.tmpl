@@ -1,0 +1,12 @@
+Balanced.configure("{{ api_key }}");
+
+Customer customer = new Customer("{{ request.uri }}");
+
+Map<String, String> meta = new HashMap<String, String>();
+meta.put("shipping-preference", "ground");
+
+customer.meta = meta;
+customer.email = "{{ request.payload.email }}";
+
+customer.save();
+

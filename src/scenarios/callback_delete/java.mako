@@ -1,17 +1,16 @@
 % if mode == 'definition':
-Callback.delete()
+Callback().delete()
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Callback callback = new Callback("/v1/callbacks/CB6DYHGJOCaSxYwDz34j5TGa");
+Callback callback = new Callback("/callbacks/CB40OMtABWHqkGcBEYpWVnAd");
 
 try {
     callback.delete();
 }
-catch (NotCreated e) {
-    // the callback didn't exist in the first place
-}
+catch (APIError e) {}
+catch (NotCreated e) {}
 
 % endif
 

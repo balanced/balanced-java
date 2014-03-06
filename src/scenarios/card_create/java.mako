@@ -2,13 +2,13 @@
 Card(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
 Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("card_number", "5105105105105100");
+payload.put("number", "5105105105105100");
 payload.put("expiration_month", 12);
 payload.put("expiration_year", 2020);
-payload.put("security_code", "123");
+payload.put("cvv", "123");
 
 Card card = new Card(payload);
 card.save();

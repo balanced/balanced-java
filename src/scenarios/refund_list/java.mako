@@ -2,9 +2,9 @@
 Refund.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Refund.Collection refunds = new Refund.Collection("/v1/marketplaces/TEST-MP5FKPQwyjvVgTDt7EiRw3Kq/refunds");
+Refund.Collection refunds = new Refund.Collection(Refund.resource_href);
 
 % endif
 

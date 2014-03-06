@@ -14,22 +14,32 @@ import com.balancedpayments.errors.NotCreated;
 
 public class ApiKeyTest {
     @Test
-    public void testCreate() throws CannotCreate, HTTPError {
+    public void testApiKeyCreate() throws CannotCreate, HTTPError {
         ApiKey key = new ApiKey();
         key.save();
         assertNotNull(key.secret);
     }
     
     @Test
-    public void testDelete() throws CannotCreate, NotCreated, HTTPError {
+    public void testApiKeyDelete() throws CannotCreate, NotCreated, HTTPError {
         ApiKey key = new ApiKey();
         key.save();
         Balanced.configure(key.secret);
-        key.delete();
+        key.unstore();
     }
-    
+
     @Test
-    public void testQueryAll() throws CannotCreate, NotCreated, HTTPError {
+    public void testApiKeyCollection() throws HTTPError {
+        ApiKey key = new ApiKey();
+        key.save();
+        Balanced.configure(key.secret);
+        ApiKey.Collection apiKeys = new ApiKey.Collection(ApiKey.resource_href);
+        assertEquals(1, apiKeys.total());
+    }
+
+    @Test
+    public void testApiKeyQueryAll() throws CannotCreate, NotCreated, HTTPError {
+        ApiKey.Collection bankAccounts = new ApiKey.Collection("/bank_accounts");
         ApiKey key = new ApiKey();
         key.save();
         Balanced.configure(key.secret);

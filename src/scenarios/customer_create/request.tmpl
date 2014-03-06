@@ -1,8 +1,13 @@
 Balanced.configure("{{ api_key }}");
 
+Map<String, Object> address = new HashMap<String, Object>();
+address.put("postal_code", "{{ request.payload.address.postal_code }}");
+
 Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("name", "{{ request.name }}");
-payload.put("email", "{{ request.email }}");
+payload.put("name", "{{ request.payload.name }}");
+payload.put("dob_month", {{ request.payload.dob_month }});
+payload.put("dob_year", {{ request.payload.dob_year }});
+payload.put("address", address);
 
 Customer customer = new Customer(payload);
 customer.save();

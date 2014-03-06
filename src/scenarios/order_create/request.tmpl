@@ -1,0 +1,11 @@
+Balanced.configure("{{ api_key }}");
+
+Customer customer = new Customer("{{ request.customer_href }}");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("description", "{{ request.payload.description }}");
+
+try {
+    customer.createOrder(payload);
+}
+catch (HTTPError e) {}

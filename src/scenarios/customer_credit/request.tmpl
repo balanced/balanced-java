@@ -1,8 +1,0 @@
-Balanced.configure("{{ api_key }}");
-
-Customer customer = new Customer("{{ request.customer_uri }}");
-
-Map<String, Object> payload = new HashMap<String, Object>();
-payload.put("amount", 100);
-
-customer.credit(payload);

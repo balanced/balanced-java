@@ -1,0 +1,8 @@
+Balanced.configure("{{ api_key }}");
+
+ApiKey key = new ApiKey("{{ request.uri }}");
+try {
+    key.unstore();
+}
+catch (APIError e) {}
+catch (NotCreated notCreated) {}

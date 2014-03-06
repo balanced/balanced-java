@@ -1,10 +1,10 @@
 % if mode == 'definition':
-Refund.save()
+Refund().save()
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Refund refund = new Refund("/v1/customers/CUuDKfPHvZhTmaNbEsg1BOO/refunds/RFHBiohkzkfO6RPYOrjc9US");
+Refund refund = new Refund("/refunds/RF5c71x7GALUPPdyexP4Weca");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("refund.reason", "user not happy with product");
@@ -12,7 +12,11 @@ meta.put("user.notes", "very polite on the phone");
 meta.put("user.refund.count", "3");
 refund.meta = meta;
 refund.description = "update this description";
-refund.save();
+
+try {
+    refund.save();
+}
+catch (HTTPError e) {}
 
 
 % endif

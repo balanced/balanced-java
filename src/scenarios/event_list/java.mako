@@ -2,9 +2,9 @@
 Event.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Event.Collection events = new Event.Collection("/v1/events");
+Event.Collection events = new Event.Collection(Event.resource_href);
 
 % endif
 

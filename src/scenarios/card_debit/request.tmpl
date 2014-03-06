@@ -1,0 +1,10 @@
+Balanced.configure("{{ api_key }}");
+
+Card card = new Card("{{ request.uri }}");
+
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+payload.put("description", "{{ request.payload.description }}");
+payload.put("appears_on_statement_as", "{{ request.payload.appears_on_statement_as }}");
+
+Debit debit = card.debit(payload);

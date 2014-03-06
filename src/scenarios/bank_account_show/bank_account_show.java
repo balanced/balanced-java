@@ -8,9 +8,9 @@ import java.util.Map;
 public class bank_account_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-BankAccount bankAccount = new BankAccount("/v1/bank_accounts/BA6wDj2MwJTwkPA4s4rEMq2y");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BA3LBmizwthrjehivn2ffzHU");
 
 }
 }

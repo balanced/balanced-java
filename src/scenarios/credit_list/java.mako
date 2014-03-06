@@ -1,11 +1,10 @@
 % if mode == 'definition':
-Marketplace.credits
+Credit.Collection(String href)
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Marketplace mp = Marketplace.mine();
-Credit.Collection credits = mp.credits;
+Credit.Collection credits = new Credit.Collection(Credit.resource_href);
 
 % endif
 

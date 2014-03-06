@@ -4,7 +4,7 @@ Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("account_number", "{{ request.payload.account_number }}");
 payload.put("name", "{{ request.payload.name }}");
 payload.put("routing_number", "{{ request.payload.routing_number }}");
-payload.put("type", "{{ request.payload.type }}");
+payload.put("account_type", "{{ request.payload.account_type }}");
 
 BankAccount bankAccount = new BankAccount(payload);
 bankAccount.save();

@@ -1,0 +1,5 @@
+Balanced.configure("{{ api_key }}");
+
+CardHold cardHold = new CardHold("{{ request.uri }}");
+cardHold.description = "{{ request.payload.description }}";
+cardHold.save();

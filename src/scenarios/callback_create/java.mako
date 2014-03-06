@@ -1,11 +1,15 @@
 % if mode == 'definition':
-Callback(String uri)
+Callback(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
+Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
 Callback callback = new Callback("http://www.example.com/callback");
-callback.save();
+
+try {
+    callback.save();
+}
+catch(HTTPError e) {}
 
 % endif
 

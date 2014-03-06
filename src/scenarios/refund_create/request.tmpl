@@ -1,4 +1,8 @@
 Balanced.configure("{{ api_key }}");
 
-Debit debit = new Debit("{{ request.payload.debit_uri }}");
-debit.refund();
+Debit debit = new Debit("{{ request.debit_href }}");
+
+try {
+    debit.refund();
+}
+catch (HTTPError e) {}

@@ -1,0 +1,13 @@
+Balanced.configure("{{ api_key }}");
+
+Credit credit = new Credit("{{ request.uri }}");
+
+Map<String, String> meta = new HashMap<String, String>();
+meta.put("facebook.id", "1234567890");
+meta.put("anykey", "valuegoeshere");
+
+credit.meta = meta;
+credit.description = "{{ request.payload.description }}";
+
+credit.save();
+

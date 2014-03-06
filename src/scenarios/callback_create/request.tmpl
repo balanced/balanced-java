@@ -1,4 +1,8 @@
 Balanced.configure("{{ api_key }}");
 
 Callback callback = new Callback("{{ request.payload.url }}");
-callback.save();
+
+try {
+    callback.save();
+}
+catch(HTTPError e) {}
