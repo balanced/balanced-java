@@ -18,8 +18,10 @@ meta.put("shipping-preference", "ground");
 customer.meta = meta;
 customer.email = "email@newdomain.com";
 
-customer.save();
-
+try {
+    customer.save();
+}
+catch (HTTPError e) {}
 
 }
 }

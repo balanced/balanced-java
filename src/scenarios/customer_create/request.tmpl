@@ -10,4 +10,8 @@ payload.put("dob_year", {{ request.payload.dob_year }});
 payload.put("address", address);
 
 Customer customer = new Customer(payload);
-customer.save();
+
+try {
+    customer.save();
+}
+catch (HTTPError e) {}

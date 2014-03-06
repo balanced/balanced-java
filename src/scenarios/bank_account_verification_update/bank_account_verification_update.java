@@ -11,7 +11,10 @@ public static void main(String[] args) throws HTTPError, NoResultsFound, Multipl
 Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
 BankAccountVerification verification = new BankAccountVerification("/verifications/BZ3NheXIi1UxUiNtkaSo1ZI5");
-verification.confirm(1, 1);
+try {
+    verification.confirm(1, 1);
+}
+catch (HTTPError e) {}
 
 }
 }

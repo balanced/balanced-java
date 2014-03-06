@@ -9,5 +9,7 @@ meta.put("anykey", "valuegoeshere");
 credit.meta = meta;
 credit.description = "{{ request.payload.description }}";
 
-credit.save();
-
+try {
+    credit.save();
+}
+catch (HTTPError e) {}

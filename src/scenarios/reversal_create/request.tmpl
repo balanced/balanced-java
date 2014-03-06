@@ -2,7 +2,17 @@ Balanced.configure("{{ api_key }}");
 
 Credit credit = new Credit("{{ request.credit_href }}");
 
+HashMap<String, Object> meta = new HashMap<String, Object>();
+meta.put("user.refund_reason", "not happy with product");
+meta.put("merchant.feedback", "positive");
+meta.put("fulfillment.item.condition", "OK");
+
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+payload.put("description", "{{ request.payload.description }}");
+payload.put("meta", meta);
+
 try {
-    credit.reverse();
+    credit.reverse(payload);
 }
 catch (HTTPError e) {}

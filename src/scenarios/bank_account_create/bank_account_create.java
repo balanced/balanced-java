@@ -17,7 +17,10 @@ payload.put("routing_number", "121000358");
 payload.put("account_type", "checking");
 
 BankAccount bankAccount = new BankAccount(payload);
-bankAccount.save();
+try {
+    bankAccount.save();
+}
+catch (HTTPError e) {}
 
 }
 }

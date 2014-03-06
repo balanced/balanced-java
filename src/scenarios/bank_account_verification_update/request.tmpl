@@ -1,4 +1,7 @@
 Balanced.configure("{{ api_key }}");
 
 BankAccountVerification verification = new BankAccountVerification("{{ request.uri }}");
-verification.confirm({{ request.payload.amount_1 }}, {{ request.payload.amount_2 }});
+try {
+    verification.confirm({{ request.payload.amount_1 }}, {{ request.payload.amount_2 }});
+}
+catch (HTTPError e) {}

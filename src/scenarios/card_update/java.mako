@@ -13,8 +13,10 @@ meta.put("twitter.id", "1234987650");
 
 card.meta = meta;
 
-card.save();
-
+try {
+    card.save();
+}
+catch (HTTPError e) {}
 
 % endif
 

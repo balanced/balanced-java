@@ -10,12 +10,16 @@ public class callback_create {
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
 Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-Callback callback = new Callback("http://www.example.com/callback");
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("url", "http://www.example.com/callback");
+payload.put("method", "");
+
+Callback callback = new Callback(payload);
 
 try {
     callback.save();
 }
-catch(HTTPError e) {}
+catch (HTTPError e) {}
 
 }
 }

@@ -1,4 +1,7 @@
 Balanced.configure("{{ api_key }}");
 
 ApiKey key = new ApiKey();
-key.save();
+try {
+    key.save();
+}
+catch (HTTPError e) {}

@@ -24,7 +24,6 @@ try {
 }
 catch (HTTPError e) {}
 
-
 }
 }
 

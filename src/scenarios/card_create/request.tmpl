@@ -7,4 +7,7 @@ payload.put("expiration_year", {{ request.payload.expiration_year }});
 payload.put("cvv", "{{ request.payload.cvv }}");
 
 Card card = new Card(payload);
-card.save();
+try {
+    card.save();
+}
+catch (HTTPError e) {}

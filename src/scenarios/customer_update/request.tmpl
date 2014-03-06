@@ -8,5 +8,7 @@ meta.put("shipping-preference", "ground");
 customer.meta = meta;
 customer.email = "{{ request.payload.email }}";
 
-customer.save();
-
+try {
+    customer.save();
+}
+catch (HTTPError e) {}

@@ -10,7 +10,7 @@ public class bank_account_list {
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
 Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
-BankAccount.Collection bankAccounts = new BankAccount.Collection("/bank_accounts");
+BankAccount.Collection bankAccounts = new BankAccount.Collection(BankAccount.resource_href);
 
 }
 }

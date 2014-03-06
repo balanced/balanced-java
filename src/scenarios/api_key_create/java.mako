@@ -5,7 +5,10 @@ ApiKey(Map<String, Object> payload)
 Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
 
 ApiKey key = new ApiKey();
-key.save();
+try {
+    key.save();
+}
+catch (HTTPError e) {}
 
 % endif
 

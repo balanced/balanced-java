@@ -1,8 +1,11 @@
 Balanced.configure("{{ api_key }}");
 
-BankAccount bankAccount = new BankAccount("{{ request.uri }}");
+BankAccount bankAccount = new BankAccount("{{ request.bank_account_href }}");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", {{ request.payload.amount }});
 
-Credit credit = bankAccount.credit(payload);
+try {
+    Credit credit = bankAccount.credit(payload);
+}
+catch (HTTPError e) {}

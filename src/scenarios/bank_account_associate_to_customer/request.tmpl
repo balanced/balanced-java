@@ -1,0 +1,6 @@
+Balanced.configure("{{ api_key }}");
+
+Customer customer = new Customer("{{ request.customer_href }}");
+BankAccount bankAccount = new BankAccount("{{ request.uri }}");
+
+bankAccount.associateToCustomer(customer);

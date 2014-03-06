@@ -13,7 +13,11 @@ meta.put("twitter.id", "1234987650");
 
 bankAccount.meta = meta;
 
-bankAccount.save();
+try {
+    bankAccount.save();
+}
+catch (HTTPError e) {}
+
 
 
 % endif

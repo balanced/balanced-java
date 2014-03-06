@@ -20,7 +20,11 @@ payload.put("dob_year", 1963);
 payload.put("address", address);
 
 Customer customer = new Customer(payload);
-customer.save();
+
+try {
+    customer.save();
+}
+catch (HTTPError e) {}
 
 }
 }

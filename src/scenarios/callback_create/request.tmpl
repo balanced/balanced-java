@@ -1,8 +1,12 @@
 Balanced.configure("{{ api_key }}");
 
-Callback callback = new Callback("{{ request.payload.url }}");
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("url", "{{ request.payload.url }}");
+payload.put("method", "{{ request.payload.method }}");
+
+Callback callback = new Callback(payload);
 
 try {
     callback.save();
 }
-catch(HTTPError e) {}
+catch (HTTPError e) {}

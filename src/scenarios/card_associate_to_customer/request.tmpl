@@ -1,0 +1,9 @@
+Balanced.configure("{{ api_key }}");
+
+Customer customer = new Customer("{{ request.customer_href }}");
+Card card = new Card("{{ request.uri }}");
+
+try {
+    card.associateToCustomer(customer);
+}
+catch (HTTPError e) {}

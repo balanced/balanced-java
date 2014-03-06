@@ -11,7 +11,10 @@ payload.put("expiration_year", 2020);
 payload.put("cvv", "123");
 
 Card card = new Card(payload);
-card.save();
+try {
+    card.save();
+}
+catch (HTTPError e) {}
 
 % endif
 

@@ -19,8 +19,10 @@ meta.put("anykey", "valuegoeshere");
 credit.meta = meta;
 credit.description = "New description for credit";
 
-credit.save();
-
+try {
+    credit.save();
+}
+catch (HTTPError e) {}
 
 }
 }

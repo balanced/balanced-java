@@ -7,4 +7,7 @@ payload.put("routing_number", "{{ request.payload.routing_number }}");
 payload.put("account_type", "{{ request.payload.account_type }}");
 
 BankAccount bankAccount = new BankAccount(payload);
-bankAccount.save();
+try {
+    bankAccount.save();
+}
+catch (HTTPError e) {}
