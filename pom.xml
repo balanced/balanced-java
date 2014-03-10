@@ -4,7 +4,7 @@
     <artifactId>balancedpayments</artifactId>
     <packaging>jar</packaging>
     <name>balanced-java</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <description>Balanced API Java client.</description>
     <url>https://www.balancedpayments.com</url>
     <licenses>
@@ -18,7 +18,8 @@
         <url>git@github.com:balanced/balanced-java.git</url>
         <connection>scm:git:git@github.com:balanced/balanced-java.git</connection>
         <developerConnection>scm:git:git@github.com:balanced/balanced-java.git</developerConnection>
-    </scm>
+      <tag>balancedpayments-1.0</tag>
+  </scm>
     <developers>
         <developer>
             <id>support</id>
