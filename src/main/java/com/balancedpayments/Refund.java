@@ -41,8 +41,8 @@ public class Refund extends Resource {
     @ResourceField(field="refunds.events")
     public Event.Collection events;
 
-    //@ResourceField(field="refunds.order")
-    //public Order order;
+    @ResourceField(field="refunds.order")
+    public Order order;
 
 
     public static class Collection extends ResourceCollection<Refund> {

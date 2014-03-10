@@ -44,8 +44,8 @@ public class Reversal extends Resource {
     @ResourceField(field="reversals.events")
     public Event.Collection events;
 
-    //@ResourceField(field="reversals.order")
-    //public Order order;
+    @ResourceField(field="reversals.order")
+    public Order order;
 
 
     public static class Collection extends ResourceCollection<Reversal> {
