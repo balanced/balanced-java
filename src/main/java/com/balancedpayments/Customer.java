@@ -49,8 +49,8 @@ public class Customer extends Resource {
     @ResourceField(field="customers.bank_accounts")
     public BankAccount.Collection bank_accounts;
 
-    //@ResourceField(field="customers.card_holds")
-    //public CardHold.Collection card_holds;
+    @ResourceField(field="customers.card_holds")
+    public CardHold.Collection card_holds;
 
     @ResourceField(field="customers.cards")
     public Card.Collection cards;
