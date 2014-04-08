@@ -4,6 +4,8 @@ Online Marketplace Payments
 
 [![Build Status](https://secure.travis-ci.org/balanced/balanced-java.png)](http://travis-ci.org/balanced/balanced-java)
 
+**v1.x requires Balanced API 1.1. Use [v0.x](https://github.com/balanced/balanced-java/tree/rev0) for Balanced API 1.0.**
+
 ## Requirements
 
 - [gson](http://code.google.com/p/google-gson/) 2.2.2
