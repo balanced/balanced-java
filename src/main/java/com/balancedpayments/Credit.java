@@ -24,7 +24,7 @@ public class Credit extends Resource {
     @ResourceField(mutable=true)
     public String description;
 
-    @ResourceField(field="credits.order")
+    @ResourceField(mutable=true, field="credits.order")
     public Order order;
 
     // attributes
