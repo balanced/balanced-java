@@ -23,6 +23,12 @@ public class BankAccountVerification extends Resource {
     @ResourceField()
     public String verification_status;
 
+    // attributes
+
+    @ResourceField(field="bank_account_verifications.bank_account")
+    public BankAccount bank_account;
+
+
     public static class Collection extends ResourceCollection<BankAccountVerification> {
         public Collection(String uri) {
             super(BankAccountVerification.class, uri);

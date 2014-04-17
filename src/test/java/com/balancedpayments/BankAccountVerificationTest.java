@@ -56,5 +56,6 @@ public class BankAccountVerificationTest extends BaseTest {
         bav = ba.verify();
         bav.confirm(1, 1);
         assertEquals(bav.verification_status, "succeeded");
+        assertEquals(ba.href, bav.bank_account.href);
     }
 }
