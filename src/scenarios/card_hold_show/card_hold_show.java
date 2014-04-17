@@ -8,9 +8,9 @@ import java.util.Map;
 public class card_hold_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-CardHold cardHold = new CardHold("/card_holds/HL4a1BKhDiVV9Ueh9MTozVDs");
+CardHold cardHold = new CardHold("/card_holds/HLbr4hg4i7Mg2wAEroOwJhk");
 
 }
 }

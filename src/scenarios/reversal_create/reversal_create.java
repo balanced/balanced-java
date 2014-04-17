@@ -8,9 +8,9 @@ import java.util.Map;
 public class reversal_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-Credit credit = new Credit("/credits/CR5j27kuJPX6voI8aokUWsEG");
+Credit credit = new Credit("/credits/CR1gIgujcGCCERRlL4KwljLG");
 
 HashMap<String, Object> meta = new HashMap<String, Object>();
 meta.put("user.refund_reason", "not happy with product");

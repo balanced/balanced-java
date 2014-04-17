@@ -8,7 +8,7 @@ import java.util.Map;
 public class card_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("number", "5105105105105100");

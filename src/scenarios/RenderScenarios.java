@@ -2,14 +2,16 @@
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.asfun.jangod.template.TemplateEngine;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 
 public class RenderScenarios {
+
+    private final static String SCENARIO_CACHE_URL = "https://raw.githubusercontent.com/balanced/balanced-docs/master/scenario.cache";
 
     final static TemplateEngine engine;
     static {
@@ -91,7 +93,43 @@ public class RenderScenarios {
         return scenarioPaths;
     }
 
+    public static void fetchScenarioCache() throws MalformedURLException, IOException {
+        try {
+            File file = new File("scenario.cache");
+            file.delete();
+        }
+        catch (Exception e) { /* ignore */ }
+
+        BufferedInputStream fin = null;
+        FileOutputStream fout = null;
+        try {
+            fin = new BufferedInputStream(new URL(SCENARIO_CACHE_URL).openStream());
+            fout = new FileOutputStream("src/scenarios/scenario.cache");
+
+            final byte data[] = new byte[1024];
+            int count;
+            while ((count = fin.read(data, 0, 1024)) != -1) {
+                fout.write(data, 0, count);
+            }
+        }
+        finally {
+            if (fin != null) {
+                fin.close();
+            }
+            if (fout != null) {
+                fout.close();
+            }
+        }
+    }
     public static void main(String[] args) throws IOException, JsonMappingException {
+        try {
+            fetchScenarioCache();
+        }
+        catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            System.exit(1);
+        }
+
         for (String scenarioPath : getScenarioPaths()) {
             String scenario = new File(scenarioPath).getName();
             renderScenario(scenario, scenarioPath);

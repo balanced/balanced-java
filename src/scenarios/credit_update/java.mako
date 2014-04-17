@@ -2,9 +2,9 @@
 Credit().save()
 
 % else:
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-Credit credit = new Credit("/credits/CR4wyLukORa0TXhCYtjZrfw5");
+Credit credit = new Credit("/credits/CRzQD72qlmLMGqdvPapoQd0");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("facebook.id", "1234567890");

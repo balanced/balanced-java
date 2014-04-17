@@ -2,9 +2,9 @@
 Card().debit(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-Card card = new Card("/cards/CC4GOYzOKyWXBzJMVTs00aNk");
+Card card = new Card("/cards/CCHv1QwjLfCxskorXDf8bmm");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);

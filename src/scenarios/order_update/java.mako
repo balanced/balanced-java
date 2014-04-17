@@ -2,9 +2,9 @@
 Order().save()
 
 % else:
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-Order order = new Order("/orders/OR520nGy59wfJ4mM7HR6TYrn");
+Order order = new Order("/orders/OR16uowitglVKoM6x5DxkKVq");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("product.id", "1234567890");

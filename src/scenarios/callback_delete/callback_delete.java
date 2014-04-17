@@ -8,9 +8,9 @@ import java.util.Map;
 public class callback_delete {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-Callback callback = new Callback("/callbacks/CB40OMtABWHqkGcBEYpWVnAd");
+Callback callback = new Callback("/callbacks/CB6K21Z5b8imJRPeZEBoHPq");
 
 try {
     callback.delete();

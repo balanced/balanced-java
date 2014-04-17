@@ -8,9 +8,9 @@ import java.util.Map;
 public class refund_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2cSDy37BKy5K4NUHKHVNXNTjTHPEqjRtB");
+Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
 
-Debit debit = new Debit("/debits/WD57kmfV9Cgc0MiZkHOmFU1z");
+Debit debit = new Debit("/debits/WDVNXTW2eo8YXgikJOXqVgy");
 
 HashMap<String, Object> meta = new HashMap<String, Object>();
 meta.put("user.refund_reason", "not happy with product");
