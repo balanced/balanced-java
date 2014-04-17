@@ -48,8 +48,8 @@ public class Debit extends Resource  {
     @ResourceField(field="debits.customer")
     public Customer customer;
 
-    //@ResourceField(field="debits.dispute")
-    //public Dispute dispute;
+    @ResourceField(field="debits.dispute")
+    public Dispute dispute;
 
     @ResourceField(field="debits.events")
     public Event.Collection events;

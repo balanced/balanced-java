@@ -35,8 +35,8 @@ public class Refund extends Resource {
     @ResourceField(field="refunds.debit")
     public Debit debit;
 
-    //@ResourceField(field="refunds.dispute")
-    //public Dispute dispute;
+    @ResourceField(field="refunds.dispute")
+    public Dispute dispute;
 
     @ResourceField(field="refunds.events")
     public Event.Collection events;

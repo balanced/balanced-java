@@ -5,26 +5,22 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.balancedpayments.Balanced;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
+import org.apache.commons.lang3.time.DateUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 public abstract class Resource {
 
-    protected static final ThreadLocal<SimpleDateFormat> dateTimeFormat
-            = new ThreadLocal<SimpleDateFormat>(){
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        }
-    };
+    DateTimeFormatter parser = ISODateTimeFormat.dateTimeParser();
 
     @ResourceField()
     public Date created_at;
@@ -95,7 +91,7 @@ public abstract class Resource {
     public Map<String, Object> serialize() {
         Map<String, Object> payload = new HashMap<String, Object>();
         Field[] fields = this.getClass().getFields();
-        for(Field f : fields){
+        for(Field f : fields) {
             if (!f.isAnnotationPresent(ResourceField.class)) {
                 continue;
             }
@@ -117,8 +113,15 @@ public abstract class Resource {
         return payload;
     }
 
-    public void constructFromResponse(Map<String, Object>payload) throws HTTPError{
+    public void constructFromResponse(Map<String, Object>payload) throws HTTPError {
+        constructFromResponse(payload, null);
+    }
+
+    public void constructFromResponse(Map<String, Object>payload, Resource parent) throws HTTPError {
         Field[] fields = this.getClass().getFields();
+        ArrayList<HashMap<String, Object>> resourceToHydrate = new ArrayList<HashMap<String, Object>>();
+
+        // populate fields
         for (Field f : fields) {
             if (!f.isAnnotationPresent(ResourceField.class)) {
                 continue;
@@ -158,16 +161,45 @@ public abstract class Resource {
             }
             else if (Resource.class.isAssignableFrom(f.getType())) {
                 if (value != null) {
-                    if (value instanceof String) {
-                        value = Balanced.getInstance().getClient().get((String)value);
-                    }
-                    value = deserializeResource((Map<String, Object>)value, f.getType());
+                    HashMap<String, Object> field = new HashMap<String, Object>();
+                    field.put("field", f);
+                    field.put("value", value);
+                    resourceToHydrate.add(field);
+                    continue;
                 }
             }
             else if (ResourceCollection.class.isAssignableFrom(f.getType())) {
                 if (value != null) {
                     value = deserializeResourceCollection((String) value, f.getType());
                 }
+            }
+
+            try {
+                f.set(this, value);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        // Instantiate linked resources
+        for (HashMap<String, Object> res : resourceToHydrate) {
+            Field f = (Field)res.get("field");
+            Object value = res.get("value");
+
+            if (value instanceof String) {
+                if (parent != null &&
+                        ((String)value).contains(parent.href)) {
+                    value = parent;
+                }
+                else {
+                    value = Balanced.getInstance().getClient().get((String) value);
+                }
+            }
+
+            if (value instanceof HashMap) {
+                value = deserializeResource((Map<String, Object>) value, f.getType(), this);
             }
 
             try {
@@ -218,7 +250,11 @@ public abstract class Resource {
         this.hyperlinks = links;
     }
 
-    public void deserialize(Map<String, Object> payload) throws HTTPError{
+    public void deserialize(Map<String, Object> payload) throws HTTPError {
+        deserialize(payload, null);
+    }
+
+    public void deserialize(Map<String, Object> payload, Resource parent) throws HTTPError {
         Map<String, String> links = (Map<String, String>)payload.remove("links");
         Map<String, String> meta = (Map<String, String>)payload.remove("meta");
 
@@ -229,19 +265,13 @@ public abstract class Resource {
         for (Object key : payload.keySet()) {
             Map<String, Object> entity = (Map<String, Object>)((ArrayList)payload.get(key)).get(0);
             hydrate(links, meta, entity);
-            constructFromResponse(entity);
+            constructFromResponse(entity, parent);
         }
     }
 
     protected Date deserializeDate(String raw) {
-        // http://stackoverflow.com/a/2132605/1339571
         if (raw == null) return null;
-        raw = raw.substring(0, 23) + raw.substring(26, raw.length());
-        try {
-            return dateTimeFormat.get().parse(raw);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return parser.parseDateTime(raw).toDate();
     }
 
     protected Object deserializeResourceCollection(String raw, Class clazz) {
@@ -270,7 +300,7 @@ public abstract class Resource {
         return value;
     }
 
-    protected Resource deserializeResource(Map<String, Object> raw, Class clazz) throws HTTPError {
+    protected Resource deserializeResource(Map<String, Object> raw, Class clazz, Resource parent) throws HTTPError {
         Resource value;
 
         Constructor<?> ctor;
@@ -292,7 +322,7 @@ public abstract class Resource {
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         }
-        value.deserialize(raw);
+        value.deserialize(raw, parent);
 
         return value;
     }
