@@ -4,6 +4,7 @@ import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
+import com.balancedpayments.errors.HTTPError;
 
 import java.util.Date;
 
@@ -39,6 +40,10 @@ public class Dispute extends Resource {
     @ResourceField(field="disputes.transaction")
     public Debit transaction;
 
+
+    public Dispute(String uri) throws HTTPError {
+        super(uri);
+    }
 
     public static class Collection extends ResourceCollection<Dispute> {
         public Collection(String uri) {
