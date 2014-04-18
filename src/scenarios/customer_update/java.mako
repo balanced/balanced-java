@@ -2,9 +2,9 @@
 Customer().save()
 
 % else:
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-Customer customer = new Customer("/customers/CUUybBMdV1fZ7BXjdL58BVt");
+Customer customer = new Customer("/customers/CU194sQ52I1idiwicbg0mOOB");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("shipping-preference", "ground");

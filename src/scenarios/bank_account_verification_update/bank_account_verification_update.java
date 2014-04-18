@@ -8,9 +8,9 @@ import java.util.Map;
 public class bank_account_verification_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-BankAccountVerification verification = new BankAccountVerification("/verifications/BZ7zjJJJqb1VU633qQw0z1Vc");
+BankAccountVerification verification = new BankAccountVerification("/verifications/BZ2AZ05mk2SQsEcicjSh3UN");
 try {
     verification.confirm(1, 1);
 }

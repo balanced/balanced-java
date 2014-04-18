@@ -2,9 +2,9 @@
 Card(String uri)
 
 % else:
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-Card card = new Card("/cards/CCA3crun7LbUPTtQyJhPAtW");
+Card card = new Card("/cards/CCOeoFZJMd94AruXU0wuSI9");
 
 % endif
 

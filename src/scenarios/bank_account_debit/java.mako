@@ -2,9 +2,9 @@
 BankAccount().debit(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-BankAccount bankAccount = new BankAccount("/bank_accounts/BA7JTM3gXtLHz4juPfeQ4oqz");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BAcRGk40xmI8meZpNLB3oYp");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);

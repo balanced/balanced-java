@@ -8,9 +8,9 @@ import java.util.Map;
 public class reversal_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-Reversal reversal = new Reversal("/reversals/RV1g9oXOqXgXYezFUtmqg4S2");
+Reversal reversal = new Reversal("/reversals/RV1Lqw4ZTPoeuldngynU1z6J");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("reversal.reason", "user not happy with product");

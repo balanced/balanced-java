@@ -2,7 +2,7 @@
 Customer(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
 Map<String, Object> address = new HashMap<String, Object>();
 address.put("postal_code", "48120");

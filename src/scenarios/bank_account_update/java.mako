@@ -2,9 +2,9 @@
 BankAccount().save()
 
 % else:
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-BankAccount bankAccount = new BankAccount("/bank_accounts/BA4BWUWGpCUSJoo0e9EiFE2");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BA8MzVwjVFnkuUvfHaXmqMZ");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("facebook.user_id", "0192837465");

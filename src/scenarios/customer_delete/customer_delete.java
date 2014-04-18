@@ -8,9 +8,9 @@ import java.util.Map;
 public class customer_delete {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-Customer customer = new Customer("/customers/CU116TOiXnCfxHyDErDcMtpU");
+Customer customer = new Customer("/customers/CU1eX3FIMntmCLmi2VfWA2db");
 
 try {
     customer.unstore();

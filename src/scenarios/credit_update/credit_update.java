@@ -8,9 +8,9 @@ import java.util.Map;
 public class credit_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2fYjkv4Tz5l3iPCtOlgLolmF15XPXlRCr");
+Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
 
-Credit credit = new Credit("/credits/CRzQD72qlmLMGqdvPapoQd0");
+Credit credit = new Credit("/credits/CROijU7WflyjITPTGU9GMlL");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("facebook.id", "1234567890");
