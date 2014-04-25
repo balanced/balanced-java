@@ -41,6 +41,8 @@ public class Dispute extends Resource {
     public Debit transaction;
 
 
+    public Dispute() {};
+
     public Dispute(String uri) throws HTTPError {
         super(uri);
     }
