@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Debit(String uri).dispute
+Debit().dispute
 
 % else:
 Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
