@@ -8,9 +8,9 @@ import java.util.Map;
 public class order_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Order order = new Order("/orders/OR1MqLeXKqwqqW254i3GJ72F");
+Order order = new Order("/orders/OR6d55qbtKx5aWSURkQeodRr");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("product.id", "1234567890");

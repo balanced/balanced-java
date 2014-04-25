@@ -2,9 +2,9 @@
 Credit().reverse()
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Credit credit = new Credit("/credits/CR1KskgNXcoA6e52QczoCYyF");
+Credit credit = new Credit("/credits/CR6nBcaGvGc4dtflEB1bjKBP");
 
 HashMap<String, Object> meta = new HashMap<String, Object>();
 meta.put("user.refund_reason", "not happy with product");

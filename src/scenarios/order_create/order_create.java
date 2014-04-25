@@ -8,9 +8,9 @@ import java.util.Map;
 public class order_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Customer customer = new Customer("/customers/CU1eX3FIMntmCLmi2VfWA2db");
+Customer customer = new Customer("/customers/CU4MnFEab304anOtUtEu5hkN");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("description", "Order #12341234");

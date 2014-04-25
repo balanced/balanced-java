@@ -8,7 +8,7 @@ import java.util.Map;
 public class card_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 Card.Collection cards = new Card.Collection(Card.resource_href);
 

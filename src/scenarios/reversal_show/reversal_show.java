@@ -8,9 +8,9 @@ import java.util.Map;
 public class reversal_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Reversal reversal = new Reversal("/reversals/RV1Lqw4ZTPoeuldngynU1z6J");
+Reversal reversal = new Reversal("/reversals/RV6qrEOTouLeIJuPu4s73Ra1");
 
 }
 }

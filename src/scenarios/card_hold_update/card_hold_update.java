@@ -8,9 +8,9 @@ import java.util.Map;
 public class card_hold_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-CardHold cardHold = new CardHold("/card_holds/HLqY5FcrUWcnBzMkHpKK1WB");
+CardHold cardHold = new CardHold("/card_holds/HL4bdnO7ELS2JfyJ2T8elYOl");
 cardHold.description = "update this description";
 try {
     cardHold.save();

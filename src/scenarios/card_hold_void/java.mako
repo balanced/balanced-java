@@ -2,9 +2,9 @@
 CardHold().unstore()
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-CardHold cardHold = new CardHold("/card_holds/HLKUg5lJJ5fQZpvaAujCWZH");
+CardHold cardHold = new CardHold("/card_holds/HL4joUazeM3BJE6emmv2Q8EF");
 try {
     cardHold.unstore();
 }

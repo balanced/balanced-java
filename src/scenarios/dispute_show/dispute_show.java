@@ -8,9 +8,9 @@ import java.util.Map;
 public class dispute_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Dispute dispute = new Dispute("/disputes/DT1yIxVolzxscHl6rGUhtTDw");
+Dispute dispute = new Dispute("/disputes/DT61IA2iRqyYBLqUCJNt5XNV");
 
 }
 }

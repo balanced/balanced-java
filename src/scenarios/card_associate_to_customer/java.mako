@@ -2,10 +2,10 @@
 Card().associateToCustomer(Customer customer)
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 Customer customer = new Customer("");
-Card card = new Card("/cards/CCVkCgaysaNhZH3ITVLmQ9X");
+Card card = new Card("/cards/CC4tvKLTKXcBJAgkGvPEW58N");
 
 try {
     card.associateToCustomer(customer);

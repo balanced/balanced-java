@@ -2,7 +2,7 @@
 ApiKey.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 ApiKey.Collection apiKeys = new ApiKey.Collection(ApiKey.resource_href);
 

@@ -2,7 +2,7 @@
 Debit.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 Debit.Collection debits = new Debit.Collection(Debit.resource_href);
 

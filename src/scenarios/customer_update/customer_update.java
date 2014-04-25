@@ -8,9 +8,9 @@ import java.util.Map;
 public class customer_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Customer customer = new Customer("/customers/CU194sQ52I1idiwicbg0mOOB");
+Customer customer = new Customer("/customers/CU4GAx8tZTDNIgAmwfV35e53");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("shipping-preference", "ground");

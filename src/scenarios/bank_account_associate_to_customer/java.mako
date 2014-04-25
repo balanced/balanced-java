@@ -2,10 +2,10 @@
 BankAccount().associateToCustomer(Customer customer)
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Customer customer = new Customer("/customers/CUeXNjpejPooRtSnJLc6SRD");
-BankAccount bankAccount = new BankAccount("/bank_accounts/BAscOV2erMwv3yhIb5sFTaV");
+Customer customer = new Customer("/customers/CU3VYCUIfwngJsidJWdGw2W5");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BA3Y63fK5STwlhKNMkE3Utmd");
 
 bankAccount.associateToCustomer(customer);
 

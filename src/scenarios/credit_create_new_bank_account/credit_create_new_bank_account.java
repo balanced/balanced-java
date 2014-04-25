@@ -8,7 +8,7 @@ import java.util.Map;
 public class credit_create_new_bank_account {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 /*
 Map<String, Object> bankAccountPayload = new HashMap<String, Object>();
 bankAccountPayload.put("name", "");

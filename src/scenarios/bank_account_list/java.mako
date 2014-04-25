@@ -2,7 +2,7 @@
 BankAccount.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 BankAccount.Collection bankAccounts = new BankAccount.Collection(BankAccount.resource_href);
 

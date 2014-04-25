@@ -2,9 +2,9 @@
 Customer(String uri)
 
 % else:
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
-Customer customer = new Customer("/customers/CU194sQ52I1idiwicbg0mOOB");
+Customer customer = new Customer("/customers/CU4GAx8tZTDNIgAmwfV35e53");
 
 % endif
 

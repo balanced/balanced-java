@@ -8,7 +8,7 @@ import java.util.Map;
 public class credit_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 Credit.Collection credits = new Credit.Collection(Credit.resource_href);
 

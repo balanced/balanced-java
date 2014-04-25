@@ -8,7 +8,7 @@ import java.util.Map;
 public class customer_create {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1ByQgRpcQLTwmOhCBUofyIHm0r96qPm8s");
+Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
 
 Map<String, Object> address = new HashMap<String, Object>();
 address.put("postal_code", "48120");
