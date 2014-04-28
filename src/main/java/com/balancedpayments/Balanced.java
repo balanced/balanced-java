@@ -6,7 +6,7 @@ public class Balanced {
 
     private static final Balanced _instance = new Balanced();
 
-    private static final String VERSION = "1.0";
+    private static final String VERSION = "1.1";
     private static final String API_REVISION = "1.1";
     private static final String API_URL = "https://api.balancedpayments.com";
     private static final String AGENT = "balanced-java";
