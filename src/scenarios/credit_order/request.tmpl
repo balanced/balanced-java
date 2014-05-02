@@ -1,0 +1,12 @@
+anced.configure("{{ api_key }}");
+
+BankAccount bankAccount = new BankAccount("{{ request.bank_account_href }}");
+Order order = new Order("{{ request.payload.order }}");
+
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+
+try {
+    Credit credit = order.creditTo(bankAccount, payload);
+}
+catch (HTTPError e) {}
