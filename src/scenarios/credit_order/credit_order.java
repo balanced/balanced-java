@@ -8,7 +8,7 @@ import java.util.Map;
 public class credit_order {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-anced.configure("ak-test-aUV295IugdhWSNx2JFckYBCSvfY2ibgq");
+Balanced.configure("ak-test-aUV295IugdhWSNx2JFckYBCSvfY2ibgq");
 
 BankAccount bankAccount = new BankAccount("/bank_accounts/BA1BnM6LmT9DLV4bZDIjUmHD");
 Order order = new Order("/orders/OR1s2WQKp0shLH9Qb0LiUfEJ");

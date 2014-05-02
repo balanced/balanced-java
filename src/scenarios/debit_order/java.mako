@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Order().debit(Map<String, Object> payload)
+Order().debitFrom(Card card, Map<String, Object> payload)
 
 % else:
 Balanced.configure("ak-test-aUV295IugdhWSNx2JFckYBCSvfY2ibgq");
