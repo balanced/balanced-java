@@ -1,0 +1,12 @@
+Balanced.configure("{{ api_key }}");
+
+Card card = new Card("{{ request.card_href }}");
+Order order = new Order("{{ request.order_href }}");
+
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+
+try {
+    Debit debit = order.debitFrom(card, payload);
+}
+catch (HTTPError e) {}
