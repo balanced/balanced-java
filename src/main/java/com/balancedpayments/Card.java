@@ -5,6 +5,7 @@ import java.util.Map;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
+import com.balancedpayments.errors.FundingInstrumentNotCreditable;
 import com.balancedpayments.errors.HTTPError;
 
 public class Card extends FundingInstrument {
@@ -65,6 +66,9 @@ public class Card extends FundingInstrument {
     @ResourceField(field="cards.debits")
     public Debit.Collection debits;
 
+    @ResourceField(field="cards.credits")
+    public Credit.Collection credits;
+
 
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
@@ -102,6 +106,14 @@ public class Card extends FundingInstrument {
 
     public CardHold hold(Map<String, Object> payload) throws HTTPError {
         return card_holds.create(payload);
+    }
+
+    @Override
+    public Credit credit(Map<String, Object> payload) throws HTTPError, FundingInstrumentNotCreditable {
+        if (credits == null) {
+            throw new FundingInstrumentNotCreditable();
+        }
+        return credits.create(payload);
     }
 
     @Override

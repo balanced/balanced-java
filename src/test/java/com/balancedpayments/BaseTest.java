@@ -55,6 +55,32 @@ public class BaseTest {
         return card;
     }
 
+    protected Card createCreditableCard() throws HTTPError {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("name", "Johannes Bach");
+        payload.put("number", "4342561111111118");
+        payload.put("expiration_month", 05);
+        payload.put("expiration_year", 2016);
+
+        Card card = new Card(payload);
+        card.save();
+
+        return card;
+    }
+
+    protected Card createNonCreditableCard() throws HTTPError {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("name", "Georg Telemann");
+        payload.put("number", "4111111111111111");
+        payload.put("expiration_month", 12);
+        payload.put("expiration_year", 2016);
+
+        Card card = new Card(payload);
+        card.save();
+
+        return card;
+    }
+
     protected BankAccount createBankAccount() throws HTTPError {
         Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("name", "Johann Bernoulli");

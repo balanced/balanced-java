@@ -1,14 +1,11 @@
 package com.balancedpayments;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.NotCreated;
 import com.google.gson.internal.StringMap;
 
 
@@ -94,10 +91,12 @@ public class BankAccount extends FundingInstrument {
         return verifications.create();
     }
 
+    @Override
     public Credit credit(Map<String, Object> payload) throws HTTPError {
         return credits.create(payload);
     }
 
+    @Override
     public Debit debit(Map<String, Object> payload) throws HTTPError {
         return debits.create(payload);
     }

@@ -1,0 +1,13 @@
+Balanced.configure("{{ api_key }}");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("name", "{{ request.payload.name }}");
+payload.put("number", "{{ request.payload.number }}");
+payload.put("expiration_month", {{ request.payload.expiration_month }});
+payload.put("expiration_year", {{ request.payload.expiration_year }});
+
+Card card = new Card(payload);
+try {
+    card.save();
+}
+catch (HTTPError e) {}
