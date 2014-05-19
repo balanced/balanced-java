@@ -6,6 +6,7 @@ import java.util.Map;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
+import com.balancedpayments.errors.FundingInstrumentNotCreditable;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
 
@@ -39,6 +40,11 @@ public class FundingInstrument extends Resource {
     }
 
     public Debit debit(Map<String, Object> payload) throws HTTPError {
+        // override in subclasses
+        return null;
+    }
+
+    public Credit credit(Map<String, Object> payload) throws HTTPError, FundingInstrumentNotCreditable {
         // override in subclasses
         return null;
     }
