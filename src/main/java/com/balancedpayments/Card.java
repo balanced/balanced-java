@@ -43,7 +43,19 @@ public class Card extends FundingInstrument {
     public String avs_street_match;
 
     @ResourceField()
+    public String bank_name;
+
+    @ResourceField()
     public String brand;
+
+    @ResourceField()
+    public Boolean can_credit;
+
+    @ResourceField()
+    public Boolean can_debit;
+
+    @ResourceField()
+    public String category;
 
     @ResourceField()
     public String cvv_match;
@@ -56,6 +68,9 @@ public class Card extends FundingInstrument {
 
     @ResourceField()
     public Boolean is_verified;
+
+    @ResourceField()
+    public String type;
 
     @ResourceField(field="cards.card_holds")
     public CardHold.Collection card_holds;
