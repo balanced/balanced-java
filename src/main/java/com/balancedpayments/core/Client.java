@@ -203,7 +203,10 @@ public class Client {
             String body,
             Map<String, Object> payload) throws APIError {
 
-        if (payload.containsKey("errors")) {
+        if (!payload.containsKey("errors")) {
+            throw new APIError(response, body, payload);
+        }
+        else {
             Map<String, Object> entity = (Map<String, Object>) ((ArrayList) payload.get("errors")).get(0);
             String category_code = (String) entity.get("category_code");
 
@@ -218,8 +221,6 @@ public class Client {
                 throw new BankAccountVerificationFailure(response, body, entity);
 
             throw new APIError(response, body, entity);
-        } else {
-            throw new APIError(response, body, payload);
         }
     }
 }
