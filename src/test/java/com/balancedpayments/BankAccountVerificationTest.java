@@ -42,7 +42,7 @@ public class BankAccountVerificationTest extends BaseTest {
             }
             catch (APIError e){
                 bav = new BankAccountVerification(bav.href);
-                assertEquals(bav.deposit_status, "succeeded");
+                assertEquals("pending", bav.deposit_status);
             }
         }
         try {
@@ -55,7 +55,7 @@ public class BankAccountVerificationTest extends BaseTest {
         assertEquals(bav.attempts_remaining.intValue(), 0);
         bav = ba.verify();
         bav.confirm(1, 1);
-        assertEquals(bav.verification_status, "succeeded");
+        assertEquals("succeeded", bav.verification_status);
         assertEquals(ba.href, bav.bank_account.href);
     }
 }
