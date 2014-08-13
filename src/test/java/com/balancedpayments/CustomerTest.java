@@ -89,9 +89,11 @@ public class CustomerTest extends BaseTest {
 
     @Test
     public void testCustomerList() throws HTTPError {
+        Customer.Collection customerz = new Customer.Collection(Customer.resource_href);
+        for (Customer c : customerz) {
+            System.out.println(c.name);
+        }
         ArrayList<Customer> customers = Customer.query().all();
-        //Customer.Collection customers = mp.customers;
-        //assertTrue(customers.getClass().equals(Customer.Collection.class));
         assertTrue(customers.size() > 0);
     }
 }
