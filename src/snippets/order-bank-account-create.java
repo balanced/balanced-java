@@ -6,7 +6,7 @@ bankAccountPayload.put("account_type", "checking");
 
 BankAccount bankAccount = new BankAccount(bankAccountPayload);
 try {
-bankAccount.save();
-bankAccount.associateToCustomer(merchant);
+    bankAccount.save();
+    bankAccount.associateToCustomer(merchant);
 }
 catch (HTTPError e) {}
