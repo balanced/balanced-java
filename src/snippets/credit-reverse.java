@@ -1,5 +1,3 @@
-Credit credit = new Credit(credit_href);
-
 HashMap<String, Object> reversalMeta = new HashMap<String, Object>();
 reversalMeta.put("user.refund_reason", "not happy with product");
 reversalMeta.put("merchant.feedback", "positive");
