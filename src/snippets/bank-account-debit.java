@@ -1,3 +1,7 @@
+// bankAccountHref is the stored href for the BankAccount
+// orderHref is the stored href for the Order
+BankAccount bankAccount = new BankAccount(bankAccountHref);
+
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);
 payload.put("description", "Some descriptive text for the debit in the dashboard");

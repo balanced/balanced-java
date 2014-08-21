@@ -1,4 +1,5 @@
-// creditHref is the stored href for the credit
+// creditHref is the stored href for the Credit
+// orderHref is the stored href for the Order
 Credit credit = new Credit(creditHref);
 
 HashMap<String, Object> meta = new HashMap<String, Object>();

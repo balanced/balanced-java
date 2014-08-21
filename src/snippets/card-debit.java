@@ -1,4 +1,5 @@
-// cardHref is the stored href for the card
+// cardHref is the stored href for the Card
+// orderHref is the stored href for the Order
 Card card = new Card(cardHref);
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
