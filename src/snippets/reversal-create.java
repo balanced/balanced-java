@@ -11,6 +11,7 @@ HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 100000);
 payload.put("description", "Reversal for Order #1111");
 payload.put("meta", meta);
+payload.put("order", orderHref);
 
 try {
     credit.reverse(payload);
