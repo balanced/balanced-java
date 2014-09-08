@@ -136,7 +136,7 @@ public class DebitTest extends BaseTest {
 
         Debit debit = ba.debit(payload);
 
-        assertTrue(debit.status.equals("pending"));
+        assertTrue(debit.status.equals("succeeded"));
         assertEquals(100000, (int)debit.amount);
     }
 

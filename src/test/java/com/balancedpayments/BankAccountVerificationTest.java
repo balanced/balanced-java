@@ -40,9 +40,9 @@ public class BankAccountVerificationTest extends BaseTest {
             try {
                 bav.confirm(12, 13);
             }
-            catch (APIError e){
+            catch (APIError e) {
                 bav = new BankAccountVerification(bav.href);
-                assertEquals("pending", bav.deposit_status);
+                assertEquals("pending", bav.verification_status);
             }
         }
         try {
