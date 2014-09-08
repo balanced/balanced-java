@@ -6,7 +6,7 @@ import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
-import com.google.gson.internal.StringMap;
+import com.google.gson.internal.LinkedTreeMap;
 
 
 public class BankAccount extends FundingInstrument {
@@ -23,7 +23,7 @@ public class BankAccount extends FundingInstrument {
     public String account_number;
 
     @ResourceField(mutable=true)
-    public StringMap<String> address;
+    public LinkedTreeMap<String, String> address;
 
     @ResourceField(mutable=true)
     public String name;

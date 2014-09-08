@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import com.balancedpayments.Balanced;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.NotCreated;
+import com.google.gson.internal.LinkedTreeMap;
 import org.apache.commons.lang3.time.DateUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -198,7 +199,7 @@ public abstract class Resource {
                 }
             }
 
-            if (value instanceof HashMap) {
+            if (value instanceof LinkedTreeMap) {
                 value = deserializeResource((Map<String, Object>) value, f.getType(), this);
             }
 
