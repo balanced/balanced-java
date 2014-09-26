@@ -37,7 +37,7 @@ Add this dependency to your `pom.xml`:
 
 ## Quickstart
 
-See https://github.com/balanced/balanced-java/blob/master/src/examples/com/balancedpayments/QuickStart.java
+See https://docs.balancedpayments.com/1.1/guides/quickstart/?language=java
 
 ## Usage
 
