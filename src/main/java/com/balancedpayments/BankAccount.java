@@ -57,6 +57,9 @@ public class BankAccount extends FundingInstrument {
     @ResourceField(field="bank_accounts.debits")
     public Debit.Collection debits;
 
+    @ResourceField(field="bank_accounts.customer")
+    public Customer customer;
+
     public static class Collection extends ResourceCollection<BankAccount> {
         public Collection(String uri) {
             super(BankAccount.class, uri);

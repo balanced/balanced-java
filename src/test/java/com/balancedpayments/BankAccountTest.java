@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import org.junit.rules.ExpectedException;
 
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class BankAccountTest  extends BaseTest {
@@ -58,5 +60,22 @@ public class BankAccountTest  extends BaseTest {
         String href = bankAccount.href;
         bankAccount.unstore();
         // TODO: make sure this was deleted
+    }
+
+    @Test
+    public void testBankAccountCustomerResourceField() throws HTTPError {
+        Map<String, Object> payload = personCustomerPayload();
+        Customer customer = new Customer(payload);
+        customer.save();
+
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.name = "Harry Fakester";
+        bankAccount.routing_number = "121042882";
+        bankAccount.account_number = "112233a";
+        bankAccount.account_type = "checking";
+        bankAccount.save();
+
+        bankAccount.associateToCustomer(customer);
+        assertNotNull(bankAccount.customer);
     }
 }
