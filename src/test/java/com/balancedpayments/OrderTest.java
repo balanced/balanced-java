@@ -1,14 +1,11 @@
 package com.balancedpayments;
 
+import com.balancedpayments.errors.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
 
 
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.NotCreated;
-import com.balancedpayments.errors.APIError;
 import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
@@ -178,5 +175,27 @@ public class OrderTest extends BaseTest {
 
         assertEquals(5000, order.amount.intValue());
         assertEquals(5000, order.amount_escrowed.intValue());
+    }
+
+    @Test
+    public void testOrderResourceFields() throws HTTPError {
+        Order order = createOrder();
+
+        assertNotNull(order.buyers);
+        assertNotNull(order.credits);
+        assertNotNull(order.debits);
+        assertNotNull(order.merchant);
+        assertNotNull(order.refunds);
+        assertNotNull(order.reversals);
+        assertNotNull(order.amount_escrowed);
+        assertNotNull(order.amount);
+        assertNotNull(order.created_at);
+        assertNotNull(order.currency);
+        assertNotNull(order.delivery_address);
+        assertNull(order.description);
+        assertNotNull(order.href);
+        assertNotNull(order.id);
+        assertNotNull(order.meta);
+        assertNotNull(order.updated_at);
     }
 }

@@ -16,6 +16,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class CardTest extends BaseTest {
@@ -69,5 +70,38 @@ public class CardTest extends BaseTest {
         Card card = createCard();
         card.unstore();
         //apiError.expect(APIError.class);
+    }
+
+    @Test
+    public void testCardResourceFields() throws HTTPError {
+        Card card = createCreditableCard();
+
+        assertNotNull(card.address);
+        assertNull(card.avs_postal_match);
+        assertNull(card.avs_result);
+        assertNull(card.avs_street_match);
+        assertNotNull(card.bank_name);
+        assertNotNull(card.can_credit);
+        assertNotNull(card.can_debit);
+        assertNotNull(card.category);
+        assertNotNull(card.created_at);
+        assertNull(card.cvv_match);
+        assertNull(card.cvv_result);
+        assertNotNull(card.expiration_month);
+        assertNotNull(card.expiration_year);
+        assertNotNull(card.fingerprint);
+        assertNotNull(card.href);
+        assertNotNull(card.id);
+        assertNotNull(card.is_verified);
+        assertNotNull(card.meta);
+        assertNotNull(card.name);
+        assertNotNull(card.number);
+        assertNotNull(card.type);
+        assertNotNull(card.updated_at);
+        assertNotNull(card.card_holds);
+        assertNull(card.customer);
+        assertNotNull(card.debits);
+        assertNotNull(card.disputes);
+        assertNotNull(card.credits);
     }
 }

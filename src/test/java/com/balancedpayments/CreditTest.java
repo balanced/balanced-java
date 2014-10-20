@@ -1,8 +1,6 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,5 +140,39 @@ public class CreditTest extends BaseTest {
         Reversal reversal = credit.reverse();
 
         assertEquals(credit.amount, reversal.amount);
+    }
+
+    @Test
+    public void testCreditResourceFields() throws HTTPError {
+        Card card = createCard();
+
+        Map<String, Object> debitPayload = new HashMap<String, Object>();
+        debitPayload.put("amount", 1000);
+        card.debit(debitPayload);
+
+        BankAccount ba = createBankAccount();
+        Map<String, Object> creditPayload = new HashMap<String, Object>();
+        creditPayload.put("amount", 1000);
+
+        Credit credit = ba.credit(creditPayload);
+
+        assertNotNull(credit.amount);
+        assertNotNull(credit.appears_on_statement_as);
+        assertNotNull(credit.created_at);
+        assertNotNull(credit.currency);
+        assertNull(credit.description);
+        assertNull(credit.failure_reason);
+        assertNull(credit.failure_reason_code);
+        assertNotNull(credit.href);
+        assertNotNull(credit.id);
+        assertNull(credit.customer);
+        assertNotNull(credit.destination);
+        assertNull(credit.order);
+        assertNotNull(credit.meta);
+        assertNotNull(credit.status);
+        assertNotNull(credit.transaction_number);
+        assertNotNull(credit.updated_at);
+        assertNotNull(credit.events);
+        assertNotNull(credit.reversals);
     }
 }

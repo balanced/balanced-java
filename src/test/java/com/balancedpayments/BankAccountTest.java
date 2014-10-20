@@ -1,6 +1,7 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import com.balancedpayments.errors.*;
 import org.junit.Before;
@@ -63,19 +64,27 @@ public class BankAccountTest  extends BaseTest {
     }
 
     @Test
-    public void testBankAccountCustomerResourceField() throws HTTPError {
-        Map<String, Object> payload = personCustomerPayload();
-        Customer customer = new Customer(payload);
-        customer.save();
+    public void testBankAccountResourceFields() throws HTTPError {
+        BankAccount bankAccount = createdAssociatedBankAccount();
 
-        BankAccount bankAccount = new BankAccount();
-        bankAccount.name = "Harry Fakester";
-        bankAccount.routing_number = "121042882";
-        bankAccount.account_number = "112233a";
-        bankAccount.account_type = "checking";
-        bankAccount.save();
-
-        bankAccount.associateToCustomer(customer);
         assertNotNull(bankAccount.customer);
+        assertNotNull(bankAccount.account_number);
+        assertNotNull(bankAccount.account_type);
+        assertNotNull(bankAccount.address);
+        assertNotNull(bankAccount.bank_name);
+        assertNotNull(bankAccount.can_credit);
+        assertNotNull(bankAccount.can_debit);
+        assertNotNull(bankAccount.created_at);
+        assertNotNull(bankAccount.fingerprint);
+        assertNotNull(bankAccount.href);
+        assertNotNull(bankAccount.id);
+        assertNotNull(bankAccount.verifications);
+        assertNull(bankAccount.verification);
+        assertNotNull(bankAccount.credits);
+        assertNotNull(bankAccount.debits);
+        assertNotNull(bankAccount.meta);
+        assertNotNull(bankAccount.name);
+        assertNotNull(bankAccount.routing_number);
+        assertNotNull(bankAccount.updated_at);
     }
 }
