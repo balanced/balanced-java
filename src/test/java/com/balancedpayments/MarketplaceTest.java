@@ -34,4 +34,37 @@ public class MarketplaceTest extends BaseTest {
         Marketplace mine = Marketplace.mine();
         assertNotNull(mine.owner_customer);
     }
+
+    @Test
+    public void testMarketplaceResourceFields() throws HTTPError,
+            NoResultsFound, MultipleResultsFound{
+        Marketplace marketplace = Marketplace.mine();
+
+        assertNotNull(marketplace.in_escrow);
+        assertNotNull(marketplace.domain_url);
+        assertNotNull(marketplace.name);
+        assertNotNull(marketplace.owner_customer);
+        assertNotNull(marketplace.href);
+        assertNotNull(marketplace.created_at);
+        assertNotNull(marketplace.support_email_address);
+        assertNotNull(marketplace.updated_at);
+        assertNotNull(marketplace.support_email_address);
+        assertNotNull(marketplace.support_phone_number);
+        assertNotNull(marketplace.production);
+        assertNotNull(marketplace.meta);
+        assertNotNull(marketplace.unsettled_fees);
+        assertNotNull(marketplace.id);
+        assertNotNull(marketplace.debits);
+        assertNotNull(marketplace.reversals);
+        assertNotNull(marketplace.disputes);
+        assertNotNull(marketplace.customers);
+        assertNotNull(marketplace.credits);
+        assertNotNull(marketplace.cards);
+        assertNotNull(marketplace.orders);
+        assertNotNull(marketplace.card_holds);
+        assertNotNull(marketplace.refunds);
+        assertNotNull(marketplace.bank_accounts);
+        assertNotNull(marketplace.callbacks);
+        assertNotNull(marketplace.events);
+    }
 }
