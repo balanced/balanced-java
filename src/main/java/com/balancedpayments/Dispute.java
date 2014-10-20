@@ -20,7 +20,7 @@ public class Dispute extends Resource {
     public String currency;
 
     @ResourceField()
-    public Date initianted_at;
+    public Date initiated_at;
 
     @ResourceField()
     public String href;
