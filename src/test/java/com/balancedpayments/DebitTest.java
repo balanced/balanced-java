@@ -7,6 +7,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Arrays;
+import java.lang.reflect.*;
+
 
 import static org.junit.Assert.*;
 
@@ -203,5 +206,46 @@ public class DebitTest extends BaseTest {
 
         all_debits = query.all();
         assertEquals(debits[1].id, all_debits.get(0).id);
+    }
+
+    @Test
+    public void testDebitResourceFields() throws HTTPError {
+        Card card = createCard();
+
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 5000);
+        payload.put("description", "Some descriptive text for the debit in the dashboard");
+        payload.put("appears_on_statement_as", "Statement text");
+        payload.put("appears_on_statement_as", "Statement text");
+
+
+        Debit debit = card.debit(payload);
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("anykey", "valuegoeshere");
+        meta.put("facebook.id", "1234567890");
+
+        debit.meta = meta;
+        debit.save();
+        
+        assertNotNull(debit.appears_on_statement_as);
+        assertNotNull(debit.created_at);
+        assertNotNull(debit.currency);
+        assertNotNull(debit.description);
+        assertNull(debit.failure_reason);
+        assertNull(debit.failure_reason_code);
+        assertNotNull(debit.href);
+        assertNotNull(debit.id);
+        assertNotNull(debit.card_hold);
+        assertNull(debit.customer);
+        assertNull(debit.dispute);
+        assertNull(debit.order);
+        assertNotNull(debit.source);
+        assertNotNull(debit.meta);
+        assertNotNull(debit.status);
+        assertNotNull(debit.transaction_number);
+        assertNotNull(debit.updated_at);
+        assertNotNull(debit.events);
+        assertNotNull(debit.refunds);
     }
 }
