@@ -1,12 +1,12 @@
 package com.balancedpayments;
 
-import java.util.Date;
-import java.util.Map;
-
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
+
+import java.util.Date;
+import java.util.Map;
 
 public class CardHold extends Resource {
 
@@ -58,6 +58,8 @@ public class CardHold extends Resource {
     @ResourceField(field="card_holds.events")
     public Event.Collection events;
 
+    @ResourceField(field="card_holds.order")
+    public Order.Collection order;
 
     public static class Collection extends ResourceCollection<CardHold> {
         public Collection(String uri) {

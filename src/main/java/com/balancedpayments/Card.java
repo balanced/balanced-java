@@ -1,12 +1,12 @@
 package com.balancedpayments;
 
-import java.util.Map;
-
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.FundingInstrumentNotCreditable;
 import com.balancedpayments.errors.HTTPError;
+
+import java.util.Map;
 
 public class Card extends FundingInstrument {
 
@@ -83,6 +83,9 @@ public class Card extends FundingInstrument {
 
     @ResourceField(field="cards.credits")
     public Credit.Collection credits;
+
+    @ResourceField(field="cards.disputes")
+    public Dispute.Collection disputes;
 
 
     public static class Collection extends ResourceCollection<Card> {

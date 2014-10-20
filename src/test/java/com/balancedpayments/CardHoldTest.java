@@ -71,4 +71,35 @@ public class CardHoldTest extends BaseTest {
 
         assertNotNull(cardHold.voided_at);
     }
+
+    @Test
+    public void testCardHoldResourceFields() throws HTTPError {
+        Card card = createNonCreditableCard();
+
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("amount", 2000);
+        payload.put("description", "Test hold");
+
+        CardHold cardHold = card.hold(payload);
+
+        assertNotNull(cardHold.amount);
+        assertNotNull(cardHold.created_at);
+        assertNotNull(cardHold.currency);
+        assertNotNull(cardHold.description);
+        assertNotNull(cardHold.expires_at);
+        assertNull(cardHold.failure_reason);
+        assertNull(cardHold.failure_reason_code);
+        assertNotNull(cardHold.href);
+        assertNotNull(cardHold.id);
+        assertNotNull(cardHold.card);
+        assertNull(cardHold.debit);
+        assertNull(cardHold.order);
+        assertNotNull(cardHold.meta);
+        assertNotNull(cardHold.status);
+        assertNotNull(cardHold.transaction_number);
+        assertNotNull(cardHold.updated_at);
+        assertNull(cardHold.voided_at);
+        assertNotNull(cardHold.debits);
+        assertNotNull(cardHold.events);
+    }
 }
