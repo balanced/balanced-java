@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.balancedpayments.errors.HTTPError;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class CustomerTest extends BaseTest {
 
@@ -95,5 +96,37 @@ public class CustomerTest extends BaseTest {
         }
         ArrayList<Customer> customers = Customer.query().all();
         assertTrue(customers.size() > 0);
+    }
+
+    @Test
+    public void testCustomerResourceFields() throws HTTPError {
+        Customer customer = createPersonCustomer();
+
+        assertNotNull(customer.address);
+        assertNull(customer.business_name);
+        assertNotNull(customer.created_at);
+        assertNotNull(customer.dob_month);
+        assertNotNull(customer.dob_year);
+        assertNull(customer.ein);
+        assertNull(customer.email);
+        assertNotNull(customer.href);
+        assertNotNull(customer.id);
+        assertNull(customer.destination);
+        assertNull(customer.source);
+        assertNotNull(customer.merchant_status);
+        assertNotNull(customer.meta);
+        assertNotNull(customer.name);
+        assertNotNull(customer.phone);
+        assertNotNull(customer.ssn_last4);
+        assertNotNull(customer.updated_at);
+        assertNotNull(customer.bank_accounts);
+        assertNotNull(customer.card_holds);
+        assertNotNull(customer.cards);
+        assertNotNull(customer.credits);
+        assertNotNull(customer.debits);
+        assertNotNull(customer.disputes);
+        assertNotNull(customer.orders);
+        assertNotNull(customer.refunds);
+        assertNotNull(customer.reversals);
     }
 }
