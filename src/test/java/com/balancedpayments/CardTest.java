@@ -17,6 +17,7 @@ import java.util.Map;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 
 public class CardTest extends BaseTest {
@@ -76,32 +77,44 @@ public class CardTest extends BaseTest {
     public void testCardResourceFields() throws HTTPError {
         Card card = createCreditableCard();
 
-        assertNotNull(card.address);
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        card.meta = meta;
+        card.save();
+
+        Map<String, Object> payload = personCustomerPayload();
+        Customer customer = new Customer(payload);
+        customer.save();
+
+        card.associateToCustomer(customer);
+
+        assertEquals(card.address.toString(), "{city=null, line2=null, " +
+                "line1=null, state=null, postal_code=null, country_code=null}");
         assertNull(card.avs_postal_match);
         assertNull(card.avs_result);
         assertNull(card.avs_street_match);
-        assertNotNull(card.bank_name);
-        assertNotNull(card.can_credit);
-        assertNotNull(card.can_debit);
-        assertNotNull(card.category);
+        assertEquals(card.bank_name, "WELLS FARGO BANK, N.A.");
+        assertTrue(card.can_credit);
+        assertTrue(card.can_debit);
+        assertEquals(card.category, "other");
         assertNotNull(card.created_at);
         assertNull(card.cvv_match);
         assertNull(card.cvv_result);
-        assertNotNull(card.expiration_month);
-        assertNotNull(card.expiration_year);
+        assertEquals(card.expiration_month.toString(), "5");
+        assertEquals(card.expiration_year.toString(), "2016");
         assertNotNull(card.fingerprint);
-        assertNotNull(card.href);
-        assertNotNull(card.id);
-        assertNotNull(card.is_verified);
-        assertNotNull(card.meta);
-        assertNotNull(card.name);
-        assertNotNull(card.number);
-        assertNotNull(card.type);
+        assertTrue(card.href.contains("/cards/CC"));
+        assertTrue(card.id.contains("CC"));
+        assertTrue(card.is_verified);
+        assertEquals(card.meta.get("facebook"), "0192837465");
+        assertEquals(card.name, "Johannes Bach");
+        assertEquals(card.number, "xxxxxxxxxxxx1118");
+        assertEquals(card.type, "debit");
         assertNotNull(card.updated_at);
-        assertNotNull(card.card_holds);
-        assertNull(card.customer);
-        assertNotNull(card.debits);
-        assertNotNull(card.disputes);
-        assertNotNull(card.credits);
+        assertEquals(card.customer.href, customer.href);
+        assertThat(card.disputes, instanceOf(Dispute.Collection.class));
+        assertThat(card.card_holds, instanceOf(CardHold.Collection.class));
+        assertThat(card.debits, instanceOf(Debit.Collection.class));
+        assertThat(card.credits, instanceOf(Credit.Collection.class));
     }
 }
