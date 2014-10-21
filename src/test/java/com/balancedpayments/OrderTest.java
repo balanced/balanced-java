@@ -8,12 +8,12 @@ import org.junit.Rule;
 
 import org.junit.rules.ExpectedException;
 
+import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class OrderTest extends BaseTest {
     @Test
@@ -181,21 +181,28 @@ public class OrderTest extends BaseTest {
     public void testOrderResourceFields() throws HTTPError {
         Order order = createOrder();
 
-        assertNotNull(order.buyers);
-        assertNotNull(order.credits);
-        assertNotNull(order.debits);
-        assertNotNull(order.merchant);
-        assertNotNull(order.refunds);
-        assertNotNull(order.reversals);
-        assertNotNull(order.amount_escrowed);
-        assertNotNull(order.amount);
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        order.description = "New description for order";
+        order.meta = meta;
+        order.save();
+
+        assertThat(order.buyers, instanceOf(Customer.Collection.class));
+        assertThat(order.credits, instanceOf(Credit.Collection.class));
+        assertThat(order.debits, instanceOf(Debit.Collection.class));
+        assertThat(order.merchant, instanceOf(Customer.class));
+        assertThat(order.refunds, instanceOf(Refund.Collection.class));
+        assertThat(order.reversals, instanceOf(Reversal.Collection.class));
+        assertTrue(order.href.contains("/orders/OR"));
+        assertTrue(order.id.startsWith("OR"));
+        assertEquals(order.delivery_address.toString(), "{city=null, line2=null, " +
+                "line1=null, state=null, postal_code=null, country_code=null}");
         assertNotNull(order.created_at);
-        assertNotNull(order.currency);
-        assertNotNull(order.delivery_address);
-        assertNull(order.description);
-        assertNotNull(order.href);
-        assertNotNull(order.id);
-        assertNotNull(order.meta);
         assertNotNull(order.updated_at);
+        assertEquals(order.currency, "USD");
+        assertEquals(order.description, "New description for order");
+        assertEquals(order.meta.get("facebook"), "0192837465");
+        assertEquals(order.amount_escrowed.toString(), "0");
+        assertEquals(order.amount.toString(), "5000");
     }
 }

@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.balancedpayments.errors.HTTPError;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class CustomerTest extends BaseTest {
 
@@ -101,32 +101,44 @@ public class CustomerTest extends BaseTest {
     @Test
     public void testCustomerResourceFields() throws HTTPError {
         Customer customer = createPersonCustomer();
+        Card card = createCard();
+        BankAccount ba = createBankAccount();
+        ba.associateToCustomer(customer);
+        card.associateToCustomer(customer);
 
-        assertNotNull(customer.address);
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        customer.ein = "123456789";
+        customer.email = "john@google.com";
+        customer.meta = meta;
+        customer.save();
+
+        assertEquals(customer.address.toString(),
+                "{city=San Francisco, line2=null, line1=965 Mission St, " +
+                        "state=CA, postal_code=94103, country_code=US}");
         assertNull(customer.business_name);
         assertNotNull(customer.created_at);
-        assertNotNull(customer.dob_month);
-        assertNotNull(customer.dob_year);
-        assertNull(customer.ein);
-        assertNull(customer.email);
-        assertNotNull(customer.href);
-        assertNotNull(customer.id);
-        assertNull(customer.destination);
-        assertNull(customer.source);
-        assertNotNull(customer.merchant_status);
-        assertNotNull(customer.meta);
-        assertNotNull(customer.name);
-        assertNotNull(customer.phone);
-        assertNotNull(customer.ssn_last4);
+        assertEquals(customer.dob_month.toString(), "1");
+        assertEquals(customer.dob_year.toString(), "1980");
+        assertEquals(customer.ein, "123456789");
+        assertEquals(customer.email, "john@google.com");
+        assertTrue(customer.href.contains("/customers/CU"));
+        assertTrue(customer.id.startsWith("CU"));
+        assertEquals(customer.merchant_status, "underwritten");
+        assertEquals(customer.meta.get("facebook"), "0192837465");
+        assertEquals(customer.name, "John Lee Hooker");
+        assertEquals(customer.phone, "(904) 555-1796");
+        assertEquals(customer.ssn_last4, "xxxx");
         assertNotNull(customer.updated_at);
-        assertNotNull(customer.bank_accounts);
-        assertNotNull(customer.card_holds);
-        assertNotNull(customer.cards);
-        assertNotNull(customer.credits);
-        assertNotNull(customer.debits);
-        assertNotNull(customer.disputes);
-        assertNotNull(customer.orders);
-        assertNotNull(customer.refunds);
-        assertNotNull(customer.reversals);
+        assertThat(customer.bank_accounts, instanceOf(BankAccount.Collection.class));
+        assertThat(customer.cards, instanceOf(Card.Collection.class));
+        assertThat(customer.credits, instanceOf(Credit.Collection.class));
+        assertThat(customer.debits, instanceOf(Debit.Collection.class));
+        assertThat(customer.disputes, instanceOf(Dispute.Collection.class));
+        assertThat(customer.orders, instanceOf(Order.Collection.class));
+        assertThat(customer.refunds, instanceOf(Refund.Collection.class));
+        assertThat(customer.reversals, instanceOf(Reversal.Collection.class));
+        assertThat(customer.card_holds, instanceOf(CardHold.Collection.class));
     }
 }
