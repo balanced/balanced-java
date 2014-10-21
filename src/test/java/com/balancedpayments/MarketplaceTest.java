@@ -1,6 +1,7 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,31 +41,29 @@ public class MarketplaceTest extends BaseTest {
             NoResultsFound, MultipleResultsFound{
         Marketplace marketplace = Marketplace.mine();
 
-        assertNotNull(marketplace.in_escrow);
-        assertNotNull(marketplace.domain_url);
-        assertNotNull(marketplace.name);
-        assertNotNull(marketplace.owner_customer);
-        assertNotNull(marketplace.href);
+        assertEquals(marketplace.domain_url, "example.com");
+        assertEquals(marketplace.name, "Test Marketplace");
+        assertThat(marketplace.owner_customer, instanceOf(Customer.class));
+        assertEquals(marketplace.support_email_address, "support@example.com");
+        assertEquals(marketplace.support_phone_number, "+16505551234");
         assertNotNull(marketplace.created_at);
-        assertNotNull(marketplace.support_email_address);
         assertNotNull(marketplace.updated_at);
-        assertNotNull(marketplace.support_email_address);
-        assertNotNull(marketplace.support_phone_number);
-        assertNotNull(marketplace.production);
-        assertNotNull(marketplace.meta);
-        assertNotNull(marketplace.unsettled_fees);
-        assertNotNull(marketplace.id);
-        assertNotNull(marketplace.debits);
-        assertNotNull(marketplace.reversals);
-        assertNotNull(marketplace.disputes);
-        assertNotNull(marketplace.customers);
-        assertNotNull(marketplace.credits);
-        assertNotNull(marketplace.cards);
-        assertNotNull(marketplace.orders);
-        assertNotNull(marketplace.card_holds);
-        assertNotNull(marketplace.refunds);
-        assertNotNull(marketplace.bank_accounts);
-        assertNotNull(marketplace.callbacks);
-        assertNotNull(marketplace.events);
+        assertFalse(marketplace.production);
+        assertEquals(marketplace.in_escrow.toString(), "0");
+        assertEquals(marketplace.unsettled_fees.toString(), "0");
+        assertTrue(marketplace.href.contains("/marketplaces/TEST-MP"));
+        assertTrue(marketplace.id.startsWith("TEST-MP"));
+        assertThat(marketplace.bank_accounts, instanceOf(BankAccount.Collection.class));
+        assertThat(marketplace.cards, instanceOf(Card.Collection.class));
+        assertThat(marketplace.credits, instanceOf(Credit.Collection.class));
+        assertThat(marketplace.debits, instanceOf(Debit.Collection.class));
+        assertThat(marketplace.disputes, instanceOf(Dispute.Collection.class));
+        assertThat(marketplace.orders, instanceOf(Order.Collection.class));
+        assertThat(marketplace.refunds, instanceOf(Refund.Collection.class));
+        assertThat(marketplace.reversals, instanceOf(Reversal.Collection.class));
+        assertThat(marketplace.card_holds, instanceOf(CardHold.Collection.class));
+        assertThat(marketplace.events, instanceOf(Event.Collection.class));
+        assertThat(marketplace.callbacks, instanceOf(Callback.Collection.class));
+        assertThat(marketplace.customers, instanceOf(Customer.Collection.class));
     }
 }
