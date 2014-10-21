@@ -12,7 +12,6 @@ import java.lang.reflect.*;
 
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class DebitTest extends BaseTest {
 
@@ -237,8 +236,8 @@ public class DebitTest extends BaseTest {
         assertNull(debit.failure_reason_code);
         assertTrue(debit.href.contains("/debits/WD"));
         assertTrue(debit.id.startsWith("WD"));
-        assertThat(debit.card_hold, instanceOf(CardHold.class));
-        assertThat(debit.customer, instanceOf(Customer.class));
+        assertTrue(debit.card_hold instanceof CardHold);
+        assertEquals(debit.customer.href, customer.href);
         assertNull(debit.dispute);
         assertNull(debit.order);
         assertEquals(debit.source.href, card.href);
@@ -246,7 +245,7 @@ public class DebitTest extends BaseTest {
         assertEquals(debit.status, "succeeded");
         assertTrue(debit.transaction_number.startsWith("W"));
         assertNotNull(debit.updated_at);
-        assertThat(debit.events, instanceOf(Event.Collection.class));
-        assertThat(debit.refunds, instanceOf(Refund.Collection.class));
+        assertTrue(debit.events instanceof Event.Collection);
+        assertTrue(debit.refunds instanceof Refund.Collection);
     }
 }
