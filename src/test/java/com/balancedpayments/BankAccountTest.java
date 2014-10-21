@@ -65,7 +65,7 @@ public class BankAccountTest  extends BaseTest {
     }
 
     @Test
-    public void testBankAccountCustomerResourceField() throws HTTPError {
+    public void testBankAccountResourceFields() throws HTTPError {
         Map<String, Object> payload = personCustomerPayload();
         Customer customer = new Customer(payload);
         customer.save();
@@ -81,11 +81,10 @@ public class BankAccountTest  extends BaseTest {
 
         Map<String, String> meta = new HashMap<String, String>();
         meta.put("facebook", "0192837465");
-
         bankAccount.meta = meta;
         bankAccount.save();
 
-        assertThat(bankAccount.customer, instanceOf(Customer.class));
+        assertEquals(bankAccount.customer.href, customer.href);
         assertEquals(bankAccount.account_number, "xxx233a");
         assertEquals(bankAccount.account_type, "checking");
         assertEquals(bankAccount.address.toString(), "{city=null, line2=null, " +
@@ -106,9 +105,8 @@ public class BankAccountTest  extends BaseTest {
         assertTrue((bankAccount.verifications.toString()).contains(
                 "com.balancedpayments.BankAccountVerification$Collection"));
         assertNull(bankAccount.verification);
-        assertTrue((bankAccount.credits.toString()).contains("com.balancedpayments.Credit$Collection"));
-        assertTrue((bankAccount.debits.toString()).contains("com.balancedpayments.Debit$Collection"));
+        assertThat(bankAccount.credits, instanceOf(Credit.Collection.class));
+        assertThat(bankAccount.debits, instanceOf(Debit.Collection.class));
         assertEquals(bankAccount.bank_name, "WELLS FARGO BANK NA");
-
     }
 }

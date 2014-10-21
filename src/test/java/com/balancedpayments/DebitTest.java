@@ -246,7 +246,7 @@ public class DebitTest extends BaseTest {
         assertEquals(debit.status, "succeeded");
         assertTrue(debit.transaction_number.startsWith("W"));
         assertNotNull(debit.updated_at);
-        assertTrue((debit.events.toString()).contains("com.balancedpayments.Event$Collection"));
-        assertTrue((debit.refunds.toString()).contains("com.balancedpayments.Refund$Collection"));
+        assertThat(debit.events, instanceOf(Event.Collection.class));
+        assertThat(debit.refunds, instanceOf(Refund.Collection.class));
     }
 }
