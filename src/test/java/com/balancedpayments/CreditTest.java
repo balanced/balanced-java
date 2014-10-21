@@ -1,13 +1,14 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.balancedpayments.errors.*;
+
 import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 import com.balancedpayments.core.ResourceQuery;
 
@@ -151,28 +152,40 @@ public class CreditTest extends BaseTest {
         card.debit(debitPayload);
 
         BankAccount ba = createBankAccount();
+        Map<String, Object> payload = personCustomerPayload();
+        Customer customer = new Customer(payload);
+        customer.save();
+        ba.associateToCustomer(customer);
+
         Map<String, Object> creditPayload = new HashMap<String, Object>();
         creditPayload.put("amount", 1000);
-
+        creditPayload.put("appears_on_statement_as", "Statement");
+        creditPayload.put("description", "something");
         Credit credit = ba.credit(creditPayload);
 
-        assertNotNull(credit.amount);
-        assertNotNull(credit.appears_on_statement_as);
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        credit.meta = meta;
+        credit.save();
+
+        assertEquals(credit.amount.toString(), "1000");
+        assertEquals(credit.appears_on_statement_as, "Statement");
         assertNotNull(credit.created_at);
-        assertNotNull(credit.currency);
-        assertNull(credit.description);
+        assertEquals(credit.currency, "USD");
+        assertEquals(credit.description, "something");
         assertNull(credit.failure_reason);
         assertNull(credit.failure_reason_code);
-        assertNotNull(credit.href);
-        assertNotNull(credit.id);
-        assertNull(credit.customer);
-        assertNotNull(credit.destination);
+        assertTrue(credit.href.contains("/credits/CR"));
+        assertTrue(credit.id.startsWith("CR"));
+        assertEquals(credit.customer.href, customer.href);
+        assertEquals(credit.destination.href, ba.href);
         assertNull(credit.order);
-        assertNotNull(credit.meta);
-        assertNotNull(credit.status);
-        assertNotNull(credit.transaction_number);
+        assertEquals(credit.meta.get("facebook"), "0192837465");
+        assertEquals(credit.status, "succeeded");
+        assertTrue(credit.transaction_number.startsWith("CR"));
         assertNotNull(credit.updated_at);
-        assertNotNull(credit.events);
-        assertNotNull(credit.reversals);
+        assertThat(credit.events, instanceOf(Event.Collection.class));
+        assertThat(credit.reversals, instanceOf(Reversal.Collection.class));
+
     }
 }

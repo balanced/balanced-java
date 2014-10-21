@@ -1,8 +1,6 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import com.balancedpayments.errors.*;
 import org.junit.Before;
@@ -65,15 +63,14 @@ public class BankAccountVerificationTest extends BaseTest {
         BankAccount bankAccount = createdAssociatedBankAccount();
         BankAccountVerification verification = bankAccount.verify();
 
-        assertNotNull(verification.attempts);
-        assertNotNull(verification.attempts_remaining);
+        assertEquals(verification.attempts.toString(), "0");
+        assertEquals(verification.attempts_remaining.toString(), "3");
         assertNotNull(verification.created_at);
-        assertNotNull(verification.deposit_status);
-        assertNotNull(verification.href);
-        assertNotNull(verification.id);
-        assertNotNull(verification.bank_account);
-        assertNotNull(verification.meta);
+        assertEquals(verification.deposit_status, "succeeded");
+        assertTrue(verification.href.contains("/verifications/BZ"));
+        assertTrue(verification.id.contains("BZ"));
+        assertEquals(verification.bank_account.href, bankAccount.href);
         assertNotNull(verification.updated_at);
-        assertNotNull(verification.verification_status);
+        assertEquals(verification.verification_status, "pending");
     }
 }
