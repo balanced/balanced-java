@@ -88,7 +88,8 @@ public class BankAccountTest  extends BaseTest {
         assertThat(bankAccount.customer, instanceOf(Customer.class));
         assertEquals(bankAccount.account_number, "xxx233a");
         assertEquals(bankAccount.account_type, "checking");
-        assertEquals(bankAccount.address.toString(), "{city=null, line2=null, line1=null, state=null, postal_code=null, country_code=null}");
+        assertEquals(bankAccount.address.toString(), "{city=null, line2=null, " +
+                "line1=null, state=null, postal_code=null, country_code=null}");
         assertEquals(bankAccount.bank_name, "WELLS FARGO BANK NA");
         assertTrue(bankAccount.can_credit);
         assertFalse(bankAccount.can_debit);
@@ -102,10 +103,12 @@ public class BankAccountTest  extends BaseTest {
         assertEquals(bankAccount.name, "Harry Fakester");
         assertEquals(bankAccount.routing_number, "121042882");
         assertNotNull(bankAccount.updated_at);
-        assertTrue((bankAccount.verifications.toString()).contains("com.balancedpayments.BankAccountVerification$Collection"));
+        assertTrue((bankAccount.verifications.toString()).contains(
+                "com.balancedpayments.BankAccountVerification$Collection"));
         assertNull(bankAccount.verification);
         assertTrue((bankAccount.credits.toString()).contains("com.balancedpayments.Credit$Collection"));
         assertTrue((bankAccount.debits.toString()).contains("com.balancedpayments.Debit$Collection"));
         assertEquals(bankAccount.bank_name, "WELLS FARGO BANK NA");
+
     }
 }
