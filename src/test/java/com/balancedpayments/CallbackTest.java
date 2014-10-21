@@ -48,11 +48,10 @@ public class CallbackTest extends BaseTest {
         Callback callback = new Callback(payload);
         callback.save();
 
-        assertNotNull(callback.href);
-        assertNotNull(callback.id);
-        assertNotNull(callback.links);
-        assertNotNull(callback.method);
-        assertNotNull(callback.revision);
-        assertNotNull(callback.url);
+        assertTrue(callback.href.contains("/callbacks/CB"));
+        assertTrue(callback.id.contains("CB"));
+        assertEquals(callback.method, "post");
+        assertEquals(callback.revision.toString(), "1.1");
+        assertEquals(callback.url, "http://www.example.com/callback");
     }
 }

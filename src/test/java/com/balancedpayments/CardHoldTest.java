@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class CardHoldTest extends BaseTest {
 
@@ -82,24 +83,29 @@ public class CardHoldTest extends BaseTest {
 
         CardHold cardHold = card.hold(payload);
 
-        assertNotNull(cardHold.amount);
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        cardHold.meta = meta;
+        cardHold.save();
+
+        assertEquals(cardHold.amount.toString(), "2000");
         assertNotNull(cardHold.created_at);
-        assertNotNull(cardHold.currency);
-        assertNotNull(cardHold.description);
+        assertEquals(cardHold.currency, "USD");
+        assertEquals(cardHold.description, "Test hold");
         assertNotNull(cardHold.expires_at);
         assertNull(cardHold.failure_reason);
         assertNull(cardHold.failure_reason_code);
-        assertNotNull(cardHold.href);
-        assertNotNull(cardHold.id);
-        assertNotNull(cardHold.card);
+        assertTrue(cardHold.href.contains("/card_holds/HL"));
+        assertTrue(cardHold.id.contains("HL"));
+        assertEquals(cardHold.card.href, card.href);
         assertNull(cardHold.debit);
         assertNull(cardHold.order);
-        assertNotNull(cardHold.meta);
-        assertNotNull(cardHold.status);
-        assertNotNull(cardHold.transaction_number);
+        assertEquals(cardHold.meta.get("facebook"), "0192837465");
+        assertEquals(cardHold.status, "succeeded");
+        assertTrue(cardHold.transaction_number.startsWith("HL"));
         assertNotNull(cardHold.updated_at);
         assertNull(cardHold.voided_at);
-        assertNotNull(cardHold.debits);
-        assertNotNull(cardHold.events);
+        assertThat(cardHold.debits, instanceOf(Debit.Collection.class));
+        assertThat(cardHold.events, instanceOf(Event.Collection.class));
     }
 }
