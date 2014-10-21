@@ -12,6 +12,7 @@ import java.lang.reflect.*;
 
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class DebitTest extends BaseTest {
 
@@ -211,41 +212,41 @@ public class DebitTest extends BaseTest {
     @Test
     public void testDebitResourceFields() throws HTTPError {
         Card card = createCard();
+        Customer customer = createPersonCustomer();
+        card.associateToCustomer(customer);
 
         HashMap<String, Object> payload = new HashMap<String, Object>();
         payload.put("amount", 5000);
         payload.put("description", "Some descriptive text for the debit in the dashboard");
-        payload.put("appears_on_statement_as", "Statement text");
         payload.put("appears_on_statement_as", "Statement text");
 
 
         Debit debit = card.debit(payload);
 
         Map<String, String> meta = new HashMap<String, String>();
-        meta.put("anykey", "valuegoeshere");
-        meta.put("facebook.id", "1234567890");
+        meta.put("facebook", "1234567890");
 
         debit.meta = meta;
         debit.save();
-        
-        assertNotNull(debit.appears_on_statement_as);
+
+        assertEquals(debit.appears_on_statement_as, "BAL*Statement text");
         assertNotNull(debit.created_at);
-        assertNotNull(debit.currency);
-        assertNotNull(debit.description);
+        assertEquals(debit.currency, "USD");
+        assertEquals(debit.description, "Some descriptive text for the debit in the dashboard");
         assertNull(debit.failure_reason);
         assertNull(debit.failure_reason_code);
-        assertNotNull(debit.href);
-        assertNotNull(debit.id);
-        assertNotNull(debit.card_hold);
-        assertNull(debit.customer);
+        assertTrue(debit.href.contains("/debits/WD"));
+        assertTrue(debit.id.startsWith("WD"));
+        assertThat(debit.card_hold, instanceOf(CardHold.class));
+        assertThat(debit.customer, instanceOf(Customer.class));
         assertNull(debit.dispute);
         assertNull(debit.order);
-        assertNotNull(debit.source);
-        assertNotNull(debit.meta);
-        assertNotNull(debit.status);
-        assertNotNull(debit.transaction_number);
+        assertEquals(debit.source.href, card.href);
+        assertEquals(debit.meta.get("facebook"), "1234567890");
+        assertEquals(debit.status, "succeeded");
+        assertTrue(debit.transaction_number.startsWith("W"));
         assertNotNull(debit.updated_at);
-        assertNotNull(debit.events);
-        assertNotNull(debit.refunds);
+        assertThat(debit.events, instanceOf(Event.Collection.class));
+        assertThat(debit.refunds, instanceOf(Refund.Collection.class));
     }
 }

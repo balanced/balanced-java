@@ -87,7 +87,6 @@ public class Card extends FundingInstrument {
     @ResourceField(field="cards.disputes")
     public Dispute.Collection disputes;
 
-
     public static class Collection extends ResourceCollection<Card> {
         public Collection(String uri) {
             super(Card.class, uri);
