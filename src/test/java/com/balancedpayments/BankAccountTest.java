@@ -10,8 +10,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Map;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class BankAccountTest  extends BaseTest {
 
@@ -76,6 +78,34 @@ public class BankAccountTest  extends BaseTest {
         bankAccount.save();
 
         bankAccount.associateToCustomer(customer);
-        assertNotNull(bankAccount.customer);
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+
+        bankAccount.meta = meta;
+        bankAccount.save();
+
+        assertThat(bankAccount.customer, instanceOf(Customer.class));
+        assertEquals(bankAccount.account_number, "xxx233a");
+        assertEquals(bankAccount.account_type, "checking");
+        assertEquals(bankAccount.address.toString(), "{city=null, line2=null, line1=null, state=null, postal_code=null, country_code=null}");
+        assertEquals(bankAccount.bank_name, "WELLS FARGO BANK NA");
+        assertTrue(bankAccount.can_credit);
+        assertFalse(bankAccount.can_debit);
+        assertNotNull(bankAccount.created_at);
+        assertNotNull(bankAccount.fingerprint);
+        assertTrue(bankAccount.href.contains("/bank_accounts/BA"));
+        assertTrue(bankAccount.id.contains("BA"));
+        assertTrue(bankAccount.links.containsKey("customer"));
+        assertTrue(bankAccount.links.containsKey("bank_account_verification"));
+        assertEquals(bankAccount.meta.get("facebook"), "0192837465");
+        assertEquals(bankAccount.name, "Harry Fakester");
+        assertEquals(bankAccount.routing_number, "121042882");
+        assertNotNull(bankAccount.updated_at);
+        assertTrue((bankAccount.verifications.toString()).contains("com.balancedpayments.BankAccountVerification$Collection"));
+        assertNull(bankAccount.verification);
+        assertTrue((bankAccount.credits.toString()).contains("com.balancedpayments.Credit$Collection"));
+        assertTrue((bankAccount.debits.toString()).contains("com.balancedpayments.Debit$Collection"));
+        assertEquals(bankAccount.bank_name, "WELLS FARGO BANK NA");
     }
 }
