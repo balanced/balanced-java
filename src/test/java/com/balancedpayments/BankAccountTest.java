@@ -79,7 +79,6 @@ public class BankAccountTest  extends BaseTest {
 
         Map<String, String> meta = new HashMap<String, String>();
         meta.put("facebook", "0192837465");
-
         bankAccount.meta = meta;
         bankAccount.save();
 
