@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class DisputeTest extends BaseTest {
 
@@ -49,18 +49,17 @@ public class DisputeTest extends BaseTest {
         assertEquals("fraud", dispute.reason);
         assertEquals("pending", dispute.status);
 
-        assertNotNull(dispute.amount);
+        assertEquals(dispute.amount.toString(), "100000");
         assertNotNull(dispute.created_at);
-        assertNotNull(dispute.currency);
-        assertNotNull(dispute.href);
-        assertNotNull(dispute.id);
+        assertEquals(dispute.currency, "USD");
+        assertTrue(dispute.href.contains("/disputes/DT"));
+        assertTrue(dispute.id.startsWith("DT"));
         assertNotNull(dispute.initiated_at);
-        assertNotNull(dispute.transaction);
-        assertNotNull(dispute.meta);
-        assertNotNull(dispute.reason);
+        assertThat(dispute.transaction, instanceOf(Debit.class));
+        assertEquals(dispute.reason, "fraud");
         assertNotNull(dispute.respond_by);
-        assertNotNull(dispute.status);
+        assertEquals(dispute.status, "pending");
         assertNotNull(dispute.updated_at);
-        assertNotNull(dispute.events);
+        assertThat(dispute.events, instanceOf(Event.Collection.class));
     }
 }
