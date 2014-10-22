@@ -7,8 +7,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class DisputeTest extends BaseTest {
 
@@ -43,10 +42,23 @@ public class DisputeTest extends BaseTest {
             System.out.println("polling disputes...");
             Thread.sleep(10000);
         }
-
+        
         assertNotNull(dispute);
         assertEquals(100000, dispute.amount.intValue());
         assertEquals("fraud", dispute.reason);
         assertEquals("pending", dispute.status);
+
+        assertEquals(dispute.amount.intValue(), 100000);
+        assertNotNull(dispute.created_at);
+        assertEquals(dispute.currency, "USD");
+        assertTrue(dispute.href.contains("/disputes/DT"));
+        assertTrue(dispute.id.startsWith("DT"));
+        assertNotNull(dispute.initiated_at);
+        assertTrue(dispute.transaction instanceof Debit);
+        assertEquals(dispute.reason, "fraud");
+        assertNotNull(dispute.respond_by);
+        assertEquals(dispute.status, "pending");
+        assertNotNull(dispute.updated_at);
+        assertTrue(dispute.events instanceof Event.Collection);
     }
 }
