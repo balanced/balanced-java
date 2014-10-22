@@ -87,7 +87,7 @@ public class CardHoldTest extends BaseTest {
         cardHold.meta = meta;
         cardHold.save();
 
-        assertEquals(cardHold.amount.toString(), "2000");
+        assertEquals(cardHold.amount.intValue(), 2000);
         assertNotNull(cardHold.created_at);
         assertEquals(cardHold.currency, "USD");
         assertEquals(cardHold.description, "Test hold");
