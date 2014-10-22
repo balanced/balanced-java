@@ -34,4 +34,35 @@ public class MarketplaceTest extends BaseTest {
         Marketplace mine = Marketplace.mine();
         assertNotNull(mine.owner_customer);
     }
+
+    @Test
+    public void testMarketplaceResourceFields() throws HTTPError,
+            NoResultsFound, MultipleResultsFound{
+        Marketplace marketplace = Marketplace.mine();
+
+        assertEquals(marketplace.domain_url, "example.com");
+        assertEquals(marketplace.name, "Test Marketplace");
+        assertTrue(marketplace.owner_customer instanceof Customer);
+        assertEquals(marketplace.support_email_address, "support@example.com");
+        assertEquals(marketplace.support_phone_number, "+16505551234");
+        assertNotNull(marketplace.created_at);
+        assertNotNull(marketplace.updated_at);
+        assertFalse(marketplace.production);
+        assertEquals(marketplace.in_escrow.intValue(), 0);
+        assertEquals(marketplace.unsettled_fees.intValue(), 0);
+        assertTrue(marketplace.href.contains("/marketplaces/TEST-MP"));
+        assertTrue(marketplace.id.startsWith("TEST-MP"));
+        assertTrue(marketplace.bank_accounts instanceof BankAccount.Collection);
+        assertTrue(marketplace.cards instanceof Card.Collection);
+        assertTrue(marketplace.credits instanceof Credit.Collection);
+        assertTrue(marketplace.debits instanceof Debit.Collection);
+        assertTrue(marketplace.disputes instanceof Dispute.Collection);
+        assertTrue(marketplace.orders instanceof Order.Collection);
+        assertTrue(marketplace.refunds instanceof Refund.Collection);
+        assertTrue(marketplace.reversals instanceof Reversal.Collection);
+        assertTrue(marketplace.card_holds instanceof CardHold.Collection);
+        assertTrue(marketplace.events instanceof Event.Collection);
+        assertTrue(marketplace.callbacks instanceof Callback.Collection);
+        assertTrue(marketplace.customers instanceof Customer.Collection);
+    }
 }

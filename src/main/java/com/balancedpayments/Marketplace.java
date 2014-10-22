@@ -1,14 +1,13 @@
 package com.balancedpayments;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
 import com.balancedpayments.errors.MultipleResultsFound;
 import com.balancedpayments.errors.NoResultsFound;
+
+import java.util.ArrayList;
 
 public class Marketplace extends Resource {
 
@@ -35,6 +34,12 @@ public class Marketplace extends Resource {
 
     @ResourceField(field="marketplaces.bank_accounts")
     public BankAccount.Collection bank_accounts;
+
+    @ResourceField(field="marketplaces.disputes")
+    public Dispute.Collection disputes;
+
+    @ResourceField(field="marketplaces.orders")
+    public Order.Collection orders;
 
     @ResourceField(field="marketplaces.callbacks")
     public Callback.Collection callbacks;
