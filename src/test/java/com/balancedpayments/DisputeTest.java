@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class DisputeTest extends BaseTest {
 
@@ -55,11 +54,11 @@ public class DisputeTest extends BaseTest {
         assertTrue(dispute.href.contains("/disputes/DT"));
         assertTrue(dispute.id.startsWith("DT"));
         assertNotNull(dispute.initiated_at);
-        assertThat(dispute.transaction, instanceOf(Debit.class));
+        assertTrue(dispute.transaction instanceof Debit);
         assertEquals(dispute.reason, "fraud");
         assertNotNull(dispute.respond_by);
         assertEquals(dispute.status, "pending");
         assertNotNull(dispute.updated_at);
-        assertThat(dispute.events, instanceOf(Event.Collection.class));
+        assertTrue(dispute.events instanceof Event.Collection);
     }
 }
