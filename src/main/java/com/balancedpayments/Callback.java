@@ -18,7 +18,7 @@ public class Callback extends Resource {
     @ResourceField(mutable=true, required=false)
     public String method;
 
-    @ResourceField(mutable=true, required=false)
+    @ResourceField(required=false)
     public String revision;
 
     public static class Collection extends ResourceCollection<Callback> {
