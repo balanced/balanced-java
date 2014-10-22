@@ -96,4 +96,48 @@ public class CustomerTest extends BaseTest {
         ArrayList<Customer> customers = Customer.query().all();
         assertTrue(customers.size() > 0);
     }
+
+    @Test
+    public void testCustomerResourceFields() throws HTTPError {
+        Customer customer = createPersonCustomer();
+        Card card = createCard();
+        BankAccount ba = createBankAccount();
+        ba.associateToCustomer(customer);
+        card.associateToCustomer(customer);
+
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        customer.ein = "123456789";
+        customer.email = "john@google.com";
+        customer.meta = meta;
+        customer.save();
+
+        assertEquals(customer.address.toString(),
+                "{city=San Francisco, line2=null, line1=965 Mission St, " +
+                        "state=CA, postal_code=94103, country_code=US}");
+        assertNull(customer.business_name);
+        assertNotNull(customer.created_at);
+        assertEquals(customer.dob_month.intValue(), 1);
+        assertEquals(customer.dob_year.intValue(), 1980);
+        assertEquals(customer.ein, "123456789");
+        assertEquals(customer.email, "john@google.com");
+        assertTrue(customer.href.contains("/customers/CU"));
+        assertTrue(customer.id.startsWith("CU"));
+        assertEquals(customer.merchant_status, "underwritten");
+        assertEquals(customer.meta.get("facebook"), "0192837465");
+        assertEquals(customer.name, "John Lee Hooker");
+        assertEquals(customer.phone, "(904) 555-1796");
+        assertEquals(customer.ssn_last4, "xxxx");
+        assertNotNull(customer.updated_at);
+        assertTrue(customer.bank_accounts instanceof BankAccount.Collection);
+        assertTrue(customer.cards instanceof Card.Collection);
+        assertTrue(customer.credits instanceof Credit.Collection);
+        assertTrue(customer.debits instanceof Debit.Collection);
+        assertTrue(customer.disputes instanceof Dispute.Collection);
+        assertTrue(customer.orders instanceof Order.Collection);
+        assertTrue(customer.refunds instanceof Refund.Collection);
+        assertTrue(customer.reversals instanceof Reversal.Collection);
+        assertTrue(customer.card_holds instanceof CardHold.Collection);
+    }
 }

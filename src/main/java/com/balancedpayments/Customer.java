@@ -1,12 +1,12 @@
 package com.balancedpayments;
 
-import java.util.Map;
-
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
+
+import java.util.Map;
 
 public class Customer extends Resource {
 
@@ -46,6 +46,12 @@ public class Customer extends Resource {
     @ResourceField()
     public String merchant_status;
 
+    @ResourceField(mutable=true)
+    public String destination;
+
+    @ResourceField(mutable=true)
+    public String source;
+
     @ResourceField(field="customers.bank_accounts")
     public BankAccount.Collection bank_accounts;
 
@@ -73,6 +79,8 @@ public class Customer extends Resource {
     @ResourceField(field="customers.reversals")
     public Reversal.Collection reversals;
 
+    @ResourceField(field="customers.disputes")
+    public Dispute.Collection disputes;
 
     public static class Collection extends ResourceCollection<Customer> {
         public Collection(String href) {
