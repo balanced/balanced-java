@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class OrderTest extends BaseTest {
     @Test
@@ -187,12 +186,12 @@ public class OrderTest extends BaseTest {
         order.meta = meta;
         order.save();
 
-        assertThat(order.buyers, instanceOf(Customer.Collection.class));
-        assertThat(order.credits, instanceOf(Credit.Collection.class));
-        assertThat(order.debits, instanceOf(Debit.Collection.class));
-        assertThat(order.merchant, instanceOf(Customer.class));
-        assertThat(order.refunds, instanceOf(Refund.Collection.class));
-        assertThat(order.reversals, instanceOf(Reversal.Collection.class));
+        assertTrue(order.buyers instanceof Customer.Collection);
+        assertTrue(order.credits instanceof Credit.Collection);
+        assertTrue(order.debits instanceof Debit.Collection);
+        assertTrue(order.merchant instanceof Customer);
+        assertTrue(order.refunds instanceof Refund.Collection);
+        assertTrue(order.reversals instanceof Reversal.Collection);
         assertTrue(order.href.contains("/orders/OR"));
         assertTrue(order.id.startsWith("OR"));
         assertEquals(order.delivery_address.toString(), "{city=null, line2=null, " +
