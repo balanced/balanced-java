@@ -8,7 +8,6 @@ import org.junit.Rule;
 
 import org.junit.rules.ExpectedException;
 
-import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
