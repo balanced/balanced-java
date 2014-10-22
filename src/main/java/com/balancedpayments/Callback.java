@@ -1,12 +1,12 @@
 package com.balancedpayments;
 
-import java.util.Map;
-
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
+
+import java.util.Map;
 
 public class Callback extends Resource {
 
@@ -17,6 +17,9 @@ public class Callback extends Resource {
 
     @ResourceField(mutable=true, required=false)
     public String method;
+
+    @ResourceField(required=false)
+    public String revision;
 
     public static class Collection extends ResourceCollection<Callback> {
         public Collection(String href) {

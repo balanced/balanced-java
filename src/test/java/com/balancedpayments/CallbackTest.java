@@ -38,4 +38,20 @@ public class CallbackTest extends BaseTest {
 
         assertEquals(mp.callbacks.total(), 0);
     }
+
+    @Test
+    public void testCallbacksResourceFields() throws HTTPError {
+        HashMap<String, Object> payload = new HashMap<String, Object>();
+        payload.put("url", "http://www.example.com/callback");
+        payload.put("method", "post");
+
+        Callback callback = new Callback(payload);
+        callback.save();
+
+        assertTrue(callback.href.contains("/callbacks/CB"));
+        assertTrue(callback.id.contains("CB"));
+        assertEquals(callback.method, "post");
+        assertEquals(callback.revision, "1.1");
+        assertEquals(callback.url, "http://www.example.com/callback");
+    }
 }
