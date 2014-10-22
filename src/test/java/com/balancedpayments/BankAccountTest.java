@@ -1,7 +1,5 @@
 package com.balancedpayments;
 
-import static org.junit.Assert.assertEquals;
-
 import com.balancedpayments.errors.*;
 import org.junit.Before;
 import org.junit.Rule;

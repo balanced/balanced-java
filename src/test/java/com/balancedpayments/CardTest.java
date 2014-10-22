@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-
 
 public class CardTest extends BaseTest {
 
@@ -69,5 +67,50 @@ public class CardTest extends BaseTest {
         Card card = createCard();
         card.unstore();
         //apiError.expect(APIError.class);
+    }
+
+    @Test
+    public void testCardResourceFields() throws HTTPError {
+        Card card = createCreditableCard();
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        card.meta = meta;
+        card.save();
+
+        Map<String, Object> payload = personCustomerPayload();
+        Customer customer = new Customer(payload);
+        customer.save();
+
+        card.associateToCustomer(customer);
+
+        assertEquals(card.address.toString(), "{city=null, line2=null, " +
+                "line1=null, state=null, postal_code=null, country_code=null}");
+        assertNull(card.avs_postal_match);
+        assertNull(card.avs_result);
+        assertNull(card.avs_street_match);
+        assertEquals(card.bank_name, "WELLS FARGO BANK, N.A.");
+        assertTrue(card.can_credit);
+        assertTrue(card.can_debit);
+        assertEquals(card.category, "other");
+        assertNotNull(card.created_at);
+        assertNull(card.cvv_match);
+        assertNull(card.cvv_result);
+        assertEquals(card.expiration_month.intValue(), 5);
+        assertEquals(card.expiration_year.intValue(), 2016);
+        assertNotNull(card.fingerprint);
+        assertTrue(card.href.contains("/cards/CC"));
+        assertTrue(card.id.contains("CC"));
+        assertTrue(card.is_verified);
+        assertEquals(card.meta.get("facebook"), "0192837465");
+        assertEquals(card.name, "Johannes Bach");
+        assertEquals(card.number, "xxxxxxxxxxxx1118");
+        assertEquals(card.type, "debit");
+        assertNotNull(card.updated_at);
+        assertEquals(card.customer.href, customer.href);
+        assertTrue(card.disputes instanceof Dispute.Collection);
+        assertTrue(card.card_holds instanceof CardHold.Collection);
+        assertTrue(card.debits instanceof Debit.Collection);
+        assertTrue(card.credits instanceof Credit.Collection);
     }
 }

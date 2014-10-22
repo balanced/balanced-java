@@ -1,22 +1,17 @@
 package com.balancedpayments;
 
+import com.balancedpayments.errors.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
 
 
-import com.balancedpayments.errors.CannotCreate;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.NotCreated;
-import com.balancedpayments.errors.APIError;
 import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-
 
 public class OrderTest extends BaseTest {
     @Test
@@ -178,5 +173,34 @@ public class OrderTest extends BaseTest {
 
         assertEquals(5000, order.amount.intValue());
         assertEquals(5000, order.amount_escrowed.intValue());
+    }
+
+    @Test
+    public void testOrderResourceFields() throws HTTPError {
+        Order order = createOrder();
+
+        Map<String, String> meta = new HashMap<String, String>();
+        meta.put("facebook", "0192837465");
+        order.description = "New description for order";
+        order.meta = meta;
+        order.save();
+
+        assertTrue(order.buyers instanceof Customer.Collection);
+        assertTrue(order.credits instanceof Credit.Collection);
+        assertTrue(order.debits instanceof Debit.Collection);
+        assertTrue(order.merchant instanceof Customer);
+        assertTrue(order.refunds instanceof Refund.Collection);
+        assertTrue(order.reversals instanceof Reversal.Collection);
+        assertTrue(order.href.contains("/orders/OR"));
+        assertTrue(order.id.startsWith("OR"));
+        assertEquals(order.delivery_address.toString(), "{city=null, line2=null, " +
+                "line1=null, state=null, postal_code=null, country_code=null}");
+        assertNotNull(order.created_at);
+        assertNotNull(order.updated_at);
+        assertEquals(order.currency, "USD");
+        assertEquals(order.description, "New description for order");
+        assertEquals(order.meta.get("facebook"), "0192837465");
+        assertEquals(order.amount_escrowed.intValue(), 0);
+        assertEquals(order.amount.intValue(), 5000);
     }
 }
