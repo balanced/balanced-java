@@ -59,7 +59,7 @@ public class CardHold extends Resource {
     public Event.Collection events;
 
     @ResourceField(field="card_holds.order")
-    public Order.Collection order;
+    public Order order;
 
     public static class Collection extends ResourceCollection<CardHold> {
         public Collection(String uri) {

@@ -51,7 +51,7 @@ public class CallbackTest extends BaseTest {
         assertTrue(callback.href.contains("/callbacks/CB"));
         assertTrue(callback.id.contains("CB"));
         assertEquals(callback.method, "post");
-        assertEquals(callback.revision.toString(), "1.1");
+        assertEquals(callback.revision, "1.1");
         assertEquals(callback.url, "http://www.example.com/callback");
     }
 }
