@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class BankAccountTest  extends BaseTest {
 
@@ -79,7 +78,6 @@ public class BankAccountTest  extends BaseTest {
 
         Map<String, String> meta = new HashMap<String, String>();
         meta.put("facebook", "0192837465");
-
         bankAccount.meta = meta;
         bankAccount.save();
 
@@ -101,11 +99,9 @@ public class BankAccountTest  extends BaseTest {
         assertEquals(bankAccount.name, "Harry Fakester");
         assertEquals(bankAccount.routing_number, "121042882");
         assertNotNull(bankAccount.updated_at);
-        assertTrue((bankAccount.verifications.toString()).contains(
-                "com.balancedpayments.BankAccountVerification$Collection"));
         assertNull(bankAccount.verification);
-        assertThat(bankAccount.credits, instanceOf(Credit.Collection.class));
-        assertThat(bankAccount.debits, instanceOf(Debit.Collection.class));
+        assertTrue(bankAccount.verifications instanceof BankAccountVerification.Collection);
+        assertTrue(bankAccount.credits instanceof Credit.Collection);
         assertEquals(bankAccount.bank_name, "WELLS FARGO BANK NA");
     }
 }

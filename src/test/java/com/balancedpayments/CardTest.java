@@ -15,10 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 
 public class CardTest extends BaseTest {
 
@@ -112,9 +108,9 @@ public class CardTest extends BaseTest {
         assertEquals(card.type, "debit");
         assertNotNull(card.updated_at);
         assertEquals(card.customer.href, customer.href);
-        assertThat(card.disputes, instanceOf(Dispute.Collection.class));
-        assertThat(card.card_holds, instanceOf(CardHold.Collection.class));
-        assertThat(card.debits, instanceOf(Debit.Collection.class));
-        assertThat(card.credits, instanceOf(Credit.Collection.class));
+        assertTrue(card.disputes instanceof Dispute.Collection);
+        assertTrue(card.card_holds instanceof CardHold.Collection);
+        assertTrue(card.debits instanceof Debit.Collection);
+        assertTrue(card.credits instanceof Credit.Collection);
     }
 }
