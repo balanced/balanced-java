@@ -8,7 +8,6 @@ import org.junit.Rule;
 
 import org.junit.rules.ExpectedException;
 
-import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -201,7 +200,7 @@ public class OrderTest extends BaseTest {
         assertEquals(order.currency, "USD");
         assertEquals(order.description, "New description for order");
         assertEquals(order.meta.get("facebook"), "0192837465");
-        assertEquals(order.amount_escrowed.toString(), "0");
-        assertEquals(order.amount.toString(), "5000");
+        assertEquals(order.amount_escrowed.intValue(), 0);
+        assertEquals(order.amount.intValue(), 5000);
     }
 }

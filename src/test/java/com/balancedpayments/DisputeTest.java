@@ -48,7 +48,7 @@ public class DisputeTest extends BaseTest {
         assertEquals("fraud", dispute.reason);
         assertEquals("pending", dispute.status);
 
-        assertEquals(dispute.amount.toString(), "100000");
+        assertEquals(dispute.amount.intValue(), 100000);
         assertNotNull(dispute.created_at);
         assertEquals(dispute.currency, "USD");
         assertTrue(dispute.href.contains("/disputes/DT"));

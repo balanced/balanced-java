@@ -63,8 +63,8 @@ public class BankAccountVerificationTest extends BaseTest {
         BankAccount bankAccount = createdAssociatedBankAccount();
         BankAccountVerification verification = bankAccount.verify();
 
-        assertEquals(verification.attempts.toString(), "0");
-        assertEquals(verification.attempts_remaining.toString(), "3");
+        assertEquals(verification.attempts.intValue(), 0);
+        assertEquals(verification.attempts_remaining.intValue(), 3);
         assertNotNull(verification.created_at);
         assertEquals(verification.deposit_status, "succeeded");
         assertTrue(verification.href.contains("/verifications/BZ"));

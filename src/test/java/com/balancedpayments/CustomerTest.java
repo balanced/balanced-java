@@ -118,8 +118,8 @@ public class CustomerTest extends BaseTest {
                         "state=CA, postal_code=94103, country_code=US}");
         assertNull(customer.business_name);
         assertNotNull(customer.created_at);
-        assertEquals(customer.dob_month.toString(), "1");
-        assertEquals(customer.dob_year.toString(), "1980");
+        assertEquals(customer.dob_month.intValue(), 1);
+        assertEquals(customer.dob_year.intValue(), 1980);
         assertEquals(customer.ein, "123456789");
         assertEquals(customer.email, "john@google.com");
         assertTrue(customer.href.contains("/customers/CU"));
