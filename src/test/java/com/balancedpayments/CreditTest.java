@@ -8,7 +8,6 @@ import com.balancedpayments.errors.*;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 import com.balancedpayments.core.ResourceQuery;
 
@@ -184,8 +183,8 @@ public class CreditTest extends BaseTest {
         assertEquals(credit.status, "succeeded");
         assertTrue(credit.transaction_number.startsWith("CR"));
         assertNotNull(credit.updated_at);
-        assertThat(credit.events, instanceOf(Event.Collection.class));
-        assertThat(credit.reversals, instanceOf(Reversal.Collection.class));
+        assertTrue(credit.events instanceof Event.Collection);
+        assertTrue(credit.reversals instanceof Reversal.Collection);
 
     }
 }

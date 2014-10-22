@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class CardHoldTest extends BaseTest {
 
@@ -105,7 +104,7 @@ public class CardHoldTest extends BaseTest {
         assertTrue(cardHold.transaction_number.startsWith("HL"));
         assertNotNull(cardHold.updated_at);
         assertNull(cardHold.voided_at);
-        assertThat(cardHold.debits, instanceOf(Debit.Collection.class));
-        assertThat(cardHold.events, instanceOf(Event.Collection.class));
+        assertTrue(cardHold.debits instanceof Debit.Collection);
+        assertTrue(cardHold.events instanceof Event.Collection);
     }
 }
