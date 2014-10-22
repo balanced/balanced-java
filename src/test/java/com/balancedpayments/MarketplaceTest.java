@@ -48,8 +48,8 @@ public class MarketplaceTest extends BaseTest {
         assertNotNull(marketplace.created_at);
         assertNotNull(marketplace.updated_at);
         assertFalse(marketplace.production);
-        assertEquals(marketplace.in_escrow.toString(), "0");
-        assertEquals(marketplace.unsettled_fees.toString(), "0");
+        assertEquals(marketplace.in_escrow.intValue(), 0);
+        assertEquals(marketplace.unsettled_fees.intValue(), 0);
         assertTrue(marketplace.href.contains("/marketplaces/TEST-MP"));
         assertTrue(marketplace.id.startsWith("TEST-MP"));
         assertTrue(marketplace.bank_accounts instanceof BankAccount.Collection);
