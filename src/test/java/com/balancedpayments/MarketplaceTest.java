@@ -1,7 +1,6 @@
 package com.balancedpayments;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public class MarketplaceTest extends BaseTest {
 
         assertEquals(marketplace.domain_url, "example.com");
         assertEquals(marketplace.name, "Test Marketplace");
-        assertThat(marketplace.owner_customer, instanceOf(Customer.class));
+        assertTrue(marketplace.owner_customer instanceof Customer);
         assertEquals(marketplace.support_email_address, "support@example.com");
         assertEquals(marketplace.support_phone_number, "+16505551234");
         assertNotNull(marketplace.created_at);
@@ -53,17 +52,17 @@ public class MarketplaceTest extends BaseTest {
         assertEquals(marketplace.unsettled_fees.toString(), "0");
         assertTrue(marketplace.href.contains("/marketplaces/TEST-MP"));
         assertTrue(marketplace.id.startsWith("TEST-MP"));
-        assertThat(marketplace.bank_accounts, instanceOf(BankAccount.Collection.class));
-        assertThat(marketplace.cards, instanceOf(Card.Collection.class));
-        assertThat(marketplace.credits, instanceOf(Credit.Collection.class));
-        assertThat(marketplace.debits, instanceOf(Debit.Collection.class));
-        assertThat(marketplace.disputes, instanceOf(Dispute.Collection.class));
-        assertThat(marketplace.orders, instanceOf(Order.Collection.class));
-        assertThat(marketplace.refunds, instanceOf(Refund.Collection.class));
-        assertThat(marketplace.reversals, instanceOf(Reversal.Collection.class));
-        assertThat(marketplace.card_holds, instanceOf(CardHold.Collection.class));
-        assertThat(marketplace.events, instanceOf(Event.Collection.class));
-        assertThat(marketplace.callbacks, instanceOf(Callback.Collection.class));
-        assertThat(marketplace.customers, instanceOf(Customer.Collection.class));
+        assertTrue(marketplace.bank_accounts instanceof BankAccount.Collection);
+        assertTrue(marketplace.cards instanceof Card.Collection);
+        assertTrue(marketplace.credits instanceof Credit.Collection);
+        assertTrue(marketplace.debits instanceof Debit.Collection);
+        assertTrue(marketplace.disputes instanceof Dispute.Collection);
+        assertTrue(marketplace.orders instanceof Order.Collection);
+        assertTrue(marketplace.refunds instanceof Refund.Collection);
+        assertTrue(marketplace.reversals instanceof Reversal.Collection);
+        assertTrue(marketplace.card_holds instanceof CardHold.Collection);
+        assertTrue(marketplace.events instanceof Event.Collection);
+        assertTrue(marketplace.callbacks instanceof Callback.Collection);
+        assertTrue(marketplace.customers instanceof Customer.Collection);
     }
 }
