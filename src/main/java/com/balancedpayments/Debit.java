@@ -1,14 +1,11 @@
 package com.balancedpayments;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.balancedpayments.core.Client;
 import com.balancedpayments.core.Resource;
 import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.errors.HTTPError;
+
+import java.util.Map;
 
 public class Debit extends Resource  {
 
@@ -47,6 +44,9 @@ public class Debit extends Resource  {
 
     @ResourceField(field="debits.customer")
     public Customer customer;
+
+    @ResourceField(field="debits.card_hold")
+    public CardHold card_hold;
 
     @ResourceField(field="debits.dispute")
     public Dispute dispute;
