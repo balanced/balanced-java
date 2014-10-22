@@ -167,7 +167,7 @@ public class CreditTest extends BaseTest {
         credit.meta = meta;
         credit.save();
 
-        assertEquals(credit.amount.toString(), "1000");
+        assertEquals(credit.amount.intValue(), 1000);
         assertEquals(credit.appears_on_statement_as, "Statement");
         assertNotNull(credit.created_at);
         assertEquals(credit.currency, "USD");
