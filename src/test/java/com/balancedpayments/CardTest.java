@@ -96,8 +96,8 @@ public class CardTest extends BaseTest {
         assertNotNull(card.created_at);
         assertNull(card.cvv_match);
         assertNull(card.cvv_result);
-        assertEquals(card.expiration_month.toString(), "5");
-        assertEquals(card.expiration_year.toString(), "2016");
+        assertEquals(card.expiration_month.intValue(), 5);
+        assertEquals(card.expiration_year.intValue(), 2016);
         assertNotNull(card.fingerprint);
         assertTrue(card.href.contains("/cards/CC"));
         assertTrue(card.id.contains("CC"));
