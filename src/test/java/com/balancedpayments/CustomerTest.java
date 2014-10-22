@@ -10,7 +10,6 @@ import org.junit.Test;
 import com.balancedpayments.errors.HTTPError;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class CustomerTest extends BaseTest {
 
@@ -131,14 +130,14 @@ public class CustomerTest extends BaseTest {
         assertEquals(customer.phone, "(904) 555-1796");
         assertEquals(customer.ssn_last4, "xxxx");
         assertNotNull(customer.updated_at);
-        assertThat(customer.bank_accounts, instanceOf(BankAccount.Collection.class));
-        assertThat(customer.cards, instanceOf(Card.Collection.class));
-        assertThat(customer.credits, instanceOf(Credit.Collection.class));
-        assertThat(customer.debits, instanceOf(Debit.Collection.class));
-        assertThat(customer.disputes, instanceOf(Dispute.Collection.class));
-        assertThat(customer.orders, instanceOf(Order.Collection.class));
-        assertThat(customer.refunds, instanceOf(Refund.Collection.class));
-        assertThat(customer.reversals, instanceOf(Reversal.Collection.class));
-        assertThat(customer.card_holds, instanceOf(CardHold.Collection.class));
+        assertTrue(customer.bank_accounts instanceof BankAccount.Collection);
+        assertTrue(customer.cards instanceof Card.Collection);
+        assertTrue(customer.credits instanceof Credit.Collection);
+        assertTrue(customer.debits instanceof Debit.Collection);
+        assertTrue(customer.disputes instanceof Dispute.Collection);
+        assertTrue(customer.orders instanceof Order.Collection);
+        assertTrue(customer.refunds instanceof Refund.Collection);
+        assertTrue(customer.reversals instanceof Reversal.Collection);
+        assertTrue(customer.card_holds instanceof CardHold.Collection);
     }
 }
