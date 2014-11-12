@@ -1,8 +1,6 @@
 package com.balancedpayments;
 
-import com.balancedpayments.core.Resource;
-
-public class Account extends Resource {
+public class Account extends FundingInstrument {
 
     public static final String resource_href = "/accounts";
 }
