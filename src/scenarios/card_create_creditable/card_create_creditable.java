@@ -8,7 +8,7 @@ import java.util.Map;
 public class card_create_creditable {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2jJSjIixy2qkOMmIONPtXnawOUftBDRSK");
+Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("name", "Johannes Bach");

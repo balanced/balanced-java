@@ -8,7 +8,7 @@ import java.util.Map;
 public class dispute_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
+Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
 Dispute.Collection disputes = new Dispute.Collection(Dispute.resource_href);
 
