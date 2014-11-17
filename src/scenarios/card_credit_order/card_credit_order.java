@@ -17,7 +17,7 @@ HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);
 
 try {
-    Debit debit = order.debitFrom(card, payload);
+    Credit credit = order.creditTo(card, payload);
 }
 catch (HTTPError e) {}
 
