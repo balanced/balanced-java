@@ -2,7 +2,7 @@
 Callback(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
+Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("url", "http://www.example.com/callback");
