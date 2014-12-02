@@ -1,0 +1,13 @@
+Balanced.configure("{{ api_key }}");
+
+Card card = new Card("{{ request.card_href }}");
+
+Map<String, Object> payload = new HashMap<String, Object>();
+payload.put("amount", {{ request.payload.amount }});
+payload.put("description", "{{ request.payload.description }}");
+payload.put("order", "{{ request.payload.order }}");
+
+try {
+    CardHold cardHold = card.hold(payload);
+}
+catch (HTTPError e) {}

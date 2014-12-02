@@ -2,10 +2,10 @@
 Order().debitFrom(Card card, Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-aUV295IugdhWSNx2JFckYBCSvfY2ibgq");
+Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-Card card = new Card("/cards/CC5OD6648yiKfSzfj6z6MdXr");
-Order order = new Order("/orders/OR5QcYnwysJXQswImokq6ZSx");
+Card card = new Card("/cards/CC33DRVrekWpiHYjxSdVuqWc");
+Order order = new Order("/orders/OR2UWXCNY2nKlqIQhQhWN3Jm");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);

@@ -8,7 +8,7 @@ import java.util.Map;
 public class debit_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
+Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
 Debit.Collection debits = new Debit.Collection(Debit.resource_href);
 

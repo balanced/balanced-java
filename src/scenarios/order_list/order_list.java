@@ -8,7 +8,7 @@ import java.util.Map;
 public class order_list {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-22IOkhevjZlmRP2do6CZixkkDshTiOjTV");
+Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
 Order.Collection orders = new Order.Collection(Order.resource_href);
 
