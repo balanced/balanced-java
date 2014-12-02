@@ -5,7 +5,10 @@ import com.balancedpayments.core.ResourceCollection;
 import com.balancedpayments.core.ResourceField;
 import com.balancedpayments.core.ResourceQuery;
 import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.MultipleResultsFound;
+import com.balancedpayments.errors.NoResultsFound;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Customer extends Resource {
@@ -81,6 +84,14 @@ public class Customer extends Resource {
 
     @ResourceField(field="customers.disputes")
     public Dispute.Collection disputes;
+
+    @ResourceField(field="customers.accounts")
+    public Account.Collection accounts;
+
+    public Account payable_account() throws NoResultsFound, MultipleResultsFound, HTTPError {
+        ArrayList<Account> accounts = this.accounts.query().filter("account_type", "contains", "payable").all();
+        return accounts.get(0);
+    }
 
     public static class Collection extends ResourceCollection<Customer> {
         public Collection(String href) {

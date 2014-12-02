@@ -9,4 +9,4 @@ payload.put("amount", {{ request.payload.amount }});
 try {
     Credit credit = order.creditTo(card, payload);
 }
-catch (HTTPError e) {}
+catch (FundingInstrumentNotCreditable e) {}
