@@ -12,7 +12,7 @@ public class Account extends FundingInstrument {
     public static final String resource_href = "/accounts";
 
     // fields
-    @ResourceField(mutable = true)
+    @ResourceField
     public String description;
 
     // attributes

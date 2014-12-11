@@ -15,7 +15,7 @@ public class AccountTest extends BaseTest {
     public void testAccountTransfer() throws HTTPError, MultipleResultsFound,
             NoResultsFound {
         Customer merchant = createPersonCustomer();
-        Account payable_account = merchant.payable_account();
+        Account payableAccount = merchant.payableAccount();
 
         BankAccount ba = createBankAccount();
         ba.associateToCustomer(merchant);
@@ -26,7 +26,7 @@ public class AccountTest extends BaseTest {
         debitPayload.put("description", "Debit for Order #234123");
         debitPayload.put("amount", 5000);
 
-        Debit debit = order.debitFrom(card, debitPayload);
+        order.debitFrom(card, debitPayload);
         order.reload();
 
         Map<String, Object> creditPayload = new HashMap<String, Object>();
@@ -34,8 +34,8 @@ public class AccountTest extends BaseTest {
         creditPayload.put("amount", 5000);
         creditPayload.put("order", order.href);
 
-        Credit credit = payable_account.credit(creditPayload);
-        payable_account.reload();
-        assertEquals(payable_account.balance.intValue(), 5000);
+        payableAccount.credit(creditPayload);
+        payableAccount.reload();
+        assertEquals(payableAccount.balance.intValue(), 5000);
     }
 }
