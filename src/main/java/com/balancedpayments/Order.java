@@ -72,17 +72,20 @@ public class Order extends Resource {
         super(payload);
     }
 
-    public Debit debitFrom(FundingInstrument fi, Map<String, Object> options) throws HTTPError {
+    public Debit debitFrom(FundingInstrument fi, Map<String, Object> options)
+            throws HTTPError {
         options.put("order", this.href);
         return fi.debit(options);
     }
 
-    public Credit creditTo(BankAccount ba, Map<String, Object> options) throws HTTPError {
+    public Credit creditTo(BankAccount ba, Map<String, Object> options)
+            throws HTTPError {
         options.put("order", this.href);
         return ba.credit(options);
     }
 
-    public Credit creditTo(Card card, Map<String, Object> options) throws HTTPError, FundingInstrumentNotCreditable {
+    public Credit creditTo(Card card, Map<String, Object> options)
+            throws HTTPError, FundingInstrumentNotCreditable {
         options.put("order", this.href);
         return card.credit(options);
     }

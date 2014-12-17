@@ -87,9 +87,11 @@ public class Customer extends Resource {
 
     @ResourceField(field="customers.accounts")
     public Account.Collection accounts;
-
-    public Account payable_account() throws NoResultsFound, MultipleResultsFound, HTTPError {
-        ArrayList<Account> accounts = this.accounts.query().filter("type", "contains", "payable").all();
+    
+    public Account payableAccount()
+            throws NoResultsFound,MultipleResultsFound, HTTPError {
+        ArrayList<Account> accounts = this.accounts.query().filter(
+                "type", "contains", "payable").all();
         return accounts.get(0);
     }
 

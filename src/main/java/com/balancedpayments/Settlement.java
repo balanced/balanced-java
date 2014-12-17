@@ -17,7 +17,7 @@ public class Settlement extends Resource {
     @ResourceField(mutable=true)
     public String funding_instrument;
 
-    @ResourceField(mutable=true)
+    @ResourceField
     public Integer amount;
 
     @ResourceField(mutable=true)
