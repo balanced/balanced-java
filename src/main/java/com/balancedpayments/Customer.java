@@ -89,7 +89,7 @@ public class Customer extends Resource {
     public Account.Collection accounts;
 
     public Account payable_account() throws NoResultsFound, MultipleResultsFound, HTTPError {
-        ArrayList<Account> accounts = this.accounts.query().filter("account_type", "contains", "payable").all();
+        ArrayList<Account> accounts = this.accounts.query().filter("type", "contains", "payable").all();
         return accounts.get(0);
     }
 
