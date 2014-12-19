@@ -1,9 +1,15 @@
 package card_credit_order;
 
-import com.balancedpayments.*;
-import com.balancedpayments.errors.*;
+import com.balancedpayments.Balanced;
+import com.balancedpayments.Card;
+import com.balancedpayments.Credit;
+import com.balancedpayments.Order;
+import com.balancedpayments.errors.FundingInstrumentNotCreditable;
+import com.balancedpayments.errors.HTTPError;
+import com.balancedpayments.errors.MultipleResultsFound;
+import com.balancedpayments.errors.NoResultsFound;
+
 import java.util.HashMap;
-import java.util.Map;
 
 public class card_credit_order {
 
@@ -19,7 +25,7 @@ payload.put("amount", 5000);
 try {
     Credit credit = order.creditTo(card, payload);
 }
-catch (HTTPError e) {}
+catch (FundingInstrumentNotCreditable e) {}
 
 }
 }

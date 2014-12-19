@@ -1,0 +1,2 @@
+account.reload();
+account.balance;

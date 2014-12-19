@@ -13,7 +13,7 @@ payload.put("amount", 5000);
 try {
     Credit credit = order.creditTo(card, payload);
 }
-catch (HTTPError e) {}
+catch (FundingInstrumentNotCreditable e) {}
 
 % endif
 

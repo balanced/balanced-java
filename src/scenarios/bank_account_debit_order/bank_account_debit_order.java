@@ -1,14 +1,9 @@
 package bank_account_debit_order;
 
-import com.balancedpayments.Balanced;
-import com.balancedpayments.BankAccount;
-import com.balancedpayments.Debit;
-import com.balancedpayments.Order;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
-
+import com.balancedpayments.*;
+import com.balancedpayments.errors.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class bank_account_debit_order {
 
