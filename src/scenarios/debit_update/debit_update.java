@@ -8,9 +8,9 @@ import java.util.Map;
 public class debit_update {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
 
-Debit debit = new Debit("/debits/WD3nVmuDYvCWCox0YECGc6b3");
+Debit debit = new Debit("/debits/WD6wpBAzwRyTIEdqkKgUSLHa");
 debit.description = "New description for debit";
 
 Map<String, String> meta = new HashMap<String, String>();

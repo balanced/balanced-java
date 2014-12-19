@@ -2,9 +2,9 @@
 Debit().refund()
 
 % else:
-Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
 
-Debit debit = new Debit("/debits/WD4heQm0HfB6IpymdvsGM8dv");
+Debit debit = new Debit("/debits/WD6GYJu1hYxqJrpXspjFtKSI");
 
 HashMap<String, Object> meta = new HashMap<String, Object>();
 meta.put("user.refund_reason", "not happy with product");

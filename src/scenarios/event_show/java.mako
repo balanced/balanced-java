@@ -2,9 +2,9 @@
 Event(String uri)
 
 % else:
-Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
 
-Event event = new Event("/events/EVac079fda6c3411e49b2c020fe4ae3568");
+Event event = new Event("/events/EV8099fafa858411e4b4d3061e5f402045");
 
 % endif
 
