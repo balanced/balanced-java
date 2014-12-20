@@ -1,0 +1,13 @@
+Balanced.configure("{{ api_key }}");
+
+Account account = new Account("{{ request.href }}");
+
+HashMap<String, Object> payload = new HashMap<String, Object>();
+payload.put("funding_instrument", {{ request.payload.funding_instrument }});
+payload.put("appears_on_statement_as", {{ request.payload.appears_on_statement_as }});
+payload.put("description", {{ request.payload.description }});
+
+try {
+    Settlement settlement = account.settle(payload);
+}
+catch (HTTPError e) {}

@@ -2,9 +2,9 @@
 CardHold().capture(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
 
-CardHold cardHold = new CardHold("/card_holds/HL2F8jlnySjVKidwfXgBYZMY");
+CardHold cardHold = new CardHold("/card_holds/HL5gGjFGvSfw0pkPB93SnYze");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 1000);

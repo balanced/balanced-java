@@ -2,9 +2,9 @@
 Customer().createOrder(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
 
-Customer customer = new Customer("/customers/CU40AyvBB6ny9u3oelCwyc3C");
+Customer customer = new Customer("/customers/CU6sIkS1KUtHVoPUBM1Gf72B");
 
 Map<String, Object> payload = new HashMap<String, Object>();
 payload.put("description", "Order #12341234");
