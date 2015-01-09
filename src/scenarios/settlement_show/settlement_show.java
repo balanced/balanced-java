@@ -1,17 +1,16 @@
 package settlement_show;
 
-import com.balancedpayments.Balanced;
-import com.balancedpayments.Settlement;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
+import com.balancedpayments.*;
+import com.balancedpayments.errors.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class settlement_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Settlement settlement = new Settlement("/settlements/ST1VhpiMiUv5BrcvJW2G1RgV");
+Settlement settlement = new Settlement("/settlements/ST5xMBEiT3t2Stt2ia4Svl2d");
 
 }
 }

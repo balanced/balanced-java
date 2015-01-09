@@ -2,9 +2,9 @@
 Refund(String uri)
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Refund refund = new Refund("/refunds/RF6InibH83VMbodkun32mfyU");
+Refund refund = new Refund("/refunds/RF4zwAHHq8ifpN3M1RLEwSJD");
 
 % endif
 

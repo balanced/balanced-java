@@ -8,9 +8,9 @@ import java.util.Map;
 public class credit_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Credit credit = new Credit("/credits/CR63lfosmGuD9LlV7hGlBZYx");
+Credit credit = new Credit("/credits/CR5pb9ux8RYVNTwcJ3jdVF84");
 
 }
 }

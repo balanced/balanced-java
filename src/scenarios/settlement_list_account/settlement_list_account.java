@@ -1,18 +1,16 @@
 package settlement_list_account;
 
-import com.balancedpayments.Account;
-import com.balancedpayments.Balanced;
-import com.balancedpayments.Settlement;
-import com.balancedpayments.errors.HTTPError;
-import com.balancedpayments.errors.MultipleResultsFound;
-import com.balancedpayments.errors.NoResultsFound;
+import com.balancedpayments.*;
+import com.balancedpayments.errors.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class settlement_list_account {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Account account = new Account("/accounts/AT43cMKrvwKEJnV5qX8wCqY0");
+Account account = new Account("/accounts/AT2E6Ju62P9AnTJwe0fL5kOI");
 Settlement.Collection settlements = account.settlements;
 
 }

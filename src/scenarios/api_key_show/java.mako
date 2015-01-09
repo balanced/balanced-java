@@ -2,9 +2,9 @@
 ApiKey(String uri)
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-ApiKey apiKey = new ApiKey("/api_keys/AK4e2JjsmVYES9oUwqRYg8hy");
+ApiKey apiKey = new ApiKey("/api_keys/AK5GPcrSGuD1jtq6cEctwa3j");
 
 % endif
 
