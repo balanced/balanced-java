@@ -2,9 +2,9 @@
 Customer().accounts
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Customer customer = new Customer("/customers/CU6sIkS1KUtHVoPUBM1Gf72B");
+Customer customer = new Customer("/customers/CU4CZc7Xjn8gGJXl1LyzZk7S");
 Account.Collection accounts = customer.accounts;
 
 % endif

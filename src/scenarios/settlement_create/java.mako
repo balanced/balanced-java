@@ -2,14 +2,14 @@
 Account().settle(Map<String, Object> payload)
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Account account = new Account("/accounts/AT43cMKrvwKEJnV5qX8wCqY0");
+Account account = new Account("/accounts/AT2E6Ju62P9AnTJwe0fL5kOI");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
-payload.put("funding_instrument", /bank_accounts/BA4UZsYXpf2BX97v5WPaT57O);
-payload.put("appears_on_statement_as", ThingsCo);
-payload.put("description", );
+payload.put("funding_instrument", "/bank_accounts/BA3uzbngfVXy1SGg25Et7iKY");
+payload.put("appears_on_statement_as", "ThingsCo");
+payload.put("description", "Payout A");
 
 try {
     Settlement settlement = account.settle(payload);

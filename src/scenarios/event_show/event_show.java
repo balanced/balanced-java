@@ -8,9 +8,9 @@ import java.util.Map;
 public class event_show {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Event event = new Event("/events/EV8099fafa858411e4b4d3061e5f402045");
+Event event = new Event("/events/EV96e2da0887f411e4a02d020fe4ae3568");
 
 }
 }

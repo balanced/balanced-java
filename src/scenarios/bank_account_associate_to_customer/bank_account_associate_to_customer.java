@@ -8,10 +8,10 @@ import java.util.Map;
 public class bank_account_associate_to_customer {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Customer customer = new Customer("/customers/CU42QGL6X08UHbQnRqgCNtKg");
-BankAccount bankAccount = new BankAccount("/bank_accounts/BA4UZsYXpf2BX97v5WPaT57O");
+Customer customer = new Customer("/customers/CU4CZc7Xjn8gGJXl1LyzZk7S");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BA6g0aWJb8TNd7sXXs17t0Q0");
 
 bankAccount.associateToCustomer(customer);
 

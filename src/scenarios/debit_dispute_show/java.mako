@@ -2,9 +2,9 @@
 Debit().dispute
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Debit debit = new Debit("/debits/WD6NY7W6uBFngNyBLqyhPBPv");
+Debit debit = new Debit("/debits/WD4QE0i532v0eWQ6mCWCASc5");
 Dispute dispute = debit.dispute;
 
 % endif

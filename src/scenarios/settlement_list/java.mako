@@ -2,7 +2,7 @@
 Settlement.Collection(String uri)
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
 Settlement.Collection settlements = new Settlement.Collection(Settlement.resource_href);
 

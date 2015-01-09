@@ -2,9 +2,9 @@
 BankAccountVerification.save()
 
 % else:
-Balanced.configure("ak-test-2wIOi20ITgc1u1Lw6UM3y5ZZjZ66M8HMf");
+Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-BankAccountVerification verification = new BankAccountVerification("/verifications/BZ4x3kqJ5rTrM8LL0WmP4GUZ");
+BankAccountVerification verification = new BankAccountVerification("/verifications/BZ5XxtvPAMXrKcmyaN1DFqfK");
 try {
     verification.confirm(1, 1);
 }
