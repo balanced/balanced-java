@@ -8,9 +8,9 @@ import java.util.Map;
 public class credit_list_bank_account {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-BankAccount bankAccount = new BankAccount("/bank_accounts/BA3uzbngfVXy1SGg25Et7iKY");
+BankAccount bankAccount = new BankAccount("/bank_accounts/BA45anEaEr8g0lOhzhcE9VAN");
 Credit.Collection credits = bankAccount.credits;
 
 }

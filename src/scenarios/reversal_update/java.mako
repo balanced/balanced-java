@@ -2,9 +2,9 @@
 Reversal().save()
 
 % else:
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-Reversal reversal = new Reversal("/reversals/RV5xRK6ZoaXMhboMamfdfm85");
+Reversal reversal = new Reversal("/reversals/RV6AleFrrhNHBDpr9W9ozGmY");
 
 Map<String, String> meta = new HashMap<String, String>();
 meta.put("reversal.reason", "user not happy with product");

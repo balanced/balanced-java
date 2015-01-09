@@ -5,7 +5,7 @@ Account account = new Account("{{ request.href }}");
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", {{ request.payload.amount }});
 payload.put("appears_on_statement_as", "{{ request.payload.appears_on_statement_as }}");
-payload.put("description", {{ request.payload.description }});
+payload.put("description", "{{ request.payload.description }}");
 payload.put("order", "{{ request.payload.order }}");
 
 try {

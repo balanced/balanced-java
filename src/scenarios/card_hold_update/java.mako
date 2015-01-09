@@ -2,9 +2,9 @@
 CardHold().save()
 
 % else:
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-CardHold cardHold = new CardHold("/card_holds/HL44qbPoom3uVlTlEGBZV7z2");
+CardHold cardHold = new CardHold("/card_holds/HL4iHX8OBNW7nVsu6MqyjnQ9");
 cardHold.description = "update this description";
 try {
     cardHold.save();

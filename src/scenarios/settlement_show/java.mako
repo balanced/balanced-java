@@ -2,9 +2,9 @@
 Settlement(String uri)
 
 % else:
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-Settlement settlement = new Settlement("/settlements/ST5xMBEiT3t2Stt2ia4Svl2d");
+Settlement settlement = new Settlement("/settlements/ST6HmBuLJSEa82oUwId1AShW");
 
 % endif
 

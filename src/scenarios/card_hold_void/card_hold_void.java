@@ -8,9 +8,9 @@ import java.util.Map;
 public class card_hold_void {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-CardHold cardHold = new CardHold("/card_holds/HL2LGQraRykRR3IhnNGqdSNi");
+CardHold cardHold = new CardHold("/card_holds/HL4u4T2877PfgYwnbhD2XweV");
 try {
     cardHold.unstore();
 }
