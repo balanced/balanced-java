@@ -8,9 +8,9 @@ import java.util.Map;
 public class account_list_customer {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-Customer customer = new Customer("/customers/CU4CZc7Xjn8gGJXl1LyzZk7S");
+Customer customer = new Customer("/customers/CU3o1ZAd8Gtxz6ZTIFK9YmsM");
 Account.Collection accounts = customer.accounts;
 
 }

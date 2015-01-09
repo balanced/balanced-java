@@ -2,9 +2,9 @@
 Account(String uri)
 
 % else:
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-Account account = new Account("/accounts/AT2t2NS6otEMnPT0jVuRAE6Y");
+Account account = new Account("/accounts/AT2V7l4MoUJH8xDse641Xqog");
 
 % endif
 

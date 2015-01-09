@@ -2,9 +2,9 @@
 Debit.save()
 
 % else:
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-Debit debit = new Debit("/debits/WD4LT3ghEgoGK9z4wUQCsKUU");
+Debit debit = new Debit("/debits/WD5EW7vbyXlTsudIGF5AkrEA");
 debit.description = "New description for debit";
 
 Map<String, String> meta = new HashMap<String, String>();

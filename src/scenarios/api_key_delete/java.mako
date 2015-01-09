@@ -2,9 +2,9 @@
 ApiKey().unstore()
 
 % else:
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-ApiKey key = new ApiKey("/api_keys/AK5GPcrSGuD1jtq6cEctwa3j");
+ApiKey key = new ApiKey("/api_keys/AK3DQGzROuoRYulKXMQdHBxX");
 try {
     key.unstore();
 }

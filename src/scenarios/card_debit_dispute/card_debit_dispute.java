@@ -8,9 +8,9 @@ import java.util.Map;
 public class card_debit_dispute {
 
 public static void main(String[] args) throws HTTPError, NoResultsFound, MultipleResultsFound {
-Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
+Balanced.configure("ak-test-2eKlj1ZDfAcZSARMf3NMhBHywDej0avSY");
 
-Card card = new Card("/cards/CC4PUCBUQfNqecW8QDsjnOfz");
+Card card = new Card("/cards/CC5RRvpnZIg0PWdSphR8xxPa");
 
 HashMap<String, Object> payload = new HashMap<String, Object>();
 payload.put("amount", 5000);
