@@ -19,6 +19,9 @@ public class BankAccount extends FundingInstrument {
     @ResourceField(mutable=true)
     public String account_type;
 
+    @ResourceField()
+    public Boolean is_valid;
+
     @ResourceField(mutable=true)
     public String account_number;
 
